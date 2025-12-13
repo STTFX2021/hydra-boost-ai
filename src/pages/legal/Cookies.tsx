@@ -41,7 +41,7 @@ const Cookies = () => {
               </p>
               <ul className="list-disc pl-6 text-muted-foreground space-y-2">
                 <li>Google Analytics (análisis de tráfico)</li>
-                <li>Supabase (autenticación y base de datos)</li>
+                <li>Servicios de autenticación y base de datos</li>
               </ul>
 
               <h2 className="text-2xl font-display font-semibold mt-8">Gestión de cookies</h2>
@@ -61,7 +61,7 @@ const Cookies = () => {
               <h2 className="text-2xl font-display font-semibold mt-8">Contacto</h2>
               <p className="text-muted-foreground">
                 Si tienes preguntas sobre nuestra política de cookies, contacta en: 
-                <a href="mailto:privacidad@hydrailabs.com" className="text-primary"> privacidad@hydrailabs.com</a>
+                <a href="mailto:privacidad@hydraiservices.com" className="text-primary"> privacidad@hydraiservices.com</a>
               </p>
             </div>
           </div>

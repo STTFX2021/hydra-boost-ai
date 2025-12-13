@@ -174,8 +174,35 @@ const Auditoria = () => {
 
       if (assessmentError) throw assessmentError;
 
+      // Trigger notification edge function
+      try {
+        await supabase.functions.invoke("send-lead-notification", {
+          body: {
+            type: "assessment",
+            lead: {
+              id: lead.id,
+              name: formData.name.trim(),
+              email: formData.email.trim(),
+              phone: formData.phone?.trim() || null,
+              vertical: formData.vertical,
+              city: formData.city,
+              source: "audit",
+              score,
+            },
+            assessment: {
+              score,
+              priority,
+              recommendations: recommendations.join("\n"),
+            },
+          },
+        });
+      } catch (notifyError) {
+        console.error("Notification error (non-blocking):", notifyError);
+      }
+
       setResult({ score, priority, recommendations });
       setShowResults(true);
+      toast.success("¡Auditoría completada!");
     } catch (error) {
       console.error("Audit submission error:", error);
       toast.error("Error al enviar. Inténtalo de nuevo.");
