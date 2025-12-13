@@ -80,7 +80,7 @@ const AdminDashboard = () => {
         <div className="flex flex-col h-full">
           <div className="p-4 border-b border-sidebar-border flex items-center justify-between">
             <Link to="/" className="font-display text-lg font-bold text-gradient-primary">
-              HydrAI Labs
+              HydrAI Services
             </Link>
             <button className="lg:hidden text-sidebar-foreground" onClick={() => setSidebarOpen(false)}>
               <X className="w-5 h-5" />

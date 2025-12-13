@@ -46,6 +46,23 @@ const Contacto = () => {
 
       if (error) throw error;
 
+      // Send notification
+      try {
+        await supabase.functions.invoke('send-lead-notification', {
+          body: {
+            type: 'contact',
+            data: {
+              name: formData.name.trim(),
+              email: formData.email.trim(),
+              phone: formData.phone?.trim(),
+              message: formData.message.trim(),
+            }
+          }
+        });
+      } catch (notifError) {
+        console.error("Notification error:", notifError);
+      }
+
       toast.success("¡Mensaje enviado! Te responderemos pronto.");
       setFormData({ name: "", email: "", phone: "", message: "" });
     } catch (error) {
