@@ -1,12 +1,14 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useTranslation, useI18n } from "@/lib/i18n";
+import { useAdmin } from "@/hooks/useAdmin";
 import { Menu, X, Globe } from "lucide-react";
 import { useState } from "react";
 
 export const Header = () => {
   const { t, language } = useTranslation();
   const { setLanguage } = useI18n();
+  const { isAdmin } = useAdmin();
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
 
@@ -25,7 +27,7 @@ export const Header = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/30">
       <div className="section-container flex items-center justify-between h-16">
         <Link to="/" className="font-display text-xl font-bold text-gradient-primary">
-          HydrAI Labs
+          {t('brand')}
         </Link>
 
         {/* Desktop Nav */}
@@ -55,9 +57,13 @@ export const Header = () => {
             {language.toUpperCase()}
           </Button>
 
-          <Link to="/login" className="hidden sm:block">
-            <Button variant="ghost" size="sm">{t("nav.login")}</Button>
-          </Link>
+          {/* Only show Admin link if user is admin */}
+          {isAdmin && (
+            <Link to="/admin" className="hidden sm:block">
+              <Button variant="ghost" size="sm">{t("nav.login")}</Button>
+            </Link>
+          )}
+          
           <Link to="/auditoria" className="hidden sm:block">
             <Button size="sm" className="btn-neon">{t("nav.audit")}</Button>
           </Link>
@@ -91,9 +97,11 @@ export const Header = () => {
               </Link>
             ))}
             <div className="flex gap-3 pt-3 border-t border-border/30">
-              <Link to="/login" onClick={() => setMenuOpen(false)}>
-                <Button variant="ghost" size="sm">{t("nav.login")}</Button>
-              </Link>
+              {isAdmin && (
+                <Link to="/admin" onClick={() => setMenuOpen(false)}>
+                  <Button variant="ghost" size="sm">{t("nav.login")}</Button>
+                </Link>
+              )}
               <Link to="/auditoria" onClick={() => setMenuOpen(false)}>
                 <Button size="sm" className="btn-neon">{t("nav.audit")}</Button>
               </Link>

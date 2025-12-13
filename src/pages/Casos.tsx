@@ -1,104 +1,135 @@
 import { PageLayout } from "@/components/layout/PageLayout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { useTranslation } from "@/lib/i18n";
+import { PORTFOLIO_LINKS, isValidUrl } from "@/lib/constants";
 import { 
   ArrowRight, Zap, TrendingUp, Shield, Gamepad2, 
   ExternalLink, Code, Brain, Server, Palette
 } from "lucide-react";
 
-const projects = [
-  {
-    id: "orochi",
-    title: "Orochi AI Trading",
-    subtitle: "Sistema de trading algorítmico para XAUUSD",
-    category: "Ingeniería Avanzada",
-    icon: TrendingUp,
-    color: "primary",
-    description: "Sistema de trading automatizado impulsado por IA para el mercado de oro (XAUUSD). Análisis técnico avanzado, gestión de riesgo y ejecución automática de operaciones.",
-    technologies: ["Python", "TensorFlow", "MetaTrader 5", "AWS", "PostgreSQL"],
-    metrics: [
-      { label: "Precisión predicción", value: "78%" },
-      { label: "Operaciones/día", value: "50+" },
-      { label: "Uptime", value: "99.9%" },
-    ],
-    capabilities: [
-      "Modelos de ML para predicción de precios",
-      "Backtesting con datos históricos (5+ años)",
-      "Gestión de riesgo automatizada",
-      "Dashboard de monitorización en tiempo real",
-      "Alertas y notificaciones inteligentes",
-    ],
-  },
-  {
-    id: "argus",
-    title: "ARGUS AI Integration",
-    subtitle: "Sistema de seguridad empresarial con Knowledge Graph",
-    category: "Enterprise / Seguridad",
-    icon: Shield,
-    color: "secondary",
-    description: "Plataforma de integración de IA para análisis de seguridad empresarial. Knowledge graphs, procesamiento de lenguaje natural y detección de amenazas en tiempo real.",
-    technologies: ["AWS", "Neo4j", "Python", "FastAPI", "React", "Kubernetes"],
-    metrics: [
-      { label: "Nodos procesados", value: "1M+" },
-      { label: "Tiempo respuesta", value: "<100ms" },
-      { label: "Integraciones", value: "15+" },
-    ],
-    capabilities: [
-      "Knowledge Graph para relaciones de datos",
-      "NLP para análisis de documentos",
-      "Detección de anomalías con ML",
-      "API RESTful escalable",
-      "Despliegue multi-cloud",
-    ],
-  },
-  {
-    id: "prank-brawlers",
-    title: "Prank Brawlers",
-    subtitle: "Videojuego multijugador con IA generativa",
-    category: "Producto / Gaming",
-    icon: Gamepad2,
-    color: "accent",
-    description: "Juego multijugador competitivo con elementos generados por IA. Desarrollo completo desde concepto hasta lanzamiento, incluyendo marketing y monetización.",
-    technologies: ["Unity", "C#", "Node.js", "Firebase", "Stable Diffusion"],
-    metrics: [
-      { label: "Usuarios beta", value: "5K+" },
-      { label: "Retención D7", value: "45%" },
-      { label: "Assets IA", value: "500+" },
-    ],
-    capabilities: [
-      "Desarrollo de juego end-to-end",
-      "Generación de assets con IA",
-      "Sistema multijugador en tiempo real",
-      "Economía in-game balanceada",
-      "Estrategia de marketing y UA",
-    ],
-  },
-];
-
-const capabilities = [
-  {
-    icon: Brain,
-    title: "Machine Learning",
-    description: "Modelos predictivos, NLP, visión por computador",
-  },
-  {
-    icon: Server,
-    title: "Backend Escalable",
-    description: "APIs, microservicios, bases de datos, cloud",
-  },
-  {
-    icon: Code,
-    title: "Desarrollo Full-Stack",
-    description: "Web apps, mobile, dashboards, integraciones",
-  },
-  {
-    icon: Palette,
-    title: "Producto & UX",
-    description: "Diseño, prototipado, testing, lanzamiento",
-  },
-];
-
 const Casos = () => {
+  const { t, language } = useTranslation();
+
+  const projects = [
+    {
+      id: "orochi",
+      title: "Trade Vortex / Orochi AI Trading",
+      subtitle: language === 'en' ? "Algorithmic trading system for XAUUSD" : "Sistema de trading algorítmico para XAUUSD",
+      category: language === 'en' ? "Advanced Engineering" : "Ingeniería Avanzada",
+      icon: TrendingUp,
+      color: "primary",
+      description: language === 'en' 
+        ? "AI-powered automated trading system for the gold market (XAUUSD). Advanced technical analysis, risk management, and automatic trade execution."
+        : "Sistema de trading automatizado impulsado por IA para el mercado de oro (XAUUSD). Análisis técnico avanzado, gestión de riesgo y ejecución automática de operaciones.",
+      technologies: ["Python", "TensorFlow", "MetaTrader 5", "AWS", "PostgreSQL"],
+      metrics: [
+        { label: language === 'en' ? "Prediction accuracy" : "Precisión predicción", value: "78%" },
+        { label: language === 'en' ? "Operations/day" : "Operaciones/día", value: "50+" },
+        { label: "Uptime", value: "99.9%" },
+      ],
+      capabilities: language === 'en' ? [
+        "ML models for price prediction",
+        "Backtesting with historical data (5+ years)",
+        "Automated risk management",
+        "Real-time monitoring dashboard",
+        "Smart alerts and notifications",
+      ] : [
+        "Modelos de ML para predicción de precios",
+        "Backtesting con datos históricos (5+ años)",
+        "Gestión de riesgo automatizada",
+        "Dashboard de monitorización en tiempo real",
+        "Alertas y notificaciones inteligentes",
+      ],
+      url: PORTFOLIO_LINKS.xauusdOrochi || PORTFOLIO_LINKS.tradeVortex,
+    },
+    {
+      id: "argus",
+      title: "ARGUS AI Integration",
+      subtitle: language === 'en' ? "Enterprise security system with Knowledge Graph" : "Sistema de seguridad empresarial con Knowledge Graph",
+      category: "Enterprise / Security",
+      icon: Shield,
+      color: "secondary",
+      description: language === 'en'
+        ? "AI integration platform for enterprise security analysis. Knowledge graphs, natural language processing, and real-time threat detection."
+        : "Plataforma de integración de IA para análisis de seguridad empresarial. Knowledge graphs, procesamiento de lenguaje natural y detección de amenazas en tiempo real.",
+      technologies: ["AWS", "Neo4j", "Python", "FastAPI", "React", "Kubernetes"],
+      metrics: [
+        { label: language === 'en' ? "Nodes processed" : "Nodos procesados", value: "1M+" },
+        { label: language === 'en' ? "Response time" : "Tiempo respuesta", value: "<100ms" },
+        { label: language === 'en' ? "Integrations" : "Integraciones", value: "15+" },
+      ],
+      capabilities: language === 'en' ? [
+        "Knowledge Graph for data relationships",
+        "NLP for document analysis",
+        "Anomaly detection with ML",
+        "Scalable RESTful API",
+        "Multi-cloud deployment",
+      ] : [
+        "Knowledge Graph para relaciones de datos",
+        "NLP para análisis de documentos",
+        "Detección de anomalías con ML",
+        "API RESTful escalable",
+        "Despliegue multi-cloud",
+      ],
+      url: PORTFOLIO_LINKS.argusAI,
+    },
+    {
+      id: "prank-brawlers",
+      title: "Prank Brawlers",
+      subtitle: language === 'en' ? "Multiplayer game with generative AI" : "Videojuego multijugador con IA generativa",
+      category: language === 'en' ? "Product / Gaming" : "Producto / Gaming",
+      icon: Gamepad2,
+      color: "accent",
+      description: language === 'en'
+        ? "Competitive multiplayer game with AI-generated elements. Complete development from concept to launch, including marketing and monetization."
+        : "Juego multijugador competitivo con elementos generados por IA. Desarrollo completo desde concepto hasta lanzamiento, incluyendo marketing y monetización.",
+      technologies: ["Unity", "C#", "Node.js", "Firebase", "Stable Diffusion"],
+      metrics: [
+        { label: language === 'en' ? "Beta users" : "Usuarios beta", value: "5K+" },
+        { label: language === 'en' ? "D7 Retention" : "Retención D7", value: "45%" },
+        { label: language === 'en' ? "AI Assets" : "Assets IA", value: "500+" },
+      ],
+      capabilities: language === 'en' ? [
+        "End-to-end game development",
+        "AI asset generation",
+        "Real-time multiplayer system",
+        "Balanced in-game economy",
+        "Marketing and UA strategy",
+      ] : [
+        "Desarrollo de juego end-to-end",
+        "Generación de assets con IA",
+        "Sistema multijugador en tiempo real",
+        "Economía in-game balanceada",
+        "Estrategia de marketing y UA",
+      ],
+      url: PORTFOLIO_LINKS.prankBrawlers,
+    },
+  ];
+
+  const capabilities = [
+    {
+      icon: Brain,
+      title: "Machine Learning",
+      description: language === 'en' ? "Predictive models, NLP, computer vision" : "Modelos predictivos, NLP, visión por computador",
+    },
+    {
+      icon: Server,
+      title: language === 'en' ? "Scalable Backend" : "Backend Escalable",
+      description: language === 'en' ? "APIs, microservices, databases, cloud" : "APIs, microservicios, bases de datos, cloud",
+    },
+    {
+      icon: Code,
+      title: language === 'en' ? "Full-Stack Development" : "Desarrollo Full-Stack",
+      description: language === 'en' ? "Web apps, mobile, dashboards, integrations" : "Web apps, mobile, dashboards, integraciones",
+    },
+    {
+      icon: Palette,
+      title: language === 'en' ? "Product & UX" : "Producto & UX",
+      description: language === 'en' ? "Design, prototyping, testing, launch" : "Diseño, prototipado, testing, lanzamiento",
+    },
+  ];
+
   return (
     <PageLayout>
       {/* Hero */}
@@ -112,10 +143,10 @@ const Casos = () => {
               <Zap className="w-3 h-3 mr-1" /> Portfolio
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
-              Lo que <span className="text-gradient-accent">sabemos construir</span>
+              {t('cases.title').split(' ').slice(0, 2).join(' ')} <span className="text-gradient-accent">{t('cases.title').split(' ').slice(2).join(' ')}</span>
             </h1>
             <p className="text-lg text-muted-foreground mb-8">
-              Proyectos que demuestran nuestra capacidad técnica. Desde trading algorítmico hasta videojuegos.
+              {t('cases.subtitle')}
             </p>
           </div>
         </div>
@@ -125,73 +156,91 @@ const Casos = () => {
       <section className="section-padding">
         <div className="section-container">
           <div className="space-y-24">
-            {projects.map((project, index) => (
-              <div key={project.id} id={project.id} className="scroll-mt-24">
-                <div className="grid lg:grid-cols-5 gap-12">
-                  {/* Left: Info */}
-                  <div className="lg:col-span-3">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className={`w-12 h-12 rounded-xl bg-${project.color}/10 flex items-center justify-center`}>
-                        <project.icon className={`w-6 h-6 text-${project.color}`} />
+            {projects.map((project, index) => {
+              const hasUrl = isValidUrl(project.url || '');
+              
+              return (
+                <div key={project.id} id={project.id} className="scroll-mt-24">
+                  <div className="grid lg:grid-cols-5 gap-12">
+                    {/* Left: Info */}
+                    <div className="lg:col-span-3">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className={`w-12 h-12 rounded-xl bg-${project.color}/10 flex items-center justify-center`}>
+                          <project.icon className={`w-6 h-6 text-${project.color}`} />
+                        </div>
+                        <div>
+                          <span className={`badge-${project.color} text-xs`}>{project.category}</span>
+                        </div>
                       </div>
-                      <div>
-                        <span className={`badge-${project.color} text-xs`}>{project.category}</span>
+
+                      <h2 className="text-3xl font-display font-bold mb-2">{project.title}</h2>
+                      <p className="text-primary mb-4">{project.subtitle}</p>
+                      <p className="text-muted-foreground mb-6">{project.description}</p>
+
+                      {/* Tech Stack */}
+                      <div className="mb-6">
+                        <h4 className="text-sm font-semibold text-muted-foreground uppercase mb-3">{language === 'en' ? 'Tech Stack' : 'Stack Tecnológico'}</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {project.technologies.map((tech, i) => (
+                            <span key={i} className="px-3 py-1 rounded-full text-xs bg-muted text-foreground">
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
                       </div>
+
+                      {/* Capabilities */}
+                      <div className="mb-6">
+                        <h4 className="text-sm font-semibold text-muted-foreground uppercase mb-3">{language === 'en' ? 'Demonstrated Capabilities' : 'Capacidades Demostradas'}</h4>
+                        <ul className="grid sm:grid-cols-2 gap-2">
+                          {project.capabilities.map((cap, i) => (
+                            <li key={i} className="text-sm text-muted-foreground flex items-center gap-2">
+                              <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                              {cap}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* View Project Button */}
+                      {hasUrl ? (
+                        <a href={project.url} target="_blank" rel="noopener noreferrer">
+                          <Button className="btn-neon">
+                            {t('portfolio.viewProject')}
+                            <ExternalLink className="ml-2 w-4 h-4" />
+                          </Button>
+                        </a>
+                      ) : (
+                        <Button variant="ghost" disabled>
+                          {t('portfolio.comingSoon')}
+                        </Button>
+                      )}
                     </div>
 
-                    <h2 className="text-3xl font-display font-bold mb-2">{project.title}</h2>
-                    <p className="text-primary mb-4">{project.subtitle}</p>
-                    <p className="text-muted-foreground mb-6">{project.description}</p>
-
-                    {/* Tech Stack */}
-                    <div className="mb-6">
-                      <h4 className="text-sm font-semibold text-muted-foreground uppercase mb-3">Stack Tecnológico</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {project.technologies.map((tech, i) => (
-                          <span key={i} className="px-3 py-1 rounded-full text-xs bg-muted text-foreground">
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Capabilities */}
-                    <div>
-                      <h4 className="text-sm font-semibold text-muted-foreground uppercase mb-3">Capacidades Demostradas</h4>
-                      <ul className="grid sm:grid-cols-2 gap-2">
-                        {project.capabilities.map((cap, i) => (
-                          <li key={i} className="text-sm text-muted-foreground flex items-center gap-2">
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                            {cap}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-
-                  {/* Right: Metrics Card */}
-                  <div className="lg:col-span-2">
-                    <div className="card-premium h-full flex flex-col justify-center">
-                      <h4 className="font-display font-semibold mb-6 text-center">Métricas del Proyecto</h4>
-                      <div className="space-y-6">
-                        {project.metrics.map((metric, i) => (
-                          <div key={i} className="text-center">
-                            <div className="text-3xl font-display font-bold text-gradient-primary">
-                              {metric.value}
+                    {/* Right: Metrics Card */}
+                    <div className="lg:col-span-2">
+                      <div className="card-premium h-full flex flex-col justify-center">
+                        <h4 className="font-display font-semibold mb-6 text-center">{language === 'en' ? 'Project Metrics' : 'Métricas del Proyecto'}</h4>
+                        <div className="space-y-6">
+                          {project.metrics.map((metric, i) => (
+                            <div key={i} className="text-center">
+                              <div className="text-3xl font-display font-bold text-gradient-primary">
+                                {metric.value}
+                              </div>
+                              <div className="text-sm text-muted-foreground">{metric.label}</div>
                             </div>
-                            <div className="text-sm text-muted-foreground">{metric.label}</div>
-                          </div>
-                        ))}
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                {index < projects.length - 1 && (
-                  <div className="border-t border-border/30 mt-24" />
-                )}
-              </div>
-            ))}
+                  {index < projects.length - 1 && (
+                    <div className="border-t border-border/30 mt-24" />
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -201,10 +250,10 @@ const Casos = () => {
         <div className="section-container">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-display font-bold mb-4">
-              Nuestras <span className="text-gradient-primary">capacidades</span>
+              {language === 'en' ? 'Our' : 'Nuestras'} <span className="text-gradient-primary">{language === 'en' ? 'capabilities' : 'capacidades'}</span>
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              No solo hacemos chatbots. Tenemos experiencia en desarrollo de software complejo.
+              {language === 'en' ? "We don't just make chatbots. We have experience in complex software development." : "No solo hacemos chatbots. Tenemos experiencia en desarrollo de software complejo."}
             </p>
           </div>
 
@@ -227,14 +276,14 @@ const Casos = () => {
         <div className="section-container">
           <div className="card-premium text-center p-12 neon-border max-w-2xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              ¿Tienes un proyecto en mente?
+              {language === 'en' ? 'Have a project in mind?' : '¿Tienes un proyecto en mente?'}
             </h2>
             <p className="text-muted-foreground mb-8">
-              Cuéntanos tu idea. Desde MVPs hasta sistemas enterprise.
+              {language === 'en' ? 'Tell us your idea. From MVPs to enterprise systems.' : 'Cuéntanos tu idea. Desde MVPs hasta sistemas enterprise.'}
             </p>
             <Link to="/contacto">
               <Button size="lg" className="btn-neon text-lg px-8">
-                Hablemos
+                {language === 'en' ? "Let's talk" : 'Hablemos'}
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>
