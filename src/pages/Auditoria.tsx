@@ -147,8 +147,12 @@ const Auditoria = () => {
     const priority = score >= 70 ? "high" : score >= 50 ? "medium" : "low";
     const recommendations = getRecommendations(score);
 
+    let leadId: string | null = null;
+    let dataWasSaved = false;
+    let notificationFailed = false;
+
     try {
-      // Create lead
+      // Step 1: Create lead (primary data save)
       const { data: lead, error: leadError } = await supabase.from("leads").insert({
         name: formData.name.trim(),
         email: formData.email.trim(),
@@ -161,9 +165,18 @@ const Auditoria = () => {
         status: "new",
       }).select().single();
 
-      if (leadError) throw leadError;
+      if (leadError) {
+        console.error("Lead insert error:", { 
+          code: leadError.code, 
+          message: leadError.message, 
+          details: leadError.details 
+        });
+        throw leadError;
+      }
 
-      // Create assessment
+      leadId = lead.id;
+
+      // Step 2: Create assessment
       const { error: assessmentError } = await supabase.from("assessments").insert({
         lead_id: lead.id,
         payload_json: formData,
@@ -172,40 +185,90 @@ const Auditoria = () => {
         recommendations_text: recommendations.join("\n"),
       });
 
-      if (assessmentError) throw assessmentError;
+      if (assessmentError) {
+        console.error("Assessment insert error:", { 
+          code: assessmentError.code, 
+          message: assessmentError.message, 
+          details: assessmentError.details 
+        });
+        throw assessmentError;
+      }
 
-      // Trigger notification edge function
+      dataWasSaved = true;
+
+      // Step 3: Trigger notification (best-effort, non-blocking)
       try {
-        await supabase.functions.invoke("send-lead-notification", {
+        const { error: notifyError } = await supabase.functions.invoke("send-lead-notification", {
           body: {
             type: "assessment",
-            lead: {
-              id: lead.id,
+            data: {
               name: formData.name.trim(),
               email: formData.email.trim(),
               phone: formData.phone?.trim() || null,
               vertical: formData.vertical,
-              city: formData.city,
-              source: "audit",
-              score,
-            },
-            assessment: {
               score,
               priority,
               recommendations: recommendations.join("\n"),
             },
           },
         });
-      } catch (notifyError) {
-        console.error("Notification error (non-blocking):", notifyError);
+
+        if (notifyError) {
+          console.warn("Notification failed (non-blocking):", notifyError);
+          notificationFailed = true;
+        }
+      } catch (notifyError: any) {
+        console.warn("Notification error (non-blocking):", notifyError?.message || notifyError);
+        notificationFailed = true;
       }
 
+      // Success
       setResult({ score, priority, recommendations });
       setShowResults(true);
-      toast.success("¡Auditoría completada!");
-    } catch (error) {
-      console.error("Audit submission error:", error);
-      toast.error("Error al enviar. Inténtalo de nuevo.");
+      
+      if (notificationFailed) {
+        toast.success("¡Auditoría guardada! (Notificación interna pendiente)");
+      } else {
+        toast.success("¡Auditoría completada!");
+      }
+
+    } catch (error: any) {
+      console.error("Audit submission error:", {
+        message: error?.message,
+        code: error?.code,
+        details: error?.details,
+        hint: error?.hint,
+      });
+
+      // Fallback: save to contact_submissions if lead/assessment failed
+      if (!dataWasSaved) {
+        try {
+          const { error: fallbackError } = await supabase.from("contact_submissions").insert({
+            name: formData.name.trim(),
+            email: formData.email.trim(),
+            phone: formData.phone?.trim() || null,
+            message: `[AUDIT FALLBACK] Vertical: ${formData.vertical}, City: ${formData.city}, Score: ${score}, Priority: ${priority}, Recommendations: ${recommendations.join("; ")}`,
+          });
+
+          if (fallbackError) {
+            console.error("Fallback save error:", fallbackError);
+            toast.error("Error al guardar. Por favor contacta directamente.");
+          } else {
+            console.log("Data saved to contact_submissions as fallback");
+            setResult({ score, priority, recommendations });
+            setShowResults(true);
+            toast.warning("Tu auditoría se ha guardado (modo alternativo). Te contactaremos pronto.");
+          }
+        } catch (fallbackErr) {
+          console.error("Fallback critical error:", fallbackErr);
+          toast.error("Error crítico. Por favor contacta directamente.");
+        }
+      } else {
+        // Data was saved but something else failed - show results anyway
+        setResult({ score, priority, recommendations });
+        setShowResults(true);
+        toast.warning("Auditoría guardada, pero hubo un problema menor.");
+      }
     } finally {
       setLoading(false);
     }
