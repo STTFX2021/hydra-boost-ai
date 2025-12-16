@@ -2,7 +2,7 @@ import { PageLayout } from "@/components/layout/PageLayout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Send, MessageCircle, Mail, MapPin, Clock, ArrowRight, Zap } from "lucide-react";
@@ -24,12 +24,12 @@ const Contacto = () => {
     message: "",
   });
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const validation = contactSchema.safeParse(formData);
     if (!validation.success) {
-      toast.error(validation.error.errors[0].message);
+      toast.error(validation.error.errors[0]?.message ?? "Revisa los datos del formulario");
       return;
     }
 
@@ -44,7 +44,7 @@ const Contacto = () => {
 
       if (error) throw error;
 
-      // Send notification
+      // Notificación al edge function (si falla, no rompe el envío)
       try {
         await supabase.functions.invoke("send-lead-notification", {
           body: {
@@ -52,7 +52,7 @@ const Contacto = () => {
             data: {
               name: formData.name.trim(),
               email: formData.email.trim(),
-              phone: formData.phone?.trim(),
+              phone: formData.phone?.trim() || undefined,
               message: formData.message.trim(),
             },
           },
@@ -94,7 +94,7 @@ const Contacto = () => {
       <section className="section-padding -mt-16">
         <div className="section-container">
           <div className="grid lg:grid-cols-5 gap-12 max-w-6xl mx-auto">
-            {/* Form */}
+            {/* Formulario */}
             <div className="lg:col-span-3">
               <div className="card-premium">
                 <h2 className="text-xl font-display font-bold mb-6">Envíanos un mensaje</h2>
@@ -164,11 +164,11 @@ const Contacto = () => {
               </div>
             </div>
 
-            {/* Contact Info */}
+            {/* Info de contacto */}
             <div className="lg:col-span-2 space-y-6">
               {/* WhatsApp */}
               <a
-                href="https://wa.me/+34634425921"
+                href="https://wa.me/34634425921?text=Hola%2C%20vengo%20de%20HydrAI%20Services%20y%20quiero%20informaci%C3%B3n%20sobre%20webs%20y%20automatizaciones"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="card-premium flex items-center gap-4 group"
@@ -195,7 +195,7 @@ const Contacto = () => {
                 <ArrowRight className="w-4 h-4 ml-auto text-muted-foreground group-hover:text-foreground transition" />
               </a>
 
-              {/* Location */}
+              {/* Ubicación */}
               <div className="card-premium flex items-center gap-4">
                 <div className="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center">
                   <MapPin className="w-6 h-6 text-secondary" />
@@ -206,7 +206,7 @@ const Contacto = () => {
                 </div>
               </div>
 
-              {/* Response Time */}
+              {/* Tiempo de respuesta */}
               <div className="card-premium flex items-center gap-4">
                 <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center">
                   <Clock className="w-6 h-6 text-accent" />
@@ -217,7 +217,7 @@ const Contacto = () => {
                 </div>
               </div>
 
-              {/* CTA */}
+              {/* CTA Auditoría */}
               <div className="card-premium neon-border text-center p-6">
                 <h4 className="font-display font-semibold mb-2">¿Prefieres una auditoría?</h4>
                 <p className="text-sm text-muted-foreground mb-4">Descubre gratis cómo la IA puede ayudarte.</p>
