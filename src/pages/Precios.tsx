@@ -2,58 +2,53 @@ import { PageLayout } from "@/components/layout/PageLayout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { CheckCircle2, ArrowRight, Zap, Star, Phone, Gift } from "lucide-react";
+import { useTranslation } from "@/lib/i18n";
 
 const Precios = () => {
+  const { t } = useTranslation();
+
+  const pricingData = t("pricing") as unknown as {
+    packs: {
+      webPresencia: { name: string; description: string; features: string[] };
+      webChatbot: { name: string; description: string; features: string[] };
+      automatiza: { name: string; description: string; features: string[] };
+    };
+    monthlyPlans: {
+      mantenimiento: { name: string; description: string };
+      crecimiento: { name: string; description: string };
+    };
+    faqs: Array<{ q: string; a: string }>;
+  };
+
   const packs = [
     {
       id: "web-presencia",
-      name: "Web Presencia IA-Ready",
-      description: "Tu web profesional lista para conectar chatbots y automatizaciones",
+      name: pricingData.packs.webPresencia.name,
+      description: pricingData.packs.webPresencia.description,
       price: "497",
-      priceType: "pago único",
-      features: [
-        "Web corporativa 1–3 páginas",
-        "Diseño responsive y moderno",
-        "Formulario de contacto / WhatsApp",
-        "SEO local básico",
-        "Preparada para chatbot futuro",
-      ],
-      cta: "Solicitar",
+      priceType: t("pricing.oneTimePayment"),
+      features: pricingData.packs.webPresencia.features,
+      cta: t("pricing.request"),
       featured: false,
     },
     {
       id: "web-chatbot",
-      name: "Web + Chatbot 24/7",
-      description: "Tu web + asistente virtual que responde, captura leads y guía clientes",
+      name: pricingData.packs.webChatbot.name,
+      description: pricingData.packs.webChatbot.description,
       price: "790",
-      priceType: "pago único",
-      features: [
-        "Todo lo de Web Presencia +",
-        "Chatbot IA 24/7 entrenado",
-        "Widget en web + WhatsApp ready",
-        "Captura automática de leads",
-        "Dashboard de conversaciones",
-        "Soporte 30 días incluido",
-      ],
-      cta: "Solicitar",
+      priceType: t("pricing.oneTimePayment"),
+      features: pricingData.packs.webChatbot.features,
+      cta: t("pricing.request"),
       featured: true,
     },
     {
       id: "automatiza-agenda",
-      name: "Automatiza tu Agenda",
-      description: "Sistema completo de reservas, recordatorios y solicitud de reseñas",
+      name: pricingData.packs.automatiza.name,
+      description: pricingData.packs.automatiza.description,
       price: "1.290",
-      priceType: "pago único",
-      features: [
-        "Todo lo de Web + Chatbot +",
-        "Sistema de reservas online",
-        "Recordatorios automáticos (WhatsApp/Email)",
-        "Mensajes anti no-show",
-        "Solicitud de reseñas post-servicio",
-        "Integración Google Calendar",
-        "Dashboard de métricas",
-      ],
-      cta: "Solicitar",
+      priceType: t("pricing.oneTimePayment"),
+      features: pricingData.packs.automatiza.features,
+      cta: t("pricing.request"),
       featured: false,
     },
   ];
@@ -61,40 +56,19 @@ const Precios = () => {
   const monthlyPlans = [
     {
       id: "mantenimiento",
-      name: "Plan Mantenimiento",
+      name: pricingData.monthlyPlans.mantenimiento.name,
       price: "49",
-      description: "Cambios menores, soporte técnico y revisión mensual de automatizaciones.",
+      description: pricingData.monthlyPlans.mantenimiento.description,
     },
     {
       id: "crecimiento",
-      name: "Plan Crecimiento",
+      name: pricingData.monthlyPlans.crecimiento.name,
       price: "99",
-      description: "Todo lo de Mantenimiento + optimización de chatbot, mejoras de conversión e informes detallados.",
+      description: pricingData.monthlyPlans.crecimiento.description,
     },
   ];
 
-  const faqs = [
-    {
-      q: "¿Qué incluye el precio?",
-      a: "Todo lo listado en cada pack. Sin costes ocultos. Hosting y dominio no incluidos (te asesoramos para elegir el mejor).",
-    },
-    {
-      q: "¿Cuánto tarda la entrega?",
-      a: "Web Presencia: 5-7 días. Web + Chatbot: 7-10 días. Automatiza tu Agenda: 10-14 días. Depende de tu rapidez enviando contenido.",
-    },
-    {
-      q: "¿Puedo actualizar mi pack más adelante?",
-      a: "Sí, puedes empezar con Web Presencia y añadir chatbot o automatizaciones cuando quieras. Solo pagas la diferencia.",
-    },
-    {
-      q: "¿Qué pasa después de la entrega?",
-      a: "Tienes 30 días de soporte incluido. Después puedes contratar un plan mensual o pedir ajustes puntuales.",
-    },
-    {
-      q: "¿Ofrecéis descuentos?",
-      a: "Sí, tenemos ofertas puntuales y descuentos por pago anual en los planes mensuales. Pregúntanos.",
-    },
-  ];
+  const faqs = pricingData.faqs;
 
   return (
     <PageLayout>
@@ -105,13 +79,13 @@ const Precios = () => {
         <div className="section-container relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <div className="badge-primary mb-6 inline-flex">
-              <Zap className="w-3 h-3 mr-1" /> Precios transparentes
+              <Zap className="w-3 h-3 mr-1" /> {t("pricing.badge")}
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
-              <span className="text-gradient-primary">Packs</span> claros, sin letra pequeña
+              <span className="text-gradient-primary">{t("pricing.title").split(",")[0]}</span>{t("pricing.title").includes(",") ? "," + t("pricing.title").split(",")[1] : ""}
             </h1>
             <p className="text-lg text-muted-foreground mb-4">
-              Elige el pack que mejor se adapte a tu negocio. Precios fijos, entrega rápida.
+              {t("pricing.subtitle")}
             </p>
           </div>
         </div>
@@ -122,7 +96,7 @@ const Precios = () => {
         <div className="text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary/20 via-accent/20 to-secondary/20 border border-primary/30">
             <Gift className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium">🎄 Oferta Navidad: hasta -20% en packs Web + Chatbot y Automatiza tu Agenda</span>
+            <span className="text-sm font-medium">{t("pricing.ribbon")}</span>
           </div>
         </div>
       </div>
@@ -141,7 +115,7 @@ const Precios = () => {
                 {pack.featured && (
                   <div className="absolute top-0 right-4 -translate-y-1/2">
                     <span className="badge-primary flex items-center gap-1">
-                      <Star className="w-3 h-3" /> Más popular
+                      <Star className="w-3 h-3" /> {t("pricing.popular")}
                     </span>
                   </div>
                 )}
@@ -181,7 +155,7 @@ const Precios = () => {
           {/* Monthly Plans */}
           <div className="max-w-3xl mx-auto mt-16">
             <h3 className="text-2xl font-display font-bold text-center mb-8">
-              Planes <span className="text-gradient-secondary">mensuales</span>
+              {t("pricing.monthlyPlansTitle").split(" ")[0]} <span className="text-gradient-secondary">{t("pricing.monthlyPlansTitle").split(" ").slice(1).join(" ")}</span>
             </h3>
             <div className="grid md:grid-cols-2 gap-6">
               {monthlyPlans.map((plan) => (
@@ -189,7 +163,7 @@ const Precios = () => {
                   <div className="flex items-baseline gap-2 mb-2">
                     <h4 className="font-display font-bold text-lg">{plan.name}</h4>
                     <span className="text-2xl font-bold text-primary">{plan.price}€</span>
-                    <span className="text-sm text-muted-foreground">/mes</span>
+                    <span className="text-sm text-muted-foreground">/{t("pricing.monthly")}</span>
                   </div>
                   <p className="text-sm text-muted-foreground">{plan.description}</p>
                 </div>
@@ -199,11 +173,11 @@ const Precios = () => {
 
           {/* Talk to human */}
           <div className="text-center mt-12">
-            <p className="text-muted-foreground mb-4">¿Necesitas algo más personalizado?</p>
+            <p className="text-muted-foreground mb-4">{t("pricing.talkToHuman")}</p>
             <Link to="/contacto">
               <Button variant="outline" className="border-border hover:border-primary">
                 <Phone className="w-4 h-4 mr-2" />
-                Hablar con un humano
+                {t("pricing.talkToHumanButton")}
               </Button>
             </Link>
           </div>
@@ -215,7 +189,7 @@ const Precios = () => {
         <div className="section-container">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl font-display font-bold text-center mb-12">
-              Preguntas <span className="text-gradient-primary">frecuentes</span>
+              {t("pricing.faqTitle").split(" ")[0]} <span className="text-gradient-primary">{t("pricing.faqTitle").split(" ").slice(1).join(" ")}</span>
             </h2>
 
             <div className="space-y-4">
@@ -235,14 +209,14 @@ const Precios = () => {
         <div className="section-container">
           <div className="card-premium text-center p-12 neon-border max-w-2xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              ¿Aún tienes dudas?
+              {t("pricing.ctaTitle")}
             </h2>
             <p className="text-muted-foreground mb-8">
-              Haz nuestra auditoría gratuita y te diremos qué pack necesitas.
+              {t("pricing.ctaSubtitle")}
             </p>
             <Link to="/auditoria">
               <Button size="lg" className="btn-neon text-lg px-8">
-                Auditoría AI gratis
+                {t("pricing.ctaButton")}
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>

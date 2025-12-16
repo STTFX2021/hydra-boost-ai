@@ -10,6 +10,7 @@ import {
   Building2, MapPin, MessageSquare, AlertCircle,
   Clock, Send, Info
 } from "lucide-react";
+import { useTranslation } from "@/lib/i18n";
 
 const verticals = [
   { id: "restaurante", label: "Restaurante / Cafetería / Hostelería", icon: "🍽️" },

@@ -2,78 +2,105 @@ import { PageLayout } from "@/components/layout/PageLayout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, Zap, ExternalLink } from "lucide-react";
+import { useTranslation } from "@/lib/i18n";
 
 const Blog = () => {
+  const { t, language } = useTranslation();
+
   const tools = [
     {
       name: "OpenAI / ChatGPT",
-      description: "Inteligencia artificial conversacional para chatbots y procesamiento de lenguaje natural.",
+      description: language === 'es' 
+        ? "Inteligencia artificial conversacional para chatbots y procesamiento de lenguaje natural."
+        : "Conversational AI for chatbots and natural language processing.",
       logo: "🤖",
       url: "https://openai.com",
     },
     {
       name: "Lovable",
-      description: "Desarrollo de aplicaciones web con IA. La plataforma donde construimos tus soluciones.",
+      description: language === 'es' 
+        ? "Desarrollo de aplicaciones web con IA. La plataforma donde construimos tus soluciones."
+        : "AI-powered web application development. The platform where we build your solutions.",
       logo: "💜",
       url: "https://lovable.dev",
     },
     {
       name: "Supabase",
-      description: "Base de datos y autenticación. Backend escalable para tus aplicaciones.",
+      description: language === 'es' 
+        ? "Base de datos y autenticación. Backend escalable para tus aplicaciones."
+        : "Database and authentication. Scalable backend for your applications.",
       logo: "⚡",
       url: "https://supabase.com",
     },
     {
       name: "Make / Zapier",
-      description: "Automatización de flujos de trabajo. Conectamos todas tus herramientas.",
+      description: language === 'es' 
+        ? "Automatización de flujos de trabajo. Conectamos todas tus herramientas."
+        : "Workflow automation. We connect all your tools.",
       logo: "🔗",
       url: "https://make.com",
     },
     {
       name: "Google Calendar",
-      description: "Integración con calendario para gestión de citas y reservas.",
+      description: language === 'es' 
+        ? "Integración con calendario para gestión de citas y reservas."
+        : "Calendar integration for appointment and booking management.",
       logo: "📅",
       url: "https://calendar.google.com",
     },
     {
       name: "WhatsApp Business",
-      description: "Canal de comunicación directo con tus clientes. Chatbots y notificaciones.",
+      description: language === 'es' 
+        ? "Canal de comunicación directo con tus clientes. Chatbots y notificaciones."
+        : "Direct communication channel with your clients. Chatbots and notifications.",
       logo: "💬",
       url: "https://business.whatsapp.com",
     },
     {
       name: "Notion",
-      description: "Gestión de proyectos y documentación. Base de conocimiento para chatbots.",
+      description: language === 'es' 
+        ? "Gestión de proyectos y documentación. Base de conocimiento para chatbots."
+        : "Project management and documentation. Knowledge base for chatbots.",
       logo: "📝",
       url: "https://notion.so",
     },
     {
       name: "Resend",
-      description: "Envío de emails transaccionales. Confirmaciones y notificaciones automáticas.",
+      description: language === 'es' 
+        ? "Envío de emails transaccionales. Confirmaciones y notificaciones automáticas."
+        : "Transactional email delivery. Automatic confirmations and notifications.",
       logo: "✉️",
       url: "https://resend.com",
     },
     {
       name: "Stripe",
-      description: "Procesamiento de pagos online. Integración segura para tu negocio.",
+      description: language === 'es' 
+        ? "Procesamiento de pagos online. Integración segura para tu negocio."
+        : "Online payment processing. Secure integration for your business.",
       logo: "💳",
       url: "https://stripe.com",
     },
     {
       name: "Vercel",
-      description: "Hosting y despliegue de aplicaciones web. Rendimiento y escalabilidad.",
+      description: language === 'es' 
+        ? "Hosting y despliegue de aplicaciones web. Rendimiento y escalabilidad."
+        : "Web application hosting and deployment. Performance and scalability.",
       logo: "▲",
       url: "https://vercel.com",
     },
     {
       name: "Discord",
-      description: "Notificaciones internas y comunicación de equipo en tiempo real.",
+      description: language === 'es' 
+        ? "Notificaciones internas y comunicación de equipo en tiempo real."
+        : "Internal notifications and real-time team communication.",
       logo: "🎮",
       url: "https://discord.com",
     },
     {
       name: "Google Analytics",
-      description: "Analítica web. Métricas y seguimiento del rendimiento de tu sitio.",
+      description: language === 'es' 
+        ? "Analítica web. Métricas y seguimiento del rendimiento de tu sitio."
+        : "Web analytics. Metrics and performance tracking for your site.",
       logo: "📊",
       url: "https://analytics.google.com",
     },
@@ -88,13 +115,13 @@ const Blog = () => {
         <div className="section-container relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <div className="badge-secondary mb-6 inline-flex">
-              <Zap className="w-3 h-3 mr-1" /> Stack Tecnológico
+              <Zap className="w-3 h-3 mr-1" /> {t("resources.badge")}
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
-              Herramientas y <span className="text-gradient-secondary">Partners</span>
+              {t("resources.title").split(" ").slice(0, 2).join(" ")} <span className="text-gradient-secondary">{t("resources.title").split(" ").slice(2).join(" ")}</span>
             </h1>
             <p className="text-lg text-muted-foreground mb-8">
-              Hydra Services se apoya en las mejores herramientas del mercado para construir soluciones robustas, escalables y a la vanguardia de la tecnología.
+              {t("resources.subtitle")}
             </p>
           </div>
         </div>
@@ -120,7 +147,7 @@ const Blog = () => {
                   {tool.description}
                 </p>
                 <span className="text-xs text-primary flex items-center gap-1">
-                  Visitar <ExternalLink className="w-3 h-3" />
+                  {language === 'es' ? 'Visitar' : 'Visit'} <ExternalLink className="w-3 h-3" />
                 </span>
               </a>
             ))}
@@ -133,29 +160,36 @@ const Blog = () => {
         <div className="section-container">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl font-display font-bold mb-6">
-              ¿Por qué estas herramientas?
+              {language === 'es' ? '¿Por qué estas herramientas?' : 'Why these tools?'}
             </h2>
             <p className="text-muted-foreground mb-8">
-              Elegimos cada herramienta por su fiabilidad, escalabilidad y capacidad de integración. 
-              Esto nos permite crear soluciones que funcionan hoy y crecen contigo mañana.
+              {language === 'es' 
+                ? 'Elegimos cada herramienta por su fiabilidad, escalabilidad y capacidad de integración. Esto nos permite crear soluciones que funcionan hoy y crecen contigo mañana.'
+                : 'We choose each tool for its reliability, scalability and integration capabilities. This allows us to create solutions that work today and grow with you tomorrow.'}
             </p>
             <div className="grid sm:grid-cols-3 gap-6 text-left">
               <div className="card-premium">
-                <h4 className="font-semibold mb-2">Escalabilidad</h4>
+                <h4 className="font-semibold mb-2">{language === 'es' ? 'Escalabilidad' : 'Scalability'}</h4>
                 <p className="text-sm text-muted-foreground">
-                  Todas las herramientas pueden crecer con tu negocio sin límites.
+                  {language === 'es' 
+                    ? 'Todas las herramientas pueden crecer con tu negocio sin límites.'
+                    : 'All tools can grow with your business without limits.'}
                 </p>
               </div>
               <div className="card-premium">
-                <h4 className="font-semibold mb-2">Integración</h4>
+                <h4 className="font-semibold mb-2">{language === 'es' ? 'Integración' : 'Integration'}</h4>
                 <p className="text-sm text-muted-foreground">
-                  APIs abiertas que permiten conectar cualquier sistema externo.
+                  {language === 'es' 
+                    ? 'APIs abiertas que permiten conectar cualquier sistema externo.'
+                    : 'Open APIs that allow connecting any external system.'}
                 </p>
               </div>
               <div className="card-premium">
-                <h4 className="font-semibold mb-2">Soporte</h4>
+                <h4 className="font-semibold mb-2">{language === 'es' ? 'Soporte' : 'Support'}</h4>
                 <p className="text-sm text-muted-foreground">
-                  Herramientas con comunidades activas y documentación excelente.
+                  {language === 'es' 
+                    ? 'Herramientas con comunidades activas y documentación excelente.'
+                    : 'Tools with active communities and excellent documentation.'}
                 </p>
               </div>
             </div>
@@ -168,14 +202,16 @@ const Blog = () => {
         <div className="section-container">
           <div className="card-premium text-center p-12 neon-border max-w-2xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              ¿Quieres ver la IA en acción?
+              {language === 'es' ? '¿Quieres ver la IA en acción?' : 'Want to see AI in action?'}
             </h2>
             <p className="text-muted-foreground mb-8">
-              Haz nuestra auditoría gratuita y recibe recomendaciones personalizadas.
+              {language === 'es' 
+                ? 'Haz nuestra auditoría gratuita y recibe recomendaciones personalizadas.'
+                : 'Take our free audit and receive personalized recommendations.'}
             </p>
             <Link to="/auditoria">
               <Button size="lg" className="btn-neon text-lg px-8">
-                Auditoría AI gratis
+                {t("nav.audit")}
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>
