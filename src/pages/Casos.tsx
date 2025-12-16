@@ -1,132 +1,75 @@
 import { PageLayout } from "@/components/layout/PageLayout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { useTranslation } from "@/lib/i18n";
-import { PORTFOLIO_LINKS, isValidUrl } from "@/lib/constants";
 import { 
-  ArrowRight, Zap, TrendingUp, Shield, Gamepad2, 
-  ExternalLink, Code, Brain, Server, Palette
+  ArrowRight, Zap, ExternalLink,
+  Flame, UtensilsCrossed, Stethoscope, Car, Hotel, BarChart3, Home
 } from "lucide-react";
 
 const Casos = () => {
-  const { t, language } = useTranslation();
-
   const projects = [
     {
-      id: "orochi",
-      title: "Trade Vortex / Orochi AI Trading",
-      subtitle: language === 'en' ? "Algorithmic trading system for XAUUSD" : "Sistema de trading algorítmico para XAUUSD",
-      category: language === 'en' ? "Advanced Engineering" : "Ingeniería Avanzada",
-      icon: TrendingUp,
+      id: "atelier-embers",
+      title: "Atelier of Embers",
+      type: "Tienda de velas artesanales y artesanía",
+      icon: Flame,
+      description: "Web e-commerce con catálogo de productos, integración de pagos y sistema de pedidos automatizado. Chatbot para consultas sobre personalización.",
+      tags: ["#web", "#chatbot", "#ecommerce"],
       color: "primary",
-      description: language === 'en' 
-        ? "AI-powered automated trading system for the gold market (XAUUSD). Advanced technical analysis, risk management, and automatic trade execution."
-        : "Sistema de trading automatizado impulsado por IA para el mercado de oro (XAUUSD). Análisis técnico avanzado, gestión de riesgo y ejecución automática de operaciones.",
-      technologies: ["Python", "TensorFlow", "MetaTrader 5", "AWS", "PostgreSQL"],
-      metrics: [
-        { label: language === 'en' ? "Prediction accuracy" : "Precisión predicción", value: "78%" },
-        { label: language === 'en' ? "Operations/day" : "Operaciones/día", value: "50+" },
-        { label: "Uptime", value: "99.9%" },
-      ],
-      capabilities: language === 'en' ? [
-        "ML models for price prediction",
-        "Backtesting with historical data (5+ years)",
-        "Automated risk management",
-        "Real-time monitoring dashboard",
-        "Smart alerts and notifications",
-      ] : [
-        "Modelos de ML para predicción de precios",
-        "Backtesting con datos históricos (5+ años)",
-        "Gestión de riesgo automatizada",
-        "Dashboard de monitorización en tiempo real",
-        "Alertas y notificaciones inteligentes",
-      ],
-      url: PORTFOLIO_LINKS.xauusdOrochi || PORTFOLIO_LINKS.tradeVortex,
     },
     {
-      id: "argus",
-      title: "ARGUS AI Integration",
-      subtitle: language === 'en' ? "Enterprise security system with Knowledge Graph" : "Sistema de seguridad empresarial con Knowledge Graph",
-      category: "Enterprise / Security",
-      icon: Shield,
+      id: "chic-bookings",
+      title: "Chic Bookings",
+      type: "Sistema de reservas para restaurante / salón",
+      icon: UtensilsCrossed,
+      description: "Sistema elegante de reservas online con confirmaciones automáticas, gestión de mesas y recordatorios anti no-show por WhatsApp.",
+      tags: ["#web", "#automatizaciones", "#reservas"],
       color: "secondary",
-      description: language === 'en'
-        ? "AI integration platform for enterprise security analysis. Knowledge graphs, natural language processing, and real-time threat detection."
-        : "Plataforma de integración de IA para análisis de seguridad empresarial. Knowledge graphs, procesamiento de lenguaje natural y detección de amenazas en tiempo real.",
-      technologies: ["AWS", "Neo4j", "Python", "FastAPI", "React", "Kubernetes"],
-      metrics: [
-        { label: language === 'en' ? "Nodes processed" : "Nodos procesados", value: "1M+" },
-        { label: language === 'en' ? "Response time" : "Tiempo respuesta", value: "<100ms" },
-        { label: language === 'en' ? "Integrations" : "Integraciones", value: "15+" },
-      ],
-      capabilities: language === 'en' ? [
-        "Knowledge Graph for data relationships",
-        "NLP for document analysis",
-        "Anomaly detection with ML",
-        "Scalable RESTful API",
-        "Multi-cloud deployment",
-      ] : [
-        "Knowledge Graph para relaciones de datos",
-        "NLP para análisis de documentos",
-        "Detección de anomalías con ML",
-        "API RESTful escalable",
-        "Despliegue multi-cloud",
-      ],
-      url: PORTFOLIO_LINKS.argusAI,
     },
     {
-      id: "prank-brawlers",
-      title: "Prank Brawlers",
-      subtitle: language === 'en' ? "Multiplayer game with generative AI" : "Videojuego multijugador con IA generativa",
-      category: language === 'en' ? "Product / Gaming" : "Producto / Gaming",
-      icon: Gamepad2,
+      id: "smile-studio",
+      title: "Smile Studio Hub",
+      type: "Clínica dental moderna",
+      icon: Stethoscope,
+      description: "Web profesional con sistema de citas, chatbot para resolver dudas frecuentes sobre tratamientos y automatización de recordatorios.",
+      tags: ["#web", "#chatbot", "#automatizaciones"],
       color: "accent",
-      description: language === 'en'
-        ? "Competitive multiplayer game with AI-generated elements. Complete development from concept to launch, including marketing and monetization."
-        : "Juego multijugador competitivo con elementos generados por IA. Desarrollo completo desde concepto hasta lanzamiento, incluyendo marketing y monetización.",
-      technologies: ["Unity", "C#", "Node.js", "Firebase", "Stable Diffusion"],
-      metrics: [
-        { label: language === 'en' ? "Beta users" : "Usuarios beta", value: "5K+" },
-        { label: language === 'en' ? "D7 Retention" : "Retención D7", value: "45%" },
-        { label: language === 'en' ? "AI Assets" : "Assets IA", value: "500+" },
-      ],
-      capabilities: language === 'en' ? [
-        "End-to-end game development",
-        "AI asset generation",
-        "Real-time multiplayer system",
-        "Balanced in-game economy",
-        "Marketing and UA strategy",
-      ] : [
-        "Desarrollo de juego end-to-end",
-        "Generación de assets con IA",
-        "Sistema multijugador en tiempo real",
-        "Economía in-game balanceada",
-        "Estrategia de marketing y UA",
-      ],
-      url: PORTFOLIO_LINKS.prankBrawlers,
-    },
-  ];
-
-  const capabilities = [
-    {
-      icon: Brain,
-      title: "Machine Learning",
-      description: language === 'en' ? "Predictive models, NLP, computer vision" : "Modelos predictivos, NLP, visión por computador",
     },
     {
-      icon: Server,
-      title: language === 'en' ? "Scalable Backend" : "Backend Escalable",
-      description: language === 'en' ? "APIs, microservices, databases, cloud" : "APIs, microservicios, bases de datos, cloud",
+      id: "autoquote-hub",
+      title: "AutoQuote Hub",
+      type: "Taller mecánico con presupuestos rápidos",
+      icon: Car,
+      description: "Landing de captación con formulario inteligente que genera presupuestos orientativos automáticos según el tipo de servicio y vehículo.",
+      tags: ["#web", "#automatizaciones", "#leads"],
+      color: "primary",
     },
     {
-      icon: Code,
-      title: language === 'en' ? "Full-Stack Development" : "Desarrollo Full-Stack",
-      description: language === 'en' ? "Web apps, mobile, dashboards, integrations" : "Web apps, mobile, dashboards, integraciones",
+      id: "sol-reservas",
+      title: "Sol Reservas IA",
+      type: "Motor de reservas para hoteles",
+      icon: Hotel,
+      description: "Sistema de reservas inteligente con chatbot multiidioma, check-in automático y seguimiento post-estancia para reseñas.",
+      tags: ["#chatbot", "#automatizaciones", "#reservas"],
+      color: "secondary",
     },
     {
-      icon: Palette,
-      title: language === 'en' ? "Product & UX" : "Producto & UX",
-      description: language === 'en' ? "Design, prototyping, testing, launch" : "Diseño, prototipado, testing, lanzamiento",
+      id: "insight-narrator",
+      title: "Insight Narrator",
+      type: "Interpretación de dashboards con IA",
+      icon: BarChart3,
+      description: "Capa de IA que analiza los datos de negocio y genera informes narrativos automáticos con recomendaciones accionables.",
+      tags: ["#automatizaciones", "#ia", "#analytics"],
+      color: "accent",
+    },
+    {
+      id: "tu-hogar-madrid",
+      title: "tu-hogar-madrid",
+      type: "Inmobiliaria vivienda en Madrid",
+      icon: Home,
+      description: "Web de captación con filtros avanzados, chatbot para cualificación de leads y automatización de envío de fichas de propiedades.",
+      tags: ["#web", "#chatbot", "#leads"],
+      color: "primary",
     },
   ];
 
@@ -140,104 +83,51 @@ const Casos = () => {
         <div className="section-container relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <div className="badge-accent mb-6 inline-flex">
-              <Zap className="w-3 h-3 mr-1" /> Portfolio
+              <Zap className="w-3 h-3 mr-1" /> Casos de Éxito
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
-              {t('cases.title').split(' ').slice(0, 2).join(' ')} <span className="text-gradient-accent">{t('cases.title').split(' ').slice(2).join(' ')}</span>
+              Proyectos que <span className="text-gradient-accent">demuestran resultados</span>
             </h1>
             <p className="text-lg text-muted-foreground mb-8">
-              {t('cases.subtitle')}
+              Ejemplos de lo que Hydra Services puede hacer por tu negocio: webs, chatbots y automatizaciones reales.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Projects */}
+      {/* Projects Grid */}
       <section className="section-padding">
         <div className="section-container">
-          <div className="space-y-24">
-            {projects.map((project, index) => {
-              const hasUrl = isValidUrl(project.url || '');
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects.map((project) => {
+              const IconComponent = project.icon;
               
               return (
-                <div key={project.id} id={project.id} className="scroll-mt-24">
-                  <div className="grid lg:grid-cols-5 gap-12">
-                    {/* Left: Info */}
-                    <div className="lg:col-span-3">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className={`w-12 h-12 rounded-xl bg-${project.color}/10 flex items-center justify-center`}>
-                          <project.icon className={`w-6 h-6 text-${project.color}`} />
-                        </div>
-                        <div>
-                          <span className={`badge-${project.color} text-xs`}>{project.category}</span>
-                        </div>
-                      </div>
-
-                      <h2 className="text-3xl font-display font-bold mb-2">{project.title}</h2>
-                      <p className="text-primary mb-4">{project.subtitle}</p>
-                      <p className="text-muted-foreground mb-6">{project.description}</p>
-
-                      {/* Tech Stack */}
-                      <div className="mb-6">
-                        <h4 className="text-sm font-semibold text-muted-foreground uppercase mb-3">{language === 'en' ? 'Tech Stack' : 'Stack Tecnológico'}</h4>
-                        <div className="flex flex-wrap gap-2">
-                          {project.technologies.map((tech, i) => (
-                            <span key={i} className="px-3 py-1 rounded-full text-xs bg-muted text-foreground">
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Capabilities */}
-                      <div className="mb-6">
-                        <h4 className="text-sm font-semibold text-muted-foreground uppercase mb-3">{language === 'en' ? 'Demonstrated Capabilities' : 'Capacidades Demostradas'}</h4>
-                        <ul className="grid sm:grid-cols-2 gap-2">
-                          {project.capabilities.map((cap, i) => (
-                            <li key={i} className="text-sm text-muted-foreground flex items-center gap-2">
-                              <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                              {cap}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      {/* View Project Button */}
-                      {hasUrl ? (
-                        <a href={project.url} target="_blank" rel="noopener noreferrer">
-                          <Button className="btn-neon">
-                            {t('portfolio.viewProject')}
-                            <ExternalLink className="ml-2 w-4 h-4" />
-                          </Button>
-                        </a>
-                      ) : (
-                        <Button variant="ghost" disabled>
-                          {t('portfolio.comingSoon')}
-                        </Button>
-                      )}
-                    </div>
-
-                    {/* Right: Metrics Card */}
-                    <div className="lg:col-span-2">
-                      <div className="card-premium h-full flex flex-col justify-center">
-                        <h4 className="font-display font-semibold mb-6 text-center">{language === 'en' ? 'Project Metrics' : 'Métricas del Proyecto'}</h4>
-                        <div className="space-y-6">
-                          {project.metrics.map((metric, i) => (
-                            <div key={i} className="text-center">
-                              <div className="text-3xl font-display font-bold text-gradient-primary">
-                                {metric.value}
-                              </div>
-                              <div className="text-sm text-muted-foreground">{metric.label}</div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
+                <div key={project.id} className="card-premium group flex flex-col">
+                  <div className={`w-12 h-12 rounded-xl bg-${project.color}/10 flex items-center justify-center mb-4 group-hover:bg-${project.color}/20 transition`}>
+                    <IconComponent className={`w-6 h-6 text-${project.color}`} />
                   </div>
-
-                  {index < projects.length - 1 && (
-                    <div className="border-t border-border/30 mt-24" />
-                  )}
+                  
+                  <div className="mb-2">
+                    <span className="text-xs text-muted-foreground">{project.type}</span>
+                  </div>
+                  
+                  <h3 className="text-xl font-display font-bold mb-3">{project.title}</h3>
+                  
+                  <p className="text-sm text-muted-foreground mb-4 flex-1">
+                    {project.description}
+                  </p>
+                  
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.tags.map((tag, i) => (
+                      <span key={i} className="badge-primary text-xs">{tag}</span>
+                    ))}
+                  </div>
+                  
+                  <Button size="sm" variant="ghost" disabled className="w-full">
+                    Ver demo (próximamente)
+                    <ExternalLink className="ml-2 w-3 h-3" />
+                  </Button>
                 </div>
               );
             })}
@@ -245,45 +135,19 @@ const Casos = () => {
         </div>
       </section>
 
-      {/* Capabilities */}
-      <section className="section-padding bg-muted/10">
-        <div className="section-container">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-display font-bold mb-4">
-              {language === 'en' ? 'Our' : 'Nuestras'} <span className="text-gradient-primary">{language === 'en' ? 'capabilities' : 'capacidades'}</span>
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              {language === 'en' ? "We don't just make chatbots. We have experience in complex software development." : "No solo hacemos chatbots. Tenemos experiencia en desarrollo de software complejo."}
-            </p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {capabilities.map((cap, i) => (
-              <div key={i} className="card-premium text-center">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                  <cap.icon className="w-6 h-6 text-primary" />
-                </div>
-                <h4 className="font-display font-semibold mb-2">{cap.title}</h4>
-                <p className="text-sm text-muted-foreground">{cap.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA */}
-      <section className="section-padding">
+      <section className="section-padding bg-muted/10">
         <div className="section-container">
           <div className="card-premium text-center p-12 neon-border max-w-2xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              {language === 'en' ? 'Have a project in mind?' : '¿Tienes un proyecto en mente?'}
+              ¿Tienes un proyecto en mente?
             </h2>
             <p className="text-muted-foreground mb-8">
-              {language === 'en' ? 'Tell us your idea. From MVPs to enterprise systems.' : 'Cuéntanos tu idea. Desde MVPs hasta sistemas enterprise.'}
+              Cuéntanos tu idea y te proponemos la mejor solución para tu negocio.
             </p>
             <Link to="/contacto">
               <Button size="lg" className="btn-neon text-lg px-8">
-                {language === 'en' ? "Let's talk" : 'Hablemos'}
+                Hablemos
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>

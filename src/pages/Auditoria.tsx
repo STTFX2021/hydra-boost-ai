@@ -1,25 +1,24 @@
 import { PageLayout } from "@/components/layout/PageLayout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { 
   ArrowRight, ArrowLeft, Zap, CheckCircle2, 
-  Building2, MapPin, Star, MessageSquare, AlertCircle,
-  DollarSign, Clock, Send
+  Building2, MapPin, MessageSquare, AlertCircle,
+  Clock, Send, Info
 } from "lucide-react";
-import { z } from "zod";
 
 const verticals = [
-  { id: "peluqueria", label: "Peluquería / Barbería / Estética", icon: "✂️" },
-  { id: "clinica", label: "Clínica (Fisio/Dental/Podología)", icon: "🏥" },
+  { id: "restaurante", label: "Restaurante / Cafetería / Hostelería", icon: "🍽️" },
+  { id: "clinica", label: "Clínica (Fisio/Dental/Podología/Salud)", icon: "🏥" },
   { id: "taller", label: "Taller Mecánico / Neumáticos", icon: "🚗" },
-  { id: "restaurante", label: "Restaurante / Hostelería", icon: "🍽️" },
-  { id: "servicios-domicilio", label: "Servicios a Domicilio", icon: "🏠" },
-  { id: "inmobiliaria", label: "Inmobiliaria / Alquiler", icon: "🏢" },
-  { id: "otro", label: "Otro", icon: "📦" },
+  { id: "peluqueria", label: "Peluquería / Barbería / Estética", icon: "✂️" },
+  { id: "inmobiliaria", label: "Inmobiliaria / Alquiler Vacacional", icon: "🏢" },
+  { id: "servicios-domicilio", label: "Servicios a Domicilio (limpieza, reformas...)", icon: "🏠" },
+  { id: "otro", label: "Otro tipo de negocio", icon: "📦" },
 ];
 
 const channels = [
@@ -38,16 +37,16 @@ const problems = [
   { id: "leads", label: "Pérdida de leads / clientes potenciales", icon: "👤" },
   { id: "resenas", label: "Pocas reseñas online", icon: "⭐" },
   { id: "tiempo", label: "Falta de tiempo para atender", icon: "⏰" },
+  { id: "trafico", label: "Poco tráfico / visibilidad online", icon: "📉" },
 ];
 
 const steps = [
   { title: "Tipo de negocio", icon: Building2 },
   { title: "Ubicación", icon: MapPin },
-  { title: "Reputación", icon: Star },
   { title: "Canales", icon: MessageSquare },
   { title: "Problema", icon: AlertCircle },
-  { title: "Negocio", icon: DollarSign },
-  { title: "Resultados", icon: CheckCircle2 },
+  { title: "Tiempo", icon: Clock },
+  { title: "Contacto", icon: Send },
 ];
 
 const Auditoria = () => {
@@ -62,11 +61,9 @@ const Auditoria = () => {
   const [formData, setFormData] = useState({
     vertical: preselectedVertical || "",
     city: "",
-    rating: "",
-    reviewCount: "",
+    businessName: "",
     channels: [] as string[],
     mainProblem: "",
-    avgTicket: "",
     hoursPerWeek: "",
     name: "",
     email: "",
@@ -85,60 +82,66 @@ const Auditoria = () => {
   const calculateScore = () => {
     let score = 0;
     
-    // Rating (max 25)
-    const rating = parseFloat(formData.rating);
-    if (rating >= 4.5) score += 25;
-    else if (rating >= 4) score += 20;
-    else if (rating >= 3.5) score += 15;
+    // Channels (max 30) - more channels = more opportunity
+    score += Math.min(formData.channels.length * 6, 30);
+
+    // Hours per week (max 30) - more hours = more need for automation
+    const hours = parseInt(formData.hoursPerWeek) || 0;
+    if (hours >= 20) score += 30;
+    else if (hours >= 10) score += 25;
+    else if (hours >= 5) score += 15;
     else score += 10;
 
-    // Review count (max 25)
-    const reviews = parseInt(formData.reviewCount);
-    if (reviews >= 100) score += 25;
-    else if (reviews >= 50) score += 20;
-    else if (reviews >= 20) score += 15;
+    // Problem type (max 20)
+    if (["mensajes", "tiempo", "reservas"].includes(formData.mainProblem)) score += 20;
+    else if (["no-shows", "leads"].includes(formData.mainProblem)) score += 18;
+    else score += 12;
+
+    // Vertical bonus (max 20)
+    if (["clinica", "restaurante", "peluqueria"].includes(formData.vertical)) score += 20;
+    else if (["taller", "inmobiliaria"].includes(formData.vertical)) score += 15;
     else score += 10;
 
-    // Channels (max 25) - more channels = more opportunity
-    score += Math.min(formData.channels.length * 5, 25);
-
-    // Ticket value (max 25)
-    const ticket = parseInt(formData.avgTicket);
-    if (ticket >= 100) score += 25;
-    else if (ticket >= 50) score += 20;
-    else if (ticket >= 25) score += 15;
-    else score += 10;
-
-    return score;
+    return Math.min(score, 100);
   };
 
   const getRecommendations = (score: number) => {
     const recs: string[] = [];
 
+    // Always recommend web if they don't have one
+    if (!formData.channels.includes("web")) {
+      recs.push("Web Presencia IA-Ready: Tu negocio necesita presencia online profesional para captar clientes 24/7");
+    }
+
     if (formData.channels.includes("whatsapp") || formData.channels.includes("instagram")) {
-      recs.push("AI Recepcionista: Automatiza respuestas en WhatsApp/Instagram 24/7");
+      recs.push("Web + Chatbot 24/7: Automatiza respuestas en WhatsApp/Instagram con IA");
     }
-    if (formData.mainProblem === "no-shows") {
-      recs.push("Sistema Anti No-Show: Recordatorios automáticos que reducen hasta 80% las citas perdidas");
+    
+    if (formData.mainProblem === "no-shows" || formData.mainProblem === "reservas") {
+      recs.push("Automatiza tu Agenda: Sistema de reservas con recordatorios anti no-show");
     }
-    if (formData.mainProblem === "resenas" || parseFloat(formData.rating) < 4.5) {
-      recs.push("Reputación Autopilot: Aumenta tus reseñas 5 estrellas automáticamente");
+    
+    if (formData.mainProblem === "resenas") {
+      recs.push("Reputación Autopilot: Solicita reseñas automáticamente tras cada servicio");
     }
-    if (formData.mainProblem === "leads") {
-      recs.push("Lead Capture: Captura y cualifica leads desde redes sin perder ninguno");
+    
+    if (formData.mainProblem === "leads" || formData.mainProblem === "trafico") {
+      recs.push("Captura de Leads: Convierte visitantes en clientes con formularios inteligentes");
     }
-    if (formData.mainProblem === "reservas") {
-      recs.push("Sistema de Reservas: Citas online integradas con recordatorios");
+    
+    if (formData.mainProblem === "mensajes" || formData.mainProblem === "tiempo") {
+      recs.push("Chatbot IA 24/7: Responde preguntas frecuentes automáticamente");
     }
-    if (score >= 70) {
-      recs.push("Dashboard KPI: Visibilidad total de tu negocio con métricas en tiempo real");
+
+    if (score >= 60) {
+      recs.push("Plan Mantenimiento: Optimización continua de tu web y automatizaciones");
     }
 
     if (recs.length === 0) {
-      recs.push("Diagnóstico personalizado: Tu caso necesita análisis detallado con un experto");
+      recs.push("Diagnóstico personalizado: Tu caso requiere análisis detallado con un experto");
     }
 
-    return recs;
+    return recs.slice(0, 4);
   };
 
   const handleSubmit = async () => {
@@ -147,17 +150,16 @@ const Auditoria = () => {
     const priority = score >= 70 ? "high" : score >= 50 ? "medium" : "low";
     const recommendations = getRecommendations(score);
 
-    let leadId: string | null = null;
     let dataWasSaved = false;
     let notificationFailed = false;
 
     try {
-      // Step 1: Create lead (primary data save)
+      // Step 1: Create lead
       const { data: lead, error: leadError } = await supabase.from("leads").insert({
         name: formData.name.trim(),
         email: formData.email.trim(),
         phone: formData.phone?.trim() || null,
-        business_name: formData.city,
+        business_name: formData.businessName || formData.city,
         city: formData.city,
         vertical: formData.vertical,
         source: "audit",
@@ -166,15 +168,9 @@ const Auditoria = () => {
       }).select().single();
 
       if (leadError) {
-        console.error("Lead insert error:", { 
-          code: leadError.code, 
-          message: leadError.message, 
-          details: leadError.details 
-        });
+        console.error("Lead insert error:", leadError);
         throw leadError;
       }
-
-      leadId = lead.id;
 
       // Step 2: Create assessment
       const { error: assessmentError } = await supabase.from("assessments").insert({
@@ -186,17 +182,13 @@ const Auditoria = () => {
       });
 
       if (assessmentError) {
-        console.error("Assessment insert error:", { 
-          code: assessmentError.code, 
-          message: assessmentError.message, 
-          details: assessmentError.details 
-        });
+        console.error("Assessment insert error:", assessmentError);
         throw assessmentError;
       }
 
       dataWasSaved = true;
 
-      // Step 3: Trigger notification (best-effort, non-blocking)
+      // Step 3: Trigger notification (best-effort)
       try {
         const { error: notifyError } = await supabase.functions.invoke("send-lead-notification", {
           body: {
@@ -222,52 +214,41 @@ const Auditoria = () => {
         notificationFailed = true;
       }
 
-      // Success
       setResult({ score, priority, recommendations });
       setShowResults(true);
       
       if (notificationFailed) {
-        toast.success("¡Auditoría guardada! (Notificación interna pendiente)");
+        toast.success("¡Auditoría guardada!");
       } else {
         toast.success("¡Auditoría completada!");
       }
 
     } catch (error: any) {
-      console.error("Audit submission error:", {
-        message: error?.message,
-        code: error?.code,
-        details: error?.details,
-        hint: error?.hint,
-      });
+      console.error("Audit submission error:", error);
 
-      // Fallback: save to contact_submissions if lead/assessment failed
       if (!dataWasSaved) {
         try {
           const { error: fallbackError } = await supabase.from("contact_submissions").insert({
             name: formData.name.trim(),
             email: formData.email.trim(),
             phone: formData.phone?.trim() || null,
-            message: `[AUDIT FALLBACK] Vertical: ${formData.vertical}, City: ${formData.city}, Score: ${score}, Priority: ${priority}, Recommendations: ${recommendations.join("; ")}`,
+            message: `[AUDIT] Vertical: ${formData.vertical}, City: ${formData.city}, Problem: ${formData.mainProblem}, Score: ${score}`,
           });
 
           if (fallbackError) {
-            console.error("Fallback save error:", fallbackError);
             toast.error("Error al guardar. Por favor contacta directamente.");
           } else {
-            console.log("Data saved to contact_submissions as fallback");
             setResult({ score, priority, recommendations });
             setShowResults(true);
-            toast.warning("Tu auditoría se ha guardado (modo alternativo). Te contactaremos pronto.");
+            toast.warning("Tu auditoría se ha guardado. Te contactaremos pronto.");
           }
-        } catch (fallbackErr) {
-          console.error("Fallback critical error:", fallbackErr);
+        } catch {
           toast.error("Error crítico. Por favor contacta directamente.");
         }
       } else {
-        // Data was saved but something else failed - show results anyway
         setResult({ score, priority, recommendations });
         setShowResults(true);
-        toast.warning("Auditoría guardada, pero hubo un problema menor.");
+        toast.warning("Auditoría guardada.");
       }
     } finally {
       setLoading(false);
@@ -280,7 +261,7 @@ const Auditoria = () => {
         return (
           <div>
             <h3 className="text-xl font-display font-bold mb-6">¿Qué tipo de negocio tienes?</h3>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {verticals.map((v) => (
                 <button
                   key={v.id}
@@ -302,51 +283,46 @@ const Auditoria = () => {
       case 1:
         return (
           <div>
-            <h3 className="text-xl font-display font-bold mb-6">¿Dónde está ubicado tu negocio?</h3>
-            <Input
-              type="text"
-              value={formData.city}
-              onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-              placeholder="Ej: Madrid, Barcelona, Valencia..."
-              className="input-premium"
-            />
-          </div>
-        );
-
-      case 2:
-        return (
-          <div>
-            <h3 className="text-xl font-display font-bold mb-6">¿Cuál es tu reputación online?</h3>
+            <h3 className="text-xl font-display font-bold mb-6">¿Dónde está tu negocio?</h3>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm mb-2">Rating en Google</label>
+                <label className="block text-sm mb-2">Nombre del negocio (opcional)</label>
                 <Input
-                  type="number"
-                  min="0"
-                  max="5"
-                  step="0.1"
-                  value={formData.rating}
-                  onChange={(e) => setFormData({ ...formData, rating: e.target.value })}
-                  placeholder="Ej: 4.5"
+                  type="text"
+                  value={formData.businessName}
+                  onChange={(e) => setFormData({ ...formData, businessName: e.target.value })}
+                  placeholder="Ej: Peluquería María"
                   className="input-premium"
                 />
               </div>
               <div>
-                <label className="block text-sm mb-2">Número de reseñas</label>
+                <label className="block text-sm mb-2">Ciudad / Zona *</label>
                 <Input
-                  type="number"
-                  min="0"
-                  value={formData.reviewCount}
-                  onChange={(e) => setFormData({ ...formData, reviewCount: e.target.value })}
-                  placeholder="Ej: 50"
+                  type="text"
+                  value={formData.city}
+                  onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                  placeholder="Ej: Madrid, Barcelona, Valencia..."
                   className="input-premium"
                 />
+              </div>
+            </div>
+            
+            {/* Info box about reputation */}
+            <div className="mt-6 p-4 rounded-xl bg-primary/5 border border-primary/20">
+              <div className="flex items-start gap-3">
+                <Info className="w-5 h-5 text-primary mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-sm font-medium mb-1">En la auditoría revisaremos tu reputación online</p>
+                  <p className="text-xs text-muted-foreground">
+                    Analizaremos tu presencia en Google, reseñas, rating y ticket medio estimado para proponerte mejoras personalizadas.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         );
 
-      case 3:
+      case 2:
         return (
           <div>
             <h3 className="text-xl font-display font-bold mb-6">¿Qué canales usas actualmente?</h3>
@@ -370,7 +346,7 @@ const Auditoria = () => {
           </div>
         );
 
-      case 4:
+      case 3:
         return (
           <div>
             <h3 className="text-xl font-display font-bold mb-6">¿Cuál es tu principal problema?</h3>
@@ -393,38 +369,25 @@ const Auditoria = () => {
           </div>
         );
 
-      case 5:
+      case 4:
         return (
           <div>
-            <h3 className="text-xl font-display font-bold mb-6">Cuéntanos más sobre tu negocio</h3>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm mb-2">Ticket medio (€)</label>
-                <Input
-                  type="number"
-                  min="0"
-                  value={formData.avgTicket}
-                  onChange={(e) => setFormData({ ...formData, avgTicket: e.target.value })}
-                  placeholder="Ej: 35"
-                  className="input-premium"
-                />
-              </div>
-              <div>
-                <label className="block text-sm mb-2">Horas semanales atendiendo mensajes/llamadas</label>
-                <Input
-                  type="number"
-                  min="0"
-                  value={formData.hoursPerWeek}
-                  onChange={(e) => setFormData({ ...formData, hoursPerWeek: e.target.value })}
-                  placeholder="Ej: 10"
-                  className="input-premium"
-                />
-              </div>
-            </div>
+            <h3 className="text-xl font-display font-bold mb-6">¿Cuántas horas semanales dedicas a atender mensajes y llamadas?</h3>
+            <Input
+              type="number"
+              min="0"
+              value={formData.hoursPerWeek}
+              onChange={(e) => setFormData({ ...formData, hoursPerWeek: e.target.value })}
+              placeholder="Ej: 10"
+              className="input-premium text-lg"
+            />
+            <p className="text-sm text-muted-foreground mt-2">
+              Incluye tiempo en teléfono, WhatsApp, redes sociales, email...
+            </p>
           </div>
         );
 
-      case 6:
+      case 5:
         return (
           <div>
             <h3 className="text-xl font-display font-bold mb-6">¿Dónde te enviamos los resultados?</h3>
@@ -474,11 +437,10 @@ const Auditoria = () => {
     switch (currentStep) {
       case 0: return !!formData.vertical;
       case 1: return !!formData.city;
-      case 2: return !!formData.rating && !!formData.reviewCount;
-      case 3: return formData.channels.length > 0;
-      case 4: return !!formData.mainProblem;
-      case 5: return !!formData.avgTicket;
-      case 6: return !!formData.name && !!formData.email;
+      case 2: return formData.channels.length > 0;
+      case 3: return !!formData.mainProblem;
+      case 4: return !!formData.hoursPerWeek;
+      case 5: return !!formData.name && !!formData.email;
       default: return true;
     }
   };

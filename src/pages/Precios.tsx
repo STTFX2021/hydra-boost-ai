@@ -1,139 +1,98 @@
 import { PageLayout } from "@/components/layout/PageLayout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { useTranslation } from "@/lib/i18n";
-import { CheckCircle2, ArrowRight, Zap, Star, Phone, Globe } from "lucide-react";
+import { CheckCircle2, ArrowRight, Zap, Star, Phone, Gift } from "lucide-react";
 
 const Precios = () => {
-  const { t, language } = useTranslation();
-
-  const plans = [
+  const packs = [
     {
-      id: "starter",
-      name: "Starter",
-      description: language === 'en' ? "Try the power of AI in your business" : "Prueba el poder de la IA en tu negocio",
-      duration: language === 'en' ? "7 days" : "7 días",
-      price: "0",
-      priceNote: language === 'en' ? "No commitment" : "Sin compromiso",
-      features: language === 'en' ? [
-        "1 channel (WhatsApp, IG or FB)",
-        "Automatic response bot",
-        "Up to 100 conversations",
-        "Basic dashboard",
-        "Email support",
-      ] : [
-        "1 canal (WhatsApp, IG o FB)",
-        "Bot de respuesta automática",
-        "Hasta 100 conversaciones",
-        "Dashboard básico",
-        "Soporte por email",
+      id: "web-presencia",
+      name: "Web Presencia IA-Ready",
+      description: "Tu web profesional lista para conectar chatbots y automatizaciones",
+      price: "497",
+      priceType: "pago único",
+      features: [
+        "Web corporativa 1–3 páginas",
+        "Diseño responsive y moderno",
+        "Formulario de contacto / WhatsApp",
+        "SEO local básico",
+        "Preparada para chatbot futuro",
       ],
-      cta: language === 'en' ? "Start free" : "Empezar gratis",
+      cta: "Solicitar",
       featured: false,
     },
     {
-      id: "growth",
-      name: "Growth",
-      description: language === 'en' ? "For businesses that want to grow" : "Para negocios que quieren crecer",
-      duration: language === 'en' ? "14 days" : "14 días",
-      price: "297",
-      priceNote: language === 'en' ? "/month after" : "/mes después",
-      features: language === 'en' ? [
-        "3 channels included",
-        "AI Receptionist 24/7",
-        "Booking system",
-        "Automatic reminders",
-        "Review requests",
-        "Full dashboard",
-        "Priority support",
-        "Basic integrations",
-      ] : [
-        "3 canales incluidos",
-        "AI Recepcionista 24/7",
-        "Sistema de reservas",
-        "Recordatorios automáticos",
-        "Solicitud de reseñas",
-        "Dashboard completo",
-        "Soporte prioritario",
-        "Integraciones básicas",
+      id: "web-chatbot",
+      name: "Web + Chatbot 24/7",
+      description: "Tu web + asistente virtual que responde, captura leads y guía clientes",
+      price: "790",
+      priceType: "pago único",
+      features: [
+        "Todo lo de Web Presencia +",
+        "Chatbot IA 24/7 entrenado",
+        "Widget en web + WhatsApp ready",
+        "Captura automática de leads",
+        "Dashboard de conversaciones",
+        "Soporte 30 días incluido",
       ],
-      cta: language === 'en' ? "Start trial" : "Empezar prueba",
+      cta: "Solicitar",
       featured: true,
     },
     {
-      id: "pro",
-      name: "Pro",
-      description: language === 'en' ? "Complete automation" : "Automatización completa",
-      duration: language === 'en' ? "30 days" : "30 días",
-      price: "597",
-      priceNote: language === 'en' ? "/month after" : "/mes después",
-      features: language === 'en' ? [
-        "Unlimited channels",
-        "Everything in Growth +",
-        "Customer reactivation",
-        "Integrated CRM",
-        "Automatic campaigns",
-        "Custom API",
-        "Dedicated support",
-        "Premium onboarding",
-        "Guaranteed SLA",
-      ] : [
-        "Canales ilimitados",
-        "Todo en Growth +",
-        "Reactivación de clientes",
-        "CRM integrado",
-        "Campañas automáticas",
-        "API personalizada",
-        "Soporte dedicado",
-        "Onboarding premium",
-        "SLA garantizado",
+      id: "automatiza-agenda",
+      name: "Automatiza tu Agenda",
+      description: "Sistema completo de reservas, recordatorios y solicitud de reseñas",
+      price: "1.290",
+      priceType: "pago único",
+      features: [
+        "Todo lo de Web + Chatbot +",
+        "Sistema de reservas online",
+        "Recordatorios automáticos (WhatsApp/Email)",
+        "Mensajes anti no-show",
+        "Solicitud de reseñas post-servicio",
+        "Integración Google Calendar",
+        "Dashboard de métricas",
       ],
-      cta: language === 'en' ? "Start trial" : "Empezar prueba",
+      cta: "Solicitar",
       featured: false,
     },
   ];
 
-  const faqs = language === 'en' ? [
+  const monthlyPlans = [
     {
-      q: "How much does it cost after the trial period?",
-      a: "The prices shown are monthly after the trial period. No lock-in, you can cancel anytime.",
+      id: "mantenimiento",
+      name: "Plan Mantenimiento",
+      price: "49",
+      description: "Cambios menores, soporte técnico y revisión mensual de automatizaciones.",
     },
     {
-      q: "Are there hidden costs?",
-      a: "No. The price includes everything listed. You would only pay extra for bulk SMS sending or very specific integrations.",
+      id: "crecimiento",
+      name: "Plan Crecimiento",
+      price: "99",
+      description: "Todo lo de Mantenimiento + optimización de chatbot, mejoras de conversión e informes detallados.",
+    },
+  ];
+
+  const faqs = [
+    {
+      q: "¿Qué incluye el precio?",
+      a: "Todo lo listado en cada pack. Sin costes ocultos. Hosting y dominio no incluidos (te asesoramos para elegir el mejor).",
     },
     {
-      q: "Can I change plans?",
-      a: "Yes, you can upgrade or downgrade at any time. The change applies on your next billing cycle.",
+      q: "¿Cuánto tarda la entrega?",
+      a: "Web Presencia: 5-7 días. Web + Chatbot: 7-10 días. Automatiza tu Agenda: 10-14 días. Depende de tu rapidez enviando contenido.",
     },
     {
-      q: "What happens to my data if I cancel?",
-      a: "Your data is yours. We export it in standard format (CSV/JSON) before closing the account.",
+      q: "¿Puedo actualizar mi pack más adelante?",
+      a: "Sí, puedes empezar con Web Presencia y añadir chatbot o automatizaciones cuando quieras. Solo pagas la diferencia.",
     },
     {
-      q: "Do you offer annual discounts?",
-      a: "Yes, if you pay annually you get 2 months free (equivalent to ~17% discount).",
-    },
-  ] : [
-    {
-      q: "¿Cuánto cuesta después del período de prueba?",
-      a: "Los precios indicados son mensuales tras el período de prueba. Sin permanencia, puedes cancelar cuando quieras.",
+      q: "¿Qué pasa después de la entrega?",
+      a: "Tienes 30 días de soporte incluido. Después puedes contratar un plan mensual o pedir ajustes puntuales.",
     },
     {
-      q: "¿Hay costes ocultos?",
-      a: "No. El precio incluye todo lo listado. Solo pagarías aparte si necesitas envío masivo de SMS o integraciones muy específicas.",
-    },
-    {
-      q: "¿Puedo cambiar de plan?",
-      a: "Sí, puedes subir o bajar de plan en cualquier momento. El cambio se aplica en tu próximo ciclo de facturación.",
-    },
-    {
-      q: "¿Qué pasa con mis datos si cancelo?",
-      a: "Tus datos son tuyos. Te los exportamos en formato estándar (CSV/JSON) antes de cerrar la cuenta.",
-    },
-    {
-      q: "¿Ofrecéis descuentos anuales?",
-      a: "Sí, si pagas anualmente tienes 2 meses gratis (equivalente a ~17% de descuento).",
+      q: "¿Ofrecéis descuentos?",
+      a: "Sí, tenemos ofertas puntuales y descuentos por pago anual en los planes mensuales. Pregúntanos.",
     },
   ];
 
@@ -146,58 +105,62 @@ const Precios = () => {
         <div className="section-container relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <div className="badge-primary mb-6 inline-flex">
-              <Zap className="w-3 h-3 mr-1" /> {t('pricing.title')}
+              <Zap className="w-3 h-3 mr-1" /> Precios transparentes
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
-              <span className="text-gradient-primary">{t('pricing.title').split(' ')[0]}</span> {t('pricing.subtitle')}
+              <span className="text-gradient-primary">Packs</span> claros, sin letra pequeña
             </h1>
-            <p className="text-lg text-muted-foreground mb-8">
-              {language === 'en' ? 'Choose the plan that best fits your business. All include a trial period.' : 'Elige el plan que mejor se adapte a tu negocio. Todos incluyen período de prueba.'}
+            <p className="text-lg text-muted-foreground mb-4">
+              Elige el pack que mejor se adapte a tu negocio. Precios fijos, entrega rápida.
             </p>
           </div>
         </div>
       </section>
 
+      {/* Christmas Ribbon */}
+      <div className="section-container -mt-8 mb-8">
+        <div className="text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary/20 via-accent/20 to-secondary/20 border border-primary/30">
+            <Gift className="w-4 h-4 text-primary" />
+            <span className="text-sm font-medium">🎄 Oferta Navidad: hasta -20% en packs Web + Chatbot y Automatiza tu Agenda</span>
+          </div>
+        </div>
+      </div>
+
       {/* Pricing Cards */}
-      <section className="section-padding -mt-16">
+      <section className="section-padding -mt-8">
         <div className="section-container">
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {plans.map((plan) => (
+            {packs.map((pack) => (
               <div
-                key={plan.id}
+                key={pack.id}
                 className={`${
-                  plan.featured ? "pricing-card-featured" : "pricing-card"
+                  pack.featured ? "pricing-card-featured" : "pricing-card"
                 } flex flex-col`}
               >
-                {plan.featured && (
+                {pack.featured && (
                   <div className="absolute top-0 right-4 -translate-y-1/2">
                     <span className="badge-primary flex items-center gap-1">
-                      <Star className="w-3 h-3" /> {t('pricing.popular')}
+                      <Star className="w-3 h-3" /> Más popular
                     </span>
                   </div>
                 )}
 
                 <div className="mb-6">
-                  <h3 className="text-xl font-display font-bold">{plan.name}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">{plan.description}</p>
+                  <h3 className="text-xl font-display font-bold">{pack.name}</h3>
+                  <p className="text-sm text-muted-foreground mt-1">{pack.description}</p>
                 </div>
 
                 <div className="mb-6">
                   <div className="flex items-baseline gap-1">
-                    {plan.price === "0" ? (
-                      <span className="text-4xl font-display font-bold text-gradient-primary">{language === 'en' ? 'Free' : 'Gratis'}</span>
-                    ) : (
-                      <>
-                        <span className="text-4xl font-display font-bold">{plan.price}€</span>
-                        <span className="text-muted-foreground text-sm">{plan.priceNote}</span>
-                      </>
-                    )}
+                    <span className="text-4xl font-display font-bold">{pack.price}€</span>
+                    <span className="text-muted-foreground text-sm">+ IVA</span>
                   </div>
-                  <p className="text-sm text-primary mt-1">{language === 'en' ? 'Trial' : 'Prueba'} {plan.duration}</p>
+                  <p className="text-sm text-primary mt-1">{pack.priceType}</p>
                 </div>
 
                 <ul className="space-y-3 mb-8 flex-1">
-                  {plan.features.map((feature, i) => (
+                  {pack.features.map((feature, i) => (
                     <li key={i} className="flex items-start gap-2 text-sm">
                       <CheckCircle2 className="w-4 h-4 text-success mt-0.5 shrink-0" />
                       <span className="text-muted-foreground">{feature}</span>
@@ -205,9 +168,9 @@ const Precios = () => {
                   ))}
                 </ul>
 
-                <Link to={plan.price === "0" ? "/auditoria" : "/contacto"}>
-                  <Button className={`w-full ${plan.featured ? "btn-neon" : "btn-outline-neon"}`}>
-                    {plan.cta}
+                <Link to="/contacto">
+                  <Button className={`w-full ${pack.featured ? "btn-neon" : "btn-outline-neon"}`}>
+                    {pack.cta}
                     <ArrowRight className="ml-2 w-4 h-4" />
                   </Button>
                 </Link>
@@ -215,34 +178,32 @@ const Precios = () => {
             ))}
           </div>
 
-          {/* Web Add-on */}
-          <div className="max-w-2xl mx-auto mt-12">
-            <div className="card-premium text-center p-6 border border-primary/30">
-              <div className="flex items-center justify-center gap-3 mb-3">
-                <Globe className="w-6 h-6 text-primary" />
-                <h4 className="font-display font-bold text-lg">{t('pricing.webAddon')}</h4>
-              </div>
-              <p className="text-sm text-muted-foreground mb-4">
-                {language === 'en' 
-                  ? 'Add a professional website with SEO, CRM integration, and analytics. Compatible with all plans.'
-                  : 'Añade una web profesional con SEO, integración CRM y analítica. Compatible con todos los planes.'}
-              </p>
-              <Link to="/servicios#web-creation">
-                <Button variant="outline" size="sm">
-                  {language === 'en' ? 'Learn more' : 'Saber más'}
-                  <ArrowRight className="ml-2 w-3 h-3" />
-                </Button>
-              </Link>
+          {/* Monthly Plans */}
+          <div className="max-w-3xl mx-auto mt-16">
+            <h3 className="text-2xl font-display font-bold text-center mb-8">
+              Planes <span className="text-gradient-secondary">mensuales</span>
+            </h3>
+            <div className="grid md:grid-cols-2 gap-6">
+              {monthlyPlans.map((plan) => (
+                <div key={plan.id} className="card-premium">
+                  <div className="flex items-baseline gap-2 mb-2">
+                    <h4 className="font-display font-bold text-lg">{plan.name}</h4>
+                    <span className="text-2xl font-bold text-primary">{plan.price}€</span>
+                    <span className="text-sm text-muted-foreground">/mes</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground">{plan.description}</p>
+                </div>
+              ))}
             </div>
           </div>
 
           {/* Talk to human */}
           <div className="text-center mt-12">
-            <p className="text-muted-foreground mb-4">{language === 'en' ? 'Need something more personalized?' : '¿Necesitas algo más personalizado?'}</p>
+            <p className="text-muted-foreground mb-4">¿Necesitas algo más personalizado?</p>
             <Link to="/contacto">
               <Button variant="outline" className="border-border hover:border-primary">
                 <Phone className="w-4 h-4 mr-2" />
-                {language === 'en' ? 'Talk to a human' : 'Hablar con un humano'}
+                Hablar con un humano
               </Button>
             </Link>
           </div>
@@ -254,7 +215,7 @@ const Precios = () => {
         <div className="section-container">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl font-display font-bold text-center mb-12">
-              {t('faq.title').split(' ')[0]} <span className="text-gradient-primary">{t('faq.title').split(' ').slice(1).join(' ')}</span>
+              Preguntas <span className="text-gradient-primary">frecuentes</span>
             </h2>
 
             <div className="space-y-4">
@@ -274,14 +235,14 @@ const Precios = () => {
         <div className="section-container">
           <div className="card-premium text-center p-12 neon-border max-w-2xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              {language === 'en' ? 'Still have doubts?' : '¿Aún tienes dudas?'}
+              ¿Aún tienes dudas?
             </h2>
             <p className="text-muted-foreground mb-8">
-              {language === 'en' ? 'Take our free audit and we\'ll tell you which plan you need.' : 'Haz nuestra auditoría gratuita y te diremos qué plan necesitas.'}
+              Haz nuestra auditoría gratuita y te diremos qué pack necesitas.
             </p>
             <Link to="/auditoria">
               <Button size="lg" className="btn-neon text-lg px-8">
-                {t('nav.audit')}
+                Auditoría AI gratis
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>
