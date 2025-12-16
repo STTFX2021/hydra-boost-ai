@@ -420,7 +420,7 @@ const Auditoria = () => {
                   type="tel"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  placeholder="+34 600 000 000"
+                  placeholder="+34 634 425 921"
                   className="input-premium"
                 />
               </div>

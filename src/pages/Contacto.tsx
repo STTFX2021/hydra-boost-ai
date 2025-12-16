@@ -137,7 +137,7 @@ const Contacto = () => {
                       type="tel"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      placeholder="+34 600 000 000"
+                      placeholder="+34 634 425 921"
                       className="input-premium"
                     />
                   </div>
@@ -172,7 +172,7 @@ const Contacto = () => {
             <div className="lg:col-span-2 space-y-6">
               {/* WhatsApp */}
               <a
-                href="https://wa.me/34600000000"
+                href="https://wa.me/34634425921"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="card-premium flex items-center gap-4 group"
@@ -182,7 +182,7 @@ const Contacto = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold">WhatsApp</h4>
-                  <p className="text-sm text-muted-foreground">+34 600 000 000</p>
+                  <p className="text-sm text-muted-foreground">+34 634 425 921</p>
                 </div>
                 <ArrowRight className="w-4 h-4 ml-auto text-muted-foreground group-hover:text-foreground transition" />
               </a>
