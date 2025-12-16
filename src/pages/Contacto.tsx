@@ -5,9 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { 
-  Send, MessageCircle, Mail, MapPin, Clock, ArrowRight, Zap
-} from "lucide-react";
+import { Send, MessageCircle, Mail, MapPin, Clock, ArrowRight, Zap } from "lucide-react";
 import { z } from "zod";
 
 const contactSchema = z.object({
@@ -28,7 +26,7 @@ const Contacto = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const validation = contactSchema.safeParse(formData);
     if (!validation.success) {
       toast.error(validation.error.errors[0].message);
@@ -48,16 +46,16 @@ const Contacto = () => {
 
       // Send notification
       try {
-        await supabase.functions.invoke('send-lead-notification', {
+        await supabase.functions.invoke("send-lead-notification", {
           body: {
-            type: 'contact',
+            type: "contact",
             data: {
               name: formData.name.trim(),
               email: formData.email.trim(),
               phone: formData.phone?.trim(),
               message: formData.message.trim(),
-            }
-          }
+            },
+          },
         });
       } catch (notifError) {
         console.error("Notification error:", notifError);
@@ -78,7 +76,7 @@ const Contacto = () => {
       {/* Hero */}
       <section className="relative section-padding overflow-hidden">
         <div className="glow-orb-primary w-96 h-96 -top-48 -left-48" />
-        
+
         <div className="section-container relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <div className="badge-primary mb-6 inline-flex">
@@ -87,9 +85,7 @@ const Contacto = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
               Hablemos de tu <span className="text-gradient-primary">proyecto</span>
             </h1>
-            <p className="text-lg text-muted-foreground mb-8">
-              Respondemos en menos de 24h. Sin compromisos.
-            </p>
+            <p className="text-lg text-muted-foreground mb-8">Respondemos en menos de 24h. Sin compromisos.</p>
           </div>
         </div>
       </section>
@@ -102,7 +98,7 @@ const Contacto = () => {
             <div className="lg:col-span-3">
               <div className="card-premium">
                 <h2 className="text-xl font-display font-bold mb-6">Envíanos un mensaje</h2>
-                
+
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
@@ -172,7 +168,7 @@ const Contacto = () => {
             <div className="lg:col-span-2 space-y-6">
               {/* WhatsApp */}
               <a
-                href="https://wa.me/34634425921"
+                href="https://wa.me/+34634425921"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="card-premium flex items-center gap-4 group"
@@ -188,10 +184,7 @@ const Contacto = () => {
               </a>
 
               {/* Email */}
-              <a
-                href="mailto:hola@hydrailabs.com"
-                className="card-premium flex items-center gap-4 group"
-              >
+              <a href="mailto:hola@hydrailabs.com" className="card-premium flex items-center gap-4 group">
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition">
                   <Mail className="w-6 h-6 text-primary" />
                 </div>
@@ -227,9 +220,7 @@ const Contacto = () => {
               {/* CTA */}
               <div className="card-premium neon-border text-center p-6">
                 <h4 className="font-display font-semibold mb-2">¿Prefieres una auditoría?</h4>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Descubre gratis cómo la IA puede ayudarte.
-                </p>
+                <p className="text-sm text-muted-foreground mb-4">Descubre gratis cómo la IA puede ayudarte.</p>
                 <a href="/auditoria">
                   <Button className="btn-neon w-full">
                     Auditoría gratuita
