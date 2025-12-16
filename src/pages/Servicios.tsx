@@ -1,220 +1,120 @@
 import { PageLayout } from "@/components/layout/PageLayout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { useTranslation } from "@/lib/i18n";
 import { 
-  Bot, Calendar, Star, Users, MessageSquare, TrendingUp, Globe,
-  ArrowRight, CheckCircle2, Clock, Zap
+  Globe, Bot, Calendar, Star, Users, TrendingUp,
+  ArrowRight, CheckCircle2, Clock, Zap, Gift
 } from "lucide-react";
 
 const Servicios = () => {
-  const { t, language } = useTranslation();
-
   const services = [
     {
-      id: "ai-receptionist",
+      id: "web-presencia",
+      icon: Globe,
+      title: "Web Presencia IA-Ready",
+      subtitle: "Landing o web corporativa",
+      description: "Web corporativa o landing page optimizada para móvil, preparada para integrar chatbots y automatizaciones. Ideal para restaurantes, clínicas, talleres, inmobiliarias…",
+      features: [
+        "1–3 secciones clave (inicio, servicios, contacto)",
+        "Formulario de contacto o botón directo a WhatsApp",
+        "Configuración básica de SEO local (título, descripción, mapa, etc.)",
+        "Diseño responsive y moderno",
+        "Hosting y dominio no incluidos (te asesoramos)",
+      ],
+      deliverables: ["Web lista para producción", "Panel de administración básico", "Guía de uso"],
+      time: "5-7 días",
+      price: "Desde 497 € + IVA",
+      kpis: ["Presencia online profesional", "Leads capturados 24/7", "Base para futuras automatizaciones"],
+    },
+    {
+      id: "web-chatbot",
       icon: Bot,
-      title: language === 'en' ? "AI Receptionist 24/7" : "AI Recepcionista 24/7",
-      subtitle: "WhatsApp, Instagram y Facebook",
-      description: language === 'en' 
-        ? "An AI assistant that responds to your customers' messages in seconds, 24 hours a day, 7 days a week."
-        : "Un asistente de IA que responde mensajes de tus clientes en segundos, las 24 horas del día, los 7 días de la semana.",
-      features: language === 'en' ? [
-        "Instant response on WhatsApp, IG and FB",
-        "Automated FAQs",
-        "Automatic lead qualification",
-        "Smart handoff to humans",
-        "Multi-language (ES, EN, more)",
-      ] : [
-        "Respuesta instantánea en WhatsApp, IG y FB",
-        "Preguntas frecuentes automatizadas",
-        "Cualificación de leads automática",
-        "Derivación inteligente a humanos",
-        "Multiidioma (ES, EN, más)",
+      title: "Web + Chatbot 24/7",
+      subtitle: "Tu asistente virtual siempre disponible",
+      description: "Tu web + un asistente virtual que responde 24/7, recoge datos y guía a los clientes hacia la reserva o la consulta.",
+      features: [
+        "Chatbot IA entrenado con la info de tu negocio",
+        "Disponible en web (widget) y preparado para WhatsApp/Redes",
+        "Consulta rápida de horarios, servicios, precios orientativos",
+        "Captura de leads automática",
+        "Derivación inteligente a humano cuando es necesario",
       ],
-      deliverables: language === 'en' 
-        ? ["Configured and trained bot", "Metrics dashboard", "Ongoing support"]
-        : ["Bot configurado y entrenado", "Dashboard de métricas", "Soporte continuo"],
-      time: "48-72h",
-      kpis: language === 'en' 
-        ? ["Response time < 30s", "-70% unanswered messages", "+40% lead conversion"]
-        : ["Tiempo de respuesta < 30s", "-70% mensajes sin responder", "+40% conversión de leads"],
+      deliverables: ["Web completa", "Chatbot configurado y entrenado", "Dashboard de conversaciones"],
+      time: "7-10 días",
+      price: "Desde 790 € + IVA",
+      kpis: ["Respuesta < 30s 24/7", "-70% mensajes sin responder", "+40% conversión de leads"],
     },
     {
-      id: "reservations",
+      id: "automatiza-agenda",
       icon: Calendar,
-      title: language === 'en' ? "Bookings + Anti No-Show" : "Reservas + Anti No-Show",
-      subtitle: language === 'en' ? "Smart appointment system" : "Sistema de citas inteligente",
-      description: language === 'en'
-        ? "Automated booking system with reminders and confirmations that reduce no-shows by up to 80%."
-        : "Sistema de reservas automatizado con recordatorios y confirmaciones que reducen los no-shows hasta un 80%.",
-      features: language === 'en' ? [
-        "Synced online calendar",
-        "Automatic reminders (WhatsApp/SMS)",
-        "One-click confirmation",
-        "Waiting list management",
-        "Automatic rescheduling",
-      ] : [
-        "Calendario online sincronizado",
-        "Recordatorios automáticos (WhatsApp/SMS)",
-        "Confirmación con un clic",
-        "Gestión de lista de espera",
-        "Reagendamiento automático",
+      title: "Automatiza tu Agenda",
+      subtitle: "Reservas, recordatorios y reseñas en piloto automático",
+      description: "Automatizaciones que conectan formulario, chatbot, calendario, email y WhatsApp para que las reservas se gestionen solas.",
+      features: [
+        "Confirmaciones y recordatorios automáticos (WhatsApp/Email)",
+        "Mensajes anti no-show",
+        "Pedir reseñas en el momento correcto",
+        "Integración con Google Calendar o similar",
+        "Seguimiento post-servicio automatizado",
       ],
-      deliverables: language === 'en'
-        ? ["Active booking system", "Calendar integration", "Reminder workflows"]
-        : ["Sistema de reservas activo", "Integración con tu calendario", "Flujos de recordatorio"],
-      time: "24-48h",
-      kpis: language === 'en'
-        ? ["-80% no-shows", "+25% occupancy", "Fewer manual calls"]
-        : ["-80% no-shows", "+25% ocupación", "Menos llamadas manuales"],
+      deliverables: ["Sistema de reservas activo", "Flujos de automatización configurados", "Dashboard de métricas"],
+      time: "10-14 días",
+      price: "Desde 1.290 € + IVA",
+      kpis: ["-80% no-shows", "+300% reseñas/mes", "Gestión 100% automática"],
     },
     {
-      id: "reputation",
+      id: "reputacion",
       icon: Star,
-      title: language === 'en' ? "Reputation Autopilot" : "Reputación Autopilot",
-      subtitle: language === 'en' ? "More 5-star reviews" : "Más reseñas 5 estrellas",
-      description: language === 'en'
-        ? "Automate review requests at the perfect moment and respond to all reviews intelligently."
-        : "Automatiza la solicitud de reseñas en el momento perfecto y responde a todas las reseñas de forma inteligente.",
-      features: language === 'en' ? [
-        "Automatic post-service request",
-        "Satisfaction pre-filter",
-        "Automatic review response",
-        "Multi-platform monitoring",
-        "Negative review alerts",
-      ] : [
+      title: "Reputación en Piloto Automático",
+      subtitle: "Más reseñas 5 estrellas sin esfuerzo",
+      description: "Automatiza la solicitud de reseñas en el momento perfecto y responde a todas las reseñas de forma inteligente.",
+      features: [
         "Solicitud automática post-servicio",
         "Filtro de satisfacción previo",
-        "Respuesta automática a reseñas",
-        "Monitorización multi-plataforma",
+        "Respuestas sugeridas por IA",
+        "Recordatorios a clientes satisfechos",
         "Alertas de reseñas negativas",
       ],
-      deliverables: language === 'en'
-        ? ["Active request flows", "Response templates", "Reputation dashboard"]
-        : ["Flujos de solicitud activos", "Plantillas de respuesta", "Dashboard de reputación"],
-      time: "24h",
-      kpis: language === 'en'
-        ? ["+300% new reviews/month", "4.8+ average rating", "100% reviews responded"]
-        : ["+300% nuevas reseñas/mes", "4.8+ rating promedio", "100% reseñas respondidas"],
+      deliverables: ["Flujos de solicitud activos", "Plantillas de respuesta", "Dashboard de reputación"],
+      time: "3-5 días",
+      price: "Consultar",
+      kpis: ["+300% nuevas reseñas/mes", "4.8+ rating promedio", "100% reseñas respondidas"],
     },
     {
       id: "lead-capture",
       icon: Users,
-      title: language === 'en' ? "Lead Capture Without Website" : "Lead Capture Sin Web",
-      subtitle: language === 'en' ? "Capture from social media" : "Captura desde redes sociales",
-      description: language === 'en'
-        ? "Capture leads directly from Instagram, Facebook and WhatsApp without needing a website."
-        : "Captura leads directamente desde Instagram, Facebook y WhatsApp sin necesidad de tener una web.",
-      features: language === 'en' ? [
-        "Forms in stories/posts",
-        "DM capture bot",
-        "CRM integration",
-        "Automatic tagging",
-        "Automated follow-up",
-      ] : [
-        "Formularios en stories/posts",
-        "Bot de captura en DMs",
-        "Integración con CRM",
-        "Etiquetado automático",
+      title: "Captura de Clientes sin Web",
+      subtitle: "Para negocios que aún no tienen web",
+      description: "Servicio para negocios que todavía no tienen web: chatbot + landings simples + automatizaciones mínimas para empezar a captar leads.",
+      features: [
+        "Bot de captura en WhatsApp/Instagram/Facebook",
+        "Landing page simple de captación",
+        "Integración con CRM básico",
+        "Etiquetado automático de leads",
         "Seguimiento automatizado",
       ],
-      deliverables: language === 'en'
-        ? ["Active capture flows", "Basic CRM configured", "Automations"]
-        : ["Flujos de captura activos", "CRM básico configurado", "Automatizaciones"],
-      time: "48h",
-      kpis: language === 'en'
-        ? ["+50% leads captured", "0 lost leads", "100% automatic follow-up"]
-        : ["+50% leads capturados", "0 leads perdidos", "Seguimiento 100% automático"],
+      deliverables: ["Flujos de captura activos", "CRM básico configurado", "Automatizaciones mínimas"],
+      time: "5-7 días",
+      price: "Consultar",
+      kpis: ["+50% leads capturados", "0 leads perdidos", "Seguimiento 100% automático"],
     },
     {
-      id: "reactivation",
-      icon: MessageSquare,
-      title: language === 'en' ? "Customer Reactivation" : "Reactivación de Clientes",
-      subtitle: language === 'en' ? "Recover inactive customers" : "Recupera clientes inactivos",
-      description: language === 'en'
-        ? "Automated campaigns to recover customers who haven't returned in X time with personalized offers."
-        : "Campañas automatizadas para recuperar clientes que no han vuelto en X tiempo con ofertas personalizadas.",
-      features: language === 'en' ? [
-        "Inactivity segmentation",
-        "Personalized messages",
-        "Dynamic offers",
-        "Automatic A/B testing",
-        "Conversion tracking",
-      ] : [
-        "Segmentación por inactividad",
-        "Mensajes personalizados",
-        "Ofertas dinámicas",
-        "A/B testing automático",
-        "Tracking de conversión",
-      ],
-      deliverables: language === 'en'
-        ? ["Configured campaigns", "Defined segments", "Message templates"]
-        : ["Campañas configuradas", "Segmentos definidos", "Plantillas de mensaje"],
-      time: "24-48h",
-      kpis: language === 'en'
-        ? ["+20% reactivated customers", "10x average ROI", "Total automation"]
-        : ["+20% clientes reactivados", "ROI 10x promedio", "Automatización total"],
-    },
-    {
-      id: "dashboard",
+      id: "mantenimiento",
       icon: TrendingUp,
-      title: "Dashboard KPI",
-      subtitle: language === 'en' ? "Clear metrics, no Excel" : "Métricas claras, sin Excel",
-      description: language === 'en'
-        ? "Real-time control panel with all your business metrics: bookings, leads, reviews and more."
-        : "Panel de control en tiempo real con todas las métricas de tu negocio: reservas, leads, reseñas y más.",
-      features: language === 'en' ? [
-        "Real-time metrics",
-        "Visual charts",
-        "Period comparisons",
-        "Custom alerts",
-        "Data export",
-      ] : [
-        "Métricas en tiempo real",
-        "Gráficos visuales",
-        "Comparativas período",
-        "Alertas personalizadas",
-        "Exportación de datos",
+      title: "Mantenimiento & Optimización",
+      subtitle: "Tu web y automatizaciones siempre al día",
+      description: "Cambios en la web, mejora continua y revisión de automatizaciones para que todo funcione perfectamente mes a mes.",
+      features: [
+        "Cambios menores en contenido y diseño",
+        "Revisión mensual de automatizaciones",
+        "Optimización de chatbot según feedback",
+        "Soporte técnico prioritario",
+        "Informes mensuales de rendimiento",
       ],
-      deliverables: language === 'en'
-        ? ["Custom dashboard", "Web/mobile access", "Training included"]
-        : ["Dashboard personalizado", "Acceso web/móvil", "Formación incluida"],
-      time: "72h",
-      kpis: language === 'en'
-        ? ["Data-driven decisions", "Time saved on reports", "Total visibility"]
-        : ["Decisiones basadas en datos", "Tiempo ahorrado en reportes", "Visibilidad total"],
-    },
-    {
-      id: "web-creation",
-      icon: Globe,
-      title: t('services.web.title'),
-      subtitle: t('services.web.subtitle'),
-      description: t('services.web.description'),
-      features: t('services.web.features').split(',').length > 1 
-        ? (language === 'en' ? [
-            "Responsive modern design",
-            "Technical and on-page SEO",
-            "CRM and leads integration",
-            "Google Analytics 4 tracking",
-            "Blog CMS included (optional)",
-            "Optimized load speed"
-          ] : [
-            "Diseño responsive y moderno",
-            "SEO técnico y on-page optimizado",
-            "Integración con CRM y leads",
-            "Analítica con Google Analytics 4",
-            "Blog CMS incluido (opcional)",
-            "Velocidad de carga optimizada"
-          ])
-        : [],
-      deliverables: language === 'en'
-        ? ["Production-ready website", "Admin panel", "Technical documentation"]
-        : ["Web lista para producción", "Panel de administración", "Documentación técnica"],
-      time: t('services.web.time'),
-      kpis: language === 'en'
-        ? ["Load time < 2s", "+30% conversion", "Leads captured 24/7"]
-        : ["Tiempo carga < 2s", "+30% conversión", "Leads capturados 24/7"],
+      deliverables: ["Soporte continuo", "Informes mensuales", "Mejoras incrementales"],
+      time: "Mensual",
+      price: "Desde 49 €/mes",
+      kpis: ["Web siempre actualizada", "Automatizaciones optimizadas", "Soporte cuando lo necesites"],
     },
   ];
 
@@ -228,19 +128,27 @@ const Servicios = () => {
         <div className="section-container relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <div className="badge-primary mb-6 inline-flex">
-              <Zap className="w-3 h-3 mr-1" /> {language === 'en' ? 'Productized Solutions' : 'Soluciones Productizadas'}
+              <Zap className="w-3 h-3 mr-1" /> Packs de Agencia
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
-              <span className="text-gradient-primary">{t('nav.services')}</span> {language === 'en' ? 'automation' : 'de automatización'}
+              Lo que <span className="text-gradient-primary">hacemos por ti</span>
             </h1>
             <p className="text-lg text-muted-foreground mb-8">
-              {language === 'en' 
-                ? 'Turnkey solutions to automate customer acquisition, attention and management for your local business. No complications. Measurable results.'
-                : 'Soluciones llave en mano para automatizar la captación, atención y gestión de tu negocio local. Sin complicaciones. Resultados medibles.'}
+              Hydra Services crea webs, chatbots y automatizaciones a medida para negocios locales y pymes. Sin complicaciones. Resultados medibles.
             </p>
           </div>
         </div>
       </section>
+
+      {/* Christmas Ribbon */}
+      <div className="section-container -mt-8 mb-8">
+        <div className="text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary/20 via-accent/20 to-secondary/20 border border-primary/30">
+            <Gift className="w-4 h-4 text-primary" />
+            <span className="text-sm font-medium">🎄 Oferta Navidad: hasta -20% en packs Web + Chatbot y Automatiza tu Agenda</span>
+          </div>
+        </div>
+      </div>
 
       {/* Services List */}
       <section className="section-padding bg-muted/10">
@@ -262,7 +170,7 @@ const Servicios = () => {
                   <p className="text-primary font-medium mb-4">{service.subtitle}</p>
                   <p className="text-muted-foreground mb-6">{service.description}</p>
 
-                  <h4 className="font-semibold mb-3">{language === 'en' ? "What's included:" : "Qué incluye:"}</h4>
+                  <h4 className="font-semibold mb-3">Qué incluye:</h4>
                   <ul className="space-y-2 mb-6">
                     {service.features.map((feature, i) => (
                       <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
@@ -272,9 +180,13 @@ const Servicios = () => {
                     ))}
                   </ul>
 
+                  <div className="flex items-center gap-4 mb-6">
+                    <span className="badge-primary text-sm font-semibold">{service.price}</span>
+                  </div>
+
                   <Link to="/contacto">
                     <Button className="btn-neon">
-                      {language === 'en' ? 'Request this service' : 'Solicitar este servicio'}
+                      Solicitar este servicio
                       <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
                   </Link>
@@ -283,7 +195,7 @@ const Servicios = () => {
                 <div className={`card-premium ${index % 2 === 1 ? "lg:order-1" : ""}`}>
                   <div className="space-y-6">
                     <div>
-                      <h4 className="text-sm font-semibold text-muted-foreground uppercase mb-3">{language === 'en' ? 'Deliverables' : 'Entregables'}</h4>
+                      <h4 className="text-sm font-semibold text-muted-foreground uppercase mb-3">Entregables</h4>
                       <ul className="space-y-2">
                         {service.deliverables.map((d, i) => (
                           <li key={i} className="flex items-center gap-2 text-sm">
@@ -296,12 +208,12 @@ const Servicios = () => {
 
                     <div className="flex items-center gap-2 text-sm">
                       <Clock className="w-4 h-4 text-primary" />
-                      <span className="text-muted-foreground">{language === 'en' ? 'Implementation time:' : 'Tiempo de implementación:'}</span>
+                      <span className="text-muted-foreground">Tiempo de implementación:</span>
                       <span className="font-semibold">{service.time}</span>
                     </div>
 
                     <div>
-                      <h4 className="text-sm font-semibold text-muted-foreground uppercase mb-3">{language === 'en' ? 'Expected KPIs' : 'KPIs esperados'}</h4>
+                      <h4 className="text-sm font-semibold text-muted-foreground uppercase mb-3">KPIs esperados</h4>
                       <div className="flex flex-wrap gap-2">
                         {service.kpis.map((kpi, i) => (
                           <span key={i} className="badge-success text-xs">{kpi}</span>
@@ -322,14 +234,14 @@ const Servicios = () => {
         <div className="section-container relative z-10">
           <div className="card-premium text-center p-12 neon-border">
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              {language === 'en' ? "Don't know where to start?" : "¿No sabes por dónde empezar?"}
+              ¿No sabes por dónde empezar?
             </h2>
             <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-              {language === 'en' ? "Take our free audit and we'll tell you which services you need." : "Haz nuestra auditoría gratuita y te diremos qué servicios necesitas."}
+              Haz nuestra auditoría gratuita y te diremos qué servicios necesitas.
             </p>
             <Link to="/auditoria">
               <Button size="lg" className="btn-neon text-lg px-8">
-                {t('hero.cta1')}
+                Auditoría AI gratis (3 min)
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>

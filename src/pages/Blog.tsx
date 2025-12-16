@@ -1,26 +1,83 @@
 import { PageLayout } from "@/components/layout/PageLayout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
-import { ArrowRight, Zap, Calendar, Clock, Tag } from "lucide-react";
-import { format } from "date-fns";
-import { es } from "date-fns/locale";
+import { ArrowRight, Zap, ExternalLink } from "lucide-react";
 
 const Blog = () => {
-  const { data: posts, isLoading } = useQuery({
-    queryKey: ["blog-posts"],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("blog_posts")
-        .select("*")
-        .eq("published", true)
-        .order("published_at", { ascending: false });
-
-      if (error) throw error;
-      return data;
+  const tools = [
+    {
+      name: "OpenAI / ChatGPT",
+      description: "Inteligencia artificial conversacional para chatbots y procesamiento de lenguaje natural.",
+      logo: "🤖",
+      url: "https://openai.com",
     },
-  });
+    {
+      name: "Lovable",
+      description: "Desarrollo de aplicaciones web con IA. La plataforma donde construimos tus soluciones.",
+      logo: "💜",
+      url: "https://lovable.dev",
+    },
+    {
+      name: "Supabase",
+      description: "Base de datos y autenticación. Backend escalable para tus aplicaciones.",
+      logo: "⚡",
+      url: "https://supabase.com",
+    },
+    {
+      name: "Make / Zapier",
+      description: "Automatización de flujos de trabajo. Conectamos todas tus herramientas.",
+      logo: "🔗",
+      url: "https://make.com",
+    },
+    {
+      name: "Google Calendar",
+      description: "Integración con calendario para gestión de citas y reservas.",
+      logo: "📅",
+      url: "https://calendar.google.com",
+    },
+    {
+      name: "WhatsApp Business",
+      description: "Canal de comunicación directo con tus clientes. Chatbots y notificaciones.",
+      logo: "💬",
+      url: "https://business.whatsapp.com",
+    },
+    {
+      name: "Notion",
+      description: "Gestión de proyectos y documentación. Base de conocimiento para chatbots.",
+      logo: "📝",
+      url: "https://notion.so",
+    },
+    {
+      name: "Resend",
+      description: "Envío de emails transaccionales. Confirmaciones y notificaciones automáticas.",
+      logo: "✉️",
+      url: "https://resend.com",
+    },
+    {
+      name: "Stripe",
+      description: "Procesamiento de pagos online. Integración segura para tu negocio.",
+      logo: "💳",
+      url: "https://stripe.com",
+    },
+    {
+      name: "Vercel",
+      description: "Hosting y despliegue de aplicaciones web. Rendimiento y escalabilidad.",
+      logo: "▲",
+      url: "https://vercel.com",
+    },
+    {
+      name: "Discord",
+      description: "Notificaciones internas y comunicación de equipo en tiempo real.",
+      logo: "🎮",
+      url: "https://discord.com",
+    },
+    {
+      name: "Google Analytics",
+      description: "Analítica web. Métricas y seguimiento del rendimiento de tu sitio.",
+      logo: "📊",
+      url: "https://analytics.google.com",
+    },
+  ];
 
   return (
     <PageLayout>
@@ -31,103 +88,83 @@ const Blog = () => {
         <div className="section-container relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <div className="badge-secondary mb-6 inline-flex">
-              <Zap className="w-3 h-3 mr-1" /> Recursos
+              <Zap className="w-3 h-3 mr-1" /> Stack Tecnológico
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
-              <span className="text-gradient-secondary">Blog</span> & Recursos
+              Herramientas y <span className="text-gradient-secondary">Partners</span>
             </h1>
             <p className="text-lg text-muted-foreground mb-8">
-              Artículos, guías y casos de uso sobre automatización con IA para negocios locales.
+              Hydra Services se apoya en las mejores herramientas del mercado para construir soluciones robustas, escalables y a la vanguardia de la tecnología.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Posts */}
-      <section className="section-padding -mt-16">
+      {/* Tools Grid */}
+      <section className="section-padding">
         <div className="section-container">
-          {isLoading ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="card-premium animate-pulse">
-                  <div className="h-48 bg-muted rounded-xl mb-4" />
-                  <div className="h-4 bg-muted rounded w-1/2 mb-2" />
-                  <div className="h-6 bg-muted rounded mb-2" />
-                  <div className="h-4 bg-muted rounded w-3/4" />
-                </div>
-              ))}
-            </div>
-          ) : posts && posts.length > 0 ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {posts.map((post) => (
-                <Link key={post.id} to={`/blog/${post.slug}`}>
-                  <article className="card-premium group h-full flex flex-col">
-                    {post.cover_image_url && (
-                      <div className="relative h-48 rounded-xl overflow-hidden mb-4">
-                        <img
-                          src={post.cover_image_url}
-                          alt={post.title}
-                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                        />
-                      </div>
-                    )}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {tools.map((tool, i) => (
+              <a
+                key={i}
+                href={tool.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="card-premium group hover:border-primary/50 transition-all"
+              >
+                <div className="text-4xl mb-4">{tool.logo}</div>
+                <h3 className="font-display font-semibold mb-2 group-hover:text-primary transition">
+                  {tool.name}
+                </h3>
+                <p className="text-sm text-muted-foreground mb-4">
+                  {tool.description}
+                </p>
+                <span className="text-xs text-primary flex items-center gap-1">
+                  Visitar <ExternalLink className="w-3 h-3" />
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
 
-                    {/* Tags */}
-                    {post.tags && post.tags.length > 0 && (
-                      <div className="flex flex-wrap gap-2 mb-3">
-                        {post.tags.slice(0, 2).map((tag) => (
-                          <span key={tag} className="badge-primary text-xs">
-                            <Tag className="w-3 h-3 mr-1" />
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-
-                    <h2 className="text-xl font-display font-bold mb-2 group-hover:text-primary transition">
-                      {post.title}
-                    </h2>
-
-                    {post.excerpt && (
-                      <p className="text-sm text-muted-foreground mb-4 flex-1">
-                        {post.excerpt}
-                      </p>
-                    )}
-
-                    <div className="flex items-center gap-4 text-xs text-muted-foreground mt-auto">
-                      {post.published_at && (
-                        <span className="flex items-center gap-1">
-                          <Calendar className="w-3 h-3" />
-                          {format(new Date(post.published_at), "d MMM yyyy", { locale: es })}
-                        </span>
-                      )}
-                    </div>
-                  </article>
-                </Link>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-16">
-              <div className="w-20 h-20 rounded-full bg-muted/50 flex items-center justify-center mx-auto mb-6">
-                <Zap className="w-10 h-10 text-muted-foreground" />
+      {/* Why these tools */}
+      <section className="section-padding bg-muted/10">
+        <div className="section-container">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl font-display font-bold mb-6">
+              ¿Por qué estas herramientas?
+            </h2>
+            <p className="text-muted-foreground mb-8">
+              Elegimos cada herramienta por su fiabilidad, escalabilidad y capacidad de integración. 
+              Esto nos permite crear soluciones que funcionan hoy y crecen contigo mañana.
+            </p>
+            <div className="grid sm:grid-cols-3 gap-6 text-left">
+              <div className="card-premium">
+                <h4 className="font-semibold mb-2">Escalabilidad</h4>
+                <p className="text-sm text-muted-foreground">
+                  Todas las herramientas pueden crecer con tu negocio sin límites.
+                </p>
               </div>
-              <h3 className="text-xl font-display font-bold mb-2">Próximamente</h3>
-              <p className="text-muted-foreground mb-8">
-                Estamos preparando contenido de valor. ¡Vuelve pronto!
-              </p>
-              <Link to="/contacto">
-                <Button className="btn-outline-neon">
-                  Recibir novedades
-                  <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-              </Link>
+              <div className="card-premium">
+                <h4 className="font-semibold mb-2">Integración</h4>
+                <p className="text-sm text-muted-foreground">
+                  APIs abiertas que permiten conectar cualquier sistema externo.
+                </p>
+              </div>
+              <div className="card-premium">
+                <h4 className="font-semibold mb-2">Soporte</h4>
+                <p className="text-sm text-muted-foreground">
+                  Herramientas con comunidades activas y documentación excelente.
+                </p>
+              </div>
             </div>
-          )}
+          </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="section-padding bg-muted/10">
+      <section className="section-padding">
         <div className="section-container">
           <div className="card-premium text-center p-12 neon-border max-w-2xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
