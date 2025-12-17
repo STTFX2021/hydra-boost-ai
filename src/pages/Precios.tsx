@@ -5,49 +5,36 @@ import { CheckCircle2, ArrowRight, Zap, Star, Phone, Gift } from "lucide-react";
 import { useTranslation } from "@/lib/i18n";
 
 const Precios = () => {
-  const { t } = useTranslation();
-
-  const pricingData = t("pricing") as unknown as {
-    packs: {
-      webPresencia: { name: string; description: string; features: string[] };
-      webChatbot: { name: string; description: string; features: string[] };
-      automatiza: { name: string; description: string; features: string[] };
-    };
-    monthlyPlans: {
-      mantenimiento: { name: string; description: string };
-      crecimiento: { name: string; description: string };
-    };
-    faqs: Array<{ q: string; a: string }>;
-  };
+  const { t, tArray } = useTranslation();
 
   const packs = [
     {
       id: "web-presencia",
-      name: pricingData.packs.webPresencia.name,
-      description: pricingData.packs.webPresencia.description,
+      name: t("pricing.packs.webPresencia.name"),
+      description: t("pricing.packs.webPresencia.description"),
       price: "497",
       priceType: t("pricing.oneTimePayment"),
-      features: pricingData.packs.webPresencia.features,
+      features: tArray("pricing.packs.webPresencia.features"),
       cta: t("pricing.request"),
       featured: false,
     },
     {
       id: "web-chatbot",
-      name: pricingData.packs.webChatbot.name,
-      description: pricingData.packs.webChatbot.description,
+      name: t("pricing.packs.webChatbot.name"),
+      description: t("pricing.packs.webChatbot.description"),
       price: "790",
       priceType: t("pricing.oneTimePayment"),
-      features: pricingData.packs.webChatbot.features,
+      features: tArray("pricing.packs.webChatbot.features"),
       cta: t("pricing.request"),
       featured: true,
     },
     {
       id: "automatiza-agenda",
-      name: pricingData.packs.automatiza.name,
-      description: pricingData.packs.automatiza.description,
+      name: t("pricing.packs.automatiza.name"),
+      description: t("pricing.packs.automatiza.description"),
       price: "1.290",
       priceType: t("pricing.oneTimePayment"),
-      features: pricingData.packs.automatiza.features,
+      features: tArray("pricing.packs.automatiza.features"),
       cta: t("pricing.request"),
       featured: false,
     },
@@ -56,19 +43,23 @@ const Precios = () => {
   const monthlyPlans = [
     {
       id: "mantenimiento",
-      name: pricingData.monthlyPlans.mantenimiento.name,
+      name: t("pricing.monthlyPlans.mantenimiento.name"),
       price: "49",
-      description: pricingData.monthlyPlans.mantenimiento.description,
+      description: t("pricing.monthlyPlans.mantenimiento.description"),
     },
     {
       id: "crecimiento",
-      name: pricingData.monthlyPlans.crecimiento.name,
+      name: t("pricing.monthlyPlans.crecimiento.name"),
       price: "99",
-      description: pricingData.monthlyPlans.crecimiento.description,
+      description: t("pricing.monthlyPlans.crecimiento.description"),
     },
   ];
 
-  const faqs = pricingData.faqs;
+  const faqKeys = ['time', 'includes', 'payment', 'support'];
+  const faqs = faqKeys.map(key => ({
+    q: t(`pricing.faqs.${key}.q`),
+    a: t(`pricing.faqs.${key}.a`),
+  }));
 
   return (
     <PageLayout>
