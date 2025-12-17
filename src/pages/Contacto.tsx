@@ -12,7 +12,7 @@ const contactSchema = z.object({
   name: z.string().trim().min(2, "Nombre muy corto").max(100),
   email: z.string().trim().email("Email inválido").max(255),
   phone: z.string().optional(),
-  message: z.string().trim().min(10, "Mensaje muy corto").max(1000),
+  message: z.string().trim().min(10, "Mensaje muy corto").max(2000),
 });
 
 const Contacto = () => {
@@ -23,6 +23,7 @@ const Contacto = () => {
     phone: "",
     message: "",
   });
+  const [honeypot, setHoneypot] = useState("");
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -35,37 +36,43 @@ const Contacto = () => {
 
     setLoading(true);
     try {
-      const { error } = await supabase.from("contact_submissions").insert({
+      // Save to database first
+      const { error: dbError } = await supabase.from("contact_submissions").insert({
         name: formData.name.trim(),
         email: formData.email.trim(),
         phone: formData.phone?.trim() || null,
         message: formData.message.trim(),
       });
 
-      if (error) throw error;
+      if (dbError) {
+        console.error("DB error:", dbError);
+      }
 
-      // Notificación al edge function (si falla, no rompe el envío)
-      try {
-        await supabase.functions.invoke("send-lead-notification", {
-          body: {
-            type: "contact",
-            data: {
-              name: formData.name.trim(),
-              email: formData.email.trim(),
-              phone: formData.phone?.trim() || undefined,
-              message: formData.message.trim(),
-            },
-          },
-        });
-      } catch (notifError) {
-        console.error("Notification error:", notifError);
+      // Send via Edge Function (Discord + Email)
+      const { data, error } = await supabase.functions.invoke("contact-submit", {
+        body: {
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          phone: formData.phone?.trim() || "",
+          message: formData.message.trim(),
+          website: honeypot, // honeypot field
+        },
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      if (data && !data.ok) {
+        throw new Error(data.error || "Error al enviar");
       }
 
       toast.success("¡Mensaje enviado! Te responderemos pronto.");
       setFormData({ name: "", email: "", phone: "", message: "" });
+      setHoneypot("");
     } catch (error) {
       console.error("Contact form error:", error);
-      toast.error("Error al enviar el mensaje. Inténtalo de nuevo.");
+      toast.error("No se pudo enviar. Inténtalo de nuevo.");
     } finally {
       setLoading(false);
     }
@@ -100,6 +107,16 @@ const Contacto = () => {
                 <h2 className="text-xl font-display font-bold mb-6">Envíanos un mensaje</h2>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* Honeypot anti-spam - invisible to users */}
+                  <input
+                    type="text"
+                    name="website"
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
+                    style={{ position: "absolute", left: "-9999px", opacity: 0 }}
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium mb-2">Nombre *</label>
