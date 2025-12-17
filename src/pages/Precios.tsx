@@ -2,10 +2,28 @@ import { PageLayout } from "@/components/layout/PageLayout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { CheckCircle2, ArrowRight, Zap, Star, Phone, Gift } from "lucide-react";
-import { useTranslation } from "@/lib/i18n";
+import { useTranslation, useI18n } from "@/lib/i18n";
+
+// FAQ data for each language
+const faqData = {
+  es: [
+    { q: '¿Qué incluye el precio?', a: 'Todo lo listado en cada pack. Sin costes ocultos. Hosting y dominio no incluidos (te asesoramos para elegir el mejor).' },
+    { q: '¿Cuánto tarda la entrega?', a: 'Web Presencia: 5-7 días. Web + Chatbot: 7-10 días. Automatiza tu Agenda: 10-14 días. Depende de tu rapidez enviando contenido.' },
+    { q: '¿Puedo actualizar mi pack más adelante?', a: 'Sí, puedes empezar con Web Presencia y añadir chatbot o automatizaciones cuando quieras. Solo pagas la diferencia.' },
+    { q: '¿Qué pasa después de la entrega?', a: 'Tienes 30 días de soporte incluido. Después puedes contratar un plan mensual o pedir ajustes puntuales.' },
+    { q: '¿Ofrecéis descuentos?', a: 'Sí, tenemos ofertas puntuales y descuentos por pago anual en los planes mensuales. Pregúntanos.' }
+  ],
+  en: [
+    { q: "What's included in the price?", a: 'Everything listed in each pack. No hidden costs. Hosting and domain not included (we advise you to choose the best).' },
+    { q: 'How long does delivery take?', a: 'Web Presence: 5-7 days. Web + Chatbot: 7-10 days. Automate Your Agenda: 10-14 days. Depends on how fast you send content.' },
+    { q: 'Can I upgrade my pack later?', a: 'Yes, you can start with Web Presence and add chatbot or automations whenever you want. You only pay the difference.' },
+    { q: 'What happens after delivery?', a: 'You have 30 days of support included. After that you can hire a monthly plan or request specific adjustments.' },
+    { q: 'Do you offer discounts?', a: 'Yes, we have occasional offers and discounts for annual payment on monthly plans. Ask us.' }
+  ]
+};
 
 const Precios = () => {
-  const { t, tArray } = useTranslation();
+  const { t, tArray, language } = useTranslation();
 
   const packs = [
     {
@@ -55,11 +73,7 @@ const Precios = () => {
     },
   ];
 
-  const faqKeys = ['time', 'includes', 'payment', 'support'];
-  const faqs = faqKeys.map(key => ({
-    q: t(`pricing.faqs.${key}.q`),
-    a: t(`pricing.faqs.${key}.a`),
-  }));
+  const faqs = faqData[language] || faqData.es;
 
   return (
     <PageLayout>
