@@ -8,7 +8,7 @@ import {
 import { useTranslation } from "@/lib/i18n";
 
 const Servicios = () => {
-  const { t } = useTranslation();
+  const { t, tArray } = useTranslation();
 
   const serviceKeys = ['webPresencia', 'webChatbot', 'automatiza', 'reputacion', 'leadCapture', 'mantenimiento'];
   const serviceIcons: Record<string, any> = {
@@ -20,30 +20,18 @@ const Servicios = () => {
     mantenimiento: TrendingUp,
   };
 
-  const services = serviceKeys.map(key => {
-    const serviceData = t(`services.${key}`) as unknown as {
-      title: string;
-      subtitle: string;
-      description: string;
-      features: string[];
-      deliverables: string[];
-      time: string;
-      price: string;
-      kpis: string[];
-    };
-    return {
-      id: key,
-      icon: serviceIcons[key],
-      title: serviceData.title,
-      subtitle: serviceData.subtitle,
-      description: serviceData.description,
-      features: serviceData.features,
-      deliverables: serviceData.deliverables,
-      time: serviceData.time,
-      price: serviceData.price,
-      kpis: serviceData.kpis,
-    };
-  });
+  const services = serviceKeys.map(key => ({
+    id: key,
+    icon: serviceIcons[key],
+    title: t(`services.${key}.title`),
+    subtitle: t(`services.${key}.subtitle`),
+    description: t(`services.${key}.description`),
+    features: tArray(`services.${key}.features`),
+    deliverables: tArray(`services.${key}.deliverables`),
+    time: t(`services.${key}.time`),
+    price: t(`services.${key}.price`),
+    kpis: tArray(`services.${key}.kpis`),
+  }));
 
   return (
     <PageLayout>
