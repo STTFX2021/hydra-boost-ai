@@ -130,7 +130,7 @@ const handler = async (req: Request): Promise<Response> => {
             { name: "📞 Teléfono", value: cleanPhone, inline: true },
           ],
           timestamp: new Date().toISOString(),
-          footer: { text: "HydrAI Services - Formulario de Contacto" }
+          footer: { text: "HydrAI Labs - Formulario de Contacto" }
         }]
       };
 
@@ -176,7 +176,7 @@ const handler = async (req: Request): Promise<Response> => {
           <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; white-space: pre-wrap;">${cleanMessage}</div>
           <hr style="border: 1px solid #eee; margin-top: 20px;" />
           <p style="color: #888; font-size: 12px;">
-            Este mensaje fue enviado desde el formulario de contacto de HydrAI Services.
+            Este mensaje fue enviado desde el formulario de contacto de HydrAI Labs.
           </p>
         </div>
       `;

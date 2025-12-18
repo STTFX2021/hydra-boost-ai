@@ -97,8 +97,36 @@ const Contacto = () => {
         </div>
       </section>
 
+      {/* Investor Hub CTA */}
+      <section className="section-container -mt-8 mb-8">
+        <div className="max-w-3xl mx-auto">
+          <div className="card-premium neon-border p-8 text-center">
+            <div className="badge-primary mb-4 inline-flex">
+              <Zap className="w-3 h-3 mr-1" /> Investor Hub
+            </div>
+            <h2 className="text-2xl font-display font-bold mb-3">Investor Hub</h2>
+            <p className="text-muted-foreground mb-6">
+              Si quieres formar parte del crecimiento de HydrAI Labs, aquí tienes la visión, roadmap y oportunidades de colaboración.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a href="/inversores">
+                <Button className="btn-neon">
+                  Acceder al Investor Hub
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </a>
+              <a href="#contacto">
+                <Button variant="outline" className="border-border/50 hover:bg-muted/50">
+                  Quiero hablar de colaboración
+                </Button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Contact Content */}
-      <section className="section-padding -mt-16">
+      <section id="contacto" className="section-padding">
         <div className="section-container">
           <div className="grid lg:grid-cols-5 gap-12 max-w-6xl mx-auto">
             {/* Formulario */}

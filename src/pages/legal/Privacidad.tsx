@@ -15,7 +15,7 @@ const Privacidad = () => {
 
               <h2 className="text-2xl font-display font-semibold mt-8">1. Responsable del tratamiento</h2>
               <p className="text-muted-foreground">
-                HydrAI Services es el responsable del tratamiento de los datos personales recogidos a través de este sitio web.
+                HydrAI Labs es el responsable del tratamiento de los datos personales recogidos a través de este sitio web.
               </p>
 
               <h2 className="text-2xl font-display font-semibold mt-8">2. Datos que recopilamos</h2>
