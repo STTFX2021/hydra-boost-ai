@@ -798,7 +798,7 @@ const translations: Record<Language, any> = {
       ctaSubtitle: 'Tell us your idea and we\'ll propose the best solution for your business.',
       ctaButton: "Let's talk",
       testimonialsTitle: 'What our clients say',
-      testimonialsSubtitle: 'Real stories from businesses already using websites, chatbots and automations built by Hydra.'
+      testimonialsSubtitle: 'Real stories from businesses already using websites, chatbots and automations built by HydrAI Labs.'
     },
     resources: {
       badge: 'Tools',
