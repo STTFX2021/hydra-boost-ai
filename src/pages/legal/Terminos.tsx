@@ -20,7 +20,7 @@ const Terminos = () => {
 
               <h2 className="text-2xl font-display font-semibold mt-8">2. Servicios</h2>
               <p className="text-muted-foreground">
-                HydrAI Services ofrece servicios de automatización con inteligencia artificial para negocios locales. Los detalles específicos de cada servicio se acuerdan individualmente con cada cliente.
+                HydrAI Labs ofrece servicios de automatización con inteligencia artificial para negocios locales. Los detalles específicos de cada servicio se acuerdan individualmente con cada cliente.
               </p>
 
               <h2 className="text-2xl font-display font-semibold mt-8">3. Uso del sitio</h2>
@@ -34,12 +34,12 @@ const Terminos = () => {
 
               <h2 className="text-2xl font-display font-semibold mt-8">4. Propiedad intelectual</h2>
               <p className="text-muted-foreground">
-                Todo el contenido de este sitio (textos, imágenes, logos, código) es propiedad de HydrAI Services o se utiliza con licencia. Queda prohibida su reproducción sin autorización.
+                Todo el contenido de este sitio (textos, imágenes, logos, código) es propiedad de HydrAI Labs o se utiliza con licencia. Queda prohibida su reproducción sin autorización.
               </p>
 
               <h2 className="text-2xl font-display font-semibold mt-8">5. Limitación de responsabilidad</h2>
               <p className="text-muted-foreground">
-                HydrAI Services no se hace responsable de daños directos o indirectos derivados del uso de este sitio o de la imposibilidad de usarlo.
+                HydrAI Labs no se hace responsable de daños directos o indirectos derivados del uso de este sitio o de la imposibilidad de usarlo.
               </p>
 
               <h2 className="text-2xl font-display font-semibold mt-8">6. Modificaciones</h2>
@@ -55,7 +55,7 @@ const Terminos = () => {
               <h2 className="text-2xl font-display font-semibold mt-8">8. Contacto</h2>
               <p className="text-muted-foreground">
                 Para cualquier consulta sobre estos términos, contacta en: 
-                <a href="mailto:legal@hydraiservices.com" className="text-primary"> legal@hydraiservices.com</a>
+                <a href="mailto:legal@hydrailabs.com" className="text-primary"> legal@hydrailabs.com</a>
               </p>
             </div>
           </div>

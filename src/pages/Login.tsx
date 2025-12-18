@@ -90,7 +90,7 @@ const Login = () => {
               {isLogin ? "Acceso Admin" : "Crear cuenta"}
             </h1>
             <p className="text-sm text-muted-foreground mt-2">
-              {isLogin ? "Panel de administración HydrAI Services" : "Regístrate para acceder al panel"}
+              {isLogin ? "Panel de administración HydrAI Labs" : "Regístrate para acceder al panel"}
             </p>
           </div>
 

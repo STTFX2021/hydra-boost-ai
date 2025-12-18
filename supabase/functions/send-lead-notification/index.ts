@@ -63,7 +63,7 @@ const handler = async (req: Request): Promise<Response> => {
           ${data.message ? `<p><strong>Mensaje:</strong> ${data.message}</p>` : ''}
           ${data.recommendations ? `<h3>Recomendaciones:</h3><pre>${data.recommendations}</pre>` : ''}
           <hr>
-          <p style="color: #666; font-size: 12px;">HydrAI Services - Panel Admin</p>
+          <p style="color: #666; font-size: 12px;">HydrAI Labs - Panel Admin</p>
         `;
 
         const resendResponse = await fetch("https://api.resend.com/emails", {
@@ -73,8 +73,8 @@ const handler = async (req: Request): Promise<Response> => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            from: "HydrAI Services <onboarding@resend.dev>",
-            to: ["admin@hydraiservices.com"], // This should be configured or use owner email
+            from: "HydrAI Labs <onboarding@resend.dev>",
+            to: ["admin@hydrailabs.com"], // This should be configured or use owner email
             subject: emailSubject,
             html: emailBody,
           }),
@@ -111,7 +111,7 @@ const handler = async (req: Request): Promise<Response> => {
             { name: "Email", value: data.email, inline: true },
           ],
           timestamp: new Date().toISOString(),
-          footer: { text: "HydrAI Services" },
+          footer: { text: "HydrAI Labs" },
         };
 
         if (data.phone) {

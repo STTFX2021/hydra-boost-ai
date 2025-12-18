@@ -46,7 +46,7 @@ export const useI18n = create<I18nState>()(
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const translations: Record<Language, any> = {
   es: {
-    brand: 'HydrAI Services',
+    brand: 'HydrAI Labs',
     nav: { 
       home: 'Inicio', 
       services: 'Servicios', 
@@ -150,7 +150,7 @@ const translations: Record<Language, any> = {
     services: {
       badge: 'Packs de Agencia',
       title: 'Lo que hacemos por ti',
-      subtitle: 'Hydra Services crea webs, chatbots y automatizaciones a medida para negocios locales y pymes. Sin complicaciones. Resultados medibles.',
+      subtitle: 'HydrAI Labs crea webs, chatbots y automatizaciones a medida para negocios locales y pymes. Sin complicaciones. Resultados medibles.',
       ribbon: '🎄 Oferta Navidad: hasta -20% en packs Web + Chatbot y Automatiza tu Agenda',
       includes: 'Qué incluye:',
       deliverables: 'Entregables',
@@ -357,20 +357,20 @@ const translations: Record<Language, any> = {
     cases: { 
       badge: 'Casos de Éxito',
       title: 'Proyectos que demuestran resultados', 
-      subtitle: 'Ejemplos de lo que Hydra Services puede hacer por tu negocio: webs, chatbots y automatizaciones reales.',
+      subtitle: 'Ejemplos de lo que HydrAI Labs puede hacer por tu negocio: webs, chatbots y automatizaciones reales.',
       viewDemo: 'Ver demo',
       comingSoon: 'Ver demo (próximamente)',
       ctaTitle: '¿Tienes un proyecto en mente?',
       ctaSubtitle: 'Cuéntanos tu idea y te proponemos la mejor solución para tu negocio.',
       ctaButton: 'Hablemos',
       testimonialsTitle: 'Lo que dicen nuestros clientes',
-      testimonialsSubtitle: 'Historias reales de negocios que ya están usando webs, chatbots y automatizaciones hechas por Hydra.'
+      testimonialsSubtitle: 'Historias reales de negocios que ya están usando webs, chatbots y automatizaciones hechas por HydrAI Labs.'
     },
     resources: {
       badge: 'Herramientas',
       title: 'Herramientas y Partners',
       subtitle: 'Las tecnologías que usamos para construir tus soluciones',
-      description: 'En Hydra Services nos apoyamos en las mejores herramientas del mercado para crear webs, chatbots y automatizaciones de alta calidad. Estas son algunas de las tecnologías que utilizamos:',
+      description: 'En HydrAI Labs nos apoyamos en las mejores herramientas del mercado para crear webs, chatbots y automatizaciones de alta calidad. Estas son algunas de las tecnologías que utilizamos:',
       aiSection: 'Inteligencia Artificial',
       aiDescription: 'Modelos de IA de última generación para chatbots inteligentes',
       devSection: 'Desarrollo & Hosting',
@@ -480,7 +480,7 @@ const translations: Record<Language, any> = {
     },
   },
   en: {
-    brand: 'HydrAI Services',
+    brand: 'HydrAI Labs',
     nav: { 
       home: 'Home', 
       services: 'Services', 
@@ -584,7 +584,7 @@ const translations: Record<Language, any> = {
     services: {
       badge: 'Agency Packs',
       title: 'What we do for you',
-      subtitle: 'Hydra Services creates custom websites, chatbots and automations for local businesses and SMEs. No complications. Measurable results.',
+      subtitle: 'HydrAI Labs creates custom websites, chatbots and automations for local businesses and SMEs. No complications. Measurable results.',
       ribbon: '🎄 Christmas Offer: up to -20% on Web + Chatbot and Automate Your Agenda packs',
       includes: 'What\'s included:',
       deliverables: 'Deliverables',
@@ -791,7 +791,7 @@ const translations: Record<Language, any> = {
     cases: { 
       badge: 'Success Cases',
       title: 'Projects that demonstrate results', 
-      subtitle: 'Examples of what Hydra Services can do for your business: real websites, chatbots and automations.',
+      subtitle: 'Examples of what HydrAI Labs can do for your business: real websites, chatbots and automations.',
       viewDemo: 'View demo',
       comingSoon: 'View demo (coming soon)',
       ctaTitle: 'Have a project in mind?',
@@ -804,7 +804,7 @@ const translations: Record<Language, any> = {
       badge: 'Tools',
       title: 'Tools and Partners',
       subtitle: 'The technologies we use to build your solutions',
-      description: 'At Hydra Services we rely on the best tools in the market to create high-quality websites, chatbots and automations. Here are some of the technologies we use:',
+      description: 'At HydrAI Labs we rely on the best tools in the market to create high-quality websites, chatbots and automations. Here are some of the technologies we use:',
       aiSection: 'Artificial Intelligence',
       aiDescription: 'State-of-the-art AI models for intelligent chatbots',
       devSection: 'Development & Hosting',
