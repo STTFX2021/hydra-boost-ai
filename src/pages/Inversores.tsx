@@ -1,7 +1,54 @@
 import { PageLayout } from "@/components/layout/PageLayout";
 import { Button } from "@/components/ui/button";
-import { Zap, Target, Rocket, Users, ArrowRight, TrendingUp, Calendar, CheckCircle } from "lucide-react";
+import { Zap, Target, Rocket, Users, ArrowRight, TrendingUp, Calendar, CheckCircle, Brain, Eye, Shield, Layers } from "lucide-react";
 import { Link } from "react-router-dom";
+
+const deepTechProjects = [
+  {
+    id: "orochi",
+    title: "Orochi Trading AI",
+    icon: Brain,
+    tagline: "Trading multimodal con IA avanzada",
+    description: "Motor de decisión que combina análisis multi-timeframe (MTF), reinforcement learning (PPO), redes LSTM y gestión de riesgo adaptativa para operar mercados financieros.",
+    techStack: ["MTF Analysis", "RL/PPO", "LSTM", "Risk Management"],
+    status: "Prototipo funcional",
+    nextMilestones: ["Backtesting extendido", "Paper trading 3 meses", "Cuenta real piloto"],
+    fundingAccelerates: "Infraestructura cloud, datos históricos premium, validación estadística independiente"
+  },
+  {
+    id: "yolo-cv",
+    title: "YOLO Chart Vision",
+    icon: Eye,
+    tagline: "Computer Vision para análisis técnico",
+    description: "Detección visual de estructuras de mercado (order blocks, patrones de precio, zonas de liquidez) usando modelos YOLO entrenados en datasets propietarios.",
+    techStack: ["YOLOv8", "Custom Dataset", "Chart Detection", "Pattern Recognition"],
+    status: "Dataset en construcción",
+    nextMilestones: ["10K imágenes etiquetadas", "Modelo v1 entrenado", "API de inferencia"],
+    fundingAccelerates: "Anotadores especializados, GPU compute para entrenamiento, integración con brokers"
+  },
+  {
+    id: "argus",
+    title: "ARGUS AI Integration",
+    icon: Shield,
+    tagline: "Seguridad y compliance automatizado",
+    description: "Context Engine que construye un grafo de conocimiento de infraestructura AWS/cloud, automatiza auditorías de seguridad y genera reportes de compliance (SOC2, ISO27001).",
+    techStack: ["Knowledge Graph", "AWS Security", "Compliance Automation", "NLP"],
+    status: "Concepto validado",
+    nextMilestones: ["MVP con 3 clientes piloto", "Integración multi-cloud", "Dashboard ejecutivo"],
+    fundingAccelerates: "Equipo de ingeniería, certificaciones de seguridad, partnerships enterprise"
+  },
+  {
+    id: "trade-vortex",
+    title: "Trade Vortex Ecosystem",
+    icon: Layers,
+    tagline: "Venture Studio de fintech/AI",
+    description: "Ecosistema que empaqueta y monetiza los activos tecnológicos anteriores. Modelo de negocio: licencias SaaS, señales por suscripción, y consultoría de implementación.",
+    techStack: ["SaaS Platform", "API Marketplace", "Subscription Model", "B2B Distribution"],
+    status: "Arquitectura diseñada",
+    nextMilestones: ["Landing + waitlist", "Primeros 50 early adopters", "Revenue recurrente"],
+    fundingAccelerates: "Marketing digital, equipo de ventas B2B, infraestructura escalable"
+  }
+];
 
 const Inversores = () => {
   return (
@@ -130,16 +177,76 @@ const Inversores = () => {
               </div>
             </div>
 
+            {/* Deep Tech Projects */}
+            <div className="card-premium neon-border p-8">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
+                  <Rocket className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-display font-bold">Proyectos de Alta Inversión</h2>
+                  <p className="text-sm text-muted-foreground">Deep Tech & Fintech AI</p>
+                </div>
+              </div>
+              
+              <p className="text-muted-foreground mb-8">
+                Además de la agencia, desarrollamos tecnología propietaria con potencial de escala significativo:
+              </p>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                {deepTechProjects.map((project) => (
+                  <div key={project.id} className="p-6 rounded-xl border border-border/50 bg-muted/20 hover:bg-muted/30 transition-colors">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                        <project.icon className="w-5 h-5 text-primary" />
+                      </div>
+                      <div>
+                        <h3 className="font-display font-bold">{project.title}</h3>
+                        <p className="text-xs text-muted-foreground">{project.tagline}</p>
+                      </div>
+                    </div>
+                    
+                    <p className="text-sm text-foreground/80 mb-4">
+                      {project.description}
+                    </p>
+                    
+                    <div className="flex flex-wrap gap-1.5 mb-4">
+                      {project.techStack.map((tech) => (
+                        <span key={tech} className="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                    
+                    <div className="space-y-2 text-xs">
+                      <div className="flex items-start gap-2">
+                        <span className="font-semibold text-muted-foreground shrink-0">Estado:</span>
+                        <span className="text-foreground/80">{project.status}</span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <span className="font-semibold text-muted-foreground shrink-0">Próximos hitos:</span>
+                        <span className="text-foreground/80">{project.nextMilestones.join(" → ")}</span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <span className="font-semibold text-muted-foreground shrink-0">Financiación acelera:</span>
+                        <span className="text-foreground/80">{project.fundingAccelerates}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
             {/* CTA */}
             <div className="card-premium neon-border p-8 text-center">
               <Rocket className="w-12 h-12 text-primary mx-auto mb-4" />
               <h2 className="text-2xl font-display font-bold mb-3">¿Interesado en colaborar?</h2>
               <p className="text-muted-foreground mb-6">
-                Agenda una llamada para conocer más sobre HydrAI Labs y explorar oportunidades.
+                Solicita el deck completo o agenda una llamada con el founder para explorar oportunidades.
               </p>
               <Link to="/contacto">
                 <Button className="btn-neon">
-                  Solicitar acceso / Llamada
+                  Solicitar deck / Hablar con el founder
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
