@@ -11,3 +11,7 @@ export const PORTFOLIO_LINKS = {
 export const isValidUrl = (url: string): boolean => {
   return url.length > 0 && !url.startsWith('PASTE_URL');
 };
+
+// Discord invite URL for HydrAI Labs community
+// TODO: Replace with actual Discord server invite link when available
+export const DISCORD_INVITE_URL = "https://discord.gg/hydrailabs";
