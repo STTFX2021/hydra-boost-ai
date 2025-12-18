@@ -9,7 +9,9 @@ interface ContactRequest {
   name: string;
   email: string;
   phone?: string;
-  message: string;
+  message?: string;
+  mensaje?: string;
+  text?: string;
   website?: string; // honeypot field
 }
 
@@ -48,7 +50,10 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     const body: ContactRequest = await req.json();
-    const { name, email, phone, message, website } = body;
+    const { name, email, phone, website } = body;
+    
+    // Normalize message field - handle ES/EN field names
+    const message = body.message ?? body.mensaje ?? body.text ?? "";
 
     // Honeypot check - if filled, reject silently (looks like success to bots)
     if (website && website.trim() !== "") {
@@ -109,30 +114,32 @@ const handler = async (req: Request): Promise<Response> => {
     const cleanName = name.trim();
     const cleanEmail = email.trim();
     const cleanPhone = phone?.trim() || "No proporcionado";
-    const cleanMessage = message.trim();
+    const cleanMessage = message.trim() || "(vacío)";
 
     // Truncate message for Discord description if needed (max 2000)
     const discordMessage = cleanMessage.length > 2000 
       ? cleanMessage.substring(0, 1997) + "..." 
       : cleanMessage;
 
-    // Send to Discord
+    // Send to Discord - ALWAYS include message in a dedicated field
     let discordSuccess = false;
     try {
       const discordPayload = {
         embeds: [{
           title: "📩 Nuevo Contacto",
-          description: discordMessage,
           color: 0x7C3AED, // Purple
           fields: [
             { name: "👤 Nombre", value: cleanName, inline: true },
             { name: "📧 Email", value: cleanEmail, inline: true },
             { name: "📞 Teléfono", value: cleanPhone, inline: true },
+            { name: "💬 Mensaje", value: discordMessage, inline: false },
           ],
           timestamp: new Date().toISOString(),
           footer: { text: "HydrAI Labs - Formulario de Contacto" }
         }]
       };
+
+      console.log("Sending to Discord with message:", cleanMessage);
 
       const discordRes = await fetch(DISCORD_WEBHOOK_URL, {
         method: "POST",
@@ -150,7 +157,7 @@ const handler = async (req: Request): Promise<Response> => {
       console.error("Discord error:", discordError);
     }
 
-    // Send email via Resend
+    // Send email via Resend - ALWAYS include message
     let emailSuccess = false;
     try {
       const emailHtml = `
@@ -215,7 +222,7 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    console.log(`Contact submission processed: Discord=${discordSuccess}, Email=${emailSuccess}`);
+    console.log(`Contact submission processed: Discord=${discordSuccess}, Email=${emailSuccess}, Message="${cleanMessage}"`);
 
     return new Response(
       JSON.stringify({ ok: true, discord: discordSuccess, email: emailSuccess }),

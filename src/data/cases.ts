@@ -91,7 +91,7 @@ export const cases: Case[] = [
       es: "Smile Studio Hub – clínica dental moderna",
       en: "Smile Studio Hub – modern dental clinic"
     },
-    demoUrl: "https://smile-dental-studio.lovable.app"
+    demoUrl: "https://radiant-quest-chat.lovable.app"
   },
   {
     id: "autoquote-hub",
@@ -137,7 +137,7 @@ export const cases: Case[] = [
   },
   {
     id: "insight-narrator",
-    title: "Insight Narrator",
+    title: "KPI Narrator",
     type: {
       es: "Interpretación de dashboards con IA",
       en: "AI dashboard interpretation"
@@ -151,10 +151,10 @@ export const cases: Case[] = [
     color: "accent",
     imageUrl: insightNarrator,
     imageAlt: {
-      es: "Insight Narrator – análisis de dashboards con IA",
-      en: "Insight Narrator – AI dashboard analysis"
+      es: "KPI Narrator – análisis de dashboards con IA",
+      en: "KPI Narrator – AI dashboard analysis"
     },
-    demoUrl: "#"
+    demoUrl: "https://causal-narrate.lovable.app"
   },
   {
     id: "tu-hogar-madrid",
