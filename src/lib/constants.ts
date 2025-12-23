@@ -1,7 +1,7 @@
 // Portfolio project links - replace PASTE_URL placeholders with actual URLs
 export const PORTFOLIO_LINKS = {
-  tradeVortex: "", // https://discord.gg/5dD8zASY
-  argusAI: "", //
+  tradeVortex: "", // PASTE_URL_1
+  argusAI: "", // PASTE_URL_2
   xauusdOrochi: "", // PASTE_URL_3
   prankBrawlers: "", // PASTE_URL_4
   other: "", // PASTE_URL_5
@@ -13,5 +13,4 @@ export const isValidUrl = (url: string): boolean => {
 };
 
 // Discord invite URL for HydrAI Labs community
-// TODO: Replace with actual Discord server invite link when available
-export const DISCORD_INVITE_URL = "https://discord.gg/hydrailabs";
+export const DISCORD_INVITE_URL = "https://discord.gg/HxNgAJSR";
