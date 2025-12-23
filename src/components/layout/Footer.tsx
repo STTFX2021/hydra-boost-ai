@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "@/lib/i18n";
 import { Mail } from "lucide-react";
-import { DISCORD_INVITE_URL } from "@/lib/constants";
+import { https://discordapp.com/api/webhooks/1449436473299308697/-XJIDz49n3X8L4Y1hyQWgFzHF_ARw4Nh-YZB9HP7o5HRoTvOF6QIMri4XFhoTOp56ELw } from "@/lib/constants";
 
 export const Footer = () => {
   const { t } = useTranslation();
@@ -18,7 +18,7 @@ export const Footer = () => {
             </p>
             <div className="flex gap-4 mt-6">
               <a
-                href={DISCORD_INVITE_URL}
+                href={https://discordapp.com/api/webhooks/1449436473299308697/-XJIDz49n3X8L4Y1hyQWgFzHF_ARw4Nh-YZB9HP7o5HRoTvOF6QIMri4XFhoTOp56ELw}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-[#5865F2]/10 flex items-center justify-center text-[#5865F2] hover:bg-[#5865F2]/20 transition"
