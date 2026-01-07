@@ -3,12 +3,169 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { 
   UtensilsCrossed, Stethoscope, Car, Scissors, Home, Building2,
-  ArrowRight, MessageSquare, Zap, Globe, Bot, Calendar
+  ArrowRight, MessageSquare, Zap, Globe, Bot, Calendar,
+  Brain, Radar, Target, Mail, Factory, CalendarCheck, 
+  BarChart3, Clock, TrendingUp, Users, Sparkles, Puzzle, Star, Crown
 } from "lucide-react";
 import { useTranslation } from "@/lib/i18n";
 
 const Industrias = () => {
   const { t, language } = useTranslation();
+
+  // Automation cards data
+  const automations = [
+    {
+      id: "opportunity-engine",
+      icon: Brain,
+      title: language === 'es' ? "Opportunity Intelligence Engine" : "Opportunity Intelligence Engine",
+      tag: "WF1 CORE",
+      description: language === 'es' 
+        ? "Detecta oportunidades de negocio, puntúa leads y dispara acciones automáticas."
+        : "Detects business opportunities, scores leads and triggers automatic actions."
+    },
+    {
+      id: "radar-tendencias",
+      icon: Radar,
+      title: language === 'es' ? "Radar de Tendencias & Señales" : "Trends & Signals Radar",
+      tag: "WF2",
+      description: language === 'es' 
+        ? "Señales programadas a Discord, Slack o Email según patrones de mercado."
+        : "Scheduled signals to Discord, Slack or Email based on market patterns."
+    },
+    {
+      id: "lead-engine",
+      icon: Target,
+      title: language === 'es' ? "Lead Engine (Captura + Scoring)" : "Lead Engine (Capture + Scoring)",
+      tag: null,
+      description: language === 'es' 
+        ? "Ingesta de leads multicanal + scoring hot/warm/cold + routing automático."
+        : "Multichannel lead ingestion + hot/warm/cold scoring + automatic routing."
+    },
+    {
+      id: "nutricion-automatica",
+      icon: Mail,
+      title: language === 'es' ? "Nutrición Automática (Email/Brevo)" : "Automatic Nurturing (Email/Brevo)",
+      tag: null,
+      description: language === 'es' 
+        ? "Secuencias de emails y seguimiento automático hasta la conversión."
+        : "Email sequences and automatic follow-up until conversion."
+    },
+    {
+      id: "sales-message-factory",
+      icon: Factory,
+      title: language === 'es' ? "Sales Message Factory" : "Sales Message Factory",
+      tag: "WF3",
+      description: language === 'es' 
+        ? "Generación de mensajes de ventas para leads hot/warm + reporting automático."
+        : "Sales message generation for hot/warm leads + automatic reporting."
+    },
+    {
+      id: "bookings-management",
+      icon: CalendarCheck,
+      title: language === 'es' ? "Bookings & Consultation Management" : "Bookings & Consultation Management",
+      tag: null,
+      description: language === 'es' 
+        ? "Diagnóstico, agenda, recordatorios y follow-up post-cita automatizados."
+        : "Automated diagnosis, scheduling, reminders and post-appointment follow-up."
+    },
+    {
+      id: "analytics-insights",
+      icon: BarChart3,
+      title: language === 'es' ? "Analytics & Insights (Daily/Weekly)" : "Analytics & Insights (Daily/Weekly)",
+      tag: null,
+      description: language === 'es' 
+        ? "Reportes automáticos con métricas clave + recomendaciones accionables."
+        : "Automatic reports with key metrics + actionable recommendations."
+    },
+    {
+      id: "ops-24-7",
+      icon: Clock,
+      title: language === 'es' ? "Operaciones 24/7 (Cola Priorizada)" : "24/7 Operations (Priority Queue)",
+      tag: null,
+      description: language === 'es' 
+        ? "Ejecución continua de tareas con sistema de prioridades inteligente."
+        : "Continuous task execution with intelligent priority system."
+    },
+    {
+      id: "predictive-ops",
+      icon: TrendingUp,
+      title: language === 'es' ? "Rutinas Predictivas (Predictive Ops)" : "Predictive Routines (Predictive Ops)",
+      tag: null,
+      description: language === 'es' 
+        ? "Anticipa fallos, tareas pendientes y actúa antes de que sea tarde."
+        : "Anticipates failures, pending tasks and acts before it's too late."
+    },
+    {
+      id: "agentes-rol",
+      icon: Users,
+      title: language === 'es' ? "Agentes por Rol (CEO/CTO/Tribe/Guild)" : "Role Agents (CEO/CTO/Tribe/Guild)",
+      tag: null,
+      description: language === 'es' 
+        ? "Estrategia, innovación y coordinación interna con agentes especializados."
+        : "Strategy, innovation and internal coordination with specialized agents."
+    },
+    {
+      id: "dynamic-creator",
+      icon: Sparkles,
+      title: language === 'es' ? "Dynamic Workflow Creator" : "Dynamic Workflow Creator",
+      tag: null,
+      description: language === 'es' 
+        ? "Creación controlada de nuevos workflows y agentes según necesidad."
+        : "Controlled creation of new workflows and agents as needed."
+    },
+    {
+      id: "extras-integraciones",
+      icon: Puzzle,
+      title: language === 'es' ? "Extras (Chrome / Integraciones)" : "Extras (Chrome / Integrations)",
+      tag: null,
+      description: language === 'es' 
+        ? "Extensión Chrome, APIs externas y conectores personalizados."
+        : "Chrome extension, external APIs and custom connectors."
+    },
+  ];
+
+  // Recommended packs
+  const packs = [
+    {
+      id: "starter",
+      name: "Starter",
+      price: "199",
+      period: language === 'es' ? "/mes" : "/mo",
+      badge: null,
+      description: language === 'es' 
+        ? "Core + Leads básico + Bookings + Analytics básico"
+        : "Core + Basic Leads + Bookings + Basic Analytics",
+      features: language === 'es' 
+        ? ["Opportunity Engine básico", "Lead Engine (hasta 100/mes)", "Bookings Management", "Analytics semanal"]
+        : ["Basic Opportunity Engine", "Lead Engine (up to 100/mo)", "Bookings Management", "Weekly Analytics"]
+    },
+    {
+      id: "pro",
+      name: "Pro",
+      price: "499",
+      period: language === 'es' ? "/mes" : "/mo",
+      badge: language === 'es' ? "Más popular" : "Most popular",
+      description: language === 'es' 
+        ? "Starter + Radar + Sales Factory + Content + 1 Agent (CEO o CTO)"
+        : "Starter + Radar + Sales Factory + Content + 1 Agent (CEO or CTO)",
+      features: language === 'es' 
+        ? ["Todo de Starter +", "Radar de Tendencias", "Sales Message Factory", "Nutrición Automática", "1 Agente (CEO o CTO)"]
+        : ["Everything in Starter +", "Trends Radar", "Sales Message Factory", "Automatic Nurturing", "1 Agent (CEO or CTO)"]
+    },
+    {
+      id: "autonomous",
+      name: "Autonomous",
+      price: "999",
+      period: language === 'es' ? "/mes" : "/mo",
+      badge: "Premium",
+      description: language === 'es' 
+        ? "Pro + Ops 24/7 + Predictive Ops + 3 Agents + soporte prioritario"
+        : "Pro + 24/7 Ops + Predictive Ops + 3 Agents + priority support",
+      features: language === 'es' 
+        ? ["Todo de Pro +", "Operaciones 24/7", "Rutinas Predictivas", "3 Agentes especializados", "Soporte prioritario", "Dynamic Workflow Creator"]
+        : ["Everything in Pro +", "24/7 Operations", "Predictive Routines", "3 Specialized Agents", "Priority Support", "Dynamic Workflow Creator"]
+    },
+  ];
 
   const industries = [
     {
@@ -195,29 +352,166 @@ const Industrias = () => {
 
   return (
     <PageLayout>
-      {/* Hero */}
+      {/* Hero - NEW Commercial Section */}
       <section className="relative section-padding overflow-hidden">
         <div className="glow-orb-secondary w-96 h-96 -top-48 -left-48" />
         <div className="glow-orb-accent w-64 h-64 bottom-0 right-0" />
         
         <div className="section-container relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
+          <div className="max-w-4xl mx-auto text-center">
             <div className="badge-secondary mb-6 inline-flex">
               <Zap className="w-3 h-3 mr-1" /> {t("industries.badge")}
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
-              {t("industries.title").split(" ").slice(0, 2).join(" ")} <span className="text-gradient-secondary">{t("industries.title").split(" ").slice(2).join(" ")}</span>
+              {t("industries.title")}
             </h1>
-            <p className="text-lg text-muted-foreground mb-8">
+            <p className="text-lg md:text-xl text-muted-foreground mb-8">
               {t("industries.subtitle")}
             </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link to="/auditoria">
+                <Button size="lg" className="btn-neon text-lg px-8">
+                  {language === 'es' ? 'Auditoría Gratis' : 'Free Audit'}
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </Link>
+              <Link to="/precios">
+                <Button size="lg" variant="outline" className="btn-outline-neon text-lg px-8">
+                  {language === 'es' ? 'Ver Precios' : 'See Pricing'}
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Industries */}
+      {/* Automations Grid */}
+      <section className="section-padding bg-muted/5">
+        <div className="section-container">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+              {language === 'es' ? 'Catálogo de Automatizaciones' : 'Automations Catalog'}
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              {language === 'es' 
+                ? 'Cada módulo puede contratarse individualmente o como parte de un pack.'
+                : 'Each module can be purchased individually or as part of a pack.'}
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {automations.map((automation) => (
+              <div key={automation.id} className="card-premium group hover:border-primary/50 transition-all duration-300">
+                <div className="flex items-start gap-3 mb-3">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
+                    <automation.icon className="w-5 h-5 text-primary" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <h3 className="font-display font-semibold text-sm leading-tight">{automation.title}</h3>
+                      {automation.tag && (
+                        <span className="badge-primary text-[10px] px-1.5 py-0.5">{automation.tag}</span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+                <p className="text-xs text-muted-foreground">{automation.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Recommended Packs */}
       <section className="section-padding">
         <div className="section-container">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+              {language === 'es' ? 'Packs Recomendados' : 'Recommended Packs'}
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              {language === 'es' 
+                ? 'Combina automatizaciones con descuento. Incluye setup y soporte.'
+                : 'Bundle automations with a discount. Includes setup and support.'}
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {packs.map((pack) => (
+              <div 
+                key={pack.id} 
+                className={`relative card-premium flex flex-col ${pack.badge === (language === 'es' ? 'Más popular' : 'Most popular') ? 'border-primary neon-border' : pack.badge === 'Premium' ? 'border-accent' : ''}`}
+              >
+                {pack.badge && (
+                  <div className="absolute top-0 right-4 -translate-y-1/2">
+                    <span className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium ${
+                      pack.badge === 'Premium' 
+                        ? 'bg-accent text-accent-foreground' 
+                        : 'badge-primary'
+                    }`}>
+                      {pack.badge === 'Premium' ? <Crown className="w-3 h-3" /> : <Star className="w-3 h-3" />}
+                      {pack.badge}
+                    </span>
+                  </div>
+                )}
+
+                <div className="mb-6">
+                  <h3 className="text-xl font-display font-bold">{pack.name}</h3>
+                  <p className="text-sm text-muted-foreground mt-1">{pack.description}</p>
+                </div>
+
+                <div className="mb-6">
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-4xl font-display font-bold">{pack.price}€</span>
+                    <span className="text-muted-foreground text-sm">{pack.period}</span>
+                  </div>
+                </div>
+
+                <ul className="space-y-2 mb-8 flex-1">
+                  {pack.features.map((feature, i) => (
+                    <li key={i} className="flex items-start gap-2 text-sm">
+                      <Zap className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+                      <span className="text-muted-foreground">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <Link to="/contacto">
+                  <Button className={`w-full ${pack.badge ? 'btn-neon' : 'btn-outline-neon'}`}>
+                    {language === 'es' ? 'Solicitar' : 'Request'}
+                    <ArrowRight className="ml-2 w-4 h-4" />
+                  </Button>
+                </Link>
+              </div>
+            ))}
+          </div>
+
+          {/* Annual discount notice */}
+          <p className="text-center text-sm text-muted-foreground mt-8">
+            {language === 'es' 
+              ? '💡 Pago anual: 2 meses gratis. Pregunta por descuentos para startups.'
+              : '💡 Annual payment: 2 months free. Ask about startup discounts.'}
+          </p>
+        </div>
+      </section>
+
+      {/* Sector Templates (Previously Industries) */}
+      <section className="section-padding bg-muted/5">
+        <div className="section-container">
+          <div className="text-center mb-12">
+            <div className="badge-secondary mb-4 inline-flex">
+              <Globe className="w-3 h-3 mr-1" /> {language === 'es' ? 'Plantillas' : 'Templates'}
+            </div>
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+              {language === 'es' ? 'Plantillas por Sector' : 'Templates by Sector'}
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              {language === 'es' 
+                ? 'Ejemplos de automatizaciones adaptadas a industrias específicas.'
+                : 'Examples of automations adapted to specific industries.'}
+            </p>
+          </div>
+
           <div className="space-y-24">
             {industries.map((industry) => (
               <div key={industry.id} id={industry.id} className="scroll-mt-24">
@@ -335,16 +629,16 @@ const Industrias = () => {
       </section>
 
       {/* CTA */}
-      <section className="section-padding bg-muted/10">
+      <section className="section-padding">
         <div className="section-container">
-          <div className="card-premium text-center p-12 neon-border">
+          <div className="card-premium text-center p-12 neon-border max-w-3xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              {language === 'es' ? '¿Tu industria no está aquí?' : "Your industry not listed?"}
+              {language === 'es' ? '¿Tu sector no está aquí?' : "Your sector not listed?"}
             </h2>
             <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
               {language === 'es' 
-                ? 'Creamos soluciones personalizadas para cualquier negocio local. Cuéntanos tu caso.'
-                : 'We create custom solutions for any local business. Tell us your case.'}
+                ? 'Creamos automatizaciones personalizadas para cualquier negocio. Cuéntanos tu caso.'
+                : 'We create custom automations for any business. Tell us your case.'}
             </p>
             <Link to="/contacto">
               <Button size="lg" className="btn-neon text-lg px-8">

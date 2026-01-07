@@ -1,207 +1,222 @@
 import { PageLayout } from "@/components/layout/PageLayout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { CheckCircle2, ArrowRight, Zap, Star, Phone, Gift } from "lucide-react";
-import { useTranslation, useI18n } from "@/lib/i18n";
-
-// FAQ data for each language
-const faqData = {
-  es: [
-    { q: '¿Qué incluye el precio?', a: 'Todo lo listado en cada pack. Sin costes ocultos. Hosting y dominio no incluidos (te asesoramos para elegir el mejor).' },
-    { q: '¿Cuánto tarda la entrega?', a: 'Web Presencia: 5-7 días. Web + Chatbot: 7-10 días. Automatiza tu Agenda: 10-14 días. Depende de tu rapidez enviando contenido.' },
-    { q: '¿Puedo actualizar mi pack más adelante?', a: 'Sí, puedes empezar con Web Presencia y añadir chatbot o automatizaciones cuando quieras. Solo pagas la diferencia.' },
-    { q: '¿Qué pasa después de la entrega?', a: 'Tienes 30 días de soporte incluido. Después puedes contratar un plan mensual o pedir ajustes puntuales.' },
-    { q: '¿Ofrecéis descuentos?', a: 'Sí, tenemos ofertas puntuales y descuentos por pago anual en los planes mensuales. Pregúntanos.' }
-  ],
-  en: [
-    { q: "What's included in the price?", a: 'Everything listed in each pack. No hidden costs. Hosting and domain not included (we advise you to choose the best).' },
-    { q: 'How long does delivery take?', a: 'Web Presence: 5-7 days. Web + Chatbot: 7-10 days. Automate Your Agenda: 10-14 days. Depends on how fast you send content.' },
-    { q: 'Can I upgrade my pack later?', a: 'Yes, you can start with Web Presence and add chatbot or automations whenever you want. You only pay the difference.' },
-    { q: 'What happens after delivery?', a: 'You have 30 days of support included. After that you can hire a monthly plan or request specific adjustments.' },
-    { q: 'Do you offer discounts?', a: 'Yes, we have occasional offers and discounts for annual payment on monthly plans. Ask us.' }
-  ]
-};
+import { CheckCircle2, ArrowRight, Zap, Star, Phone, Crown, Settings } from "lucide-react";
+import { useTranslation } from "@/lib/i18n";
+import { useState } from "react";
 
 const Precios = () => {
-  const { t, tArray, language } = useTranslation();
+  const { t, language } = useTranslation();
+  const [viewMode, setViewMode] = useState<'packs' | 'individuals'>('packs');
 
   const packs = [
     {
-      id: "web-presencia",
-      name: t("pricing.packs.webPresencia.name"),
-      description: t("pricing.packs.webPresencia.description"),
-      price: "497",
-      priceType: t("pricing.oneTimePayment"),
-      features: tArray("pricing.packs.webPresencia.features"),
-      cta: t("pricing.request"),
-      featured: false,
+      id: "starter",
+      name: "Starter",
+      price: "199",
+      priceAnnual: "1.990",
+      badge: null,
+      description: language === 'es' 
+        ? "Core + Leads básico + Bookings + Analytics básico"
+        : "Core + Basic Leads + Bookings + Basic Analytics",
+      features: language === 'es' 
+        ? ["Opportunity Engine básico", "Lead Engine (hasta 100/mes)", "Bookings Management", "Analytics semanal", "Soporte email"]
+        : ["Basic Opportunity Engine", "Lead Engine (up to 100/mo)", "Bookings Management", "Weekly Analytics", "Email support"],
     },
     {
-      id: "web-chatbot",
-      name: t("pricing.packs.webChatbot.name"),
-      description: t("pricing.packs.webChatbot.description"),
-      price: "790",
-      priceType: t("pricing.oneTimePayment"),
-      features: tArray("pricing.packs.webChatbot.features"),
-      cta: t("pricing.request"),
-      featured: true,
+      id: "pro",
+      name: "Pro",
+      price: "499",
+      priceAnnual: "4.990",
+      badge: language === 'es' ? "Más popular" : "Most popular",
+      description: language === 'es' 
+        ? "Starter + Radar + Sales Factory + Nutrición + 1 Agent"
+        : "Starter + Radar + Sales Factory + Nurturing + 1 Agent",
+      features: language === 'es' 
+        ? ["Todo de Starter +", "Radar de Tendencias", "Sales Message Factory", "Nutrición Automática", "1 Agente (CEO o CTO)", "Soporte prioritario"]
+        : ["Everything in Starter +", "Trends Radar", "Sales Message Factory", "Automatic Nurturing", "1 Agent (CEO or CTO)", "Priority support"],
     },
     {
-      id: "automatiza-agenda",
-      name: t("pricing.packs.automatiza.name"),
-      description: t("pricing.packs.automatiza.description"),
-      price: "1.290",
-      priceType: t("pricing.oneTimePayment"),
-      features: tArray("pricing.packs.automatiza.features"),
-      cta: t("pricing.request"),
-      featured: false,
+      id: "autonomous",
+      name: "Autonomous",
+      price: "999",
+      priceAnnual: "9.990",
+      badge: "Premium",
+      description: language === 'es' 
+        ? "Pro + Ops 24/7 + Predictive + 3 Agents + soporte dedicado"
+        : "Pro + 24/7 Ops + Predictive + 3 Agents + dedicated support",
+      features: language === 'es' 
+        ? ["Todo de Pro +", "Operaciones 24/7", "Rutinas Predictivas", "3 Agentes especializados", "Dynamic Workflow Creator", "Soporte dedicado"]
+        : ["Everything in Pro +", "24/7 Operations", "Predictive Routines", "3 Specialized Agents", "Dynamic Workflow Creator", "Dedicated support"],
     },
   ];
 
-  const monthlyPlans = [
-    {
-      id: "mantenimiento",
-      name: t("pricing.monthlyPlans.mantenimiento.name"),
-      price: "49",
-      description: t("pricing.monthlyPlans.mantenimiento.description"),
-    },
-    {
-      id: "crecimiento",
-      name: t("pricing.monthlyPlans.crecimiento.name"),
-      price: "99",
-      description: t("pricing.monthlyPlans.crecimiento.description"),
-    },
+  const individuals = [
+    { name: "Opportunity Engine", price: "97", from: true },
+    { name: "Lead Engine", price: "147", from: true },
+    { name: "Bookings Management", price: "97", from: true },
+    { name: "Analytics & Insights", price: "127", from: true },
+    { name: "Nutrición Automática", price: "147", from: true },
+    { name: "Sales Message Factory", price: "197", from: true },
+    { name: "Radar de Tendencias", price: "97", from: true },
+    { name: "Operaciones 24/7", price: "297", from: true },
+    { name: "Predictive Ops", price: "197", from: true },
+    { name: "Agente por Rol", price: "197", from: true },
+    { name: "Dynamic Creator", price: "497", from: false },
   ];
 
-  const faqs = faqData[language] || faqData.es;
+  const maintenancePacks = [
+    { name: language === 'es' ? "Básico" : "Basic", price: "49", desc: language === 'es' ? "Soporte email, ajustes menores" : "Email support, minor tweaks" },
+    { name: "Standard", price: "99", desc: language === 'es' ? "Soporte prioritario, optimización mensual" : "Priority support, monthly optimization" },
+    { name: "Premium", price: "149", desc: language === 'es' ? "Soporte dedicado, updates de modelos, ajustes ilimitados" : "Dedicated support, model updates, unlimited tweaks" },
+  ];
 
   return (
     <PageLayout>
       {/* Hero */}
       <section className="relative section-padding overflow-hidden">
         <div className="glow-orb-primary w-96 h-96 -top-48 left-1/2 -translate-x-1/2" />
-        
         <div className="section-container relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <div className="badge-primary mb-6 inline-flex">
-              <Zap className="w-3 h-3 mr-1" /> {t("pricing.badge")}
+              <Zap className="w-3 h-3 mr-1" /> {language === 'es' ? 'Precios transparentes' : 'Transparent pricing'}
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
-              <span className="text-gradient-primary">{t("pricing.title").split(",")[0]}</span>{t("pricing.title").includes(",") ? "," + t("pricing.title").split(",")[1] : ""}
+              {language === 'es' ? 'Elige tu nivel de automatización' : 'Choose your automation level'}
             </h1>
-            <p className="text-lg text-muted-foreground mb-4">
-              {t("pricing.subtitle")}
+            <p className="text-lg text-muted-foreground mb-8">
+              {language === 'es' 
+                ? 'Packs con descuento o automatizaciones individuales. Pago anual = 2 meses gratis.'
+                : 'Discounted packs or individual automations. Annual payment = 2 months free.'}
             </p>
+
+            {/* Toggle */}
+            <div className="inline-flex rounded-full p-1 bg-muted/30 border border-border">
+              <button
+                onClick={() => setViewMode('packs')}
+                className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
+                  viewMode === 'packs' ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                {language === 'es' ? 'Paquetes' : 'Packages'}
+              </button>
+              <button
+                onClick={() => setViewMode('individuals')}
+                className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
+                  viewMode === 'individuals' ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                {language === 'es' ? 'Individuales' : 'Individual'}
+              </button>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Christmas Ribbon */}
-      <div className="section-container -mt-8 mb-8">
-        <div className="text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary/20 via-accent/20 to-secondary/20 border border-primary/30">
-            <Gift className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium">{t("pricing.ribbon")}</span>
-          </div>
-        </div>
-      </div>
+      {/* Packs View */}
+      {viewMode === 'packs' && (
+        <section className="section-padding -mt-8">
+          <div className="section-container">
+            <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+              {packs.map((pack) => (
+                <div
+                  key={pack.id}
+                  className={`relative card-premium flex flex-col ${
+                    pack.badge === (language === 'es' ? 'Más popular' : 'Most popular') ? 'border-primary neon-border' : pack.badge === 'Premium' ? 'border-accent' : ''
+                  }`}
+                >
+                  {pack.badge && (
+                    <div className="absolute top-0 right-4 -translate-y-1/2">
+                      <span className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium ${
+                        pack.badge === 'Premium' ? 'bg-accent text-accent-foreground' : 'badge-primary'
+                      }`}>
+                        {pack.badge === 'Premium' ? <Crown className="w-3 h-3" /> : <Star className="w-3 h-3" />}
+                        {pack.badge}
+                      </span>
+                    </div>
+                  )}
 
-      {/* Pricing Cards */}
-      <section className="section-padding -mt-8">
-        <div className="section-container">
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {packs.map((pack) => (
-              <div
-                key={pack.id}
-                className={`${
-                  pack.featured ? "pricing-card-featured" : "pricing-card"
-                } flex flex-col`}
-              >
-                {pack.featured && (
-                  <div className="absolute top-0 right-4 -translate-y-1/2">
-                    <span className="badge-primary flex items-center gap-1">
-                      <Star className="w-3 h-3" /> {t("pricing.popular")}
-                    </span>
+                  <div className="mb-6">
+                    <h3 className="text-xl font-display font-bold">{pack.name}</h3>
+                    <p className="text-sm text-muted-foreground mt-1">{pack.description}</p>
                   </div>
-                )}
 
-                <div className="mb-6">
-                  <h3 className="text-xl font-display font-bold">{pack.name}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">{pack.description}</p>
-                </div>
-
-                <div className="mb-6">
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-4xl font-display font-bold">{pack.price}€</span>
-                    <span className="text-muted-foreground text-sm">+ IVA</span>
+                  <div className="mb-6">
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-4xl font-display font-bold">{pack.price}€</span>
+                      <span className="text-muted-foreground text-sm">/{language === 'es' ? 'mes' : 'mo'}</span>
+                    </div>
+                    <p className="text-xs text-success mt-1">
+                      {language === 'es' ? `Anual: ${pack.priceAnnual}€ (2 meses gratis)` : `Annual: €${pack.priceAnnual} (2 months free)`}
+                    </p>
                   </div>
-                  <p className="text-sm text-primary mt-1">{pack.priceType}</p>
-                </div>
 
-                <ul className="space-y-3 mb-8 flex-1">
-                  {pack.features.map((feature, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm">
-                      <CheckCircle2 className="w-4 h-4 text-success mt-0.5 shrink-0" />
-                      <span className="text-muted-foreground">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
+                  <ul className="space-y-3 mb-8 flex-1">
+                    {pack.features.map((feature, i) => (
+                      <li key={i} className="flex items-start gap-2 text-sm">
+                        <CheckCircle2 className="w-4 h-4 text-success mt-0.5 shrink-0" />
+                        <span className="text-muted-foreground">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
 
-                <Link to="/contacto">
-                  <Button className={`w-full ${pack.featured ? "btn-neon" : "btn-outline-neon"}`}>
-                    {pack.cta}
-                    <ArrowRight className="ml-2 w-4 h-4" />
-                  </Button>
-                </Link>
-              </div>
-            ))}
-          </div>
-
-          {/* Monthly Plans */}
-          <div className="max-w-3xl mx-auto mt-16">
-            <h3 className="text-2xl font-display font-bold text-center mb-8">
-              {t("pricing.monthlyPlansTitle").split(" ")[0]} <span className="text-gradient-secondary">{t("pricing.monthlyPlansTitle").split(" ").slice(1).join(" ")}</span>
-            </h3>
-            <div className="grid md:grid-cols-2 gap-6">
-              {monthlyPlans.map((plan) => (
-                <div key={plan.id} className="card-premium">
-                  <div className="flex items-baseline gap-2 mb-2">
-                    <h4 className="font-display font-bold text-lg">{plan.name}</h4>
-                    <span className="text-2xl font-bold text-primary">{plan.price}€</span>
-                    <span className="text-sm text-muted-foreground">/{t("pricing.monthly")}</span>
-                  </div>
-                  <p className="text-sm text-muted-foreground">{plan.description}</p>
+                  <Link to="/contacto">
+                    <Button className={`w-full ${pack.badge ? 'btn-neon' : 'btn-outline-neon'}`}>
+                      {language === 'es' ? 'Solicitar' : 'Request'}
+                      <ArrowRight className="ml-2 w-4 h-4" />
+                    </Button>
+                  </Link>
                 </div>
               ))}
             </div>
           </div>
+        </section>
+      )}
 
-          {/* Talk to human */}
-          <div className="text-center mt-12">
-            <p className="text-muted-foreground mb-4">{t("pricing.talkToHuman")}</p>
-            <Link to="/contacto">
-              <Button variant="outline" className="border-border hover:border-primary">
-                <Phone className="w-4 h-4 mr-2" />
-                {t("pricing.talkToHumanButton")}
-              </Button>
-            </Link>
+      {/* Individuals View */}
+      {viewMode === 'individuals' && (
+        <section className="section-padding -mt-8">
+          <div className="section-container">
+            <div className="max-w-3xl mx-auto">
+              <div className="grid sm:grid-cols-2 gap-4">
+                {individuals.map((item, i) => (
+                  <div key={i} className="card-premium flex items-center justify-between">
+                    <span className="font-medium text-sm">{item.name}</span>
+                    <span className="text-primary font-bold">
+                      {item.from && <span className="text-xs text-muted-foreground mr-1">{language === 'es' ? 'desde' : 'from'}</span>}
+                      {item.price}€<span className="text-xs text-muted-foreground">/{language === 'es' ? 'mes' : 'mo'}</span>
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
-      {/* FAQ */}
+      {/* Evolution & Maintenance Pack */}
       <section className="section-padding bg-muted/10">
         <div className="section-container">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-display font-bold text-center mb-12">
-              {t("pricing.faqTitle").split(" ")[0]} <span className="text-gradient-primary">{t("pricing.faqTitle").split(" ").slice(1).join(" ")}</span>
-            </h2>
-
-            <div className="space-y-4">
-              {faqs.map((faq, i) => (
-                <div key={i} className="card-premium">
-                  <h4 className="font-semibold mb-2">{faq.q}</h4>
-                  <p className="text-sm text-muted-foreground">{faq.a}</p>
+            <div className="text-center mb-8">
+              <div className="badge-secondary mb-4 inline-flex">
+                <Settings className="w-3 h-3 mr-1" /> {language === 'es' ? 'Mantenimiento' : 'Maintenance'}
+              </div>
+              <h2 className="text-2xl md:text-3xl font-display font-bold mb-2">
+                {language === 'es' ? 'Evolution & Maintenance Pack' : 'Evolution & Maintenance Pack'}
+              </h2>
+              <p className="text-muted-foreground">
+                {language === 'es' 
+                  ? 'Updates de modelos IA, soporte técnico y ajustes mensuales.'
+                  : 'AI model updates, technical support and monthly tweaks.'}
+              </p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-6">
+              {maintenancePacks.map((mp, i) => (
+                <div key={i} className="card-premium text-center">
+                  <h4 className="font-display font-bold mb-1">{mp.name}</h4>
+                  <div className="text-2xl font-bold text-primary mb-2">{mp.price}€<span className="text-sm text-muted-foreground">/{language === 'es' ? 'mes' : 'mo'}</span></div>
+                  <p className="text-xs text-muted-foreground">{mp.desc}</p>
                 </div>
               ))}
             </div>
@@ -214,17 +229,25 @@ const Precios = () => {
         <div className="section-container">
           <div className="card-premium text-center p-12 neon-border max-w-2xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              {t("pricing.ctaTitle")}
+              {language === 'es' ? '¿Necesitas algo personalizado?' : 'Need something custom?'}
             </h2>
             <p className="text-muted-foreground mb-8">
-              {t("pricing.ctaSubtitle")}
+              {language === 'es' ? 'Haz nuestra auditoría gratuita y te recomendamos el mejor plan.' : 'Take our free audit and we recommend the best plan.'}
             </p>
-            <Link to="/auditoria">
-              <Button size="lg" className="btn-neon text-lg px-8">
-                {t("pricing.ctaButton")}
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-            </Link>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link to="/auditoria">
+                <Button size="lg" className="btn-neon text-lg px-8">
+                  {language === 'es' ? 'Auditoría Gratis' : 'Free Audit'}
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </Link>
+              <Link to="/contacto">
+                <Button size="lg" variant="outline" className="btn-outline-neon">
+                  <Phone className="w-4 h-4 mr-2" />
+                  {language === 'es' ? 'Hablar con humano' : 'Talk to a human'}
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
