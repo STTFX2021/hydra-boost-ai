@@ -50,7 +50,7 @@ const translations: Record<Language, any> = {
     nav: { 
       home: 'Inicio', 
       services: 'Servicios', 
-      industries: 'Industrias', 
+      industries: 'Automatizaciones', 
       pricing: 'Precios', 
       cases: 'Casos', 
       resources: 'Recursos', 
@@ -345,9 +345,11 @@ const translations: Record<Language, any> = {
       ]
     },
     industries: {
-      badge: 'Soluciones por sector',
-      title: 'Soluciones por industria',
-      subtitle: 'Plantillas optimizadas para cada tipo de negocio.',
+      badge: 'Automatizaciones IA',
+      title: 'Automatizaciones IA para captar, convertir y operar sin fricción',
+      subtitle: 'Leads → nutrición → citas → seguimiento → reporting → ejecución 24/7',
+      sectorTitle: 'Plantillas por Sector',
+      sectorSubtitle: 'Ejemplos de automatizaciones adaptadas a industrias específicas.',
       apply: 'Aplicar plantilla',
       packs: 'Packs recomendados:',
       packWebPresencia: 'Web Presencia',
@@ -484,7 +486,7 @@ const translations: Record<Language, any> = {
     nav: { 
       home: 'Home', 
       services: 'Services', 
-      industries: 'Industries', 
+      industries: 'Automations', 
       pricing: 'Pricing', 
       cases: 'Cases', 
       resources: 'Resources', 
@@ -779,9 +781,11 @@ const translations: Record<Language, any> = {
       ]
     },
     industries: {
-      badge: 'Solutions by sector',
-      title: 'Solutions by industry',
-      subtitle: 'Templates optimized for each type of business.',
+      badge: 'AI Automations',
+      title: 'AI Automations to capture, convert and operate without friction',
+      subtitle: 'Leads → nurturing → appointments → follow-up → reporting → 24/7 execution',
+      sectorTitle: 'Templates by Sector',
+      sectorSubtitle: 'Examples of automations adapted to specific industries.',
       apply: 'Apply template',
       packs: 'Recommended packs:',
       packWebPresencia: 'Web Presence',
