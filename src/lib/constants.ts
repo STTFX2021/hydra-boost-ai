@@ -13,4 +13,4 @@ export const isValidUrl = (url: string): boolean => {
 };
 
 // Discord invite URL for HydrAI Labs community
-export const DISCORD_INVITE_URL = "https://discord.gg/HxNgAJSR";
+export const DISCORD_INVITE_URL = "https://discord.gg/KrymATqa";
