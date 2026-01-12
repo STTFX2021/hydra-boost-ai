@@ -26,7 +26,8 @@ export const Header = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/30">
       <div className="section-container flex items-center justify-between h-16">
-        <Link to="/" className="font-display text-xl font-bold text-gradient-primary">
+        <Link to="/" className="flex items-center gap-2 font-display text-xl font-bold text-gradient-primary">
+          <img src="/favicon.png" alt="HydrAI Labs" className="w-8 h-8 rounded" />
           {t('brand')}
         </Link>
 
