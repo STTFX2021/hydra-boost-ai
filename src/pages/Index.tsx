@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Bot, Calendar, Star, Globe, Clock, Target, TrendingUp, ThumbsUp, Zap, Gift } from "lucide-react";
+import { ArrowRight, Bot, Calendar, Star, Globe, Clock, Target, TrendingUp, ThumbsUp, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -114,13 +114,6 @@ const Index = () => {
             </p>
           </div>
 
-          {/* Christmas Ribbon */}
-          <div className="mb-8 text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary/20 via-accent/20 to-secondary/20 border border-primary/30">
-              <Gift className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium">{t("homeServices.ribbon")}</span>
-            </div>
-          </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {services.map((service, i) => (
