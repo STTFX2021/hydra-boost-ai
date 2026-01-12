@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { 
   Globe, Bot, Calendar, Star, Users, TrendingUp,
-  ArrowRight, CheckCircle2, Clock, Zap, Gift
+  ArrowRight, CheckCircle2, Clock, Zap
 } from "lucide-react";
 import { useTranslation } from "@/lib/i18n";
 
@@ -55,15 +55,6 @@ const Servicios = () => {
         </div>
       </section>
 
-      {/* Christmas Ribbon */}
-      <div className="section-container -mt-8 mb-8">
-        <div className="text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary/20 via-accent/20 to-secondary/20 border border-primary/30">
-            <Gift className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium">{t("services.ribbon")}</span>
-          </div>
-        </div>
-      </div>
 
       {/* Services List */}
       <section className="section-padding bg-muted/10">
