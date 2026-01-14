@@ -3,9 +3,11 @@ import { motion } from "framer-motion";
 import { Target, Calendar, Zap } from "lucide-react";
 import { Mission } from "./types";
 import { MISSION_LABELS } from "./data";
+import type { NavigatorSfx } from "./sfx";
 
 interface MissionCardsProps {
   onSelect: (mission: Mission) => void;
+  sfx?: Pick<NavigatorSfx, "hover" | "click">;
 }
 
 const MISSION_ICONS: Record<Mission, React.ReactNode> = {
@@ -14,12 +16,13 @@ const MISSION_ICONS: Record<Mission, React.ReactNode> = {
   automation: <Zap className="w-6 h-6" />,
 };
 
-export function MissionCards({ onSelect }: MissionCardsProps) {
+export function MissionCards({ onSelect, sfx }: MissionCardsProps) {
   const [selectedMission, setSelectedMission] = useState<Mission | null>(null);
   const missions: Mission[] = ["leads", "bookings", "automation"];
 
   const handleSelect = (mission: Mission) => {
     setSelectedMission(mission);
+    sfx?.click();
     // Lock-in animation before calling onSelect
     setTimeout(() => {
       onSelect(mission);
@@ -37,20 +40,22 @@ export function MissionCards({ onSelect }: MissionCardsProps) {
           <motion.button
             key={mission}
             initial={{ opacity: 0, x: -20 }}
-            animate={{ 
-              opacity: isOther ? 0.3 : 1, 
+            animate={{
+              opacity: isOther ? 0.3 : 1,
               x: 0,
               scale: isSelected ? 1.02 : 1,
             }}
             transition={{ delay: index * 0.1 }}
             onClick={() => handleSelect(mission)}
+            onMouseEnter={() => sfx?.hover()}
             disabled={!!selectedMission}
             className={`
               group relative flex items-center gap-4 p-4 rounded-xl 
               bg-black/40 border transition-all duration-300 text-left
-              ${isSelected 
-                ? 'border-primary shadow-lg shadow-primary/30' 
-                : 'border-primary/20 hover:border-primary/60 hover:bg-primary/10'
+              ${
+                isSelected
+                  ? "border-primary shadow-lg shadow-primary/30"
+                  : "border-primary/20 hover:border-primary/60 hover:bg-primary/10"
               }
               disabled:cursor-not-allowed
             `}
@@ -66,25 +71,33 @@ export function MissionCards({ onSelect }: MissionCardsProps) {
             )}
 
             {/* Hover glow effect */}
-            <motion.div 
+            <motion.div
               className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary/10 to-transparent"
               initial={{ opacity: 0 }}
               whileHover={{ opacity: 1 }}
               transition={{ duration: 0.2 }}
             />
-            
+
             {/* Icon */}
-            <motion.div 
+            <motion.div
               className={`
                 relative flex-shrink-0 w-12 h-12 rounded-lg 
                 flex items-center justify-center text-primary
-                ${isSelected ? 'bg-primary/40' : 'bg-primary/20'}
+                ${isSelected ? "bg-primary/40" : "bg-primary/20"}
               `}
               whileHover={{ scale: 1.1, y: -2 }}
-              animate={isSelected ? { 
-                scale: [1, 1.2, 1],
-                boxShadow: ['0 0 0 0 hsl(var(--primary) / 0)', '0 0 20px 5px hsl(var(--primary) / 0.5)', '0 0 0 0 hsl(var(--primary) / 0)']
-              } : {}}
+              animate={
+                isSelected
+                  ? {
+                      scale: [1, 1.2, 1],
+                      boxShadow: [
+                        "0 0 0 0 hsl(var(--primary) / 0)",
+                        "0 0 20px 5px hsl(var(--primary) / 0.5)",
+                        "0 0 0 0 hsl(var(--primary) / 0)",
+                      ],
+                    }
+                  : {}
+              }
               transition={{ duration: 0.4 }}
             >
               {MISSION_ICONS[mission]}
@@ -92,24 +105,30 @@ export function MissionCards({ onSelect }: MissionCardsProps) {
 
             {/* Content */}
             <div className="relative flex-1 min-w-0">
-              <motion.div 
-                className={`font-semibold transition-colors ${isSelected ? 'text-primary' : 'text-foreground group-hover:text-primary'}`}
+              <motion.div
+                className={`font-semibold transition-colors ${
+                  isSelected
+                    ? "text-primary"
+                    : "text-foreground group-hover:text-primary"
+                }`}
                 whileHover={{ x: 2 }}
               >
                 {title}
               </motion.div>
-              <div className="text-sm text-muted-foreground">
-                {description}
-              </div>
+              <div className="text-sm text-muted-foreground">{description}</div>
             </div>
 
             {/* Arrow / Check */}
             <motion.div
-              className={`relative transition-colors ${isSelected ? 'text-primary' : 'text-primary/50 group-hover:text-primary'}`}
+              className={`relative transition-colors ${
+                isSelected
+                  ? "text-primary"
+                  : "text-primary/50 group-hover:text-primary"
+              }`}
               whileHover={{ x: 5 }}
               animate={isSelected ? { scale: [1, 1.3, 1] } : {}}
             >
-              {isSelected ? '✓' : '→'}
+              {isSelected ? "✓" : "→"}
             </motion.div>
 
             {/* Border glow on hover */}
@@ -125,3 +144,4 @@ export function MissionCards({ onSelect }: MissionCardsProps) {
     </div>
   );
 }
+

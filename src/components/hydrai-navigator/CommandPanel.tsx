@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Compass, ExternalLink } from "lucide-react";
+import { X, Compass, ExternalLink, Volume2, VolumeX } from "lucide-react";
 import { RadarAnimation } from "./RadarAnimation";
 import { MissionCards } from "./MissionCards";
 import { MissionTimer } from "./MissionTimer";
@@ -13,9 +13,11 @@ import { LeadCaptureForm } from "./LeadCaptureForm";
 import { QuickActions } from "./QuickActions";
 import { NavigatorState, Mission, Channel, Urgency } from "./types";
 import { DISCORD_INVITE_URL } from "@/lib/constants";
+import type { NavigatorSfx } from "./sfx";
 
 interface CommandPanelProps {
   state: NavigatorState;
+  sfx?: NavigatorSfx;
   onClose: () => void;
   onSelectMission: (mission: Mission) => void;
   onSetBusiness: (business: string) => void;
@@ -29,6 +31,7 @@ interface CommandPanelProps {
 
 export function CommandPanel({
   state,
+  sfx,
   onClose,
   onSelectMission,
   onSetBusiness,
@@ -43,15 +46,20 @@ export function CommandPanel({
   const [timerCompleted, setTimerCompleted] = useState(false);
   const [showDemoMode, setShowDemoMode] = useState(true);
 
-  const handleMissionSelect = useCallback((mission: Mission) => {
-    setTimerActive(true);
-    setShowDemoMode(false);
-    onSelectMission(mission);
-  }, [onSelectMission]);
+  const handleMissionSelect = useCallback(
+    (mission: Mission) => {
+      sfx?.click();
+      setTimerActive(true);
+      setShowDemoMode(false);
+      onSelectMission(mission);
+    },
+    [onSelectMission, sfx]
+  );
 
   const handleTimerComplete = useCallback(() => {
     setTimerCompleted(true);
-  }, []);
+    sfx?.complete();
+  }, [sfx]);
 
   const isMissionActive = state.step !== "welcome" && state.step !== "closed";
 
@@ -80,9 +88,10 @@ export function CommandPanel({
             <div className="flex-shrink-0 p-4 border-b border-border/30">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
-                  <motion.div 
+                  <motion.div
                     className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center"
                     whileHover={{ scale: 1.1, rotate: 10 }}
+                    onMouseEnter={() => sfx?.hover()}
                   >
                     <Compass className="w-5 h-5 text-primary" />
                   </motion.div>
@@ -99,24 +108,46 @@ export function CommandPanel({
                     </div>
                   </div>
                 </div>
-                <motion.button
-                  onClick={onClose}
-                  className="p-2 rounded-lg hover:bg-muted/50 transition-colors"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <X className="w-5 h-5 text-muted-foreground" />
-                </motion.button>
+
+                <div className="flex items-center gap-2">
+                  {/* Sound toggle (OFF by default) */}
+                  {sfx && (
+                    <motion.button
+                      onClick={() => sfx.setEnabled(!sfx.enabled)}
+                      onMouseEnter={() => sfx.hover()}
+                      className="flex items-center gap-2 px-2.5 py-2 rounded-lg hover:bg-muted/50 transition-colors"
+                      whileHover={{ scale: 1.04, y: -1 }}
+                      whileTap={{ scale: 0.96 }}
+                      aria-label={sfx.enabled ? "Sonido: On" : "Sonido: Off"}
+                      title={sfx.enabled ? "Sonido: On" : "Sonido: Off"}
+                    >
+                      {sfx.enabled ? (
+                        <Volume2 className="w-4 h-4 text-primary" />
+                      ) : (
+                        <VolumeX className="w-4 h-4 text-muted-foreground" />
+                      )}
+                      <span className={`text-[10px] font-mono ${sfx.enabled ? "text-primary" : "text-muted-foreground"}`}>
+                        Sonido: {sfx.enabled ? "ON" : "OFF"}
+                      </span>
+                    </motion.button>
+                  )}
+
+                  <motion.button
+                    onClick={onClose}
+                    onMouseEnter={() => sfx?.hover()}
+                    className="p-2 rounded-lg hover:bg-muted/50 transition-colors"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <X className="w-5 h-5 text-muted-foreground" />
+                  </motion.button>
+                </div>
               </div>
 
               {/* Timer - always visible when active */}
               {isMissionActive && (
                 <div className="mb-3">
-                  <MissionTimer 
-                    isActive={timerActive} 
-                    duration={45}
-                    onComplete={handleTimerComplete}
-                  />
+                  <MissionTimer isActive={timerActive} duration={45} onComplete={handleTimerComplete} />
                 </div>
               )}
 
@@ -128,11 +159,7 @@ export function CommandPanel({
             <div className="flex-1 overflow-y-auto p-4 space-y-4">
               {/* Welcome / Mission Selection */}
               {state.step === "welcome" && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="space-y-4"
-                >
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
                   <div className="p-3 rounded-lg bg-muted/20 border border-border/30">
                     <span className="text-primary font-mono text-xs mr-1">▶</span>
                     <span className="text-sm">{state.messages[0]?.content}</span>
@@ -140,23 +167,27 @@ export function CommandPanel({
 
                   {/* Demo Mode */}
                   {showDemoMode && (
-                    <DemoMode 
+                    <DemoMode
+                      sfx={sfx}
                       onStartRealMission={() => setShowDemoMode(false)}
                       onDiscordClick={onDiscordClick}
                     />
                   )}
 
-                  <MissionCards onSelect={handleMissionSelect} />
+                  <MissionCards onSelect={handleMissionSelect} sfx={sfx} />
                 </motion.div>
               )}
 
               {/* Ask Business */}
               {state.step === "ask_business" && (
                 <div className="space-y-4">
-                  <ConversationArea 
+                  <ConversationArea
                     messages={state.messages}
                     inputEnabled
-                    onSubmit={onSetBusiness}
+                    onSubmit={(v) => {
+                      sfx?.click();
+                      onSetBusiness(v);
+                    }}
                     placeholder="Ej: Restaurante, Clínica dental, E-commerce..."
                   />
                 </div>
@@ -166,7 +197,13 @@ export function CommandPanel({
               {state.step === "ask_channel" && (
                 <div className="space-y-4">
                   <ConversationArea messages={state.messages} />
-                  <ChannelSelector onSelect={onSetChannel} />
+                  <ChannelSelector
+                    sfx={sfx}
+                    onSelect={(channel) => {
+                      sfx?.click();
+                      onSetChannel(channel);
+                    }}
+                  />
                 </div>
               )}
 
@@ -174,7 +211,13 @@ export function CommandPanel({
               {state.step === "ask_urgency" && (
                 <div className="space-y-4">
                   <ConversationArea messages={state.messages} />
-                  <UrgencySelector onSelect={onSetUrgency} />
+                  <UrgencySelector
+                    sfx={sfx}
+                    onSelect={(urgency) => {
+                      sfx?.click();
+                      onSetUrgency(urgency);
+                    }}
+                  />
                 </div>
               )}
 
@@ -183,8 +226,14 @@ export function CommandPanel({
                 <Recommendation
                   mission={state.mission}
                   urgency={state.urgency}
-                  onCaptureLeadClick={onGoToLeadCapture}
-                  onSkip={onClose}
+                  onCaptureLeadClick={() => {
+                    sfx?.click();
+                    onGoToLeadCapture();
+                  }}
+                  onSkip={() => {
+                    sfx?.click();
+                    onClose();
+                  }}
                   onDiscordClick={onDiscordClick}
                 />
               )}
@@ -193,7 +242,16 @@ export function CommandPanel({
               {state.step === "lead_capture" && (
                 <div className="space-y-4">
                   <ConversationArea messages={state.messages} />
-                  <LeadCaptureForm onSubmit={onSaveLead} onSkip={onSkipLeadCapture} />
+                  <LeadCaptureForm
+                    onSubmit={(data) => {
+                      sfx?.click();
+                      onSaveLead(data);
+                    }}
+                    onSkip={() => {
+                      sfx?.click();
+                      onSkipLeadCapture();
+                    }}
+                  />
                 </div>
               )}
 
@@ -207,12 +265,12 @@ export function CommandPanel({
                     className="text-center p-4"
                   >
                     <p className="text-sm text-muted-foreground mb-4">
-                      {timerCompleted 
+                      {timerCompleted
                         ? "Listo. Tengo tu ruta. ¿Entramos a Discord para arrancar?"
-                        : "¡Listo! Nos vemos en Discord."
-                      }
+                        : "¡Listo! Nos vemos en Discord."}
                     </p>
                     <motion.button
+                      onMouseEnter={() => sfx?.hover()}
                       onClick={() => {
                         onDiscordClick();
                         window.open(DISCORD_INVITE_URL, "_blank");
@@ -232,6 +290,7 @@ export function CommandPanel({
             {isMissionActive && (
               <div className="flex-shrink-0 p-3 border-t border-border/30 bg-black/40 sm:hidden">
                 <motion.button
+                  onMouseEnter={() => sfx?.hover()}
                   onClick={() => {
                     onDiscordClick();
                     window.open(DISCORD_INVITE_URL, "_blank");
@@ -248,7 +307,7 @@ export function CommandPanel({
 
             {/* Quick Actions Footer */}
             <div className="flex-shrink-0 p-4 border-t border-border/30 bg-black/20 hidden sm:block">
-              <QuickActions onDiscordClick={onDiscordClick} />
+              <QuickActions onDiscordClick={onDiscordClick} sfx={sfx} />
             </div>
           </motion.div>
         </>
@@ -256,3 +315,4 @@ export function CommandPanel({
     </AnimatePresence>
   );
 }
+

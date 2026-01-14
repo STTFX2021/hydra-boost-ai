@@ -1,8 +1,11 @@
 import { NavigatorButton } from "./NavigatorButton";
 import { CommandPanel } from "./CommandPanel";
 import { useNavigator } from "./useNavigator";
+import { useNavigatorSfx } from "./sfx";
 
 export function HydrAINavigator() {
+  const sfx = useNavigatorSfx();
+
   const {
     state,
     open,
@@ -17,15 +20,31 @@ export function HydrAINavigator() {
     handleDiscordClick,
   } = useNavigator();
 
+  const handleOpen = () => {
+    sfx.click();
+    open();
+  };
+
+  const handleClose = () => {
+    sfx.click();
+    close();
+  };
+
+  const handleDiscordClickWithSfx = () => {
+    sfx.click();
+    handleDiscordClick();
+  };
+
   return (
     <>
       {/* Floating Button - only show when panel is closed */}
-      {!state.isOpen && <NavigatorButton onClick={open} />}
+      {!state.isOpen && <NavigatorButton onClick={handleOpen} sfx={sfx} />}
 
       {/* Command Panel */}
       <CommandPanel
         state={state}
-        onClose={close}
+        sfx={sfx}
+        onClose={handleClose}
         onSelectMission={selectMission}
         onSetBusiness={setBusiness}
         onSetChannel={setChannel}
@@ -33,8 +52,9 @@ export function HydrAINavigator() {
         onGoToLeadCapture={goToLeadCapture}
         onSkipLeadCapture={skipLeadCapture}
         onSaveLead={saveLead}
-        onDiscordClick={handleDiscordClick}
+        onDiscordClick={handleDiscordClickWithSfx}
       />
     </>
   );
 }
+
