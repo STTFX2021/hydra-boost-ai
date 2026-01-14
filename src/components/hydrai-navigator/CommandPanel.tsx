@@ -1,7 +1,10 @@
+import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Compass } from "lucide-react";
+import { X, Compass, ExternalLink } from "lucide-react";
 import { RadarAnimation } from "./RadarAnimation";
 import { MissionCards } from "./MissionCards";
+import { MissionTimer } from "./MissionTimer";
+import { DemoMode } from "./DemoMode";
 import { ConversationArea } from "./ConversationArea";
 import { ChannelSelector } from "./ChannelSelector";
 import { UrgencySelector } from "./UrgencySelector";
@@ -9,6 +12,7 @@ import { Recommendation } from "./Recommendation";
 import { LeadCaptureForm } from "./LeadCaptureForm";
 import { QuickActions } from "./QuickActions";
 import { NavigatorState, Mission, Channel, Urgency } from "./types";
+import { DISCORD_INVITE_URL } from "@/lib/constants";
 
 interface CommandPanelProps {
   state: NavigatorState;
@@ -35,6 +39,22 @@ export function CommandPanel({
   onSaveLead,
   onDiscordClick,
 }: CommandPanelProps) {
+  const [timerActive, setTimerActive] = useState(false);
+  const [timerCompleted, setTimerCompleted] = useState(false);
+  const [showDemoMode, setShowDemoMode] = useState(true);
+
+  const handleMissionSelect = useCallback((mission: Mission) => {
+    setTimerActive(true);
+    setShowDemoMode(false);
+    onSelectMission(mission);
+  }, [onSelectMission]);
+
+  const handleTimerComplete = useCallback(() => {
+    setTimerCompleted(true);
+  }, []);
+
+  const isMissionActive = state.step !== "welcome" && state.step !== "closed";
+
   return (
     <AnimatePresence>
       {state.isOpen && (
@@ -45,7 +65,7 @@ export function CommandPanel({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] lg:hidden"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60]"
           />
 
           {/* Panel */}
@@ -60,21 +80,45 @@ export function CommandPanel({
             <div className="flex-shrink-0 p-4 border-b border-border/30">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
+                  <motion.div 
+                    className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center"
+                    whileHover={{ scale: 1.1, rotate: 10 }}
+                  >
                     <Compass className="w-5 h-5 text-primary" />
-                  </div>
+                  </motion.div>
                   <div>
                     <div className="font-bold text-foreground">HydrAI Navigator</div>
-                    <div className="text-xs text-primary font-mono">Modo: TURBO</div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs text-primary font-mono">Modo: TURBO</span>
+                      <motion.div
+                        className="w-1.5 h-1.5 rounded-full bg-green-400"
+                        animate={{ opacity: [1, 0.4, 1], scale: [1, 1.2, 1] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                      />
+                      <span className="text-[10px] text-green-400 font-mono">ONLINE</span>
+                    </div>
                   </div>
                 </div>
-                <button
+                <motion.button
                   onClick={onClose}
                   className="p-2 rounded-lg hover:bg-muted/50 transition-colors"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   <X className="w-5 h-5 text-muted-foreground" />
-                </button>
+                </motion.button>
               </div>
+
+              {/* Timer - always visible when active */}
+              {isMissionActive && (
+                <div className="mb-3">
+                  <MissionTimer 
+                    isActive={timerActive} 
+                    duration={45}
+                    onComplete={handleTimerComplete}
+                  />
+                </div>
+              )}
 
               {/* Radar */}
               <RadarAnimation />
@@ -93,7 +137,16 @@ export function CommandPanel({
                     <span className="text-primary font-mono text-xs mr-1">▶</span>
                     <span className="text-sm">{state.messages[0]?.content}</span>
                   </div>
-                  <MissionCards onSelect={onSelectMission} />
+
+                  {/* Demo Mode */}
+                  {showDemoMode && (
+                    <DemoMode 
+                      onStartRealMission={() => setShowDemoMode(false)}
+                      onDiscordClick={onDiscordClick}
+                    />
+                  )}
+
+                  <MissionCards onSelect={handleMissionSelect} />
                 </motion.div>
               )}
 
@@ -154,24 +207,47 @@ export function CommandPanel({
                     className="text-center p-4"
                   >
                     <p className="text-sm text-muted-foreground mb-4">
-                      ¡Listo! Nos vemos en Discord.
+                      {timerCompleted 
+                        ? "Listo. Tengo tu ruta. ¿Entramos a Discord para arrancar?"
+                        : "¡Listo! Nos vemos en Discord."
+                      }
                     </p>
-                    <button
+                    <motion.button
                       onClick={() => {
                         onDiscordClick();
-                        window.open("https://discord.gg/KrymATqa", "_blank");
+                        window.open(DISCORD_INVITE_URL, "_blank");
                       }}
-                      className="px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold hover:bg-primary/90 transition-colors"
+                      className="px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold shadow-lg shadow-primary/30"
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      whileTap={{ scale: 0.98 }}
                     >
                       Ir a Discord →
-                    </button>
+                    </motion.button>
                   </motion.div>
                 </div>
               )}
             </div>
 
+            {/* Mobile sticky CTA */}
+            {isMissionActive && (
+              <div className="flex-shrink-0 p-3 border-t border-border/30 bg-black/40 sm:hidden">
+                <motion.button
+                  onClick={() => {
+                    onDiscordClick();
+                    window.open(DISCORD_INVITE_URL, "_blank");
+                  }}
+                  className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-primary text-primary-foreground font-bold shadow-lg shadow-primary/30"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <ExternalLink className="w-5 h-5" />
+                  Entrar a Discord
+                </motion.button>
+              </div>
+            )}
+
             {/* Quick Actions Footer */}
-            <div className="flex-shrink-0 p-4 border-t border-border/30 bg-black/20">
+            <div className="flex-shrink-0 p-4 border-t border-border/30 bg-black/20 hidden sm:block">
               <QuickActions onDiscordClick={onDiscordClick} />
             </div>
           </motion.div>

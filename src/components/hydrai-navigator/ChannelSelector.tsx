@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Globe, MessageCircle, Mail, Instagram } from "lucide-react";
+import { Globe, MessageCircle, Mail, Instagram, Search } from "lucide-react";
 import { Channel } from "./types";
 import { CHANNEL_LABELS } from "./data";
 
@@ -12,7 +12,7 @@ const CHANNEL_ICONS: Record<Channel, React.ReactNode> = {
   whatsapp: <MessageCircle className="w-4 h-4" />,
   email: <Mail className="w-4 h-4" />,
   instagram: <Instagram className="w-4 h-4" />,
-  google: <Globe className="w-4 h-4" />,
+  google: <Search className="w-4 h-4" />,
 };
 
 export function ChannelSelector({ onSelect }: ChannelSelectorProps) {
@@ -27,10 +27,25 @@ export function ChannelSelector({ onSelect }: ChannelSelectorProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: index * 0.05 }}
           onClick={() => onSelect(channel)}
-          className="flex items-center gap-2 px-3 py-2 rounded-lg bg-muted/30 border border-border/50 hover:border-primary/50 hover:bg-primary/10 transition-all text-sm"
+          whileHover={{ 
+            scale: 1.05, 
+            y: -2,
+            boxShadow: '0 4px 12px hsl(var(--primary) / 0.2)'
+          }}
+          whileTap={{ scale: 0.95 }}
+          className="group flex items-center gap-2 px-3 py-2 rounded-lg bg-muted/30 border border-border/50 hover:border-primary/50 hover:bg-primary/10 transition-colors text-sm relative overflow-hidden"
         >
-          {CHANNEL_ICONS[channel]}
-          {CHANNEL_LABELS[channel]}
+          {/* Glow effect */}
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0"
+            initial={{ x: '-100%' }}
+            whileHover={{ x: '100%' }}
+            transition={{ duration: 0.4 }}
+          />
+          <span className="relative text-primary group-hover:scale-110 transition-transform">
+            {CHANNEL_ICONS[channel]}
+          </span>
+          <span className="relative">{CHANNEL_LABELS[channel]}</span>
         </motion.button>
       ))}
     </div>
