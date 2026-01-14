@@ -41,17 +41,34 @@ export function QuickActions({ onDiscordClick }: QuickActionsProps) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: index * 0.05 }}
           onClick={action.onClick}
+          whileHover={{ 
+            scale: 1.05, 
+            y: -1,
+            boxShadow: action.highlight 
+              ? '0 4px 12px hsl(var(--primary) / 0.4)' 
+              : '0 4px 12px rgba(0,0,0,0.2)'
+          }}
+          whileTap={{ scale: 0.98 }}
           className={`
             flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium
-            transition-all duration-200
+            transition-colors duration-200 relative overflow-hidden
             ${action.highlight 
-              ? "bg-primary text-primary-foreground hover:bg-primary/90" 
+              ? "bg-primary text-primary-foreground" 
               : "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground"
             }
           `}
         >
-          {action.icon}
-          {action.label}
+          {/* Glow effect on hover for highlight button */}
+          {action.highlight && (
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
+              initial={{ x: '-100%' }}
+              whileHover={{ x: '100%' }}
+              transition={{ duration: 0.5 }}
+            />
+          )}
+          <span className="relative">{action.icon}</span>
+          <span className="relative">{action.label}</span>
         </motion.button>
       ))}
     </div>
