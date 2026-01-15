@@ -12,6 +12,7 @@ export function HydrAINavigator() {
     open,
     close,
     selectMission,
+    startFreeChat,
     sendChatMessage,
     setBusiness,
     setChannel,
@@ -49,6 +50,7 @@ export function HydrAINavigator() {
         isAILoading={isAILoading}
         onClose={handleClose}
         onSelectMission={selectMission}
+        onStartFreeChat={startFreeChat}
         onSendChatMessage={sendChatMessage}
         onSetBusiness={setBusiness}
         onSetChannel={setChannel}

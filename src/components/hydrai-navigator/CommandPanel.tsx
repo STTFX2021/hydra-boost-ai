@@ -22,6 +22,7 @@ interface CommandPanelProps {
   isAILoading?: boolean;
   onClose: () => void;
   onSelectMission: (mission: Mission) => void;
+  onStartFreeChat?: () => void;
   onSendChatMessage?: (message: string) => void;
   onSetBusiness: (business: string) => void;
   onSetChannel: (channel: Channel) => void;
@@ -38,6 +39,7 @@ export function CommandPanel({
   isAILoading = false,
   onClose,
   onSelectMission,
+  onStartFreeChat,
   onSendChatMessage,
   onSetBusiness,
   onSetChannel,
@@ -185,6 +187,34 @@ export function CommandPanel({
                   )}
 
                   <MissionCards onSelect={handleMissionSelect} sfx={sfx} />
+
+                  {/* Free Chat Button */}
+                  {onStartFreeChat && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 }}
+                      className="pt-2"
+                    >
+                      <motion.button
+                        onClick={() => {
+                          sfx?.click();
+                          setShowDemoMode(false);
+                          onStartFreeChat();
+                        }}
+                        onMouseEnter={() => sfx?.hover()}
+                        className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-muted/60 to-muted/40 border border-border/50 hover:border-primary/50 text-foreground font-medium transition-all duration-200"
+                        whileHover={{ scale: 1.02, y: -1 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        <MessageCircle className="w-4 h-4 text-primary" />
+                        <span>O pregúntame lo que quieras</span>
+                      </motion.button>
+                      <p className="text-[10px] text-muted-foreground text-center mt-2">
+                        Chat libre sobre IA, automatizaciones, servicios...
+                      </p>
+                    </motion.div>
+                  )}
                 </motion.div>
               )}
 
