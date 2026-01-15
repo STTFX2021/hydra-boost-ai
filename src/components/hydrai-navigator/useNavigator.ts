@@ -3,13 +3,13 @@ import { useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { 
   NavigatorState, 
-  NavigatorStep, 
   Mission, 
   Channel, 
   Urgency,
   ConversationMessage 
 } from "./types";
-import { BOT_MESSAGES, getRecommendedPack } from "./data";
+import { getRecommendedPack } from "./data";
+import { useAIChat } from "./useAIChat";
 
 const initialState: NavigatorState = {
   isOpen: false,
@@ -26,6 +26,7 @@ const initialState: NavigatorState = {
 export function useNavigator() {
   const [state, setState] = useState<NavigatorState>(initialState);
   const location = useLocation();
+  const { isLoading: isAILoading, sendMessage: sendAIMessage, getInitiativeMessage, resetChat } = useAIChat();
 
   const addMessage = useCallback((type: "bot" | "user" | "system", content: string) => {
     const message: ConversationMessage = {
@@ -38,6 +39,7 @@ export function useNavigator() {
       ...prev,
       messages: [...prev.messages, message],
     }));
+    return message;
   }, []);
 
   const logEvent = useCallback(async (eventType: string, payload?: Record<string, unknown>) => {
@@ -52,53 +54,101 @@ export function useNavigator() {
     }
   }, [location.pathname]);
 
-  const open = useCallback(() => {
+  const getContext = useCallback(() => ({
+    mission: state.mission || undefined,
+    business: state.business || undefined,
+    channel: state.channel || undefined,
+    urgency: state.urgency || undefined,
+    page: location.pathname,
+  }), [state.mission, state.business, state.channel, state.urgency, location.pathname]);
+
+  const open = useCallback(async () => {
+    resetChat();
     setState((prev) => ({
       ...prev,
       isOpen: true,
       step: "welcome",
       messages: [],
     }));
-    addMessage("bot", BOT_MESSAGES.welcome);
     logEvent("opened");
-  }, [addMessage, logEvent]);
+
+    // Get AI initiative message based on current page
+    const initMessage = await getInitiativeMessage({ page: location.pathname });
+    addMessage("bot", initMessage);
+  }, [addMessage, logEvent, resetChat, getInitiativeMessage, location.pathname]);
 
   const close = useCallback(() => {
     setState(initialState);
-  }, []);
+    resetChat();
+  }, [resetChat]);
 
-  const selectMission = useCallback((mission: Mission) => {
+  const selectMission = useCallback(async (mission: Mission) => {
     setState((prev) => ({
       ...prev,
       mission,
-      step: "ask_business",
+      step: "chat",
     }));
-    addMessage("user", `Misión: ${mission}`);
-    addMessage("bot", BOT_MESSAGES.askBusiness);
+    addMessage("user", `Misión: ${mission === "leads" ? "Más clientes" : mission === "bookings" ? "Más reservas" : "Automatizar todo"}`);
     logEvent("mission_selected", { mission });
-  }, [addMessage, logEvent]);
 
-  const setBusiness = useCallback((business: string) => {
+    // Get AI response for selected mission
+    const context = { mission, page: location.pathname };
+    const response = await sendAIMessage(
+      `He elegido la misión: ${mission}. Quiero ${mission === "leads" ? "más clientes" : mission === "bookings" ? "más reservas" : "automatizar mi negocio"}.`,
+      context
+    );
+    addMessage("bot", response);
+  }, [addMessage, logEvent, sendAIMessage, location.pathname]);
+
+  const sendChatMessage = useCallback(async (userMessage: string) => {
+    addMessage("user", userMessage);
+    
+    const context = getContext();
+    const response = await sendAIMessage(userMessage, context);
+    addMessage("bot", response);
+
+    // Check if we should show recommendation based on conversation progress
+    const messageCount = state.messages.length;
+    if (messageCount >= 4 && state.mission && !state.recommendedPack) {
+      // After 2-3 exchanges, show recommendation
+      const pack = getRecommendedPack(state.mission, state.urgency || "week");
+      setState((prev) => ({
+        ...prev,
+        step: "recommendation",
+        recommendedPack: pack.id,
+      }));
+      logEvent("recommendation_shown", { 
+        mission: state.mission, 
+        pack: pack.id 
+      });
+    }
+  }, [addMessage, sendAIMessage, getContext, state.messages.length, state.mission, state.urgency, state.recommendedPack, logEvent]);
+
+  const setBusiness = useCallback(async (business: string) => {
     setState((prev) => ({
       ...prev,
       business,
-      step: "ask_channel",
     }));
     addMessage("user", business);
-    addMessage("bot", BOT_MESSAGES.askChannel);
-  }, [addMessage]);
+    
+    const context = { ...getContext(), business };
+    const response = await sendAIMessage(`Mi negocio es: ${business}`, context);
+    addMessage("bot", response);
+  }, [addMessage, sendAIMessage, getContext]);
 
-  const setChannel = useCallback((channel: Channel) => {
+  const setChannel = useCallback(async (channel: Channel) => {
     setState((prev) => ({
       ...prev,
       channel,
-      step: "ask_urgency",
     }));
     addMessage("user", channel);
-    addMessage("bot", BOT_MESSAGES.askUrgency);
-  }, [addMessage]);
+    
+    const context = { ...getContext(), channel };
+    const response = await sendAIMessage(`El canal que más me importa es: ${channel}`, context);
+    addMessage("bot", response);
+  }, [addMessage, sendAIMessage, getContext]);
 
-  const setUrgency = useCallback((urgency: Urgency) => {
+  const setUrgency = useCallback(async (urgency: Urgency) => {
     const mission = state.mission || "leads";
     const pack = getRecommendedPack(mission, urgency);
     
@@ -118,25 +168,24 @@ export function useNavigator() {
 
   const goToLeadCapture = useCallback(() => {
     setState((prev) => ({ ...prev, step: "lead_capture" }));
-    addMessage("bot", BOT_MESSAGES.leadCapture);
+    addMessage("bot", "¿Te aviso cuando esté listo el plan? (opcional)");
   }, [addMessage]);
 
   const skipLeadCapture = useCallback(() => {
     setState((prev) => ({ ...prev, step: "final" }));
-    addMessage("bot", BOT_MESSAGES.final);
+    addMessage("bot", "Perfecto. Nos vemos en Discord. Te atendemos en minutos.");
   }, [addMessage]);
 
   const saveLead = useCallback(async (data: { name: string; business: string; contact: string }) => {
     setState((prev) => ({ ...prev, leadData: data, step: "final" }));
-    addMessage("bot", BOT_MESSAGES.final);
+    addMessage("bot", `Genial ${data.name}. Te avisamos pronto. Mientras, nos vemos en Discord.`);
 
     try {
-      // Try leads table first
       const leadPayload = {
         name: data.name,
         email: data.contact.includes("@") ? data.contact : `${data.contact}@placeholder.com`,
         phone: data.contact.includes("@") ? null : data.contact,
-        business_name: data.business,
+        business_name: data.business || state.business,
         source: "hydrai_navigator",
         vertical: state.mission,
         tags: [state.channel, state.urgency].filter(Boolean),
@@ -145,7 +194,6 @@ export function useNavigator() {
       const { error: leadError } = await supabase.from("leads").insert(leadPayload);
       
       if (leadError) {
-        // Fallback to contact_submissions
         await supabase.from("contact_submissions").insert({
           name: data.name,
           email: data.contact.includes("@") ? data.contact : "no-email@placeholder.com",
@@ -157,7 +205,6 @@ export function useNavigator() {
       logEvent("lead_saved", { ...data, mission: state.mission });
     } catch (error) {
       console.warn("Lead save failed:", error);
-      // Continue anyway - don't block the user
     }
   }, [state.mission, state.business, state.channel, state.urgency, addMessage, logEvent]);
 
@@ -167,9 +214,11 @@ export function useNavigator() {
 
   return {
     state,
+    isAILoading,
     open,
     close,
     selectMission,
+    sendChatMessage,
     setBusiness,
     setChannel,
     setUrgency,
