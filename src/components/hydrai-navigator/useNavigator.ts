@@ -100,6 +100,22 @@ export function useNavigator() {
     addMessage("bot", response);
   }, [addMessage, logEvent, sendAIMessage, location.pathname]);
 
+  // Start free chat mode without selecting a mission
+  const startFreeChat = useCallback(async () => {
+    setState((prev) => ({
+      ...prev,
+      step: "chat",
+    }));
+    addMessage("user", "Quiero chatear libremente");
+    logEvent("free_chat_started");
+
+    const response = await sendAIMessage(
+      "Hola, quiero hablar contigo de cualquier tema relacionado con automatizaciones, IA o servicios de HydrAI Labs.",
+      { page: location.pathname }
+    );
+    addMessage("bot", response);
+  }, [addMessage, logEvent, sendAIMessage, location.pathname]);
+
   const sendChatMessage = useCallback(async (userMessage: string) => {
     addMessage("user", userMessage);
     
@@ -218,6 +234,7 @@ export function useNavigator() {
     open,
     close,
     selectMission,
+    startFreeChat,
     sendChatMessage,
     setBusiness,
     setChannel,
