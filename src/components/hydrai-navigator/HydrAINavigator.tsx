@@ -8,9 +8,11 @@ export function HydrAINavigator() {
 
   const {
     state,
+    isAILoading,
     open,
     close,
     selectMission,
+    sendChatMessage,
     setBusiness,
     setChannel,
     setUrgency,
@@ -44,8 +46,10 @@ export function HydrAINavigator() {
       <CommandPanel
         state={state}
         sfx={sfx}
+        isAILoading={isAILoading}
         onClose={handleClose}
         onSelectMission={selectMission}
+        onSendChatMessage={sendChatMessage}
         onSetBusiness={setBusiness}
         onSetChannel={setChannel}
         onSetUrgency={setUrgency}
@@ -57,4 +61,3 @@ export function HydrAINavigator() {
     </>
   );
 }
-

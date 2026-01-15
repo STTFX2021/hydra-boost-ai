@@ -7,6 +7,7 @@ export type Channel = "web" | "whatsapp" | "email" | "instagram" | "google";
 export type NavigatorStep = 
   | "closed"
   | "welcome"
+  | "chat"
   | "mission_selected"
   | "ask_business"
   | "ask_channel"

@@ -1,10 +1,11 @@
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Compass, ExternalLink, Volume2, VolumeX } from "lucide-react";
+import { X, Compass, ExternalLink, Volume2, VolumeX, MessageCircle } from "lucide-react";
 import { RadarAnimation } from "./RadarAnimation";
 import { MissionCards } from "./MissionCards";
 import { MissionTimer } from "./MissionTimer";
 import { DemoMode } from "./DemoMode";
+import { AIConversation } from "./AIConversation";
 import { ConversationArea } from "./ConversationArea";
 import { ChannelSelector } from "./ChannelSelector";
 import { UrgencySelector } from "./UrgencySelector";
@@ -18,8 +19,10 @@ import type { NavigatorSfx } from "./sfx";
 interface CommandPanelProps {
   state: NavigatorState;
   sfx?: NavigatorSfx;
+  isAILoading?: boolean;
   onClose: () => void;
   onSelectMission: (mission: Mission) => void;
+  onSendChatMessage?: (message: string) => void;
   onSetBusiness: (business: string) => void;
   onSetChannel: (channel: Channel) => void;
   onSetUrgency: (urgency: Urgency) => void;
@@ -32,8 +35,10 @@ interface CommandPanelProps {
 export function CommandPanel({
   state,
   sfx,
+  isAILoading = false,
   onClose,
   onSelectMission,
+  onSendChatMessage,
   onSetBusiness,
   onSetChannel,
   onSetUrgency,
@@ -62,6 +67,7 @@ export function CommandPanel({
   }, [sfx]);
 
   const isMissionActive = state.step !== "welcome" && state.step !== "closed";
+  const isChatMode = state.step === "chat";
 
   return (
     <AnimatePresence>
@@ -98,19 +104,23 @@ export function CommandPanel({
                   <div>
                     <div className="font-bold text-foreground">HydrAI Navigator</div>
                     <div className="flex items-center gap-2">
-                      <span className="text-xs text-primary font-mono">Modo: TURBO</span>
+                      <span className="text-xs text-primary font-mono">
+                        {isChatMode ? "IA ACTIVA" : "Modo: TURBO"}
+                      </span>
                       <motion.div
-                        className="w-1.5 h-1.5 rounded-full bg-green-400"
+                        className={`w-1.5 h-1.5 rounded-full ${isChatMode ? "bg-primary" : "bg-green-400"}`}
                         animate={{ opacity: [1, 0.4, 1], scale: [1, 1.2, 1] }}
                         transition={{ duration: 1.5, repeat: Infinity }}
                       />
-                      <span className="text-[10px] text-green-400 font-mono">ONLINE</span>
+                      {isChatMode && (
+                        <MessageCircle className="w-3 h-3 text-primary" />
+                      )}
                     </div>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-2">
-                  {/* Sound toggle (OFF by default) */}
+                  {/* Sound toggle */}
                   {sfx && (
                     <motion.button
                       onClick={() => sfx.setEnabled(!sfx.enabled)}
@@ -127,7 +137,7 @@ export function CommandPanel({
                         <VolumeX className="w-4 h-4 text-muted-foreground" />
                       )}
                       <span className={`text-[10px] font-mono ${sfx.enabled ? "text-primary" : "text-muted-foreground"}`}>
-                        Sonido: {sfx.enabled ? "ON" : "OFF"}
+                        {sfx.enabled ? "ON" : "OFF"}
                       </span>
                     </motion.button>
                   )}
@@ -156,7 +166,7 @@ export function CommandPanel({
             </div>
 
             {/* Content */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 flex flex-col">
               {/* Welcome / Mission Selection */}
               {state.step === "welcome" && (
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
@@ -166,7 +176,7 @@ export function CommandPanel({
                   </div>
 
                   {/* Demo Mode */}
-                  {showDemoMode && (
+                  {showDemoMode && sfx && (
                     <DemoMode
                       sfx={sfx}
                       onStartRealMission={() => setShowDemoMode(false)}
@@ -178,7 +188,20 @@ export function CommandPanel({
                 </motion.div>
               )}
 
-              {/* Ask Business */}
+              {/* AI Chat Mode - Main conversational interface */}
+              {isChatMode && sfx && onSendChatMessage && (
+                <div className="flex-1 min-h-[300px]">
+                  <AIConversation
+                    messages={state.messages}
+                    isLoading={isAILoading}
+                    onSendMessage={onSendChatMessage}
+                    sfx={sfx}
+                    placeholder="Cuéntame sobre tu negocio..."
+                  />
+                </div>
+              )}
+
+              {/* Legacy flows for backward compatibility */}
               {state.step === "ask_business" && (
                 <div className="space-y-4">
                   <ConversationArea
@@ -193,7 +216,6 @@ export function CommandPanel({
                 </div>
               )}
 
-              {/* Ask Channel */}
               {state.step === "ask_channel" && (
                 <div className="space-y-4">
                   <ConversationArea messages={state.messages} />
@@ -207,7 +229,6 @@ export function CommandPanel({
                 </div>
               )}
 
-              {/* Ask Urgency */}
               {state.step === "ask_urgency" && (
                 <div className="space-y-4">
                   <ConversationArea messages={state.messages} />
@@ -315,4 +336,3 @@ export function CommandPanel({
     </AnimatePresence>
   );
 }
-
