@@ -3,8 +3,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Play, RotateCcw, ExternalLink, Target, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DISCORD_INVITE_URL } from "@/lib/constants";
+import type { NavigatorSfx } from "./sfx";
 
-interface DemoModeProps {
+export interface DemoModeProps {
+  sfx: NavigatorSfx;
   onStartRealMission: () => void;
   onDiscordClick: () => void;
 }
