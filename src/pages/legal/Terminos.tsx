@@ -1,7 +1,15 @@
 import { PageLayout } from "@/components/layout/PageLayout";
+import { SEOHead } from "@/components/seo";
 
 const Terminos = () => {
   return (
+    <>
+      <SEOHead
+        title="Términos y Condiciones | HydrAI Labs"
+        description="Términos y condiciones de uso del sitio web y servicios de HydrAI Labs. Información legal y responsabilidades."
+        canonical="/terminos"
+        noindex={true}
+      />
     <PageLayout>
       <section className="section-padding">
         <div className="section-container">
@@ -62,6 +70,7 @@ const Terminos = () => {
         </div>
       </section>
     </PageLayout>
+    </>
   );
 };
 

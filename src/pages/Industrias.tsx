@@ -8,8 +8,29 @@ import {
   BarChart3, Clock, TrendingUp, Users, Sparkles, Puzzle, Star, Crown
 } from "lucide-react";
 import { useTranslation } from "@/lib/i18n";
+import { SEOHead, BreadcrumbSchema } from "@/components/seo";
 
 const Industrias = () => {
+  const { t, language } = useTranslation();
+
+  return (
+    <>
+      <SEOHead
+        title="Automatización por Industria | HydrAI Labs"
+        description="Soluciones IA especializadas por sector: restaurantes, clínicas, talleres, peluquerías, inmobiliarias. Chatbots y automatizaciones adaptados a tu negocio."
+        canonical="/industrias"
+        keywords="automatizacion restaurantes, chatbot clinicas, ia talleres, peluqueria automatizada, inmobiliaria ia"
+      />
+      <BreadcrumbSchema items={[
+        { name: "Inicio", url: "/" },
+        { name: "Industrias", url: "/industrias" }
+      ]} />
+      <IndustriasContent />
+    </>
+  );
+};
+
+const IndustriasContent = () => {
   const { t, language } = useTranslation();
 
   // Automation cards data

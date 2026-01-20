@@ -1,7 +1,15 @@
 import { PageLayout } from "@/components/layout/PageLayout";
+import { SEOHead } from "@/components/seo";
 
 const Cookies = () => {
   return (
+    <>
+      <SEOHead
+        title="Política de Cookies | HydrAI Labs"
+        description="Información sobre las cookies que utiliza HydrAI Labs, tipos de cookies y cómo gestionarlas en tu navegador."
+        canonical="/cookies"
+        noindex={true}
+      />
     <PageLayout>
       <section className="section-padding">
         <div className="section-container">
@@ -68,6 +76,7 @@ const Cookies = () => {
         </div>
       </section>
     </PageLayout>
+    </>
   );
 };
 

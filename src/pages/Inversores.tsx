@@ -2,6 +2,7 @@ import { PageLayout } from "@/components/layout/PageLayout";
 import { Button } from "@/components/ui/button";
 import { Zap, Target, Rocket, Users, ArrowRight, TrendingUp, Calendar, CheckCircle, Brain, Eye, Shield, Layers } from "lucide-react";
 import { Link } from "react-router-dom";
+import { SEOHead, BreadcrumbSchema } from "@/components/seo";
 
 const deepTechProjects = [
   {
@@ -52,6 +53,18 @@ const deepTechProjects = [
 
 const Inversores = () => {
   return (
+    <>
+      <SEOHead
+        title="Investor Hub | HydrAI Labs"
+        description="Oportunidades de inversión en HydrAI Labs. Proyectos Deep Tech: Orochi Trading AI, YOLO Chart Vision, ARGUS AI. Únete como partner o inversor ángel."
+        canonical="/inversores"
+        keywords="invertir ia, startup ia españa, deep tech inversion, fintech ai"
+        noindex={true}
+      />
+      <BreadcrumbSchema items={[
+        { name: "Inicio", url: "/" },
+        { name: "Inversores", url: "/inversores" }
+      ]} />
     <PageLayout>
       {/* Hero */}
       <section className="relative section-padding overflow-hidden">
@@ -256,6 +269,7 @@ const Inversores = () => {
         </div>
       </section>
     </PageLayout>
+    </>
   );
 };
 
