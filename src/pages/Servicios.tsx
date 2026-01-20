@@ -6,9 +6,36 @@ import {
   ArrowRight, CheckCircle2, Clock, Zap
 } from "lucide-react";
 import { useTranslation } from "@/lib/i18n";
+import { SEOHead, ServiceSchema, BreadcrumbSchema } from "@/components/seo";
 
 const Servicios = () => {
   const { t, tArray } = useTranslation();
+
+  return (
+    <>
+      <SEOHead
+        title="Servicios de Automatización IA | HydrAI Labs"
+        description="Webs profesionales, chatbots 24/7, automatizaciones de reservas y gestión de reputación. Soluciones IA completas para negocios locales. Consulta gratis."
+        canonical="/servicios"
+        keywords="servicios ia, chatbot negocios, automatizacion reservas, web ia, agencia automatizacion"
+      />
+      <ServiceSchema
+        name="Servicios de Automatización con IA"
+        description="Soluciones completas de automatización con inteligencia artificial para negocios locales: webs, chatbots, reservas y más."
+        url="/servicios"
+      />
+      <BreadcrumbSchema items={[
+        { name: "Inicio", url: "/" },
+        { name: "Servicios", url: "/servicios" }
+      ]} />
+      <ServiciosContent />
+    </>
+  );
+};
+
+const ServiciosContent = () => {
+  const { t, tArray } = useTranslation();
+  // Content continues below
 
   const serviceKeys = ['webPresencia', 'webChatbot', 'automatiza', 'reputacion', 'leadCapture', 'mantenimiento'];
   const serviceIcons: Record<string, any> = {

@@ -4,8 +4,25 @@ import { Link } from "react-router-dom";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { useTranslation } from "@/lib/i18n";
+import { SEOHead, OrganizationSchema, LocalBusinessSchema } from "@/components/seo";
 
 const Index = () => {
+  return (
+    <>
+      <SEOHead
+        title="HydrAI Labs | Chatbots y Automatizaciones IA para Negocios"
+        description="Agencia de automatización con IA para negocios locales. Webs profesionales, chatbots 24/7 y automatizaciones que captan clientes mientras duermes. Desde 199€/mes."
+        canonical="/"
+        keywords="chatbot ia, automatizacion negocios, agencia ia, chatbot whatsapp, reservas automaticas, marketing ia"
+      />
+      <OrganizationSchema />
+      <LocalBusinessSchema />
+      <IndexContent />
+    </>
+  );
+};
+
+const IndexContent = () => {
   const { t } = useTranslation();
 
   const services = [

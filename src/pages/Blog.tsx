@@ -3,8 +3,29 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, Zap, ExternalLink } from "lucide-react";
 import { useTranslation } from "@/lib/i18n";
+import { SEOHead, BreadcrumbSchema } from "@/components/seo";
 
 const Blog = () => {
+  const { t, language } = useTranslation();
+
+  return (
+    <>
+      <SEOHead
+        title="Recursos y Herramientas IA | HydrAI Labs"
+        description="Descubre las herramientas de IA que usamos: OpenAI, Supabase, Make, WhatsApp Business y más. Stack tecnológico para automatizar tu negocio."
+        canonical="/blog"
+        keywords="herramientas ia, stack tecnologico, openai negocios, automatizacion herramientas"
+      />
+      <BreadcrumbSchema items={[
+        { name: "Inicio", url: "/" },
+        { name: "Recursos", url: "/blog" }
+      ]} />
+      <BlogContent />
+    </>
+  );
+};
+
+const BlogContent = () => {
   const { t, language } = useTranslation();
 
   const tools = [

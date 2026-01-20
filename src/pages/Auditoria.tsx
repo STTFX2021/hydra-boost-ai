@@ -11,6 +11,7 @@ import {
   Clock, Send, Info
 } from "lucide-react";
 import { useTranslation } from "@/lib/i18n";
+import { SEOHead, BreadcrumbSchema } from "@/components/seo";
 
 const verticals = [
   { id: "restaurante", label: "Restaurante / Cafetería / Hostelería", icon: "🍽️" },
@@ -49,6 +50,24 @@ const steps = [
   { title: "Tiempo", icon: Clock },
   { title: "Contacto", icon: Send },
 ];
+
+const AuditoriaWrapper = () => {
+  return (
+    <>
+      <SEOHead
+        title="Auditoría IA Gratis para tu Negocio | HydrAI Labs"
+        description="Descubre gratis cómo la IA puede automatizar tu negocio. Análisis personalizado en 2 minutos. Recomendaciones de chatbots, reservas y automatizaciones."
+        canonical="/auditoria"
+        keywords="auditoria ia gratis, diagnostico automatizacion, analisis negocio ia, consulta gratuita chatbot"
+      />
+      <BreadcrumbSchema items={[
+        { name: "Inicio", url: "/" },
+        { name: "Auditoría", url: "/auditoria" }
+      ]} />
+      <Auditoria />
+    </>
+  );
+};
 
 const Auditoria = () => {
   const [searchParams] = useSearchParams();
@@ -556,4 +575,4 @@ const Auditoria = () => {
   );
 };
 
-export default Auditoria;
+export default AuditoriaWrapper;

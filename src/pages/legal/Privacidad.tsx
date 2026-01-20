@@ -1,7 +1,15 @@
 import { PageLayout } from "@/components/layout/PageLayout";
+import { SEOHead } from "@/components/seo";
 
 const Privacidad = () => {
   return (
+    <>
+      <SEOHead
+        title="Política de Privacidad | HydrAI Labs"
+        description="Información sobre cómo HydrAI Labs recopila, usa y protege tus datos personales. Cumplimiento RGPD."
+        canonical="/privacidad"
+        noindex={true}
+      />
     <PageLayout>
       <section className="section-padding">
         <div className="section-container">
@@ -62,6 +70,7 @@ const Privacidad = () => {
         </div>
       </section>
     </PageLayout>
+    </>
   );
 };
 

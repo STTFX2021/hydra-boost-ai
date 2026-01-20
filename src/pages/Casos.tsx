@@ -5,8 +5,29 @@ import { ArrowRight, Zap, ExternalLink, Star } from "lucide-react";
 import { cases } from "@/data/cases";
 import { testimonials } from "@/data/testimonials";
 import { useTranslation } from "@/lib/i18n";
+import { SEOHead, BreadcrumbSchema } from "@/components/seo";
 
 const Casos = () => {
+  const { t, language } = useTranslation();
+
+  return (
+    <>
+      <SEOHead
+        title="Casos de Éxito y Portfolio | HydrAI Labs"
+        description="Descubre cómo nuestros clientes han automatizado sus negocios con IA. Restaurantes, clínicas, inmobiliarias y más. Resultados reales y testimonios."
+        canonical="/casos"
+        keywords="casos exito ia, portfolio automatizacion, testimonios chatbot, resultados ia negocios"
+      />
+      <BreadcrumbSchema items={[
+        { name: "Inicio", url: "/" },
+        { name: "Casos de Éxito", url: "/casos" }
+      ]} />
+      <CasosContent />
+    </>
+  );
+};
+
+const CasosContent = () => {
   const { t, language } = useTranslation();
 
   return (

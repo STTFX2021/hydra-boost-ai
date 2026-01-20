@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { Send, Mail, MapPin, Clock, ArrowRight, Zap } from "lucide-react";
 import { z } from "zod";
 import { DISCORD_INVITE_URL } from "@/lib/constants";
+import { SEOHead, BreadcrumbSchema } from "@/components/seo";
 
 const contactSchema = z.object({
   name: z.string().trim().min(2, "Nombre muy corto").max(100),
@@ -17,6 +18,33 @@ const contactSchema = z.object({
 });
 
 const Contacto = () => {
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+  const [honeypot, setHoneypot] = useState("");
+
+  return (
+    <>
+      <SEOHead
+        title="Contacto | HydrAI Labs"
+        description="Contacta con HydrAI Labs. Respondemos en menos de 24h. Cuéntanos tu proyecto y te ayudamos a automatizar tu negocio con IA. Sin compromiso."
+        canonical="/contacto"
+        keywords="contacto hydrailabs, consulta ia, presupuesto chatbot, agencia automatizacion contacto"
+      />
+      <BreadcrumbSchema items={[
+        { name: "Inicio", url: "/" },
+        { name: "Contacto", url: "/contacto" }
+      ]} />
+      <ContactoContent />
+    </>
+  );
+};
+
+const ContactoContent = () => {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",

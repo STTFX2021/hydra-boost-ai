@@ -4,8 +4,30 @@ import { Link } from "react-router-dom";
 import { CheckCircle2, ArrowRight, Zap, Star, Phone, Crown, Settings } from "lucide-react";
 import { useTranslation } from "@/lib/i18n";
 import { useState } from "react";
+import { SEOHead, BreadcrumbSchema } from "@/components/seo";
 
 const Precios = () => {
+  const { t, language } = useTranslation();
+  const [viewMode, setViewMode] = useState<'packs' | 'individuals'>('packs');
+
+  return (
+    <>
+      <SEOHead
+        title="Precios y Planes de Automatización IA | HydrAI Labs"
+        description="Packs de automatización desde 199€/mes. Starter, Pro y Autonomous. Chatbots, reservas, leads y más. Pago anual = 2 meses gratis. Sin permanencia."
+        canonical="/precios"
+        keywords="precios chatbot, coste automatizacion, planes ia negocios, precio chatbot whatsapp"
+      />
+      <BreadcrumbSchema items={[
+        { name: "Inicio", url: "/" },
+        { name: "Precios", url: "/precios" }
+      ]} />
+      <PreciosContent />
+    </>
+  );
+};
+
+const PreciosContent = () => {
   const { t, language } = useTranslation();
   const [viewMode, setViewMode] = useState<'packs' | 'individuals'>('packs');
 
