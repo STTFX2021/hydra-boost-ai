@@ -1,3 +1,4 @@
+# https://www.robotstxt.org/robotstxt.html
 User-agent: Googlebot
 Allow: /
 
@@ -12,3 +13,11 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+# Disallow admin and internal routes
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /login
+
+# Sitemap location
+Sitemap: https://hydrailabs.com/sitemap.xml
