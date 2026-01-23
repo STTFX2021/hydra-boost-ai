@@ -14,3 +14,6 @@ export const isValidUrl = (url: string): boolean => {
 
 // Discord invite URL for HydrAI Labs community
 export const DISCORD_INVITE_URL = "https://discord.gg/KrymATqa";
+
+// Pricing page demo video URL - replace with your actual Loom/YouTube URL
+export const PRICING_DEMO_VIDEO_URL = "https://www.youtube.com/watch?v=YOUR_VIDEO_ID";
