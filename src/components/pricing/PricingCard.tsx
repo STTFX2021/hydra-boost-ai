@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, ArrowRight, Star, Crown } from "lucide-react";
+import { motion } from "framer-motion";
 
 interface PricingCardProps {
   id: string;
@@ -12,6 +13,7 @@ interface PricingCardProps {
   features: string[];
   steps: string[];
   language: 'es' | 'en';
+  delay?: number;
 }
 
 export const PricingCard = ({
@@ -24,12 +26,25 @@ export const PricingCard = ({
   features,
   steps,
   language,
+  delay = 0,
 }: PricingCardProps) => {
   const isPopular = badge === (language === 'es' ? 'Más popular' : 'Most popular');
   const isPremium = badge === 'Premium';
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ 
+        duration: 0.5, 
+        delay,
+        ease: [0.25, 0.1, 0.25, 1]
+      }}
+      whileHover={{ 
+        scale: 1.02,
+        transition: { duration: 0.2 }
+      }}
       className={`relative card-premium flex flex-col overflow-visible ${
         isPopular ? 'border-primary neon-border' : isPremium ? 'border-accent' : ''
       }`}
@@ -107,6 +122,6 @@ export const PricingCard = ({
           <ArrowRight className="ml-2 w-4 h-4" />
         </Button>
       </Link>
-    </div>
+    </motion.div>
   );
 };

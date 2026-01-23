@@ -11,6 +11,7 @@ import {
   VideoDemo,
   IndividualsGrid,
   MaintenancePacks,
+  ComparisonTable,
 } from "@/components/pricing";
 
 const Precios = () => {
@@ -189,7 +190,7 @@ const PreciosContent = () => {
             <div className="inline-flex rounded-full p-1 bg-muted/30 border border-border">
               <button
                 onClick={() => setViewMode('packs')}
-                className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
+                className={`px-6 py-2 rounded-full text-sm font-medium transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
                   viewMode === 'packs'
                     ? 'bg-primary text-primary-foreground'
                     : 'text-muted-foreground hover:text-foreground'
@@ -199,7 +200,7 @@ const PreciosContent = () => {
               </button>
               <button
                 onClick={() => setViewMode('individuals')}
-                className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
+                className={`px-6 py-2 rounded-full text-sm font-medium transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
                   viewMode === 'individuals'
                     ? 'bg-primary text-primary-foreground'
                     : 'text-muted-foreground hover:text-foreground'
@@ -220,7 +221,7 @@ const PreciosContent = () => {
         <section className="section-padding -mt-8">
           <div className="section-container">
             <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              {packs.map((pack) => (
+              {packs.map((pack, index) => (
                 <PricingCard
                   key={pack.id}
                   id={pack.id}
@@ -232,6 +233,7 @@ const PreciosContent = () => {
                   features={pack.features}
                   steps={pack.steps}
                   language={language}
+                  delay={index * 0.1}
                 />
               ))}
             </div>
@@ -241,6 +243,9 @@ const PreciosContent = () => {
 
       {/* Individuals View */}
       {viewMode === 'individuals' && <IndividualsGrid language={language} />}
+
+      {/* Comparison Table */}
+      {viewMode === 'packs' && <ComparisonTable language={language} />}
 
       {/* Elite Section */}
       <EliteSection language={language} />
@@ -262,13 +267,13 @@ const PreciosContent = () => {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link to="/auditoria">
-                <Button size="lg" className="btn-neon text-lg px-8">
+                <Button size="lg" className="btn-neon text-lg px-8 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
                   {language === 'es' ? 'Auditoría Gratis' : 'Free Audit'}
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
               <Link to="/contacto">
-                <Button size="lg" variant="outline" className="btn-outline-neon">
+                <Button size="lg" variant="outline" className="btn-outline-neon focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
                   <Phone className="w-4 h-4 mr-2" />
                   {language === 'es' ? 'Hablar con humano' : 'Talk to a human'}
                 </Button>

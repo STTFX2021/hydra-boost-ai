@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Users, Zap, Shield, BarChart3, Rocket, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 interface EliteSectionProps {
   language: 'es' | 'en';
@@ -52,10 +53,20 @@ export const EliteSection = ({ language }: EliteSectionProps) => {
       ];
 
   return (
-    <section className="section-padding">
+    <motion.section 
+      className="section-padding"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+    >
       <div className="section-container">
         <div className="max-w-4xl mx-auto">
-          <div className="relative card-premium p-8 md:p-12 border-2 border-accent overflow-visible">
+          <motion.div 
+            className="relative card-premium p-8 md:p-12 border-2 border-accent overflow-visible"
+            whileHover={{ scale: 1.01 }}
+            transition={{ duration: 0.2 }}
+          >
             {/* Glow effect */}
             <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-transparent to-primary/10 rounded-xl pointer-events-none" />
             
@@ -149,9 +160,9 @@ export const EliteSection = ({ language }: EliteSectionProps) => {
                 </p>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
