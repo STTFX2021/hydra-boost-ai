@@ -1,11 +1,11 @@
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Compass, ExternalLink, Volume2, VolumeX, MessageCircle } from "lucide-react";
+import { X, Terminal, ExternalLink, Volume2, VolumeX, MessageCircle, Cpu } from "lucide-react";
 import { RadarAnimation } from "./RadarAnimation";
 import { MissionCards } from "./MissionCards";
 import { MissionTimer } from "./MissionTimer";
 import { DemoMode } from "./DemoMode";
-import { AIConversation } from "./AIConversation";
+import { AlexInterface } from "./AlexInterface";
 import { ConversationArea } from "./ConversationArea";
 import { ChannelSelector } from "./ChannelSelector";
 import { UrgencySelector } from "./UrgencySelector";
@@ -92,31 +92,41 @@ export function CommandPanel({
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
             className="fixed right-0 top-0 bottom-0 w-full sm:w-[420px] bg-background/95 backdrop-blur-xl border-l border-primary/20 shadow-2xl shadow-primary/10 z-[70] flex flex-col"
           >
-            {/* Header */}
-            <div className="flex-shrink-0 p-4 border-b border-border/30">
+            {/* Header - Alex Branding */}
+            <div className="flex-shrink-0 p-4 border-b border-primary/20 bg-gradient-to-r from-background via-primary/5 to-background">
               <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-3">
                   <motion.div
-                    className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center"
-                    whileHover={{ scale: 1.1, rotate: 10 }}
+                    className="relative w-10 h-10 rounded-lg bg-gradient-to-br from-primary/30 to-cyan-500/20 flex items-center justify-center border border-primary/40"
+                    whileHover={{ scale: 1.1 }}
                     onMouseEnter={() => sfx?.hover()}
+                    animate={{ boxShadow: ["0 0 10px rgba(0,200,255,0.2)", "0 0 20px rgba(0,200,255,0.4)", "0 0 10px rgba(0,200,255,0.2)"] }}
+                    transition={{ duration: 2, repeat: Infinity }}
                   >
-                    <Compass className="w-5 h-5 text-primary" />
+                    <Terminal className="w-5 h-5 text-primary" />
+                    <motion.div 
+                      className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-green-400 border border-background"
+                      animate={{ scale: [1, 1.3, 1] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                    />
                   </motion.div>
                   <div>
-                    <div className="font-bold text-foreground">HydrAI Navigator</div>
                     <div className="flex items-center gap-2">
-                      <span className="text-xs text-primary font-mono">
-                        {isChatMode ? "IA ACTIVA" : "Modo: TURBO"}
+                      <span className="font-bold text-foreground">Alex</span>
+                      <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-primary/20 text-primary border border-primary/30">
+                        ARCHITECT
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] text-muted-foreground font-mono flex items-center gap-1">
+                        <Cpu className="w-3 h-3" />
+                        {isChatMode ? "Modo: ANÁLISIS" : "Solutions Architect"}
                       </span>
                       <motion.div
                         className={`w-1.5 h-1.5 rounded-full ${isChatMode ? "bg-primary" : "bg-green-400"}`}
                         animate={{ opacity: [1, 0.4, 1], scale: [1, 1.2, 1] }}
                         transition={{ duration: 1.5, repeat: Infinity }}
                       />
-                      {isChatMode && (
-                        <MessageCircle className="w-3 h-3 text-primary" />
-                      )}
                     </div>
                   </div>
                 </div>
@@ -218,15 +228,15 @@ export function CommandPanel({
                 </motion.div>
               )}
 
-              {/* AI Chat Mode - Main conversational interface */}
+              {/* Alex Chat Mode - Technical conversational interface */}
               {isChatMode && sfx && onSendChatMessage && (
                 <div className="flex-1 min-h-[300px]">
-                  <AIConversation
+                  <AlexInterface
                     messages={state.messages}
                     isLoading={isAILoading}
                     onSendMessage={onSendChatMessage}
                     sfx={sfx}
-                    placeholder="Cuéntame sobre tu negocio..."
+                    placeholder="Describe tu problema de negocio..."
                   />
                 </div>
               )}
