@@ -1,13 +1,16 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Users, Zap, Shield, BarChart3, Rocket, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { EliteWaitlistForm } from "./EliteWaitlistForm";
 
 interface EliteSectionProps {
   language: 'es' | 'en';
 }
 
 export const EliteSection = ({ language }: EliteSectionProps) => {
+  const [showWaitlistForm, setShowWaitlistForm] = useState(false);
+
   const forWhom = language === 'es'
     ? [
         "Empresas que quieren crecer sin contratar más",
@@ -147,12 +150,14 @@ export const EliteSection = ({ language }: EliteSectionProps) => {
 
               {/* CTA */}
               <div className="text-center">
-                <Link to="/auditoria">
-                  <Button size="lg" className="btn-neon text-lg px-8">
-                    {language === 'es' ? 'Unirme a la lista de espera' : 'Join the waitlist'}
-                    <ArrowRight className="ml-2 w-5 h-5" />
-                  </Button>
-                </Link>
+                <Button 
+                  size="lg" 
+                  className="btn-neon text-lg px-8"
+                  onClick={() => setShowWaitlistForm(true)}
+                >
+                  {language === 'es' ? 'Solicitar Acceso Elite' : 'Request Elite Access'}
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
                 <p className="text-xs text-muted-foreground mt-4">
                   {language === 'es'
                     ? 'Plazas limitadas. Solo aceptamos un número reducido de clientes al mes.'
@@ -163,6 +168,13 @@ export const EliteSection = ({ language }: EliteSectionProps) => {
           </motion.div>
         </div>
       </div>
+
+      {/* Waitlist Form Modal */}
+      <EliteWaitlistForm
+        open={showWaitlistForm}
+        onOpenChange={setShowWaitlistForm}
+        language={language}
+      />
     </motion.section>
   );
 };
