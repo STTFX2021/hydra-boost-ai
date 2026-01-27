@@ -22,17 +22,17 @@ interface UseAIChatReturn {
   resetChat: () => void;
 }
 
-// Initiative messages based on context
+// Alex initiative messages based on context
 const INITIATIVE_PROMPTS: Record<string, string> = {
-  default: "Un usuario acaba de abrir el Navigator. Da un saludo breve y directo (máx 15 palabras), invítalo a elegir su misión.",
-  "/precios": "El usuario está en la página de precios. Pregunta directamente qué pack le interesa o qué quiere lograr.",
-  "/servicios": "El usuario está viendo servicios. Pregunta qué automatización le interesa más o qué problema quiere resolver.",
-  "/contacto": "El usuario está en contacto. Ofrece ayuda inmediata: '¿Tienes dudas? Te las resuelvo aquí mismo.'",
-  "/casos": "El usuario ve casos de éxito. Pregunta qué tipo de negocio tiene para mostrarle resultados relevantes.",
-  "/auditoria": "El usuario quiere auditoría. Di que empezamos ahora mismo: '¿Qué negocio analizamos?'",
-  leads: "El usuario quiere más clientes. Pregunta brevemente qué negocio tiene.",
-  bookings: "El usuario quiere más reservas. Pregunta qué tipo de citas gestiona.",
-  automation: "El usuario quiere automatizar todo. Pregunta qué proceso le quita más tiempo.",
+  default: "Un usuario acaba de abrir el chat. Preséntate brevemente como Alex, Solutions Architect de HydrAI Labs. Máx 20 palabras, directo al grano.",
+  "/precios": "El usuario está en la página de precios. Pregunta qué tipo de negocio tiene y qué quiere automatizar. Ofrece tu diagnóstico técnico.",
+  "/servicios": "El usuario está viendo servicios. Pregunta qué proceso le está quitando más tiempo. Ofrece analizar el cuello de botella.",
+  "/contacto": "El usuario quiere contactar. Ofrece resolver sus dudas aquí mismo con tu expertise técnico-comercial.",
+  "/casos": "El usuario ve casos de éxito. Pregunta qué tipo de negocio tiene para mostrarle cómo aplicaría la solución en su caso.",
+  "/auditoria": "El usuario quiere auditoría. Ofrece empezar el diagnóstico técnico ahora: '¿Qué proceso te está robando más horas?'",
+  leads: "El usuario quiere más clientes. Diagnóstico rápido: pregunta cómo gestionan los leads actualmente y en cuánto tiempo responden.",
+  bookings: "El usuario quiere más reservas. Pregunta cuántas citas pierden por no responder a tiempo o por gestión manual.",
+  automation: "El usuario quiere automatizar todo. Pregunta qué proceso le está quitando más horas semanales para hacer un diagnóstico.",
 };
 
 export function useAIChat(): UseAIChatReturn {
@@ -95,7 +95,7 @@ export function useAIChat(): UseAIChatReturn {
 
       if (fnError) throw fnError;
 
-      const message = data?.content || "Soy HydrAI Navigator. Elige misión y te doy el plan.";
+      const message = data?.content || "Soy Alex, Solutions Architect. Cuéntame qué proceso te está robando tiempo y te doy el diagnóstico.";
       
       // Initialize history with this as the first assistant message
       chatHistoryRef.current = [{ role: "assistant", content: message }];
@@ -103,7 +103,7 @@ export function useAIChat(): UseAIChatReturn {
       return message;
     } catch (err) {
       console.error("Initiative message error:", err);
-      return "Soy HydrAI Navigator. Elige misión y te digo el plan en 45s.";
+      return "Soy Alex, Solutions Architect de HydrAI Labs. ¿Qué problema quieres resolver?";
     } finally {
       setIsLoading(false);
     }
