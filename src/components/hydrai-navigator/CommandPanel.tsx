@@ -1,11 +1,13 @@
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Terminal, ExternalLink, Volume2, VolumeX, MessageCircle, Cpu } from "lucide-react";
+import { X, Terminal, ExternalLink, Volume2, VolumeX, MessageCircle, Cpu, Mail } from "lucide-react";
 import { RadarAnimation } from "./RadarAnimation";
 import { MissionCards } from "./MissionCards";
 import { MissionTimer } from "./MissionTimer";
 import { DemoMode } from "./DemoMode";
 import { AlexInterface } from "./AlexInterface";
+import { AlexMetricsChart } from "./AlexMetricsChart";
+import { EmailGenerator } from "./EmailGenerator";
 import { ConversationArea } from "./ConversationArea";
 import { ChannelSelector } from "./ChannelSelector";
 import { UrgencySelector } from "./UrgencySelector";
@@ -52,6 +54,7 @@ export function CommandPanel({
   const [timerActive, setTimerActive] = useState(false);
   const [timerCompleted, setTimerCompleted] = useState(false);
   const [showDemoMode, setShowDemoMode] = useState(true);
+  const [showEmailGenerator, setShowEmailGenerator] = useState(false);
 
   const handleMissionSelect = useCallback(
     (mission: Mission) => {
@@ -120,10 +123,10 @@ export function CommandPanel({
                     <div className="flex items-center gap-2">
                       <span className="text-[10px] text-muted-foreground font-mono flex items-center gap-1">
                         <Cpu className="w-3 h-3" />
-                        {isChatMode ? "Modo: ANÁLISIS" : "Solutions Architect"}
+                        {showEmailGenerator ? "EMAIL GEN" : isChatMode ? "ANÁLISIS" : "Solutions Architect"}
                       </span>
                       <motion.div
-                        className={`w-1.5 h-1.5 rounded-full ${isChatMode ? "bg-primary" : "bg-green-400"}`}
+                        className={`w-1.5 h-1.5 rounded-full ${showEmailGenerator ? "bg-accent" : isChatMode ? "bg-primary" : "bg-green-400"}`}
                         animate={{ opacity: [1, 0.4, 1], scale: [1, 1.2, 1] }}
                         transition={{ duration: 1.5, repeat: Infinity }}
                       />
@@ -179,8 +182,13 @@ export function CommandPanel({
 
             {/* Content */}
             <div className="flex-1 overflow-y-auto p-4 space-y-4 flex flex-col">
+              {/* Email Generator Mode */}
+              {showEmailGenerator && sfx && (
+                <EmailGenerator onBack={() => setShowEmailGenerator(false)} />
+              )}
+
               {/* Welcome / Mission Selection */}
-              {state.step === "welcome" && (
+              {!showEmailGenerator && state.step === "welcome" && (
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
                   <div className="p-3 rounded-lg bg-muted/20 border border-border/30">
                     <span className="text-primary font-mono text-xs mr-1">▶</span>
@@ -197,6 +205,21 @@ export function CommandPanel({
                   )}
 
                   <MissionCards onSelect={handleMissionSelect} sfx={sfx} />
+
+                  {/* Email Generator Button */}
+                  <motion.button
+                    onClick={() => {
+                      sfx?.click();
+                      setShowEmailGenerator(true);
+                    }}
+                    onMouseEnter={() => sfx?.hover()}
+                    className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-accent/20 to-secondary/20 border border-accent/30 hover:border-accent/50 text-foreground font-medium transition-all duration-200"
+                    whileHover={{ scale: 1.02, y: -1 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <Mail className="w-4 h-4 text-accent" />
+                    <span>Generar Email de Ventas</span>
+                  </motion.button>
 
                   {/* Free Chat Button */}
                   {onStartFreeChat && (
@@ -229,15 +252,18 @@ export function CommandPanel({
               )}
 
               {/* Alex Chat Mode - Technical conversational interface */}
-              {isChatMode && sfx && onSendChatMessage && (
-                <div className="flex-1 min-h-[300px]">
-                  <AlexInterface
-                    messages={state.messages}
-                    isLoading={isAILoading}
-                    onSendMessage={onSendChatMessage}
-                    sfx={sfx}
-                    placeholder="Describe tu problema de negocio..."
-                  />
+              {!showEmailGenerator && isChatMode && sfx && onSendChatMessage && (
+                <div className="flex-1 min-h-[300px] flex flex-col">
+                  <AlexMetricsChart />
+                  <div className="flex-1 mt-3">
+                    <AlexInterface
+                      messages={state.messages}
+                      isLoading={isAILoading}
+                      onSendMessage={onSendChatMessage}
+                      sfx={sfx}
+                      placeholder="Describe tu problema de negocio..."
+                    />
+                  </div>
                 </div>
               )}
 

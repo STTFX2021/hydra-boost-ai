@@ -17,3 +17,6 @@ export const DISCORD_INVITE_URL = "https://discord.gg/KrymATqa";
 
 // Pricing page demo video URL - replace with your actual Loom/YouTube URL
 export const PRICING_DEMO_VIDEO_URL = "https://www.youtube.com/watch?v=YOUR_VIDEO_ID";
+
+// Booking/Calendar URL - replace with your actual Calendly/Cal.com URL
+export const BOOKING_URL = "https://calendly.com/hydrailabs/consulta";

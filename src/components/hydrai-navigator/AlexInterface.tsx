@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, Loader2, Terminal, Cpu, Activity, TrendingUp, Zap, BarChart3 } from "lucide-react";
+import { Send, Loader2, Terminal, Activity, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import type { ConversationMessage } from "./types";
@@ -13,13 +13,6 @@ interface AlexInterfaceProps {
   sfx: NavigatorSfx;
   placeholder?: string;
 }
-
-// Simulated metrics for the technical dashboard
-const metrics = [
-  { label: "Latencia", value: "47ms", icon: Zap, color: "text-green-400" },
-  { label: "Leads/día", value: "24", icon: TrendingUp, color: "text-primary" },
-  { label: "Conversión", value: "18%", icon: BarChart3, color: "text-cyan-400" },
-];
 
 export function AlexInterface({
   messages,
@@ -69,56 +62,11 @@ export function AlexInterface({
 
   return (
     <div className="flex flex-col h-full">
-      {/* Alex Header - Technical Identity */}
-      <div className="flex items-center gap-3 mb-3 pb-3 border-b border-border/30">
-        <motion.div 
-          className="relative w-10 h-10 rounded-lg bg-gradient-to-br from-primary/30 to-cyan-500/20 flex items-center justify-center border border-primary/40"
-          animate={{ boxShadow: ["0 0 10px rgba(0,200,255,0.3)", "0 0 20px rgba(0,200,255,0.5)", "0 0 10px rgba(0,200,255,0.3)"] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <Terminal className="w-5 h-5 text-primary" />
-          <motion.div 
-            className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-green-400"
-            animate={{ scale: [1, 1.2, 1] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-          />
-        </motion.div>
-        <div className="flex-1">
-          <div className="flex items-center gap-2">
-            <span className="font-bold text-foreground">Alex</span>
-            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-primary/20 text-primary border border-primary/30">
-              ARCHITECT
-            </span>
-          </div>
-          <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground font-mono">
-            <Cpu className="w-3 h-3" />
-            <span>Solutions Architect & Business Strategist</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Mini Metrics Dashboard */}
-      <div className="grid grid-cols-3 gap-2 mb-3">
-        {metrics.map((metric, i) => (
-          <motion.div
-            key={metric.label}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.1 }}
-            className="flex flex-col items-center p-2 rounded-lg bg-muted/20 border border-border/30"
-          >
-            <metric.icon className={`w-3.5 h-3.5 ${metric.color} mb-1`} />
-            <span className="text-xs font-bold text-foreground">{metric.value}</span>
-            <span className="text-[9px] text-muted-foreground font-mono">{metric.label}</span>
-          </motion.div>
-        ))}
-      </div>
-
       {/* Messages area with terminal aesthetic */}
       <div
         ref={scrollRef}
         className="flex-1 overflow-y-auto space-y-3 pr-2 scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent"
-        style={{ maxHeight: "calc(100% - 180px)" }}
+        style={{ maxHeight: "calc(100% - 80px)" }}
       >
         <AnimatePresence mode="popLayout">
           {messages.map((msg) => (
