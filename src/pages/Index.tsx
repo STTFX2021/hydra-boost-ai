@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { useTranslation } from "@/lib/i18n";
 import { SEOHead, OrganizationSchema, LocalBusinessSchema } from "@/components/seo";
+import { DiagnosticButton } from "@/components/diagnostic";
 
 const Index = () => {
   return (
@@ -91,13 +92,11 @@ const IndexContent = () => {
             <p className="text-sm text-primary mb-8">
               {t("hero.priceTag")}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/auditoria">
-                <Button size="lg" className="btn-neon text-lg px-8">
-                  {t("hero.cta1")}
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
-              </Link>
+            <div className="flex flex-col items-center gap-6">
+              {/* Primary CTA - Diagnostic Button */}
+              <DiagnosticButton size="lg" />
+              
+              {/* Secondary CTA */}
               <Link to="/contacto">
                 <Button size="lg" variant="outline" className="btn-outline-neon text-lg px-8">
                   {t("hero.cta2")}
@@ -178,12 +177,7 @@ const IndexContent = () => {
             <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
               {t("cta.subtitle")}
             </p>
-            <Link to="/auditoria">
-              <Button size="lg" className="btn-neon text-lg px-8">
-                {t("cta.button")}
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-            </Link>
+            <DiagnosticButton />
           </div>
         </div>
       </section>
