@@ -26,7 +26,7 @@ export const Header = () => {
 
   const navItems = [
     { to: "/servicios", label: "Automatizaciones" },
-    { to: "/industrias", label: "Arquitectura IA" },
+    { to: "/arquitectura", label: "Arquitectura IA" },
     { to: "/casos", label: "Casos de Uso" },
     { to: "/contacto", label: "Contacto" },
   ];

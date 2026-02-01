@@ -23,6 +23,7 @@ import Terminos from "./pages/legal/Terminos";
 import Cookies from "./pages/legal/Cookies";
 import Inversores from "./pages/Inversores";
 import NotFound from "./pages/NotFound";
+import Arquitectura from "./pages/Arquitectura";
 // Service pages
 import ChatbotsIA from "./pages/servicios/ChatbotsIA";
 import Automatizaciones from "./pages/servicios/Automatizaciones";
@@ -51,6 +52,7 @@ const App = () => (
             <Route path="/sectores/inmobiliarias" element={<SectorInmobiliarias />} />
             <Route path="/sectores/clinicas-estetica" element={<SectorClinicasEstetica />} />
             <Route path="/industrias" element={<Industrias />} />
+            <Route path="/arquitectura" element={<Arquitectura />} />
             <Route path="/precios" element={<Precios />} />
             <Route path="/casos" element={<Casos />} />
             <Route path="/contacto" element={<Contacto />} />
