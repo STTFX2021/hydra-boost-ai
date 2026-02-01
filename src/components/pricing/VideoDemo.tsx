@@ -1,6 +1,6 @@
 import { Play } from "lucide-react";
 import { motion } from "framer-motion";
-import { PRICING_DEMO_VIDEO_URL } from "@/lib/constants";
+import { PRICING_DEMO_VIDEO_URL, isValidUrl } from "@/lib/constants";
 
 interface VideoDemoProps {
   language: 'es' | 'en';
@@ -8,8 +8,14 @@ interface VideoDemoProps {
 }
 
 export const VideoDemo = ({ language, videoUrl }: VideoDemoProps) => {
+  const url = videoUrl || PRICING_DEMO_VIDEO_URL;
+
+  // Don't render if video URL is a placeholder
+  if (!isValidUrl(url)) {
+    return null;
+  }
+
   const handlePlayClick = () => {
-    const url = videoUrl || PRICING_DEMO_VIDEO_URL;
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 

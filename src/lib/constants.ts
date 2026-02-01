@@ -9,7 +9,10 @@ export const PORTFOLIO_LINKS = {
 
 // Check if a URL is valid and not a placeholder
 export const isValidUrl = (url: string): boolean => {
-  return url.length > 0 && !url.startsWith("PASTE_URL");
+  if (url.length === 0) return false;
+  if (url.startsWith("PASTE_URL")) return false;
+  if (url.includes("YOUR_VIDEO_ID")) return false;
+  return true;
 };
 
 // Discord invite URL for HydrAI Labs community
