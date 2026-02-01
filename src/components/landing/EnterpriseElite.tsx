@@ -72,6 +72,46 @@ const automations = [
   },
 ];
 
+// Stagger animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { 
+    opacity: 0, 
+    y: 40,
+    scale: 0.95,
+  },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    scale: 1,
+    transition: { 
+      type: "spring" as const,
+      stiffness: 100,
+      damping: 15,
+      duration: 0.6,
+    },
+  },
+};
+
+const comparisonVariants = {
+  hidden: { opacity: 0, x: -30 },
+  visible: { 
+    opacity: 1, 
+    x: 0,
+    transition: { duration: 0.5 }
+  },
+};
+
 const comparisonOthers = [
   "Chatbot FAQ básico (200 respuestas)",
   "Automatizaciones aisladas y manuales",
@@ -117,9 +157,13 @@ export const EnterpriseElite = () => {
 
         {/* Comparison */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { opacity: 1, transition: { staggerChildren: 0.2 } }
+          }}
           className="mb-20"
         >
           <h3 className="text-2xl font-display font-semibold text-center mb-8">
@@ -127,53 +171,87 @@ export const EnterpriseElite = () => {
           </h3>
           <div className="grid md:grid-cols-2 gap-6">
             {/* Others */}
-            <div className="card-premium p-6 border-destructive/30">
+            <motion.div 
+              variants={comparisonVariants}
+              className="card-premium p-6 border-destructive/30"
+            >
               <h4 className="font-display font-semibold text-lg mb-4 text-muted-foreground">
                 Otras Agencias de IA
               </h4>
               <ul className="space-y-3">
                 {comparisonOthers.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 text-sm text-muted-foreground">
+                  <motion.li 
+                    key={i} 
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 + i * 0.08 }}
+                    className="flex items-start gap-3 text-sm text-muted-foreground"
+                  >
                     <X className="w-4 h-4 text-destructive mt-0.5 shrink-0" />
                     {item}
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
 
             {/* Us */}
-            <div className="card-premium p-6 border-primary/50 neon-border">
+            <motion.div 
+              variants={comparisonVariants}
+              className="card-premium p-6 border-primary/50 neon-border"
+            >
               <h4 className="font-display font-semibold text-lg mb-4 text-gradient-primary">
                 HydrAI Labs Enterprise
               </h4>
               <ul className="space-y-3">
                 {comparisonUs.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 text-sm">
+                  <motion.li 
+                    key={i} 
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 + i * 0.08 }}
+                    className="flex items-start gap-3 text-sm"
+                  >
                     <Check className="w-4 h-4 text-success mt-0.5 shrink-0" />
                     {item}
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
           </div>
         </motion.div>
 
-        {/* Automations Grid */}
+        {/* Automations Grid with Stagger */}
         <div className="mb-20">
           <h3 className="text-2xl font-display font-semibold text-center mb-8">
             Nuestras Automatizaciones Enterprise
           </h3>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
             {automations.map((auto, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="card-premium group"
+                variants={cardVariants}
+                whileHover={{ 
+                  scale: 1.02, 
+                  y: -5,
+                  transition: { type: "spring", stiffness: 300 }
+                }}
+                className="card-premium group cursor-pointer"
               >
-                <auto.icon className="w-10 h-10 text-secondary mb-4" />
+                <motion.div
+                  initial={{ scale: 1 }}
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <auto.icon className="w-10 h-10 text-secondary mb-4" />
+                </motion.div>
                 <h4 className="font-display font-semibold text-lg mb-3">{auto.title}</h4>
                 <ul className="space-y-1 mb-4">
                   {auto.features.map((f, j) => (
@@ -188,7 +266,7 @@ export const EnterpriseElite = () => {
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
 
         {/* Architecture Diagram */}
