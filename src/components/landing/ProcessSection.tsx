@@ -1,33 +1,34 @@
 import { motion } from "framer-motion";
+import { useLandingTranslation } from "@/lib/i18n";
 
-const steps = [
-  {
-    num: "1",
-    title: "Auditoría Inicial",
-    description: "Analizamos tus procesos actuales y detectamos oportunidades de automatización",
-    time: "30-60 min (gratuita)",
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.2,
+    },
   },
-  {
-    num: "2",
-    title: "Diseño de Arquitectura",
-    description: "Proponemos la arquitectura específica con flujos, integraciones y ROI esperado",
-    time: "2-5 días hábiles",
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 40, scale: 0.95 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    scale: 1,
+    transition: { 
+      duration: 0.5,
+      ease: "easeOut" as const
+    } 
   },
-  {
-    num: "3",
-    title: "Implementación por Fases",
-    description: "Desarrollamos e integramos los sistemas de forma modular y testeable",
-    time: "1-4 semanas (según scope)",
-  },
-  {
-    num: "4",
-    title: "Monitoreo y Optimización",
-    description: "Supervisamos el sistema, ajustamos y expandimos según necesidades",
-    time: "Continuo",
-  },
-];
+};
 
 export const ProcessSection = () => {
+  const { landing } = useLandingTranslation();
+  const t = landing.process;
+
   return (
     <section className="section-padding bg-muted/10">
       <div className="section-container">
@@ -38,37 +39,59 @@ export const ProcessSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-            Cómo <span className="text-gradient-primary">Trabajamos</span>
+            {t.title} <span className="text-gradient-primary">{t.titleHighlight}</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Proceso adaptado según el nivel de arquitectura que necesites
+            {t.subtitle}
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {steps.map((step, i) => (
+        <motion.div 
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          {t.steps.map((step: { num: string; title: string; description: string; time: string }, i: number) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
+              variants={itemVariants}
               className="relative"
             >
               {/* Connector line */}
-              {i < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-8 left-full w-full h-0.5 bg-gradient-to-r from-primary/50 to-transparent z-0" />
+              {i < t.steps.length - 1 && (
+                <motion.div 
+                  className="hidden lg:block absolute top-8 left-full w-full h-0.5 bg-gradient-to-r from-primary/50 to-transparent z-0"
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 + i * 0.15, duration: 0.5 }}
+                  style={{ transformOrigin: "left" }}
+                />
               )}
               
-              <div className="card-premium text-center relative z-10 h-full">
-                <div className="step-indicator mx-auto mb-4">{step.num}</div>
+              <motion.div 
+                className="card-premium text-center relative z-10 h-full"
+                whileHover={{ 
+                  y: -8,
+                  transition: { duration: 0.3 }
+                }}
+              >
+                <motion.div 
+                  className="step-indicator mx-auto mb-4"
+                  whileHover={{ scale: 1.1, rotate: 10 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                >
+                  {step.num}
+                </motion.div>
                 <h3 className="font-display font-semibold text-lg mb-2">{step.title}</h3>
                 <p className="text-sm text-muted-foreground mb-4">{step.description}</p>
                 <span className="text-xs text-primary/80 font-medium">{step.time}</span>
-              </div>
+              </motion.div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

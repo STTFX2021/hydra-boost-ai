@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { Mail, MapPin } from "lucide-react";
 import { DISCORD_INVITE_URL } from "@/lib/constants";
+import { useTranslation } from "@/lib/i18n";
 
 export const Footer = () => {
-  const email = "hola@hydrailabs.com";
+  const { t } = useTranslation();
 
   return (
     <footer className="border-t border-border/30 bg-card/30">
@@ -16,42 +17,42 @@ export const Footer = () => {
               <span className="font-display font-bold text-lg text-gradient-primary">HydrAI Labs</span>
             </Link>
             <p className="text-sm text-muted-foreground">
-              Arquitecturas de automatización con IA que operan tu negocio 24/7
+              {t("footer.description")}
             </p>
             <div className="space-y-2 text-sm text-muted-foreground">
-              <a href={`mailto:${email}`} className="flex items-center gap-2 hover:text-foreground transition-colors">
+              <a href={`mailto:${t("footer.email")}`} className="flex items-center gap-2 hover:text-foreground transition-colors">
                 <Mail className="w-4 h-4" />
-                {email}
+                {t("footer.email")}
               </a>
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4" />
-                Madrid, España
+                {t("footer.location")}
               </div>
             </div>
           </div>
 
           {/* Soluciones */}
           <div className="space-y-4">
-            <h4 className="font-display font-semibold text-sm">Soluciones</h4>
+            <h4 className="font-display font-semibold text-sm">{t("footer.solutions")}</h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link to="/servicios" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Implementaciones Base
+                  {t("footer.solutionsBase")}
                 </Link>
               </li>
               <li>
                 <Link to="/industrias" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Arquitectura Enterprise
+                  {t("footer.solutionsEnterprise")}
                 </Link>
               </li>
               <li>
                 <Link to="/casos" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Casos de Uso
+                  {t("footer.solutionsCases")}
                 </Link>
               </li>
               <li>
                 <Link to="/precios" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Precios
+                  {t("footer.solutionsProcess")}
                 </Link>
               </li>
             </ul>
@@ -59,16 +60,16 @@ export const Footer = () => {
 
           {/* Recursos */}
           <div className="space-y-4">
-            <h4 className="font-display font-semibold text-sm">Recursos</h4>
+            <h4 className="font-display font-semibold text-sm">{t("footer.resources")}</h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link to="/blog" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Blog
+                  {t("footer.resourcesBlog")}
                 </Link>
               </li>
               <li>
                 <Link to="/casos" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Casos de Éxito
+                  {t("footer.resourcesCases")}
                 </Link>
               </li>
               <li>
@@ -78,12 +79,12 @@ export const Footer = () => {
                   rel="noreferrer"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  Comunidad Discord
+                  Discord
                 </a>
               </li>
               <li>
                 <Link to="/contacto" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Contacto
+                  {t("footer.resourcesContact")}
                 </Link>
               </li>
             </ul>
@@ -91,21 +92,21 @@ export const Footer = () => {
 
           {/* Legal */}
           <div className="space-y-4">
-            <h4 className="font-display font-semibold text-sm">Legal</h4>
+            <h4 className="font-display font-semibold text-sm">{t("footer.legal")}</h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link to="/privacidad" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Política de Privacidad
+                  {t("footer.privacy")}
                 </Link>
               </li>
               <li>
                 <Link to="/terminos" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Términos de Servicio
+                  {t("footer.terms")}
                 </Link>
               </li>
               <li>
                 <Link to="/cookies" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Política de Cookies
+                  {t("footer.cookies")}
                 </Link>
               </li>
             </ul>
@@ -115,7 +116,7 @@ export const Footer = () => {
         {/* Bottom bar */}
         <div className="mt-12 pt-8 border-t border-border/30 text-center">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} HydrAI Labs - Todos los derechos reservados
+            © {new Date().getFullYear()} HydrAI Labs - {t("footer.rights")}
           </p>
         </div>
       </div>

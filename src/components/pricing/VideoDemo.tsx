@@ -1,9 +1,10 @@
 import { Play } from "lucide-react";
 import { motion } from "framer-motion";
 import { PRICING_DEMO_VIDEO_URL } from "@/lib/constants";
+import type { Language } from "@/lib/i18n";
 
 interface VideoDemoProps {
-  language: 'es' | 'en';
+  language: Language;
   videoUrl?: string; // Override default URL if needed
 }
 
