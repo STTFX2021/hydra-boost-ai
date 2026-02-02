@@ -2,8 +2,12 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useLandingTranslation } from "@/lib/i18n";
 
 export const FinalCTA = () => {
+  const { landing } = useLandingTranslation();
+  const t = landing.finalCta;
+
   return (
     <section className="section-padding relative overflow-hidden">
       {/* Background */}
@@ -17,23 +21,22 @@ export const FinalCTA = () => {
           className="card-premium text-center p-8 md:p-12 lg:p-16 neon-border max-w-4xl mx-auto"
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4">
-            ¿Listo para Ver Tu Empresa en{" "}
+            {t.title.split('Piloto Automático')[0]}
             <span className="text-gradient-primary">Piloto Automático</span>?
           </h2>
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Agenda una auditoría gratuita y te mostraremos exactamente qué procesos 
-            podemos automatizar en tu negocio y el ROI esperado.
+            {t.subtitle}
           </p>
           
           <Link to="/auditoria">
             <Button size="lg" className="btn-neon text-lg px-10">
-              Solicitar Auditoría de Automatización
+              {t.cta}
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </Link>
           
           <p className="text-sm text-muted-foreground mt-6">
-            No es una llamada de ventas. Es una auditoría técnica real de tus procesos automatizables.
+            {t.disclaimer}
           </p>
         </motion.div>
       </div>

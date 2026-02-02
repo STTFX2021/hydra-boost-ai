@@ -3,9 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Sparkles, Users, Zap, Shield, BarChart3, Rocket, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { EliteWaitlistForm } from "./EliteWaitlistForm";
+import type { Language } from "@/lib/i18n";
 
 interface EliteSectionProps {
-  language: 'es' | 'en';
+  language: Language;
 }
 
 export const EliteSection = ({ language }: EliteSectionProps) => {

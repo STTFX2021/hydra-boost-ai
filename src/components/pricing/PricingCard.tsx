@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, ArrowRight, Star, Crown } from "lucide-react";
 import { motion } from "framer-motion";
+import type { Language } from "@/lib/i18n";
 
 interface PricingCardProps {
   id: string;
@@ -12,7 +13,7 @@ interface PricingCardProps {
   idealFor: string;
   features: string[];
   steps: string[];
-  language: 'es' | 'en';
+  language: Language;
   delay?: number;
 }
 

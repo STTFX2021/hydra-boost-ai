@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useLandingTranslation } from "@/lib/i18n";
 
 const technologies = [
   { name: "n8n", icon: "⚙️" },
@@ -10,6 +11,9 @@ const technologies = [
 ];
 
 export const TechStack = () => {
+  const { landing } = useLandingTranslation();
+  const t = landing.techStack;
+
   return (
     <section className="py-12 border-y border-border/30">
       <div className="section-container">
@@ -20,7 +24,7 @@ export const TechStack = () => {
           className="text-center mb-8"
         >
           <p className="text-sm text-muted-foreground">
-            Construido con las Mejores Herramientas
+            {t.title}
           </p>
         </motion.div>
 
@@ -37,7 +41,8 @@ export const TechStack = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
-              className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+              whileHover={{ scale: 1.1, y: -4 }}
+              className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors cursor-default"
             >
               <span className="text-2xl">{tech.icon}</span>
               <span className="font-medium text-sm">{tech.name}</span>
