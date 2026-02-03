@@ -8,6 +8,7 @@ import {
   ProcessSection,
   TechStack,
   FinalCTA,
+  FAQ,
 } from "@/components/landing";
 
 const Index = () => {
@@ -28,6 +29,7 @@ const Index = () => {
         <BaseImplementations />
         <EnterpriseElite />
         <ProcessSection />
+        <FAQ />
         <TechStack />
         <FinalCTA />
         <Footer />

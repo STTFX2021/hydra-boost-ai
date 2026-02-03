@@ -157,6 +157,38 @@ const handler = async (req: Request): Promise<Response> => {
       console.error("Discord error:", discordError);
     }
 
+    // Send to n8n webhook if configured
+    const N8N_WEBHOOK_URL = Deno.env.get("N8N_WEBHOOK_URL");
+    if (N8N_WEBHOOK_URL) {
+      try {
+        const n8nPayload = {
+          source: "hydrailabs_contact_form",
+          timestamp: new Date().toISOString(),
+          lead: {
+            name: cleanName,
+            email: cleanEmail,
+            phone: cleanPhone,
+            message: cleanMessage,
+          }
+        };
+
+        const n8nRes = await fetch(N8N_WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(n8nPayload),
+        });
+
+        if (n8nRes.ok) {
+          console.log("n8n webhook triggered successfully");
+        } else {
+          console.error("n8n webhook failed:", await n8nRes.text());
+        }
+      } catch (n8nError) {
+        console.error("n8n webhook error:", n8nError);
+        // Don't fail the request if n8n fails - lead is already saved
+      }
+    }
+
     // Send email via Resend - ALWAYS include message
     let emailSuccess = false;
     try {
