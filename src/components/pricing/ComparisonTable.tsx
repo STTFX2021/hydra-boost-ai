@@ -16,8 +16,10 @@ import {
 } from "@/components/ui/accordion";
 import { useIsMobile } from "@/hooks/use-mobile";
 
+import type { Language } from "@/lib/i18n";
+
 interface ComparisonTableProps {
-  language: 'es' | 'en';
+  language: Language;
 }
 
 type FeatureValue = boolean | string;

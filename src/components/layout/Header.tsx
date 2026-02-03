@@ -1,10 +1,18 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { useTranslation, useI18n } from "@/lib/i18n";
+import { useTranslation, useI18n, languageNames, type Language } from "@/lib/i18n";
 import { useAdmin } from "@/hooks/useAdmin";
-import { Menu, X, Globe } from "lucide-react";
+import { Menu, X, Globe, ChevronDown } from "lucide-react";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+const availableLanguages: Language[] = ['es', 'en', 'fr', 'de', 'pt', 'it'];
 
 export const Header = () => {
   const { t, language } = useTranslation();
@@ -25,10 +33,10 @@ export const Header = () => {
   const isActive = (path: string) => location.pathname === path;
 
   const navItems = [
-    { to: "/servicios", label: "Automatizaciones" },
-    { to: "/industrias", label: "Arquitectura IA" },
-    { to: "/casos", label: "Casos de Uso" },
-    { to: "/contacto", label: "Contacto" },
+    { to: "/servicios", label: t("nav.industries") },
+    { to: "/arquitectura", label: t("nav.architecture") },
+    { to: "/casos", label: t("nav.cases") },
+    { to: "/contacto", label: t("nav.contact") },
   ];
 
   return (
@@ -72,16 +80,37 @@ export const Header = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          {/* Language Toggle */}
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setLanguage(language === "es" ? "en" : "es")}
-            className="text-muted-foreground hover:text-foreground"
-          >
-            <Globe className="w-4 h-4 mr-1" />
-            {language.toUpperCase()}
-          </Button>
+          {/* Language Dropdown */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-muted-foreground hover:text-foreground"
+              >
+                <Globe className="w-4 h-4 mr-1" />
+                {language.toUpperCase()}
+                <ChevronDown className="w-3 h-3 ml-1" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="min-w-[120px]">
+              {availableLanguages.map((lang) => (
+                <DropdownMenuItem
+                  key={lang}
+                  onClick={() => setLanguage(lang)}
+                  className={cn(
+                    "cursor-pointer",
+                    language === lang && "bg-primary/10 text-primary"
+                  )}
+                >
+                  <span className="font-medium">{lang.toUpperCase()}</span>
+                  <span className="ml-2 text-muted-foreground text-xs">
+                    {languageNames[lang]}
+                  </span>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
 
           {/* Only show Admin link if user is admin */}
           {isAdmin && (
@@ -94,7 +123,7 @@ export const Header = () => {
 
           <Link to="/auditoria" className="hidden sm:block">
             <Button size="sm" className="btn-neon">
-              Solicitar Auditoría
+              {t("nav.audit")}
             </Button>
           </Link>
 
@@ -137,7 +166,7 @@ export const Header = () => {
               )}
               <Link to="/auditoria" onClick={() => setMenuOpen(false)}>
                 <Button size="sm" className="btn-neon">
-                  Solicitar Auditoría
+                  {t("nav.audit")}
                 </Button>
               </Link>
             </div>

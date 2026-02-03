@@ -21,11 +21,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { Sparkles, ArrowRight, CheckCircle2, Loader2, Building2, Users, Target } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import type { Language } from "@/lib/i18n";
 
 interface EliteWaitlistFormProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  language: 'es' | 'en';
+  language: Language;
 }
 
 const sectors = {

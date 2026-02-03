@@ -2,93 +2,54 @@ import { motion } from "framer-motion";
 import { Brain, Cpu, Users, BarChart3, Target, Wrench, X, Check, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { useLandingTranslation } from "@/lib/i18n";
 
-const automations = [
-  {
-    icon: Brain,
-    title: "Opportunity Intelligence Engine",
-    features: [
-      "Radar de tendencias cada 6h",
-      "Scoring agresivo de prospectos",
-      "Mensajes de venta automáticos",
-      "Búsqueda activa de clientes",
-    ],
-    result: "3x conversión pipeline",
-  },
-  {
-    icon: Cpu,
-    title: "Orchestrator de Eventos",
-    features: [
-      "Event Bus procesa 10K+ eventos/mes",
-      "Workers especializados (Leads, OPS)",
-      "Routing inteligente por tipo",
-      "Auto-remediación P0/P1/P2",
-    ],
-    result: "0 downtime, <2min",
-  },
-  {
-    icon: Users,
-    title: "Agentes C-Level Autónomos",
-    features: [
-      "CEO: Estrategia y prioridades",
-      "CFO: Decisiones financieras",
-      "CTO: Research técnico",
-      "Legal: Compliance automático",
-    ],
-    result: "24/7 sin bloqueos",
-  },
-  {
-    icon: BarChart3,
-    title: "Master Inventory Analyzer",
-    features: [
-      "Análisis de workflows activos",
-      "Recursos ociosos detectados",
-      "Reportes de salud diarios",
-      "Optimización de costos",
-    ],
-    result: "40% reducción costos",
-  },
-  {
-    icon: Target,
-    title: "Lead Intelligence Engine",
-    features: [
-      "Intake multicanal integrado",
-      "Clasificación automática con IA",
-      "Nurturing personalizado",
-      "Integración CRM/Supabase",
-    ],
-    result: "70% menos tiempo",
-  },
-  {
-    icon: Wrench,
-    title: "SRE Guardian System",
-    features: [
-      "Monitoreo continuo 24/7",
-      "Health checks automáticos",
-      "Remediación inteligente",
-      "Alertas multi-canal P0/P1/P2",
-    ],
-    result: "Auto-sanador 24/7",
-  },
-];
+const icons = [Brain, Cpu, Users, BarChart3, Target, Wrench];
 
-const comparisonOthers = [
-  "Chatbot FAQ básico (200 respuestas)",
-  "Automatizaciones aisladas y manuales",
-  "Plantillas genéricas para todos",
-  "Soporte reactivo (9-5 laborables)",
-  "Asistentes simples con reglas fijas",
-];
+// Stagger animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
 
-const comparisonUs = [
-  "Event Bus que procesa 10K+ eventos/mes",
-  "Orchestrator central con workers especializados",
-  "Arquitecturas enterprise personalizadas",
-  "Auto-remediación SRE Guardian 24/7",
-  "Agentes CEO, CFO, CTO, Legal autónomos",
-];
+const cardVariants = {
+  hidden: { 
+    opacity: 0, 
+    y: 40,
+    scale: 0.95,
+  },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    scale: 1,
+    transition: { 
+      type: "spring" as const,
+      stiffness: 100,
+      damping: 15,
+      duration: 0.6,
+    },
+  },
+};
+
+const comparisonVariants = {
+  hidden: { opacity: 0, x: -30 },
+  visible: { 
+    opacity: 1, 
+    x: 0,
+    transition: { duration: 0.5 }
+  },
+};
 
 export const EnterpriseElite = () => {
+  const { landing } = useLandingTranslation();
+  const t = landing.enterprise;
+
   return (
     <section id="enterprise" className="section-padding relative overflow-hidden">
       {/* Background */}
@@ -104,91 +65,131 @@ export const EnterpriseElite = () => {
           className="text-center mb-16"
         >
           <span className="badge-secondary mb-4 inline-flex items-center gap-2">
-            🏢 Arquitectura Enterprise Elite
+            {t.badge}
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4">
-            Sistemas de Automatización <span className="text-gradient-secondary">a Nivel Enterprise</span>
+            {t.title.split('Enterprise')[0]}<span className="text-gradient-secondary">Enterprise</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Event Bus, Orchestrators, Workers especializados y Agentes Autónomos C-Level. 
-            Arquitecturas que procesan miles de eventos sin intervención humana.
+            {t.subtitle}
           </p>
         </motion.div>
 
         {/* Comparison */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { opacity: 1, transition: { staggerChildren: 0.2 } }
+          }}
           className="mb-20"
         >
           <h3 className="text-2xl font-display font-semibold text-center mb-8">
-            La Diferencia Enterprise
+            {t.comparisonTitle}
           </h3>
           <div className="grid md:grid-cols-2 gap-6">
             {/* Others */}
-            <div className="card-premium p-6 border-destructive/30">
+            <motion.div 
+              variants={comparisonVariants}
+              className="card-premium p-6 border-destructive/30"
+            >
               <h4 className="font-display font-semibold text-lg mb-4 text-muted-foreground">
-                Otras Agencias de IA
+                {t.othersTitle}
               </h4>
               <ul className="space-y-3">
-                {comparisonOthers.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 text-sm text-muted-foreground">
+                {t.othersFeatures.map((item: string, i: number) => (
+                  <motion.li 
+                    key={i} 
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 + i * 0.08 }}
+                    className="flex items-start gap-3 text-sm text-muted-foreground"
+                  >
                     <X className="w-4 h-4 text-destructive mt-0.5 shrink-0" />
                     {item}
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
 
             {/* Us */}
-            <div className="card-premium p-6 border-primary/50 neon-border">
+            <motion.div 
+              variants={comparisonVariants}
+              className="card-premium p-6 border-primary/50 neon-border"
+            >
               <h4 className="font-display font-semibold text-lg mb-4 text-gradient-primary">
-                HydrAI Labs Enterprise
+                {t.usTitle}
               </h4>
               <ul className="space-y-3">
-                {comparisonUs.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 text-sm">
+                {t.usFeatures.map((item: string, i: number) => (
+                  <motion.li 
+                    key={i} 
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 + i * 0.08 }}
+                    className="flex items-start gap-3 text-sm"
+                  >
                     <Check className="w-4 h-4 text-success mt-0.5 shrink-0" />
                     {item}
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
           </div>
         </motion.div>
 
-        {/* Automations Grid */}
+        {/* Automations Grid with Stagger */}
         <div className="mb-20">
           <h3 className="text-2xl font-display font-semibold text-center mb-8">
-            Nuestras Automatizaciones Enterprise
+            {t.automationsTitle}
           </h3>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {automations.map((auto, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="card-premium group"
-              >
-                <auto.icon className="w-10 h-10 text-secondary mb-4" />
-                <h4 className="font-display font-semibold text-lg mb-3">{auto.title}</h4>
-                <ul className="space-y-1 mb-4">
-                  {auto.features.map((f, j) => (
-                    <li key={j} className="text-sm text-muted-foreground flex items-start gap-2">
-                      <span className="text-secondary">•</span> {f}
-                    </li>
-                  ))}
-                </ul>
-                <div className="pt-3 border-t border-border/30">
-                  <span className="text-xs text-muted-foreground">📈 Resultado: </span>
-                  <span className="text-sm font-semibold text-success">{auto.result}</span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {t.automations.map((auto: { icon: string; title: string; features: string[]; result: string }, i: number) => {
+              const Icon = icons[i];
+              return (
+                <motion.div
+                  key={i}
+                  variants={cardVariants}
+                  whileHover={{ 
+                    scale: 1.02, 
+                    y: -5,
+                    transition: { type: "spring", stiffness: 300 }
+                  }}
+                  className="card-premium group cursor-pointer"
+                >
+                  <motion.div
+                    initial={{ scale: 1 }}
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <Icon className="w-10 h-10 text-secondary mb-4" />
+                  </motion.div>
+                  <h4 className="font-display font-semibold text-lg mb-3">{auto.title}</h4>
+                  <ul className="space-y-1 mb-4">
+                    {auto.features.map((f: string, j: number) => (
+                      <li key={j} className="text-sm text-muted-foreground flex items-start gap-2">
+                        <span className="text-secondary">•</span> {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="pt-3 border-t border-border/30">
+                    <span className="text-xs text-muted-foreground">📈 Resultado: </span>
+                    <span className="text-sm font-semibold text-success">{auto.result}</span>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
         </div>
 
         {/* Architecture Diagram */}
@@ -254,11 +255,18 @@ export const EnterpriseElite = () => {
               { num: "2", title: "Orquestación Inteligente", desc: "El Orchestrator analiza y enruta al worker correcto según event_type" },
               { num: "3", title: "Ejecución Autónoma", desc: "Los workers ejecutan acciones sin intervención humana" },
             ].map((step, i) => (
-              <div key={i} className="text-center">
+              <motion.div 
+                key={i} 
+                className="text-center"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+              >
                 <div className="step-indicator mx-auto mb-3 w-10 h-10 text-sm">{step.num}</div>
                 <h4 className="font-semibold text-sm mb-1">{step.title}</h4>
                 <p className="text-xs text-muted-foreground">{step.desc}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </motion.div>
@@ -276,12 +284,20 @@ export const EnterpriseElite = () => {
             { value: "99.9%", label: "Uptime con auto-remediación" },
             { value: "40%", label: "Reducción de costos promedio" },
           ].map((stat, i) => (
-            <div key={i} className="card-premium text-center py-6">
+            <motion.div 
+              key={i} 
+              className="card-premium text-center py-6"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              whileHover={{ scale: 1.02, y: -4 }}
+            >
               <div className="text-3xl md:text-4xl font-display font-bold text-gradient-secondary mb-1">
                 {stat.value}
               </div>
               <div className="text-xs text-muted-foreground">{stat.label}</div>
-            </div>
+            </motion.div>
           ))}
         </motion.div>
 
@@ -294,7 +310,7 @@ export const EnterpriseElite = () => {
         >
           <Link to="/auditoria">
             <Button size="lg" className="bg-gradient-to-r from-secondary to-primary text-primary-foreground hover:opacity-90">
-              Solicitar Auditoría Enterprise
+              {t.waitlistCta}
               <ArrowRight className="ml-2 w-4 h-4" />
             </Button>
           </Link>

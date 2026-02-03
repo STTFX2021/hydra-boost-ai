@@ -1,5 +1,7 @@
+import type { Language } from "@/lib/i18n";
+
 interface IndividualsGridProps {
-  language: 'es' | 'en';
+  language: Language;
 }
 
 export const IndividualsGrid = ({ language }: IndividualsGridProps) => {
