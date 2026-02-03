@@ -1,0 +1,464 @@
+{
+  "name": "HYDRAI-02 Lead Intake MVP",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "hydrai/lead",
+        "responseMode": "responseNode",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        }
+      },
+      "id": "node-webhook",
+      "name": "Webhook Lead",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [200, 300],
+      "webhookId": "hydrai-lead-intake"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "cond-auth",
+              "leftValue": "={{ $json.headers['x-hydr-key'] }}",
+              "rightValue": "__PASTE_SECRET_HERE__",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "node-auth",
+      "name": "Auth Check",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [420, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ status: 'error', code: 401, message: 'Unauthorized' }) }}",
+        "options": {
+          "responseCode": 401
+        }
+      },
+      "id": "node-401",
+      "name": "Respond 401",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [640, 480]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "cond-email-present",
+              "leftValue": "={{ $json.body.email }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "isNotEmpty"
+              }
+            },
+            {
+              "id": "cond-email-format",
+              "leftValue": "={{ $json.body.email }}",
+              "rightValue": ".+@.+\\..+",
+              "operator": {
+                "type": "string",
+                "operation": "regex"
+              }
+            },
+            {
+              "id": "cond-name-present",
+              "leftValue": "={{ $json.body.name }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "isNotEmpty"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "node-validate",
+      "name": "Validate Fields",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [640, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ status: 'error', code: 400, message: 'Missing or invalid fields: name and email are required, email must be valid' }) }}",
+        "options": {
+          "responseCode": 400
+        }
+      },
+      "id": "node-400",
+      "name": "Respond 400",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [860, 480]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Normalize and build the insert payload\nconst body = $input.first().json.body;\nconst headers = $input.first().json.headers;\n\nconst email = (body.email || '').trim().toLowerCase();\nconst name = (body.name || '').trim();\nconst phone = (body.phone || '').trim() || null;\nconst business_name = (body.business_name || '').trim() || null;\nconst city = (body.city || '').trim() || null;\nconst industry = (body.industry || '').trim() || null;\nconst vertical = (body.vertical || '').trim() || null;\nconst message = (body.message || '').trim() || null;\nconst website = (body.website || '').trim() || null;\nconst tier = (body.tier || '').trim() || null;\nconst source = (body.source || 'n8n-webhook').trim();\nconst score = typeof body.score === 'number' ? body.score : 0;\nconst tags = Array.isArray(body.tags) ? body.tags : [];\n\n// Build dedupe_key: email + source (lowercase)\nconst dedupe_key = `${email}::${source}`;\n\n// Event ID for idempotency\nconst event_id = body.event_id || `evt_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;\n\nreturn [{\n  json: {\n    name,\n    email,\n    phone,\n    business_name,\n    city,\n    industry,\n    vertical,\n    message,\n    website,\n    tier,\n    source,\n    status: 'new',\n    score,\n    tags,\n    dedupe_key,\n    event_id,\n    meta: body.meta || null,\n    raw: body\n  }\n}];"
+      },
+      "id": "node-normalize",
+      "name": "Normalize Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [860, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{$json._supabase_url}}/rest/v1/leads",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "__PASTE_SUPABASE_ANON_KEY_HERE__"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer __PASTE_SUPABASE_SERVICE_ROLE_KEY_HERE__"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "return=representation"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ name: $json.name, email: $json.email, phone: $json.phone, business_name: $json.business_name, city: $json.city, industry: $json.industry, vertical: $json.vertical, message: $json.message, website: $json.website, tier: $json.tier, source: $json.source, status: $json.status, score: $json.score, tags: $json.tags, dedupe_key: $json.dedupe_key, event_id: $json.event_id, meta: $json.meta, raw: $json.raw }) }}",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          },
+          "redirect": {
+            "redirect": {
+              "followRedirects": false
+            }
+          }
+        }
+      },
+      "id": "node-supabase-insert",
+      "name": "Insert Lead (PostgREST)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1080, 300],
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "cond-201",
+              "leftValue": "={{ $json.statusCode }}",
+              "rightValue": 201,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "node-check-insert",
+      "name": "Insert OK?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1300, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "cond-409",
+              "leftValue": "={{ $json.statusCode }}",
+              "rightValue": 409,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "node-check-duplicate",
+      "name": "Is Duplicate?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1520, 480]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "__PASTE_SLACK_WEBHOOK_LEADS_HERE__",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ text: '🟢 *Nuevo Lead*\\n• Nombre: ' + $('Normalize Data').item.json.name + '\\n• Email: ' + $('Normalize Data').item.json.email + '\\n• Teléfono: ' + ($('Normalize Data').item.json.phone || 'N/A') + '\\n• Negocio: ' + ($('Normalize Data').item.json.business_name || 'N/A') + '\\n• Ciudad: ' + ($('Normalize Data').item.json.city || 'N/A') + '\\n• Fuente: ' + $('Normalize Data').item.json.source + '\\n• ID: ' + $json.body[0].id }) }}",
+        "options": {}
+      },
+      "id": "node-slack-success",
+      "name": "Slack #leads",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1520, 180],
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ status: 'ok', code: 201, lead_id: $('Insert Lead (PostgREST)').item.json.body[0].id }) }}",
+        "options": {
+          "responseCode": 201
+        }
+      },
+      "id": "node-201",
+      "name": "Respond 201",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1740, 180]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ status: 'duplicate', code: 409, message: 'Lead already exists with this dedupe_key' }) }}",
+        "options": {
+          "responseCode": 409
+        }
+      },
+      "id": "node-409",
+      "name": "Respond 409",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1740, 400]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "__PASTE_SLACK_WEBHOOK_ERRORS_HERE__",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ text: '🔴 *Lead Insert Error*\\n• Email: ' + $('Normalize Data').item.json.email + '\\n• HTTP Status: ' + $('Insert Lead (PostgREST)').item.json.statusCode + '\\n• Error: ' + JSON.stringify($('Insert Lead (PostgREST)').item.json.body).substring(0, 500) }) }}",
+        "options": {}
+      },
+      "id": "node-slack-error",
+      "name": "Slack #errors",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1740, 600],
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ status: 'error', code: 500, message: 'Database insert failed', detail: $('Insert Lead (PostgREST)').item.json.body }) }}",
+        "options": {
+          "responseCode": 500
+        }
+      },
+      "id": "node-500",
+      "name": "Respond 500",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1960, 600]
+    }
+  ],
+  "connections": {
+    "Webhook Lead": {
+      "main": [
+        [
+          {
+            "node": "Auth Check",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Auth Check": {
+      "main": [
+        [
+          {
+            "node": "Validate Fields",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond 401",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Fields": {
+      "main": [
+        [
+          {
+            "node": "Normalize Data",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond 400",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Data": {
+      "main": [
+        [
+          {
+            "node": "Insert Lead (PostgREST)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert Lead (PostgREST)": {
+      "main": [
+        [
+          {
+            "node": "Insert OK?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert OK?": {
+      "main": [
+        [
+          {
+            "node": "Slack #leads",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Is Duplicate?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Slack #leads": {
+      "main": [
+        [
+          {
+            "node": "Respond 201",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is Duplicate?": {
+      "main": [
+        [
+          {
+            "node": "Respond 409",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Slack #errors",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Slack #errors": {
+      "main": [
+        [
+          {
+            "node": "Respond 500",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateId": "hydrai-02-lead-intake-mvp"
+  },
+  "tags": [
+    {
+      "name": "HYDRAI-02"
+    },
+    {
+      "name": "MVP"
+    }
+  ]
+}
