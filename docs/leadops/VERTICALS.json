@@ -1,0 +1,44 @@
+﻿{
+  "ticket_strategy": {
+    "target": "medio-alto",
+    "ladder": [
+      { "tier": "Entry", "offer": "Web + Chatbot", "range_eur": [500, 1500] },
+      { "tier": "Core",  "offer": "Automatizaciones (Ops + Ventas)", "range_eur": [2000, 10000] },
+      { "tier": "Elite", "offer": "Arquitectura multi-agente + Integraciones enterprise", "range_eur": [10000, 50000] }
+    ]
+  },
+  "sectors": [
+    {
+      "sector": "Salud",
+      "verticals": [
+        { "name": "Clinicas", "keywords": ["clinic", "medical", "centro medico", "private clinic"] },
+        { "name": "Dental", "keywords": ["dentist", "dental", "odontologia", "implants"] },
+        { "name": "Fisioterapia", "keywords": ["physio", "fisioterapia", "rehab"] }
+      ]
+    },
+    {
+      "sector": "Belleza",
+      "verticals": [
+        { "name": "Salon/Peluqueria", "keywords": ["hair salon", "peluqueria", "color", "stylist"] },
+        { "name": "Estetica", "keywords": ["aesthetics", "estetica", "facial", "laser"] },
+        { "name": "Spa/Wellness", "keywords": ["spa", "wellness", "massage", "membership"] }
+      ]
+    },
+    {
+      "sector": "Servicios del Hogar",
+      "verticals": [
+        { "name": "Limpieza", "keywords": ["cleaning", "limpieza", "housekeeping"] },
+        { "name": "Reformas", "keywords": ["renovation", "reformas", "contractor"] },
+        { "name": "Jardineria", "keywords": ["landscaping", "jardineria", "garden"] }
+      ]
+    },
+    {
+      "sector": "Servicios Digitales",
+      "verticals": [
+        { "name": "Agencias", "keywords": ["marketing agency", "seo", "ppc", "agency"] },
+        { "name": "Ecommerce", "keywords": ["shopify", "ecommerce", "online store"] },
+        { "name": "SaaS local", "keywords": ["booking software", "crm", "automation"] }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+﻿{
+  "rotation_rule": "cada 3 horas, rota sector; por territorio se ejecuta en su timezone (usar TZ del nodo Cron si existe)",
+  "local_slots": ["09:00", "12:00", "15:00", "18:00"],
+  "day_rule": "dias impares arrancan con Belleza; dias pares arrancan con Salud",
+  "pattern_if_day_odd":  ["Belleza", "Salud", "Belleza", "Salud"],
+  "pattern_if_day_even": ["Salud", "Belleza", "Salud", "Belleza"],
+  "territories_p0": [
+    { "name": "EU_Core", "tz": "Europe/Madrid" },
+    { "name": "UK_IE",   "tz": "Europe/London" },
+    { "name": "APAC",    "tz": "Asia/Singapore" }
+  ],
+  "utc_fallback_example_CET_winter": {
+    "EU_Core": ["08:00", "11:00", "14:00", "17:00"],
+    "UK_IE":   ["09:00", "12:00", "15:00", "18:00"],
+    "APAC":    ["01:00", "04:00", "07:00", "10:00"]
+  }
+}

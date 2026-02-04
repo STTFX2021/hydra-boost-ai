@@ -1,0 +1,10 @@
+﻿{
+  "p0_scope": {
+    "territories": ["EU_Core", "UK_IE", "APAC"],
+    "sectors": ["Belleza", "Salud"],
+    "engines_active": ["M1", "M2"],
+    "rotation_every_hours": 3,
+    "prime_hours_local": ["09:00", "12:00", "15:00", "18:00"],
+    "rule": "por territorio, ejecutar en horario local; alternar sector por slot y alternar arranque por día"
+  }
+}

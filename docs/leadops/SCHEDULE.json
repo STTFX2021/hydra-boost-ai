@@ -1,0 +1,15 @@
+﻿{
+  "rotation_rule": "cada 3 horas, rota sector; por territorio se ejecuta en su prime time local",
+  "weekly_plan_example": {
+    "monday": [
+      { "hour_local": "09:00", "sector": "Belleza" },
+      { "hour_local": "12:00", "sector": "Salud" },
+      { "hour_local": "15:00", "sector": "Servicios Digitales" }
+    ],
+    "tuesday": [
+      { "hour_local": "09:00", "sector": "Servicios del Hogar" },
+      { "hour_local": "12:00", "sector": "Belleza" },
+      { "hour_local": "15:00", "sector": "Salud" }
+    ]
+  }
+}

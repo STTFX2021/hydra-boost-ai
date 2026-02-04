@@ -1,0 +1,10 @@
+﻿{
+  "territories": [
+    { "name": "NA_East",  "tz": "America/New_York", "prime_hours_local": ["09:00-18:00"] },
+    { "name": "NA_West",  "tz": "America/Los_Angeles", "prime_hours_local": ["09:00-18:00"] },
+    { "name": "EU_Core",  "tz": "Europe/Madrid", "prime_hours_local": ["09:00-18:00"] },
+    { "name": "UK_IE",    "tz": "Europe/London", "prime_hours_local": ["09:00-18:00"] },
+    { "name": "MENA",     "tz": "Asia/Dubai", "prime_hours_local": ["09:00-18:00"] },
+    { "name": "APAC",     "tz": "Asia/Singapore", "prime_hours_local": ["09:00-18:00"] }
+  ]
+}
