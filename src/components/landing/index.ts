@@ -1,7 +1,13 @@
 export { HeroSection } from "./HeroSection";
+export { HeroWorld } from "./HeroWorld";
 export { BaseImplementations } from "./BaseImplementations";
 export { EnterpriseElite } from "./EnterpriseElite";
 export { ProcessSection } from "./ProcessSection";
 export { TechStack } from "./TechStack";
+export { TrustBar } from "./TrustBar";
 export { FinalCTA } from "./FinalCTA";
 export { FAQ } from "./FAQ";
+export { UseCaseTabs } from "./UseCaseTabs";
+export { ROICalculator } from "./ROICalculator";
+export { LeadFormMultiStep } from "./LeadFormMultiStep";
+export { ChatWidgetWorld } from "./ChatWidgetWorld";
