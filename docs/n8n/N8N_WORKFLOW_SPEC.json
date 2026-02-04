@@ -1,0 +1,945 @@
+{
+  "$schema": "hydrai-ops/n8n-workflow-spec/v1",
+  "version": "1.0.0",
+  "generated": "2026-02-04",
+  "description": "Especificación de 4 workflows n8n para lead-generation P0: 1 MAIN + 3 CRON wrappers por territorio.",
+
+  "conventions": {
+    "no_slack": true,
+    "error_channel": "internal_only",
+    "error_strategy": "Todos los fallos internos se registran en public.event_logs y/o crean issue interno. Nunca notificaciones externas.",
+    "dedupe_algorithm": "SHA-256( lowercase(territory) | lowercase(sector) | lowercase(engine) | lowercase(normalize(business_name)) | lowercase(normalize(email)) )",
+    "dedupe_note": "normalize() elimina acentos, espacios extra y caracteres especiales. El pipe '|' es literal como separador.",
+    "target_table": "public.leads",
+    "log_table": "public.event_logs",
+    "id_generation": "UUID v4 (gen_random_uuid en Supabase)"
+  },
+
+  "variables": {
+    "workflow_level": {
+      "SUPABASE_URL":                  { "type": "credential_ref", "description": "URL del proyecto Supabase" },
+      "SUPABASE_SERVICE_ROLE_KEY":     { "type": "credential_ref", "description": "Service role key (server-side only)" },
+      "SCRAPE_API_KEY":                { "type": "credential_ref", "description": "API key del proveedor de scraping (Apify, ScrapingBee, etc.)" },
+      "GMAPS_API_KEY":                 { "type": "credential_ref", "description": "Google Maps Places API key" },
+      "MAX_RESULTS_PER_RUN":           { "type": "number",         "default": 50,   "description": "Limite de resultados por ejecucion de engine" },
+      "SCORE_THRESHOLD_HOT":           { "type": "number",         "default": 80,   "description": "Score >= este valor = hot lead" },
+      "SCORE_THRESHOLD_WARM":          { "type": "number",         "default": 50,   "description": "Score >= este valor = warm lead" },
+      "DRY_RUN":                       { "type": "boolean",        "default": false, "description": "Si true, no inserta en DB, solo loguea" }
+    },
+    "execution_inputs": {
+      "territory":  { "type": "string", "enum": ["EU_Core", "UK_IE", "APAC"],                                                     "description": "Territorio geografico" },
+      "sector":     { "type": "string", "enum": ["restaurantes", "clinicas", "inmobiliarias", "talleres", "peluquerias", "hosteleria", "servicios_domicilio"], "description": "Vertical de negocio" },
+      "engine":     { "type": "string", "enum": ["gmaps", "yelp", "tripadvisor", "paginas_amarillas", "bing_places"],              "description": "Motor de scraping/busqueda" },
+      "slot":       { "type": "string", "pattern": "^([01]\\d|2[0-3]):(00|30)$", "example": "09:00",                               "description": "Franja horaria HH:MM (bloques de 30min)" },
+      "dayParity":  { "type": "string", "enum": ["even", "odd"],                                                                   "description": "Paridad del dia (even=par, odd=impar). Distribuye carga entre dias." }
+    }
+  },
+
+  "territories": {
+    "EU_Core": {
+      "timezone": "Europe/Madrid",
+      "countries": ["ES", "PT", "FR", "IT", "DE"],
+      "languages": ["es", "pt", "fr", "it", "de"],
+      "primary_engines": ["gmaps", "paginas_amarillas", "yelp"],
+      "cron_window_utc": "07:00-11:00"
+    },
+    "UK_IE": {
+      "timezone": "Europe/London",
+      "countries": ["GB", "IE"],
+      "languages": ["en"],
+      "primary_engines": ["gmaps", "yelp", "bing_places"],
+      "cron_window_utc": "08:00-12:00"
+    },
+    "APAC": {
+      "timezone": "Asia/Singapore",
+      "countries": ["SG", "AU", "NZ", "HK", "JP"],
+      "languages": ["en", "ja", "zh"],
+      "primary_engines": ["gmaps", "yelp", "tripadvisor"],
+      "cron_window_utc": "00:00-04:00"
+    }
+  },
+
+  "workflows": [
+    {
+      "name": "HYDRAI_LeadGen_MAIN",
+      "type": "main",
+      "trigger": "Execute Workflow (called by CRON wrappers)",
+      "description": "Pipeline principal: recibe inputs, scraping por engine, normaliza, deduplica, puntua e inserta en public.leads.",
+      "inputs": ["territory", "sector", "engine", "slot", "dayParity"],
+      "outputs": ["LeadInsertPayload[]", "RunSummary"],
+
+      "nodes": [
+        {
+          "id": "N01",
+          "name": "Trigger_ExecuteWorkflow",
+          "type": "n8n-nodes-base.executeWorkflowTrigger",
+          "position": [0, 0],
+          "description": "Punto de entrada. Recibe el payload de inputs desde los CRON wrappers.",
+          "config": {
+            "inputNames": "territory,sector,engine,slot,dayParity"
+          },
+          "outputs_to": ["N02"]
+        },
+        {
+          "id": "N02",
+          "name": "Validate_Inputs",
+          "type": "n8n-nodes-base.code",
+          "position": [220, 0],
+          "description": "Valida que territory/sector/engine/slot/dayParity sean valores permitidos. Si falla, lanza error controlado.",
+          "code_summary": [
+            "const VALID_TERRITORIES = ['EU_Core','UK_IE','APAC'];",
+            "const VALID_SECTORS = ['restaurantes','clinicas','inmobiliarias','talleres','peluquerias','hosteleria','servicios_domicilio'];",
+            "const VALID_ENGINES = ['gmaps','yelp','tripadvisor','paginas_amarillas','bing_places'];",
+            "Valida dayParity in ['even','odd']",
+            "Valida slot contra regex /^([01]\\d|2[0-3]):(00|30)$/",
+            "Si alguno invalido → throw new Error('INVALID_INPUT: <detalle>')",
+            "Pasa inputs limpios al siguiente nodo"
+          ],
+          "outputs_to": ["N03"],
+          "error_to": "N_ERR"
+        },
+        {
+          "id": "N03",
+          "name": "Build_SearchQuery",
+          "type": "n8n-nodes-base.code",
+          "position": [440, 0],
+          "description": "Construye la query de busqueda segun territory+sector+engine. Genera parametros de localizacion (pais, idioma, radio, keywords del sector).",
+          "code_summary": [
+            "Mapea sector → keywords busqueda (e.g. restaurantes → 'restaurante,bar,cafeteria,food')",
+            "Mapea territory → lista de ciudades/regiones objetivo",
+            "Genera search_params: { query, location, radius_km, language, country_code, max_results }",
+            "Adjunta run_id = `${territory}_${sector}_${engine}_${slot}_${dayParity}_${Date.now()}`"
+          ],
+          "outputs_to": ["N04"],
+          "error_to": "N_ERR"
+        },
+        {
+          "id": "N04",
+          "name": "Router_Engine",
+          "type": "n8n-nodes-base.switch",
+          "position": [660, 0],
+          "description": "Enruta al nodo de scraping correcto segun el valor de 'engine'.",
+          "config": {
+            "rules": [
+              { "value": "gmaps",              "output": 0 },
+              { "value": "yelp",               "output": 1 },
+              { "value": "tripadvisor",        "output": 2 },
+              { "value": "paginas_amarillas",  "output": 3 },
+              { "value": "bing_places",        "output": 4 }
+            ],
+            "fallback": "N_ERR"
+          },
+          "outputs_to": ["N05a", "N05b", "N05c", "N05d", "N05e"],
+          "error_to": "N_ERR"
+        },
+        {
+          "id": "N05a",
+          "name": "Scrape_GMaps",
+          "type": "n8n-nodes-base.httpRequest",
+          "position": [900, -200],
+          "description": "Llama a Google Maps Places API (o Apify actor) con los search_params.",
+          "config": {
+            "method": "POST",
+            "url": "={{$vars.SCRAPE_API_BASE}}/gmaps",
+            "body": "search_params del nodo anterior",
+            "timeout_ms": 60000,
+            "retry_on_fail": true,
+            "max_retries": 2
+          },
+          "outputs_to": ["N06"],
+          "error_to": "N_ERR"
+        },
+        {
+          "id": "N05b",
+          "name": "Scrape_Yelp",
+          "type": "n8n-nodes-base.httpRequest",
+          "position": [900, -100],
+          "description": "Llama a Yelp Fusion API o scraper con los search_params.",
+          "config": {
+            "method": "POST",
+            "url": "={{$vars.SCRAPE_API_BASE}}/yelp",
+            "body": "search_params del nodo anterior",
+            "timeout_ms": 60000,
+            "retry_on_fail": true,
+            "max_retries": 2
+          },
+          "outputs_to": ["N06"],
+          "error_to": "N_ERR"
+        },
+        {
+          "id": "N05c",
+          "name": "Scrape_TripAdvisor",
+          "type": "n8n-nodes-base.httpRequest",
+          "position": [900, 0],
+          "description": "Llama a TripAdvisor scraper con los search_params.",
+          "config": {
+            "method": "POST",
+            "url": "={{$vars.SCRAPE_API_BASE}}/tripadvisor",
+            "body": "search_params del nodo anterior",
+            "timeout_ms": 60000,
+            "retry_on_fail": true,
+            "max_retries": 2
+          },
+          "outputs_to": ["N06"],
+          "error_to": "N_ERR"
+        },
+        {
+          "id": "N05d",
+          "name": "Scrape_PaginasAmarillas",
+          "type": "n8n-nodes-base.httpRequest",
+          "position": [900, 100],
+          "description": "Llama a scraper de Paginas Amarillas con los search_params.",
+          "config": {
+            "method": "POST",
+            "url": "={{$vars.SCRAPE_API_BASE}}/paginas_amarillas",
+            "body": "search_params del nodo anterior",
+            "timeout_ms": 60000,
+            "retry_on_fail": true,
+            "max_retries": 2
+          },
+          "outputs_to": ["N06"],
+          "error_to": "N_ERR"
+        },
+        {
+          "id": "N05e",
+          "name": "Scrape_BingPlaces",
+          "type": "n8n-nodes-base.httpRequest",
+          "position": [900, 200],
+          "description": "Llama a Bing Places scraper con los search_params.",
+          "config": {
+            "method": "POST",
+            "url": "={{$vars.SCRAPE_API_BASE}}/bing_places",
+            "body": "search_params del nodo anterior",
+            "timeout_ms": 60000,
+            "retry_on_fail": true,
+            "max_retries": 2
+          },
+          "outputs_to": ["N06"],
+          "error_to": "N_ERR"
+        },
+        {
+          "id": "N06",
+          "name": "Merge_RawResults",
+          "type": "n8n-nodes-base.merge",
+          "position": [1140, 0],
+          "description": "Punto de convergencia: recibe resultados raw de cualquier engine y los unifica en un array plano.",
+          "config": {
+            "mode": "append"
+          },
+          "outputs_to": ["N07"],
+          "error_to": "N_ERR"
+        },
+        {
+          "id": "N07",
+          "name": "Normalize_Records",
+          "type": "n8n-nodes-base.code",
+          "position": [1360, 0],
+          "description": "Transforma cada resultado raw del engine a la estructura estandar RawLeadRecord. Extrae/limpia name, email, phone, business_name, city, vertical.",
+          "code_summary": [
+            "Para cada item raw:",
+            "  - business_name = trim(raw.name || raw.business_name || raw.title)",
+            "  - name = raw.contact_name || raw.owner || business_name",
+            "  - email = lowercase(trim(raw.email || raw.contact_email || ''))",
+            "  - phone = normalizePhone(raw.phone || raw.telephone || '')",
+            "  - city = raw.city || raw.locality || extractCity(raw.address)",
+            "  - vertical = input.sector (del contexto de ejecucion)",
+            "  - source_engine = input.engine",
+            "  - source_url = raw.url || raw.place_url || ''",
+            "  - raw_rating = parseFloat(raw.rating || 0)",
+            "  - raw_review_count = parseInt(raw.review_count || raw.reviews || 0)",
+            "Filtra items sin email AND sin phone (al menos uno requerido)",
+            "Retorna array de RawLeadRecord"
+          ],
+          "outputs_to": ["N08"],
+          "error_to": "N_ERR"
+        },
+        {
+          "id": "N08",
+          "name": "Generate_DedupeKeys",
+          "type": "n8n-nodes-base.code",
+          "position": [1580, 0],
+          "description": "Calcula dedupe_key deterministico por cada record. SHA-256 sobre campos canonicos.",
+          "code_summary": [
+            "const crypto = require('crypto');",
+            "function normalize(s) { return s.toLowerCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').replace(/[^a-z0-9]/g,'').trim(); }",
+            "Para cada item:",
+            "  const raw = `${normalize(territory)}|${normalize(sector)}|${normalize(engine)}|${normalize(item.business_name)}|${normalize(item.email || item.phone)}`;",
+            "  item.dedupe_key = crypto.createHash('sha256').update(raw).digest('hex');",
+            "Retorna items con dedupe_key"
+          ],
+          "outputs_to": ["N09"],
+          "error_to": "N_ERR"
+        },
+        {
+          "id": "N09",
+          "name": "Dedupe_CheckDB",
+          "type": "n8n-nodes-base.supabase",
+          "position": [1800, 0],
+          "description": "Consulta public.leads buscando dedupe_keys existentes para descartar duplicados dentro del mismo ciclo y contra historico.",
+          "config": {
+            "operation": "select",
+            "table": "leads",
+            "columns": "tags",
+            "filters": "tags.cs.{dedupe_key_values}",
+            "note": "El dedupe_key se almacena como elemento del array 'tags' con prefijo 'dk:'. Ejemplo: tags @> ARRAY['dk:a1b2c3...']"
+          },
+          "code_summary": [
+            "1. Recoger todos los dedupe_key del batch actual",
+            "2. Consultar leads WHERE tags @> ARRAY['dk:{dedupe_key}'] para cada key (batched)",
+            "3. Filtrar: solo pasar items cuyo dedupe_key NO exista en DB",
+            "4. Log: contar duplicados descartados para el RunSummary"
+          ],
+          "outputs_to": ["N10"],
+          "error_to": "N_ERR"
+        },
+        {
+          "id": "N10",
+          "name": "Score_Leads",
+          "type": "n8n-nodes-base.code",
+          "position": [2020, 0],
+          "description": "Calcula score (0-100) por cada lead basado en completitud de datos, rating, review_count, y sector fit.",
+          "code_summary": [
+            "Criterios de scoring:",
+            "  +25 pts: tiene email valido",
+            "  +15 pts: tiene telefono valido",
+            "  +20 pts: raw_rating >= 3.5 (proporcional hasta 4.8+)",
+            "  +15 pts: raw_review_count >= 10 (proporcional hasta 100+)",
+            "  +10 pts: tiene direccion/ciudad completa",
+            "  +10 pts: business_name no generico",
+            "  +5  pts: tiene website/source_url",
+            "Final: score = Math.min(100, sum)",
+            "Asigna priority: score >= 80 → 'high', >= 50 → 'medium', else → 'low'"
+          ],
+          "outputs_to": ["N11"],
+          "error_to": "N_ERR"
+        },
+        {
+          "id": "N11",
+          "name": "Format_LeadInsertPayload",
+          "type": "n8n-nodes-base.code",
+          "position": [2240, 0],
+          "description": "Transforma cada record al schema exacto de public.leads INSERT ready. Este es el payload final.",
+          "code_summary": [
+            "Para cada item, produce:",
+            "{",
+            "  name:          item.name,",
+            "  email:         item.email,",
+            "  phone:         item.phone || null,",
+            "  business_name: item.business_name || null,",
+            "  city:          item.city || null,",
+            "  score:         item.score,",
+            "  source:        `n8n:${engine}:${territory}`,",
+            "  status:        'new',",
+            "  vertical:      item.vertical || null,",
+            "  tags:          [`dk:${item.dedupe_key}`, `t:${territory}`, `e:${engine}`, `s:${sector}`, `p:${item.priority}`],",
+            "  created_at:    new Date().toISOString(),",
+            "  updated_at:    new Date().toISOString()",
+            "}",
+            "Note: 'id' se omite (gen_random_uuid server-side)"
+          ],
+          "outputs_to": ["N12"],
+          "error_to": "N_ERR"
+        },
+        {
+          "id": "N12",
+          "name": "Check_DryRun",
+          "type": "n8n-nodes-base.if",
+          "position": [2460, 0],
+          "description": "Si DRY_RUN=true, salta la insercion y va directo al log. Si false, inserta en DB.",
+          "config": {
+            "condition": "={{$vars.DRY_RUN}} === true"
+          },
+          "outputs_to": {
+            "true": "N14",
+            "false": "N13"
+          }
+        },
+        {
+          "id": "N13",
+          "name": "Insert_Leads_Supabase",
+          "type": "n8n-nodes-base.supabase",
+          "position": [2680, 0],
+          "description": "Inserta batch de leads en public.leads via Supabase. Usa upsert con ON CONFLICT en tags para safety adicional.",
+          "config": {
+            "operation": "upsert",
+            "table": "leads",
+            "conflict_columns": "email",
+            "on_conflict": "DO UPDATE SET updated_at = NOW(), score = GREATEST(leads.score, EXCLUDED.score), tags = leads.tags || EXCLUDED.tags"
+          },
+          "outputs_to": ["N14"],
+          "error_to": "N_ERR"
+        },
+        {
+          "id": "N14",
+          "name": "Build_RunSummary",
+          "type": "n8n-nodes-base.code",
+          "position": [2900, 0],
+          "description": "Genera resumen de la ejecucion: totales scraped, normalizados, duplicados descartados, insertados, errores.",
+          "code_summary": [
+            "Construye RunSummary:",
+            "{",
+            "  run_id,",
+            "  territory, sector, engine, slot, dayParity,",
+            "  ts_start, ts_end,",
+            "  counts: {",
+            "    raw_scraped,",
+            "    after_normalize,",
+            "    duplicates_skipped,",
+            "    scored_hot, scored_warm, scored_cold,",
+            "    inserted (0 si DRY_RUN),",
+            "    errors",
+            "  },",
+            "  dry_run: boolean,",
+            "  status: 'ok' | 'partial' | 'error'",
+            "}"
+          ],
+          "outputs_to": ["N15"],
+          "error_to": "N_ERR"
+        },
+        {
+          "id": "N15",
+          "name": "Log_RunSummary",
+          "type": "n8n-nodes-base.supabase",
+          "position": [3120, 0],
+          "description": "Inserta RunSummary en public.event_logs para auditoria.",
+          "config": {
+            "operation": "insert",
+            "table": "event_logs",
+            "data": {
+              "event_type": "leadgen_run",
+              "status": "={{$json.status}}",
+              "payload": "={{$json.RunSummary}}",
+              "error_message": null
+            }
+          },
+          "outputs_to": []
+        },
+        {
+          "id": "N_ERR",
+          "name": "Error_Handler",
+          "type": "n8n-nodes-base.code",
+          "position": [2900, 300],
+          "description": "Captura cualquier error del pipeline. Loguea en event_logs y genera issue interno. SIN notificaciones externas.",
+          "code_summary": [
+            "1. Captura error message, stack, nodo origen",
+            "2. Construye ErrorPayload:",
+            "   {",
+            "     run_id,",
+            "     territory, sector, engine, slot, dayParity,",
+            "     failed_node: error.node,",
+            "     error_type: error.type || 'UNKNOWN',",
+            "     error_message: error.message,",
+            "     stack_trace: error.stack (truncado a 2000 chars),",
+            "     timestamp: new Date().toISOString()",
+            "   }",
+            "3. NO Slack. NO email. NO webhook externo."
+          ],
+          "outputs_to": ["N_ERR_LOG"],
+          "error_to": null
+        },
+        {
+          "id": "N_ERR_LOG",
+          "name": "Insert_ErrorLog",
+          "type": "n8n-nodes-base.supabase",
+          "position": [3120, 300],
+          "description": "Inserta el error en public.event_logs como incidencia interna.",
+          "config": {
+            "operation": "insert",
+            "table": "event_logs",
+            "data": {
+              "event_type": "leadgen_error",
+              "status": "error",
+              "payload": "={{$json.ErrorPayload}}",
+              "error_message": "={{$json.error_message}}"
+            }
+          },
+          "outputs_to": []
+        }
+      ]
+    },
+
+    {
+      "name": "HYDRAI_LeadGen_CRON_EU_Core",
+      "type": "cron_wrapper",
+      "territory": "EU_Core",
+      "description": "CRON wrapper para territorio EU_Core (ES, PT, FR, IT, DE). Ejecuta MAIN con combinaciones de sector/engine programadas en ventana 07:00-11:00 UTC.",
+
+      "nodes": [
+        {
+          "id": "C_EU_01",
+          "name": "Cron_Trigger_EU",
+          "type": "n8n-nodes-base.scheduleTrigger",
+          "description": "Dispara cada 30 minutos entre 07:00 y 11:00 UTC, todos los dias.",
+          "config": {
+            "rule": "*/30 7-10 * * *",
+            "timezone": "Europe/Madrid"
+          },
+          "outputs_to": ["C_EU_02"]
+        },
+        {
+          "id": "C_EU_02",
+          "name": "Resolve_SlotMatrix",
+          "type": "n8n-nodes-base.code",
+          "description": "Calcula dayParity (even/odd segun dia del mes) y determina el par (sector, engine) que corresponde al slot actual segun la matriz de rotacion.",
+          "code_summary": [
+            "const now = new Date();",
+            "const dayParity = now.getUTCDate() % 2 === 0 ? 'even' : 'odd';",
+            "const slot = `${String(now.getUTCHours()).padStart(2,'0')}:${now.getUTCMinutes() < 30 ? '00' : '30'}`;",
+            "",
+            "// Matriz de rotacion EU_Core - 8 slots/dia × 2 paridades = 16 combos",
+            "const MATRIX_EU = {",
+            "  'even': {",
+            "    '07:00': { sector: 'restaurantes',    engine: 'gmaps' },",
+            "    '07:30': { sector: 'restaurantes',    engine: 'yelp' },",
+            "    '08:00': { sector: 'clinicas',        engine: 'gmaps' },",
+            "    '08:30': { sector: 'clinicas',        engine: 'paginas_amarillas' },",
+            "    '09:00': { sector: 'inmobiliarias',   engine: 'gmaps' },",
+            "    '09:30': { sector: 'inmobiliarias',   engine: 'paginas_amarillas' },",
+            "    '10:00': { sector: 'talleres',        engine: 'gmaps' },",
+            "    '10:30': { sector: 'peluquerias',     engine: 'gmaps' }",
+            "  },",
+            "  'odd': {",
+            "    '07:00': { sector: 'hosteleria',           engine: 'gmaps' },",
+            "    '07:30': { sector: 'hosteleria',           engine: 'yelp' },",
+            "    '08:00': { sector: 'servicios_domicilio',  engine: 'gmaps' },",
+            "    '08:30': { sector: 'servicios_domicilio',  engine: 'paginas_amarillas' },",
+            "    '09:00': { sector: 'restaurantes',         engine: 'paginas_amarillas' },",
+            "    '09:30': { sector: 'talleres',             engine: 'paginas_amarillas' },",
+            "    '10:00': { sector: 'peluquerias',          engine: 'paginas_amarillas' },",
+            "    '10:30': { sector: 'clinicas',             engine: 'yelp' }",
+            "  }",
+            "};",
+            "",
+            "const combo = MATRIX_EU[dayParity][slot];",
+            "if (!combo) throw new Error(`NO_SLOT_MAPPING: EU_Core/${dayParity}/${slot}`);",
+            "return { territory: 'EU_Core', sector: combo.sector, engine: combo.engine, slot, dayParity };"
+          ],
+          "outputs_to": ["C_EU_03"]
+        },
+        {
+          "id": "C_EU_03",
+          "name": "Execute_MAIN",
+          "type": "n8n-nodes-base.executeWorkflow",
+          "description": "Llama a HYDRAI_LeadGen_MAIN pasando los inputs resueltos.",
+          "config": {
+            "workflowId": "={{$env.MAIN_WORKFLOW_ID}}",
+            "waitForCompletion": true
+          },
+          "outputs_to": ["C_EU_04"],
+          "error_to": "C_EU_ERR"
+        },
+        {
+          "id": "C_EU_04",
+          "name": "Log_CronRun",
+          "type": "n8n-nodes-base.supabase",
+          "description": "Registra ejecucion del CRON en event_logs.",
+          "config": {
+            "operation": "insert",
+            "table": "event_logs",
+            "data": {
+              "event_type": "cron_eu_core_run",
+              "status": "ok",
+              "payload": "={{$json}}"
+            }
+          },
+          "outputs_to": []
+        },
+        {
+          "id": "C_EU_ERR",
+          "name": "Error_Handler_EU",
+          "type": "n8n-nodes-base.supabase",
+          "description": "Registra error del CRON en event_logs. Sin notificaciones externas.",
+          "config": {
+            "operation": "insert",
+            "table": "event_logs",
+            "data": {
+              "event_type": "cron_eu_core_error",
+              "status": "error",
+              "payload": "={{$json}}",
+              "error_message": "={{$json.error.message}}"
+            }
+          },
+          "outputs_to": []
+        }
+      ]
+    },
+
+    {
+      "name": "HYDRAI_LeadGen_CRON_UK_IE",
+      "type": "cron_wrapper",
+      "territory": "UK_IE",
+      "description": "CRON wrapper para territorio UK_IE (GB, IE). Ejecuta MAIN en ventana 08:00-12:00 UTC.",
+
+      "nodes": [
+        {
+          "id": "C_UK_01",
+          "name": "Cron_Trigger_UK",
+          "type": "n8n-nodes-base.scheduleTrigger",
+          "description": "Dispara cada 30 minutos entre 08:00 y 12:00 UTC.",
+          "config": {
+            "rule": "*/30 8-11 * * *",
+            "timezone": "Europe/London"
+          },
+          "outputs_to": ["C_UK_02"]
+        },
+        {
+          "id": "C_UK_02",
+          "name": "Resolve_SlotMatrix",
+          "type": "n8n-nodes-base.code",
+          "description": "Calcula dayParity y resuelve (sector, engine) del slot actual segun matriz UK_IE.",
+          "code_summary": [
+            "const now = new Date();",
+            "const dayParity = now.getUTCDate() % 2 === 0 ? 'even' : 'odd';",
+            "const slot = `${String(now.getUTCHours()).padStart(2,'0')}:${now.getUTCMinutes() < 30 ? '00' : '30'}`;",
+            "",
+            "const MATRIX_UK = {",
+            "  'even': {",
+            "    '08:00': { sector: 'restaurantes',    engine: 'gmaps' },",
+            "    '08:30': { sector: 'restaurantes',    engine: 'yelp' },",
+            "    '09:00': { sector: 'clinicas',        engine: 'gmaps' },",
+            "    '09:30': { sector: 'clinicas',        engine: 'bing_places' },",
+            "    '10:00': { sector: 'inmobiliarias',   engine: 'gmaps' },",
+            "    '10:30': { sector: 'inmobiliarias',   engine: 'yelp' },",
+            "    '11:00': { sector: 'peluquerias',     engine: 'gmaps' },",
+            "    '11:30': { sector: 'talleres',        engine: 'gmaps' }",
+            "  },",
+            "  'odd': {",
+            "    '08:00': { sector: 'hosteleria',           engine: 'gmaps' },",
+            "    '08:30': { sector: 'hosteleria',           engine: 'yelp' },",
+            "    '09:00': { sector: 'servicios_domicilio',  engine: 'gmaps' },",
+            "    '09:30': { sector: 'servicios_domicilio',  engine: 'bing_places' },",
+            "    '10:00': { sector: 'restaurantes',         engine: 'bing_places' },",
+            "    '10:30': { sector: 'talleres',             engine: 'yelp' },",
+            "    '11:00': { sector: 'peluquerias',          engine: 'yelp' },",
+            "    '11:30': { sector: 'clinicas',             engine: 'yelp' }",
+            "  }",
+            "};",
+            "",
+            "const combo = MATRIX_UK[dayParity][slot];",
+            "if (!combo) throw new Error(`NO_SLOT_MAPPING: UK_IE/${dayParity}/${slot}`);",
+            "return { territory: 'UK_IE', sector: combo.sector, engine: combo.engine, slot, dayParity };"
+          ],
+          "outputs_to": ["C_UK_03"]
+        },
+        {
+          "id": "C_UK_03",
+          "name": "Execute_MAIN",
+          "type": "n8n-nodes-base.executeWorkflow",
+          "description": "Llama a HYDRAI_LeadGen_MAIN con inputs UK_IE.",
+          "config": {
+            "workflowId": "={{$env.MAIN_WORKFLOW_ID}}",
+            "waitForCompletion": true
+          },
+          "outputs_to": ["C_UK_04"],
+          "error_to": "C_UK_ERR"
+        },
+        {
+          "id": "C_UK_04",
+          "name": "Log_CronRun",
+          "type": "n8n-nodes-base.supabase",
+          "description": "Registra ejecucion del CRON UK_IE en event_logs.",
+          "config": {
+            "operation": "insert",
+            "table": "event_logs",
+            "data": {
+              "event_type": "cron_uk_ie_run",
+              "status": "ok",
+              "payload": "={{$json}}"
+            }
+          },
+          "outputs_to": []
+        },
+        {
+          "id": "C_UK_ERR",
+          "name": "Error_Handler_UK",
+          "type": "n8n-nodes-base.supabase",
+          "description": "Registra error del CRON UK_IE en event_logs. Sin notificaciones externas.",
+          "config": {
+            "operation": "insert",
+            "table": "event_logs",
+            "data": {
+              "event_type": "cron_uk_ie_error",
+              "status": "error",
+              "payload": "={{$json}}",
+              "error_message": "={{$json.error.message}}"
+            }
+          },
+          "outputs_to": []
+        }
+      ]
+    },
+
+    {
+      "name": "HYDRAI_LeadGen_CRON_APAC",
+      "type": "cron_wrapper",
+      "territory": "APAC",
+      "description": "CRON wrapper para territorio APAC (SG, AU, NZ, HK, JP). Ejecuta MAIN en ventana 00:00-04:00 UTC.",
+
+      "nodes": [
+        {
+          "id": "C_AP_01",
+          "name": "Cron_Trigger_APAC",
+          "type": "n8n-nodes-base.scheduleTrigger",
+          "description": "Dispara cada 30 minutos entre 00:00 y 04:00 UTC.",
+          "config": {
+            "rule": "*/30 0-3 * * *",
+            "timezone": "Asia/Singapore"
+          },
+          "outputs_to": ["C_AP_02"]
+        },
+        {
+          "id": "C_AP_02",
+          "name": "Resolve_SlotMatrix",
+          "type": "n8n-nodes-base.code",
+          "description": "Calcula dayParity y resuelve (sector, engine) del slot actual segun matriz APAC.",
+          "code_summary": [
+            "const now = new Date();",
+            "const dayParity = now.getUTCDate() % 2 === 0 ? 'even' : 'odd';",
+            "const slot = `${String(now.getUTCHours()).padStart(2,'0')}:${now.getUTCMinutes() < 30 ? '00' : '30'}`;",
+            "",
+            "const MATRIX_APAC = {",
+            "  'even': {",
+            "    '00:00': { sector: 'restaurantes',    engine: 'gmaps' },",
+            "    '00:30': { sector: 'restaurantes',    engine: 'tripadvisor' },",
+            "    '01:00': { sector: 'clinicas',        engine: 'gmaps' },",
+            "    '01:30': { sector: 'clinicas',        engine: 'yelp' },",
+            "    '02:00': { sector: 'inmobiliarias',   engine: 'gmaps' },",
+            "    '02:30': { sector: 'inmobiliarias',   engine: 'yelp' },",
+            "    '03:00': { sector: 'hosteleria',      engine: 'gmaps' },",
+            "    '03:30': { sector: 'hosteleria',      engine: 'tripadvisor' }",
+            "  },",
+            "  'odd': {",
+            "    '00:00': { sector: 'peluquerias',          engine: 'gmaps' },",
+            "    '00:30': { sector: 'peluquerias',          engine: 'yelp' },",
+            "    '01:00': { sector: 'talleres',             engine: 'gmaps' },",
+            "    '01:30': { sector: 'talleres',             engine: 'yelp' },",
+            "    '02:00': { sector: 'servicios_domicilio',  engine: 'gmaps' },",
+            "    '02:30': { sector: 'servicios_domicilio',  engine: 'yelp' },",
+            "    '03:00': { sector: 'restaurantes',         engine: 'yelp' },",
+            "    '03:30': { sector: 'clinicas',             engine: 'tripadvisor' }",
+            "  }",
+            "};",
+            "",
+            "const combo = MATRIX_APAC[dayParity][slot];",
+            "if (!combo) throw new Error(`NO_SLOT_MAPPING: APAC/${dayParity}/${slot}`);",
+            "return { territory: 'APAC', sector: combo.sector, engine: combo.engine, slot, dayParity };"
+          ],
+          "outputs_to": ["C_AP_03"]
+        },
+        {
+          "id": "C_AP_03",
+          "name": "Execute_MAIN",
+          "type": "n8n-nodes-base.executeWorkflow",
+          "description": "Llama a HYDRAI_LeadGen_MAIN con inputs APAC.",
+          "config": {
+            "workflowId": "={{$env.MAIN_WORKFLOW_ID}}",
+            "waitForCompletion": true
+          },
+          "outputs_to": ["C_AP_04"],
+          "error_to": "C_AP_ERR"
+        },
+        {
+          "id": "C_AP_04",
+          "name": "Log_CronRun",
+          "type": "n8n-nodes-base.supabase",
+          "description": "Registra ejecucion del CRON APAC en event_logs.",
+          "config": {
+            "operation": "insert",
+            "table": "event_logs",
+            "data": {
+              "event_type": "cron_apac_run",
+              "status": "ok",
+              "payload": "={{$json}}"
+            }
+          },
+          "outputs_to": []
+        },
+        {
+          "id": "C_AP_ERR",
+          "name": "Error_Handler_APAC",
+          "type": "n8n-nodes-base.supabase",
+          "description": "Registra error del CRON APAC en event_logs. Sin notificaciones externas.",
+          "config": {
+            "operation": "insert",
+            "table": "event_logs",
+            "data": {
+              "event_type": "cron_apac_error",
+              "status": "error",
+              "payload": "={{$json}}",
+              "error_message": "={{$json.error.message}}"
+            }
+          },
+          "outputs_to": []
+        }
+      ]
+    }
+  ],
+
+  "standard_payload": {
+    "description": "Payload estandar que viaja entre nodos del workflow MAIN. Cada nodo enriquece o filtra estos campos.",
+
+    "stage_1_inputs": {
+      "description": "Payload de entrada (N01 → N03)",
+      "schema": {
+        "territory":  "string  — EU_Core | UK_IE | APAC",
+        "sector":     "string  — restaurantes | clinicas | inmobiliarias | talleres | peluquerias | hosteleria | servicios_domicilio",
+        "engine":     "string  — gmaps | yelp | tripadvisor | paginas_amarillas | bing_places",
+        "slot":       "string  — HH:MM (07:00, 07:30, ...)",
+        "dayParity":  "string  — even | odd"
+      }
+    },
+
+    "stage_2_search_params": {
+      "description": "Payload de N03 → N04 (query construida)",
+      "schema": {
+        "territory":     "string",
+        "sector":        "string",
+        "engine":        "string",
+        "slot":          "string",
+        "dayParity":     "string",
+        "run_id":        "string  — EU_Core_restaurantes_gmaps_0700_even_1738627200000",
+        "search_params": {
+          "query":        "string  — 'restaurante bar cafeteria' (keywords del sector)",
+          "location":     "string  — 'Madrid, ES' (ciudad objetivo)",
+          "radius_km":    "number  — 25",
+          "language":     "string  — 'es'",
+          "country_code": "string  — 'ES'",
+          "max_results":  "number  — 50"
+        }
+      }
+    },
+
+    "stage_3_raw_results": {
+      "description": "Payload de N05x → N06 (resultados crudos del engine)",
+      "schema": {
+        "items": [
+          {
+            "name":          "string — nombre del negocio (raw)",
+            "address":       "string — direccion completa",
+            "phone":         "string | null",
+            "email":         "string | null",
+            "website":       "string | null",
+            "rating":        "number | null",
+            "review_count":  "number | null",
+            "category":      "string | null",
+            "url":           "string — URL del listado en el engine",
+            "_engine_meta":  "object — metadatos crudos del engine"
+          }
+        ],
+        "_context": {
+          "run_id": "string",
+          "territory": "string",
+          "sector": "string",
+          "engine": "string"
+        }
+      }
+    },
+
+    "stage_4_normalized": {
+      "description": "Payload de N07 → N08 (records normalizados)",
+      "schema": {
+        "items": [
+          {
+            "business_name":   "string",
+            "name":            "string — contacto o nombre del negocio",
+            "email":           "string | null",
+            "phone":           "string | null — formato E.164",
+            "city":            "string | null",
+            "vertical":        "string — valor del sector input",
+            "source_engine":   "string — gmaps | yelp | ...",
+            "source_url":      "string | null",
+            "raw_rating":      "number",
+            "raw_review_count":"number"
+          }
+        ],
+        "_context": "object (inherited)"
+      }
+    },
+
+    "stage_5_with_dedupe": {
+      "description": "Payload de N08 → N09 (con dedupe_key calculado)",
+      "schema": {
+        "items": [
+          {
+            "...stage_4_fields": true,
+            "dedupe_key": "string — SHA-256 hex (64 chars)"
+          }
+        ]
+      }
+    },
+
+    "stage_6_deduped": {
+      "description": "Payload de N09 → N10 (solo items nuevos, sin duplicados)",
+      "schema": {
+        "items": "stage_5 items filtrados (sin duplicados existentes en DB)",
+        "_dedup_stats": {
+          "total_checked":     "number",
+          "duplicates_found":  "number",
+          "new_items":         "number"
+        }
+      }
+    },
+
+    "stage_7_scored": {
+      "description": "Payload de N10 → N11 (con score y priority)",
+      "schema": {
+        "items": [
+          {
+            "...stage_5_fields": true,
+            "score":    "number — 0-100",
+            "priority": "string — high | medium | low"
+          }
+        ]
+      }
+    },
+
+    "stage_8_insert_ready": {
+      "description": "Payload de N11 → N13 (listo para INSERT en public.leads)",
+      "schema": {
+        "items": [
+          {
+            "name":          "string          — REQUIRED",
+            "email":         "string          — REQUIRED",
+            "phone":         "string | null",
+            "business_name": "string | null",
+            "city":          "string | null",
+            "score":         "number | null   — 0-100",
+            "source":        "string | null   — 'n8n:gmaps:EU_Core'",
+            "status":        "string          — siempre 'new'",
+            "vertical":      "string | null   — sector",
+            "tags":          "string[]        — ['dk:abc123...', 't:EU_Core', 'e:gmaps', 's:restaurantes', 'p:high']",
+            "created_at":    "string          — ISO 8601",
+            "updated_at":    "string          — ISO 8601"
+          }
+        ],
+        "note": "Campo 'id' omitido — generado server-side por gen_random_uuid()"
+      }
+    },
+
+    "stage_9_run_summary": {
+      "description": "Payload final (N14 → N15, tambien retornado al CRON wrapper)",
+      "schema": {
+        "run_id":     "string",
+        "territory":  "string",
+        "sector":     "string",
+        "engine":     "string",
+        "slot":       "string",
+        "dayParity":  "string",
+        "ts_start":   "string — ISO 8601",
+        "ts_end":     "string — ISO 8601",
+        "counts": {
+          "raw_scraped":        "number",
+          "after_normalize":    "number",
+          "duplicates_skipped": "number",
+          "scored_hot":         "number",
+          "scored_warm":        "number",
+          "scored_cold":        "number",
+          "inserted":           "number",
+          "errors":             "number"
+        },
+        "dry_run":  "boolean",
+        "status":   "string — ok | partial | error"
+      }
+    }
+  }
+}
