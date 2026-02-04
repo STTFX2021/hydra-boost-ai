@@ -7,11 +7,14 @@
   "conventions": {
     "no_slack": true,
     "error_channel": "internal_only",
-    "error_strategy": "Todos los fallos internos se registran en public.event_logs y/o crean issue interno. Nunca notificaciones externas.",
-    "dedupe_algorithm": "SHA-256( lowercase(territory) | lowercase(sector) | lowercase(engine) | lowercase(normalize(business_name)) | lowercase(normalize(email)) )",
-    "dedupe_note": "normalize() elimina acentos, espacios extra y caracteres especiales. El pipe '|' es literal como separador.",
+    "error_strategy": "Todos los fallos internos quedan en n8n execution data y/o crean GitHub Issue automatico. SIN Slack. SIN event_logs. SIN tablas nuevas.",
+    "lead_policy": {
+      "HYDRAI-02_inbound": "email OBLIGATORIO — leads que llegan por formulario/chatbot siempre tienen email.",
+      "LeadOps_outbound":  "email OPCIONAL (NULL) — leads scrapeados requieren phone OR website. Email es bonus."
+    },
+    "dedupe_algorithm": "SHA-256( normalize(territory) | normalize(sector) | normalize(engine) | normalize(business_name) | normalize(email || phone || source_url) )",
+    "dedupe_note": "normalize() elimina acentos, espacios extra y caracteres especiales. El pipe '|' es literal como separador. Fallback chain: email > phone > source_url. Siempre hay al menos phone o source_url.",
     "target_table": "public.leads",
-    "log_table": "public.event_logs",
     "id_generation": "UUID v4 (gen_random_uuid en Supabase)"
   },
 
@@ -239,15 +242,19 @@
             "Para cada item raw:",
             "  - business_name = trim(raw.name || raw.business_name || raw.title)",
             "  - name = raw.contact_name || raw.owner || business_name",
-            "  - email = lowercase(trim(raw.email || raw.contact_email || ''))",
-            "  - phone = normalizePhone(raw.phone || raw.telephone || '')",
+            "  - email = lowercase(trim(raw.email || raw.contact_email || '')) || null",
+            "  - phone = normalizePhone(raw.phone || raw.telephone || '') || null",
+            "  - website = lowercase(trim(raw.website || raw.url || raw.place_url || '')) || null",
             "  - city = raw.city || raw.locality || extractCity(raw.address)",
             "  - vertical = input.sector (del contexto de ejecucion)",
             "  - source_engine = input.engine",
             "  - source_url = raw.url || raw.place_url || ''",
             "  - raw_rating = parseFloat(raw.rating || 0)",
             "  - raw_review_count = parseInt(raw.review_count || raw.reviews || 0)",
-            "Filtra items sin email AND sin phone (al menos uno requerido)",
+            "FILTRO OUTBOUND (LeadOps): descarta items que no tengan phone NI website.",
+            "  → Requiere: phone OR website (al menos 1).",
+            "  → email es OPCIONAL (puede ser null).",
+            "  → (HYDRAI-02 inbound exige email, pero ese flujo no pasa por aqui.)",
             "Retorna array de RawLeadRecord"
           ],
           "outputs_to": ["N08"],
@@ -263,7 +270,9 @@
             "const crypto = require('crypto');",
             "function normalize(s) { return s.toLowerCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').replace(/[^a-z0-9]/g,'').trim(); }",
             "Para cada item:",
-            "  const raw = `${normalize(territory)}|${normalize(sector)}|${normalize(engine)}|${normalize(item.business_name)}|${normalize(item.email || item.phone)}`;",
+            "  // Fallback chain: email > phone > source_url (siempre hay al menos phone o website)",
+            "  const contact = item.email || item.phone || item.source_url;",
+            "  const raw = `${normalize(territory)}|${normalize(sector)}|${normalize(engine)}|${normalize(item.business_name)}|${normalize(contact)}`;",
             "  item.dedupe_key = crypto.createHash('sha256').update(raw).digest('hex');",
             "Retorna items con dedupe_key"
           ],
@@ -323,7 +332,7 @@
             "Para cada item, produce:",
             "{",
             "  name:          item.name,",
-            "  email:         item.email,",
+            "  email:         item.email || null,           // ← NULLABLE (outbound: email opcional)",
             "  phone:         item.phone || null,",
             "  business_name: item.business_name || null,",
             "  city:          item.city || null,",
@@ -335,7 +344,8 @@
             "  created_at:    new Date().toISOString(),",
             "  updated_at:    new Date().toISOString()",
             "}",
-            "Note: 'id' se omite (gen_random_uuid server-side)"
+            "Note: 'id' se omite (gen_random_uuid server-side).",
+            "Note: 'email' puede ser null en outbound. HYDRAI-02 inbound siempre lo tiene."
           ],
           "outputs_to": ["N12"],
           "error_to": "N_ERR"
@@ -359,12 +369,11 @@
           "name": "Insert_Leads_Supabase",
           "type": "n8n-nodes-base.supabase",
           "position": [2680, 0],
-          "description": "Inserta batch de leads en public.leads via Supabase. Usa upsert con ON CONFLICT en tags para safety adicional.",
+          "description": "Inserta batch de leads en public.leads via Supabase REST. INSERT simple (no upsert). La deduplicacion ya fue resuelta en N09 via dedupe_key en tags. Email puede ser NULL en outbound.",
           "config": {
-            "operation": "upsert",
+            "operation": "insert",
             "table": "leads",
-            "conflict_columns": "email",
-            "on_conflict": "DO UPDATE SET updated_at = NOW(), score = GREATEST(leads.score, EXCLUDED.score), tags = leads.tags || EXCLUDED.tags"
+            "note": "No se usa ON CONFLICT email porque email es nullable en outbound. El dedupe se resuelve upstream en N09 via tags dk:. Si un email ya existe, el dk: lo habra filtrado."
           },
           "outputs_to": ["N14"],
           "error_to": "N_ERR"
@@ -393,65 +402,42 @@
             "  status: 'ok' | 'partial' | 'error'",
             "}"
           ],
-          "outputs_to": ["N15"],
+          "outputs_to": [],
           "error_to": "N_ERR"
         },
         {
-          "id": "N15",
-          "name": "Log_RunSummary",
-          "type": "n8n-nodes-base.supabase",
-          "position": [3120, 0],
-          "description": "Inserta RunSummary en public.event_logs para auditoria.",
-          "config": {
-            "operation": "insert",
-            "table": "event_logs",
-            "data": {
-              "event_type": "leadgen_run",
-              "status": "={{$json.status}}",
-              "payload": "={{$json.RunSummary}}",
-              "error_message": null
-            }
-          },
-          "outputs_to": []
-        },
-        {
           "id": "N_ERR",
-          "name": "Error_Handler",
+          "name": "Build_ErrorPayload",
           "type": "n8n-nodes-base.code",
           "position": [2900, 300],
-          "description": "Captura cualquier error del pipeline. Loguea en event_logs y genera issue interno. SIN notificaciones externas.",
+          "description": "Error Trigger branch. Captura error y formatea payload para GitHub Issue. SIN Slack. SIN event_logs. SIN tablas nuevas.",
           "code_summary": [
-            "1. Captura error message, stack, nodo origen",
-            "2. Construye ErrorPayload:",
+            "1. Captura error message, stack, nodo origen desde n8n error object",
+            "2. Construye GitHub Issue payload:",
             "   {",
-            "     run_id,",
-            "     territory, sector, engine, slot, dayParity,",
-            "     failed_node: error.node,",
-            "     error_type: error.type || 'UNKNOWN',",
-            "     error_message: error.message,",
-            "     stack_trace: error.stack (truncado a 2000 chars),",
-            "     timestamp: new Date().toISOString()",
+            "     title: '[n8n] HYDRAI_LeadGen_MAIN failed — {nodo}',",
+            "     body: markdown con run_id, territory, sector, engine, slot, dayParity, error.message, timestamp,",
+            "     labels: ['bug', 'n8n-pipeline']",
             "   }",
-            "3. NO Slack. NO email. NO webhook externo."
+            "3. NO Slack. NO event_logs. NO tablas nuevas.",
+            "4. El error completo queda en n8n execution data (visible en UI)."
           ],
-          "outputs_to": ["N_ERR_LOG"],
+          "outputs_to": ["N_GH"],
           "error_to": null
         },
         {
-          "id": "N_ERR_LOG",
-          "name": "Insert_ErrorLog",
-          "type": "n8n-nodes-base.supabase",
+          "id": "N_GH",
+          "name": "Create_GitHub_Issue",
+          "type": "n8n-nodes-base.httpRequest",
           "position": [3120, 300],
-          "description": "Inserta el error en public.event_logs como incidencia interna.",
+          "description": "Crea issue en GitHub con el error. POST /repos/{owner}/{repo}/issues.",
           "config": {
-            "operation": "insert",
-            "table": "event_logs",
-            "data": {
-              "event_type": "leadgen_error",
-              "status": "error",
-              "payload": "={{$json.ErrorPayload}}",
-              "error_message": "={{$json.error_message}}"
-            }
+            "method": "POST",
+            "url": "https://api.github.com/repos/={{$vars.GITHUB_OWNER}}/={{$vars.GITHUB_REPO}}/issues",
+            "headers": "Authorization: Bearer {{$credentials.GitHub_PAT}}, Accept: application/vnd.github+json",
+            "body": "={{$json}} (title, body, labels)",
+            "retry_on_fail": true,
+            "max_retries": 1
           },
           "outputs_to": []
         }
@@ -530,34 +516,27 @@
         },
         {
           "id": "C_EU_04",
-          "name": "Log_CronRun",
-          "type": "n8n-nodes-base.supabase",
-          "description": "Registra ejecucion del CRON en event_logs.",
-          "config": {
-            "operation": "insert",
-            "table": "event_logs",
-            "data": {
-              "event_type": "cron_eu_core_run",
-              "status": "ok",
-              "payload": "={{$json}}"
-            }
-          },
+          "name": "NoOp_End",
+          "type": "n8n-nodes-base.noOp",
+          "description": "Fin. RunSummary queda en n8n execution data. SIN event_logs.",
           "outputs_to": []
         },
         {
           "id": "C_EU_ERR",
-          "name": "Error_Handler_EU",
-          "type": "n8n-nodes-base.supabase",
-          "description": "Registra error del CRON en event_logs. Sin notificaciones externas.",
+          "name": "Build_ErrorPayload_EU",
+          "type": "n8n-nodes-base.code",
+          "description": "Error Trigger branch. Formatea error para GitHub Issue. SIN Slack. SIN event_logs.",
+          "outputs_to": ["C_EU_GH"]
+        },
+        {
+          "id": "C_EU_GH",
+          "name": "Create_GitHub_Issue_EU",
+          "type": "n8n-nodes-base.httpRequest",
+          "description": "Crea issue en GitHub con el error del CRON EU_Core.",
           "config": {
-            "operation": "insert",
-            "table": "event_logs",
-            "data": {
-              "event_type": "cron_eu_core_error",
-              "status": "error",
-              "payload": "={{$json}}",
-              "error_message": "={{$json.error.message}}"
-            }
+            "method": "POST",
+            "url": "https://api.github.com/repos/={{$vars.GITHUB_OWNER}}/={{$vars.GITHUB_REPO}}/issues",
+            "body": "={{$json}} (title, body, labels: ['bug','n8n-pipeline'])"
           },
           "outputs_to": []
         }
@@ -635,34 +614,27 @@
         },
         {
           "id": "C_UK_04",
-          "name": "Log_CronRun",
-          "type": "n8n-nodes-base.supabase",
-          "description": "Registra ejecucion del CRON UK_IE en event_logs.",
-          "config": {
-            "operation": "insert",
-            "table": "event_logs",
-            "data": {
-              "event_type": "cron_uk_ie_run",
-              "status": "ok",
-              "payload": "={{$json}}"
-            }
-          },
+          "name": "NoOp_End",
+          "type": "n8n-nodes-base.noOp",
+          "description": "Fin. RunSummary queda en n8n execution data. SIN event_logs.",
           "outputs_to": []
         },
         {
           "id": "C_UK_ERR",
-          "name": "Error_Handler_UK",
-          "type": "n8n-nodes-base.supabase",
-          "description": "Registra error del CRON UK_IE en event_logs. Sin notificaciones externas.",
+          "name": "Build_ErrorPayload_UK",
+          "type": "n8n-nodes-base.code",
+          "description": "Error Trigger branch. Formatea error para GitHub Issue. SIN Slack. SIN event_logs.",
+          "outputs_to": ["C_UK_GH"]
+        },
+        {
+          "id": "C_UK_GH",
+          "name": "Create_GitHub_Issue_UK",
+          "type": "n8n-nodes-base.httpRequest",
+          "description": "Crea issue en GitHub con el error del CRON UK_IE.",
           "config": {
-            "operation": "insert",
-            "table": "event_logs",
-            "data": {
-              "event_type": "cron_uk_ie_error",
-              "status": "error",
-              "payload": "={{$json}}",
-              "error_message": "={{$json.error.message}}"
-            }
+            "method": "POST",
+            "url": "https://api.github.com/repos/={{$vars.GITHUB_OWNER}}/={{$vars.GITHUB_REPO}}/issues",
+            "body": "={{$json}} (title, body, labels: ['bug','n8n-pipeline'])"
           },
           "outputs_to": []
         }
@@ -740,34 +712,27 @@
         },
         {
           "id": "C_AP_04",
-          "name": "Log_CronRun",
-          "type": "n8n-nodes-base.supabase",
-          "description": "Registra ejecucion del CRON APAC en event_logs.",
-          "config": {
-            "operation": "insert",
-            "table": "event_logs",
-            "data": {
-              "event_type": "cron_apac_run",
-              "status": "ok",
-              "payload": "={{$json}}"
-            }
-          },
+          "name": "NoOp_End",
+          "type": "n8n-nodes-base.noOp",
+          "description": "Fin. RunSummary queda en n8n execution data. SIN event_logs.",
           "outputs_to": []
         },
         {
           "id": "C_AP_ERR",
-          "name": "Error_Handler_APAC",
-          "type": "n8n-nodes-base.supabase",
-          "description": "Registra error del CRON APAC en event_logs. Sin notificaciones externas.",
+          "name": "Build_ErrorPayload_APAC",
+          "type": "n8n-nodes-base.code",
+          "description": "Error Trigger branch. Formatea error para GitHub Issue. SIN Slack. SIN event_logs.",
+          "outputs_to": ["C_AP_GH"]
+        },
+        {
+          "id": "C_AP_GH",
+          "name": "Create_GitHub_Issue_APAC",
+          "type": "n8n-nodes-base.httpRequest",
+          "description": "Crea issue en GitHub con el error del CRON APAC.",
           "config": {
-            "operation": "insert",
-            "table": "event_logs",
-            "data": {
-              "event_type": "cron_apac_error",
-              "status": "error",
-              "payload": "={{$json}}",
-              "error_message": "={{$json.error.message}}"
-            }
+            "method": "POST",
+            "url": "https://api.github.com/repos/={{$vars.GITHUB_OWNER}}/={{$vars.GITHUB_REPO}}/issues",
+            "body": "={{$json}} (title, body, labels: ['bug','n8n-pipeline'])"
           },
           "outputs_to": []
         }
@@ -836,14 +801,15 @@
     },
 
     "stage_4_normalized": {
-      "description": "Payload de N07 → N08 (records normalizados)",
+      "description": "Payload de N07 → N08 (records normalizados). FILTRO OUTBOUND: requiere phone OR website. email puede ser null.",
       "schema": {
         "items": [
           {
             "business_name":   "string",
             "name":            "string — contacto o nombre del negocio",
-            "email":           "string | null",
-            "phone":           "string | null — formato E.164",
+            "email":           "string | null — OPCIONAL en outbound (LeadOps). OBLIGATORIO solo en inbound (HYDRAI-02).",
+            "phone":           "string | null — formato E.164. Requerido si no hay website.",
+            "website":         "string | null — URL del negocio. Requerido si no hay phone.",
             "city":            "string | null",
             "vertical":        "string — valor del sector input",
             "source_engine":   "string — gmaps | yelp | ...",
@@ -852,6 +818,7 @@
             "raw_review_count":"number"
           }
         ],
+        "_filter_rule": "phone OR website obligatorio. email opcional.",
         "_context": "object (inherited)"
       }
     },
@@ -894,12 +861,12 @@
     },
 
     "stage_8_insert_ready": {
-      "description": "Payload de N11 → N13 (listo para INSERT en public.leads)",
+      "description": "Payload de N11 → N13 (listo para INSERT en public.leads). Email nullable en outbound.",
       "schema": {
         "items": [
           {
             "name":          "string          — REQUIRED",
-            "email":         "string          — REQUIRED",
+            "email":         "string | null   — NULLABLE en outbound (LeadOps). REQUIRED solo en inbound (HYDRAI-02).",
             "phone":         "string | null",
             "business_name": "string | null",
             "city":          "string | null",
@@ -912,12 +879,12 @@
             "updated_at":    "string          — ISO 8601"
           }
         ],
-        "note": "Campo 'id' omitido — generado server-side por gen_random_uuid()"
+        "note": "Campo 'id' omitido — generado server-side por gen_random_uuid(). Campo 'email' puede ser null en outbound."
       }
     },
 
     "stage_9_run_summary": {
-      "description": "Payload final (N14 → N15, tambien retornado al CRON wrapper)",
+      "description": "Payload final (N14 → END, tambien retornado al CRON wrapper). Queda en n8n execution data.",
       "schema": {
         "run_id":     "string",
         "territory":  "string",

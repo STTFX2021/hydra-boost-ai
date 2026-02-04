@@ -268,8 +268,9 @@ Transformacion por cada item:
 {
   business_name:    trim(raw.name || raw.business_name || raw.title),
   name:             raw.contact_name || raw.owner || business_name,
-  email:            lowercase(trim(raw.email || raw.contact_email || '')),
-  phone:            normalizePhone(raw.phone || raw.telephone || ''),  // → E.164
+  email:            lowercase(trim(raw.email || raw.contact_email || '')) || null,  // ← NULLABLE
+  phone:            normalizePhone(raw.phone || raw.telephone || '') || null,       // → E.164
+  website:          lowercase(trim(raw.website || raw.url || '')) || null,          // ← NUEVO
   city:             raw.city || raw.locality || extractCity(raw.address),
   vertical:         _context.sector,
   source_engine:    _context.engine,
@@ -279,7 +280,8 @@ Transformacion por cada item:
 }
 ```
 
-**Filtro**: descarta items que no tengan ni email ni phone (al menos 1 requerido).
+**Filtro outbound (LeadOps)**: requiere **phone OR website** (al menos 1). Email es **opcional** (puede ser null).
+> Nota: HYDRAI-02 (inbound) exige email obligatorio, pero ese flujo no pasa por este pipeline.
 
 ---
 
@@ -304,18 +306,23 @@ function norm(s) {
 }
 
 // Por cada item:
+// Fallback chain: email > phone > source_url
+// Siempre hay al menos phone o website (garantizado por filtro N06)
+const contact = item.email || item.phone || item.source_url;
+
 const seed = [
   norm(_context.territory),
   norm(_context.sector),
   norm(_context.engine),
   norm(item.business_name),
-  norm(item.email || item.phone)
+  norm(contact)
 ].join('|');
 
 item.dedupe_key = crypto.createHash('sha256').update(seed).digest('hex');
 ```
 
 Resultado: string hex de 64 chars. Deterministico: mismos inputs → mismo hash siempre.
+Email puede ser null — el fallback a phone o source_url garantiza que el seed siempre tiene un 5o campo.
 
 ---
 
@@ -384,7 +391,7 @@ Priority:
 | Input     | Items puntuados                                           |
 | Output    | Items INSERT-ready                                        |
 
-Schema de salida (1 item):
+Schema de salida — ejemplo CON email:
 
 ```json
 {
@@ -403,7 +410,27 @@ Schema de salida (1 item):
 }
 ```
 
+Schema de salida — ejemplo SIN email (outbound valido):
+
+```json
+{
+  "name":          "Taller Garcia",
+  "email":         null,
+  "phone":         "+34698765432",
+  "business_name": "Taller Garcia",
+  "city":          "Barcelona",
+  "score":         55,
+  "source":        "n8n:gmaps:EU_Core",
+  "status":        "new",
+  "vertical":      "talleres",
+  "tags":          ["dk:b2c4...d8f0", "t:EU_Core", "e:gmaps", "s:talleres", "p:medium"],
+  "created_at":    "2026-02-04T09:30:00.000Z",
+  "updated_at":    "2026-02-04T09:30:00.000Z"
+}
+```
+
 - `id` omitido (generado por `gen_random_uuid()` server-side)
+- `email` **puede ser null** en outbound (LeadOps). HYDRAI-02 inbound siempre lo tiene.
 - `status` siempre `"new"` (enum: `new|contacted|qualified|proposal|won|lost`)
 - `tags[]` codifica metadata: `dk:` dedupe key, `t:` territory, `e:` engine, `s:` sector, `p:` priority
 
@@ -426,13 +453,13 @@ Schema de salida (1 item):
 | Campo          | Valor                                                              |
 |----------------|--------------------------------------------------------------------|
 | Tipo n8n       | `n8n-nodes-base.httpRequest`                                       |
-| Proposito      | Upsert batch en `public.leads` via Supabase REST API.              |
+| Proposito      | INSERT batch en `public.leads` via Supabase REST API.              |
 | Input          | Array de LeadInsertPayload                                         |
-| Output         | Response de Supabase (items insertados/actualizados)               |
+| Output         | Response de Supabase (items insertados)                            |
 | Method         | `POST`                                                             |
 | URL            | `{{ $vars.SUPABASE_URL }}/rest/v1/leads`                           |
-| Headers        | `Prefer: resolution=merge-duplicates`, `apikey`, `Authorization`   |
-| On conflict    | `email` — actualiza `updated_at`, `score = GREATEST(old, new)`, merge `tags` |
+| Headers        | `Prefer: return=representation`, `apikey`, `Authorization`         |
+| On conflict    | **Ninguno** — no se usa upsert. La dedup se resuelve upstream en N08 via `dk:` tags. Email puede ser NULL en outbound, por lo que no sirve como columna de conflicto. |
 | Authentication | `Supabase_ServiceRole` credential                                  |
 
 ---
@@ -642,7 +669,7 @@ Stage 9 (N13)      RunSummary
 ```typescript
 interface LeadInsertPayload {
   name:          string;          // REQUIRED — contacto o nombre del negocio
-  email:         string;          // REQUIRED — lowercase, trimmed
+  email:         string | null;   // NULLABLE en outbound (LeadOps). REQUIRED solo en inbound (HYDRAI-02).
   phone:         string | null;   // E.164 format o null
   business_name: string | null;   // nombre comercial
   city:          string | null;   // ciudad extraida
@@ -654,6 +681,7 @@ interface LeadInsertPayload {
   created_at:    string;          // ISO 8601
   updated_at:    string;          // ISO 8601
   // id: omitido — gen_random_uuid() server-side
+  // NOTA: outbound requiere phone OR website. email es bonus (+25 pts score).
 }
 ```
 
@@ -692,15 +720,18 @@ DRY_RUN=true, MAX_RESULTS_PER_RUN=5
 - [ ] **N03**: `search_params.location` contiene ciudad de EU_Core
 - [ ] **N04**: Enruta correctamente a N05a (gmaps)
 - [ ] **N05a**: HTTP 200, devuelve array de items (o mock)
-- [ ] **N06**: Items normalizados tienen `business_name`, `email` o `phone`
+- [ ] **N06**: Items normalizados tienen `business_name` y (`phone` o `website`) — email puede ser null
+- [ ] **N06**: Items sin phone AND sin website fueron descartados (filtro outbound)
 - [ ] **N07**: Cada item tiene `dedupe_key` de 64 chars hex
-- [ ] **N07**: Mismo item ejecutado 2x produce mismo `dedupe_key`
+- [ ] **N07**: Mismo item ejecutado 2x produce mismo `dedupe_key` (incluso con email=null)
+- [ ] **N07**: Item sin email usa phone como 5o campo del seed (fallback chain funciona)
 - [ ] **N08**: Query a Supabase no falla (puede retornar 0 duplicados)
 - [ ] **N09**: Todos los items tienen `score` (0-100) y `priority`
 - [ ] **N10**: Items tienen el schema exacto de `public.leads`
 - [ ] **N10**: `source` = `n8n:gmaps:EU_Core`
 - [ ] **N10**: `status` = `new`
 - [ ] **N10**: `tags` contiene `dk:`, `t:EU_Core`, `e:gmaps`, `s:restaurantes`
+- [ ] **N10**: Items con email=null tienen `email: null` en el payload (no string vacio)
 - [ ] **N11**: DRY_RUN=true → salta N12
 - [ ] **N13**: RunSummary tiene `inserted: 0` y `dry_run: true`
 - [ ] **N13**: RunSummary.status = `ok`
@@ -714,9 +745,10 @@ DRY_RUN=false, MAX_RESULTS_PER_RUN=5
 
 - [ ] Cambiar `DRY_RUN` a `false`
 - [ ] Ejecutar MAIN con mismos parametros
-- [ ] **N12**: Supabase responde 201 (insert) o 200 (upsert)
+- [ ] **N12**: Supabase responde 201 (insert)
 - [ ] Verificar en Supabase dashboard: nuevos rows en `public.leads`
 - [ ] Verificar que `tags` contiene el `dk:` correcto
+- [ ] Verificar que rows con email=null fueron insertados correctamente
 - [ ] **Re-ejecutar mismo run**: los mismos items ahora son filtrados en N08 (duplicados)
 - [ ] RunSummary muestra `duplicates_skipped` > 0
 
@@ -740,18 +772,20 @@ DRY_RUN=false, MAX_RESULTS_PER_RUN=5
 
 ### 7.6 Criterios de PASS
 
-| Criterio                              | Requerido |
-|---------------------------------------|-----------|
-| DRY_RUN completo sin errores          | SI        |
-| INSERT real crea rows en `leads`      | SI        |
-| Dedupe descarta duplicados en 2o run  | SI        |
-| Error crea GitHub Issue               | SI        |
-| CRON dispara y llama a MAIN           | SI        |
-| No se escribe a `event_logs`          | SI        |
-| No hay notificacion Slack             | SI        |
-| `dedupe_key` es deterministico        | SI        |
-| `score` esta entre 0-100             | SI        |
-| `status` siempre es `new`            | SI        |
+| Criterio                                          | Requerido |
+|---------------------------------------------------|-----------|
+| DRY_RUN completo sin errores                      | SI        |
+| INSERT real crea rows en `leads`                  | SI        |
+| Leads con email=null se insertan correctamente    | SI        |
+| Filtro outbound descarta items sin phone NI website | SI      |
+| Dedupe descarta duplicados en 2o run              | SI        |
+| `dedupe_key` determinista con email=null (usa phone fallback) | SI |
+| Error crea GitHub Issue                           | SI        |
+| CRON dispara y llama a MAIN                       | SI        |
+| No se escribe a `event_logs`                      | SI        |
+| No hay notificacion Slack                         | SI        |
+| `score` esta entre 0-100                          | SI        |
+| `status` siempre es `new`                         | SI        |
 
 ---
 
