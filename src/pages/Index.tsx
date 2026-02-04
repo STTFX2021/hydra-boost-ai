@@ -2,37 +2,45 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { SEOHead, OrganizationSchema, LocalBusinessSchema } from "@/components/seo";
 import {
-  HeroSection,
+  HeroWorld,
+  TrustBar,
+  UseCaseTabs,
   BaseImplementations,
   EnterpriseElite,
+  ROICalculator,
   ProcessSection,
+  FAQ,
   TechStack,
   FinalCTA,
-  FAQ,
+  ChatWidgetWorld,
 } from "@/components/landing";
 
 const Index = () => {
   return (
     <>
       <SEOHead
-        title="HydrAI Labs | Arquitecturas de Automatización con IA"
-        description="Diseñamos arquitecturas de automatización con IA que conectan captación, operaciones y clientes en un sistema autónomo. No vendemos herramientas sueltas — construimos el sistema nervioso de tu empresa."
+        title="HydrAI Labs | Automatizaciones IA que traen clientes 24/7"
+        description="Chatbots inteligentes + Webs profesionales + Automatizaciones sin código. Convierte visitantes en clientes mientras duermes. #1 en Automatización IA para Negocios Locales."
         canonical="/"
-        keywords="automatización ia, arquitectura enterprise, event bus, orchestrator, agentes ia, chatbot whatsapp, automatización negocios"
+        keywords="automatización ia, chatbot whatsapp, chatbot ia restaurantes, automatizar negocios, agencia ia españa, n8n, make, automatizaciones sin código"
       />
       <OrganizationSchema />
       <LocalBusinessSchema />
       
       <div className="min-h-screen bg-background">
         <Header />
-        <HeroSection />
+        <HeroWorld />
+        <TrustBar />
+        <UseCaseTabs />
         <BaseImplementations />
+        <ROICalculator />
         <EnterpriseElite />
         <ProcessSection />
         <FAQ />
         <TechStack />
         <FinalCTA />
         <Footer />
+        <ChatWidgetWorld />
       </div>
     </>
   );
