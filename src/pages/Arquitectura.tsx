@@ -13,7 +13,8 @@ import {
   RefreshCw,
   CheckCircle2,
   AlertCircle,
-  Clock
+  Clock,
+  Info
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -21,6 +22,7 @@ import { PageLayout } from "@/components/layout/PageLayout";
 import { SEOHead } from "@/components/seo";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "@/lib/i18n";
 
 type EventStatus = "idle" | "processing" | "success" | "error";
 
@@ -59,12 +61,198 @@ const initialNodes: EventNode[] = [
   { id: "notifications", name: "Notifications", icon: Bell, status: "idle", eventsProcessed: 0 },
 ];
 
+// Component descriptions
+const componentDetails = {
+  es: {
+    intake: {
+      title: "Lead Intake",
+      description: "Punto de entrada para todos los leads y eventos del sistema.",
+      bullets: [
+        "Recibe eventos de WhatsApp, Web, Instagram, APIs",
+        "Normaliza y valida datos de entrada",
+        "Asigna timestamps y IDs únicos",
+        "Enruta al Event Bus para procesamiento"
+      ]
+    },
+    eventbus: {
+      title: "Event Bus",
+      description: "Columna vertebral del sistema que distribuye eventos.",
+      bullets: [
+        "Pub/Sub para comunicación desacoplada",
+        "Garantiza entrega de mensajes",
+        "Permite replay de eventos históricos",
+        "Escala horizontalmente sin límites"
+      ]
+    },
+    orchestrator: {
+      title: "Orchestrator",
+      description: "Cerebro que decide qué hacer con cada evento.",
+      bullets: [
+        "Evalúa reglas de negocio en tiempo real",
+        "Prioriza eventos por urgencia (P0/P1/P2)",
+        "Distribuye trabajo a Workers especializados",
+        "Maneja reintentos y fallbacks"
+      ]
+    },
+    leadsWorker: {
+      title: "Leads Worker",
+      description: "Especializado en procesamiento de leads.",
+      bullets: [
+        "Cualificación automática con IA",
+        "Scoring y priorización de leads",
+        "Asignación a vendedores",
+        "Trigger de secuencias de nurturing"
+      ]
+    },
+    opsWorker: {
+      title: "OPS Worker",
+      description: "Maneja operaciones de negocio.",
+      bullets: [
+        "Procesa pagos y facturación",
+        "Gestiona reservas y cancelaciones",
+        "Actualiza inventario en tiempo real",
+        "Sincroniza con ERPs externos"
+      ]
+    },
+    notifications: {
+      title: "Notifications",
+      description: "Sistema de notificaciones multi-canal.",
+      bullets: [
+        "Email, SMS, WhatsApp, Push",
+        "Templates personalizados por idioma",
+        "Scheduling inteligente",
+        "Tracking de entrega y apertura"
+      ]
+    }
+  },
+  en: {
+    intake: {
+      title: "Lead Intake",
+      description: "Entry point for all leads and system events.",
+      bullets: [
+        "Receives events from WhatsApp, Web, Instagram, APIs",
+        "Normalizes and validates input data",
+        "Assigns timestamps and unique IDs",
+        "Routes to Event Bus for processing"
+      ]
+    },
+    eventbus: {
+      title: "Event Bus",
+      description: "System backbone that distributes events.",
+      bullets: [
+        "Pub/Sub for decoupled communication",
+        "Guarantees message delivery",
+        "Allows historical event replay",
+        "Scales horizontally without limits"
+      ]
+    },
+    orchestrator: {
+      title: "Orchestrator",
+      description: "Brain that decides what to do with each event.",
+      bullets: [
+        "Evaluates business rules in real-time",
+        "Prioritizes events by urgency (P0/P1/P2)",
+        "Distributes work to specialized Workers",
+        "Handles retries and fallbacks"
+      ]
+    },
+    leadsWorker: {
+      title: "Leads Worker",
+      description: "Specialized in lead processing.",
+      bullets: [
+        "Automatic AI qualification",
+        "Lead scoring and prioritization",
+        "Sales rep assignment",
+        "Nurturing sequence trigger"
+      ]
+    },
+    opsWorker: {
+      title: "OPS Worker",
+      description: "Handles business operations.",
+      bullets: [
+        "Processes payments and billing",
+        "Manages bookings and cancellations",
+        "Updates inventory in real-time",
+        "Syncs with external ERPs"
+      ]
+    },
+    notifications: {
+      title: "Notifications",
+      description: "Multi-channel notification system.",
+      bullets: [
+        "Email, SMS, WhatsApp, Push",
+        "Language-specific templates",
+        "Smart scheduling",
+        "Delivery and open tracking"
+      ]
+    }
+  }
+};
+
 export default function Arquitectura() {
+  const { language } = useTranslation();
   const [isRunning, setIsRunning] = useState(true);
   const [nodes, setNodes] = useState<EventNode[]>(initialNodes);
   const [liveEvents, setLiveEvents] = useState<LiveEvent[]>([]);
   const [totalEvents, setTotalEvents] = useState(0);
   const [activeConnections, setActiveConnections] = useState<string[]>([]);
+
+  const details = componentDetails[language as keyof typeof componentDetails] || componentDetails.es;
+
+  const content = {
+    es: {
+      badge: "Arquitectura Enterprise en Vivo",
+      title: "Event Bus &",
+      titleHighlight: "Orchestrators",
+      subtitle: "Observa cómo procesamos miles de eventos sin intervención humana. Esta visualización muestra la arquitectura real que opera 24/7.",
+      pauseBtn: "Pausar Simulación",
+      startBtn: "Iniciar Simulación",
+      processing: "Procesando eventos...",
+      paused: "Simulación pausada",
+      eventsProcessed: "Eventos Procesados",
+      uptime: "Uptime",
+      activeWorkers: "Workers Activos",
+      flowTitle: "Flujo de Eventos en Tiempo Real",
+      liveEventsTitle: "Eventos en Vivo",
+      componentsTitle: "¿Qué hace cada componente?",
+      ctaTitle: "¿Quieres Esta Arquitectura en Tu Negocio?",
+      ctaSubtitle: "Diseñamos arquitecturas personalizadas que procesan tus eventos, automatizan operaciones y escalan sin límites.",
+      ctaButton: "Solicitar Auditoría Enterprise",
+      statusIdle: "En espera",
+      statusProcessing: "Procesando",
+      statusSuccess: "Completado",
+      statusError: "Error",
+      events: "eventos",
+      waitingEvents: "Esperando eventos...",
+    },
+    en: {
+      badge: "Live Enterprise Architecture",
+      title: "Event Bus &",
+      titleHighlight: "Orchestrators",
+      subtitle: "Watch how we process thousands of events without human intervention. This visualization shows the real architecture operating 24/7.",
+      pauseBtn: "Pause Simulation",
+      startBtn: "Start Simulation",
+      processing: "Processing events...",
+      paused: "Simulation paused",
+      eventsProcessed: "Events Processed",
+      uptime: "Uptime",
+      activeWorkers: "Active Workers",
+      flowTitle: "Real-Time Event Flow",
+      liveEventsTitle: "Live Events",
+      componentsTitle: "What does each component do?",
+      ctaTitle: "Want This Architecture for Your Business?",
+      ctaSubtitle: "We design custom architectures that process your events, automate operations and scale without limits.",
+      ctaButton: "Request Enterprise Audit",
+      statusIdle: "Idle",
+      statusProcessing: "Processing",
+      statusSuccess: "Completed",
+      statusError: "Error",
+      events: "events",
+      waitingEvents: "Waiting for events...",
+    }
+  };
+
+  const t = content[language as keyof typeof content] || content.es;
 
   // Simulate live event processing
   useEffect(() => {
@@ -74,7 +262,6 @@ export default function Arquitectura() {
       const randomEvent = eventTypes[Math.floor(Math.random() * eventTypes.length)];
       const eventId = `evt_${Date.now()}`;
       
-      // Add new event
       const newEvent: LiveEvent = {
         id: eventId,
         type: randomEvent.type,
@@ -86,9 +273,7 @@ export default function Arquitectura() {
       setLiveEvents(prev => [newEvent, ...prev].slice(0, 8));
       setTotalEvents(prev => prev + 1);
 
-      // Animate through nodes
       const animateFlow = async () => {
-        // Intake
         setActiveConnections(["intake-eventbus"]);
         setNodes(prev => prev.map(n => 
           n.id === "intake" ? { ...n, status: "processing", lastEvent: randomEvent.type } : n
@@ -96,7 +281,6 @@ export default function Arquitectura() {
         
         await new Promise(r => setTimeout(r, 400));
         
-        // Event Bus
         setActiveConnections(["eventbus-orchestrator"]);
         setNodes(prev => prev.map(n => {
           if (n.id === "intake") return { ...n, status: "success", eventsProcessed: n.eventsProcessed + 1 };
@@ -106,7 +290,6 @@ export default function Arquitectura() {
 
         await new Promise(r => setTimeout(r, 400));
 
-        // Orchestrator routes to worker
         const isLeadEvent = randomEvent.type.includes("lead");
         const workerConnection = isLeadEvent ? "orchestrator-leads" : "orchestrator-ops";
         setActiveConnections([workerConnection, "orchestrator-notifications"]);
@@ -118,7 +301,6 @@ export default function Arquitectura() {
 
         await new Promise(r => setTimeout(r, 400));
 
-        // Workers process
         const targetWorker = isLeadEvent ? "leads-worker" : "ops-worker";
         setActiveConnections([]);
         setNodes(prev => prev.map(n => {
@@ -130,19 +312,16 @@ export default function Arquitectura() {
 
         await new Promise(r => setTimeout(r, 500));
 
-        // Complete
         setNodes(prev => prev.map(n => {
           if (n.id === targetWorker) return { ...n, status: "success", eventsProcessed: n.eventsProcessed + 1 };
           if (n.id === "notifications") return { ...n, status: "success", eventsProcessed: n.eventsProcessed + 1 };
           return n;
         }));
 
-        // Update event status
         setLiveEvents(prev => prev.map(e => 
           e.id === eventId ? { ...e, status: "completed" } : e
         ));
 
-        // Reset to idle after delay
         await new Promise(r => setTimeout(r, 800));
         setNodes(prev => prev.map(n => ({ ...n, status: "idle" })));
       };
@@ -171,6 +350,15 @@ export default function Arquitectura() {
     }
   };
 
+  const getStatusLabel = (status: EventStatus) => {
+    switch (status) {
+      case "processing": return t.statusProcessing;
+      case "success": return t.statusSuccess;
+      case "error": return t.statusError;
+      default: return t.statusIdle;
+    }
+  };
+
   return (
     <>
       <SEOHead
@@ -190,14 +378,13 @@ export default function Arquitectura() {
               className="text-center max-w-4xl mx-auto"
             >
               <Badge variant="outline" className="mb-4 border-primary/50 text-primary">
-                🏗️ Arquitectura Enterprise en Vivo
+                🏗️ {t.badge}
               </Badge>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
-                Event Bus & <span className="text-gradient-primary">Orchestrators</span>
+                {t.title} <span className="text-gradient-primary">{t.titleHighlight}</span>
               </h1>
               <p className="text-lg text-muted-foreground mb-8">
-                Observa cómo procesamos miles de eventos sin intervención humana. 
-                Esta visualización muestra la arquitectura real que opera 24/7.
+                {t.subtitle}
               </p>
               
               {/* Controls */}
@@ -208,7 +395,7 @@ export default function Arquitectura() {
                   className="gap-2"
                 >
                   {isRunning ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-                  {isRunning ? "Pausar Simulación" : "Iniciar Simulación"}
+                  {isRunning ? t.pauseBtn : t.startBtn}
                 </Button>
                 <div className="flex items-center gap-2 px-4 py-2 bg-muted/50 rounded-lg">
                   <div className={cn(
@@ -216,7 +403,7 @@ export default function Arquitectura() {
                     isRunning ? "bg-success animate-pulse" : "bg-muted-foreground"
                   )} />
                   <span className="text-sm text-muted-foreground">
-                    {isRunning ? "Procesando eventos..." : "Simulación pausada"}
+                    {isRunning ? t.processing : t.paused}
                   </span>
                 </div>
               </div>
@@ -225,15 +412,15 @@ export default function Arquitectura() {
               <div className="grid grid-cols-3 gap-4 max-w-md mx-auto">
                 <div className="card-premium p-4 text-center">
                   <div className="text-2xl font-bold text-primary">{totalEvents}</div>
-                  <div className="text-xs text-muted-foreground">Eventos Procesados</div>
+                  <div className="text-xs text-muted-foreground">{t.eventsProcessed}</div>
                 </div>
                 <div className="card-premium p-4 text-center">
                   <div className="text-2xl font-bold text-success">99.9%</div>
-                  <div className="text-xs text-muted-foreground">Uptime</div>
+                  <div className="text-xs text-muted-foreground">{t.uptime}</div>
                 </div>
                 <div className="card-premium p-4 text-center">
                   <div className="text-2xl font-bold text-secondary">6</div>
-                  <div className="text-xs text-muted-foreground">Workers Activos</div>
+                  <div className="text-xs text-muted-foreground">{t.activeWorkers}</div>
                 </div>
               </div>
             </motion.div>
@@ -245,7 +432,6 @@ export default function Arquitectura() {
               {/* Main Diagram */}
               <div className="lg:col-span-2">
                 <div className="card-premium p-8 relative overflow-hidden min-h-[500px]">
-                  {/* Background Grid */}
                   <div className="absolute inset-0 opacity-5">
                     <div className="h-full w-full" style={{
                       backgroundImage: "radial-gradient(circle, hsl(var(--primary)) 1px, transparent 1px)",
@@ -255,15 +441,12 @@ export default function Arquitectura() {
 
                   <div className="relative z-10">
                     <h3 className="font-display font-semibold mb-8 text-center">
-                      Flujo de Eventos en Tiempo Real
+                      {t.flowTitle}
                     </h3>
 
-                    {/* Diagram Layout */}
                     <div className="flex flex-col items-center gap-4">
-                      {/* Row 1: Intake */}
-                      <NodeComponent node={nodes.find(n => n.id === "intake")!} getStatusColor={getStatusColor} getStatusIcon={getStatusIcon} />
+                      <NodeComponent node={nodes.find(n => n.id === "intake")!} getStatusColor={getStatusColor} getStatusIcon={getStatusIcon} getStatusLabel={getStatusLabel} t={t} />
                       
-                      {/* Connection Line */}
                       <motion.div 
                         className={cn(
                           "w-0.5 h-8 transition-all duration-300",
@@ -274,10 +457,8 @@ export default function Arquitectura() {
                         } : {}}
                       />
 
-                      {/* Row 2: Event Bus */}
-                      <NodeComponent node={nodes.find(n => n.id === "eventbus")!} getStatusColor={getStatusColor} getStatusIcon={getStatusIcon} highlight />
+                      <NodeComponent node={nodes.find(n => n.id === "eventbus")!} getStatusColor={getStatusColor} getStatusIcon={getStatusIcon} getStatusLabel={getStatusLabel} highlight t={t} />
                       
-                      {/* Connection Line */}
                       <motion.div 
                         className={cn(
                           "w-0.5 h-8 transition-all duration-300",
@@ -285,10 +466,8 @@ export default function Arquitectura() {
                         )}
                       />
 
-                      {/* Row 3: Orchestrator */}
-                      <NodeComponent node={nodes.find(n => n.id === "orchestrator")!} getStatusColor={getStatusColor} getStatusIcon={getStatusIcon} highlight />
+                      <NodeComponent node={nodes.find(n => n.id === "orchestrator")!} getStatusColor={getStatusColor} getStatusIcon={getStatusIcon} getStatusLabel={getStatusLabel} highlight t={t} />
                       
-                      {/* Branching Lines */}
                       <div className="flex items-start justify-center w-full max-w-lg">
                         <div className="flex-1 flex flex-col items-center">
                           <motion.div 
@@ -297,7 +476,7 @@ export default function Arquitectura() {
                               activeConnections.includes("orchestrator-leads") ? "bg-primary" : "bg-border"
                             )}
                           />
-                          <NodeComponent node={nodes.find(n => n.id === "leads-worker")!} getStatusColor={getStatusColor} getStatusIcon={getStatusIcon} />
+                          <NodeComponent node={nodes.find(n => n.id === "leads-worker")!} getStatusColor={getStatusColor} getStatusIcon={getStatusIcon} getStatusLabel={getStatusLabel} t={t} />
                         </div>
                         
                         <div className="flex-1 flex flex-col items-center">
@@ -307,7 +486,7 @@ export default function Arquitectura() {
                               activeConnections.includes("orchestrator-ops") ? "bg-primary" : "bg-border"
                             )}
                           />
-                          <NodeComponent node={nodes.find(n => n.id === "ops-worker")!} getStatusColor={getStatusColor} getStatusIcon={getStatusIcon} />
+                          <NodeComponent node={nodes.find(n => n.id === "ops-worker")!} getStatusColor={getStatusColor} getStatusIcon={getStatusIcon} getStatusLabel={getStatusLabel} t={t} />
                         </div>
 
                         <div className="flex-1 flex flex-col items-center">
@@ -317,7 +496,7 @@ export default function Arquitectura() {
                               activeConnections.includes("orchestrator-notifications") ? "bg-secondary" : "bg-border"
                             )}
                           />
-                          <NodeComponent node={nodes.find(n => n.id === "notifications")!} getStatusColor={getStatusColor} getStatusIcon={getStatusIcon} />
+                          <NodeComponent node={nodes.find(n => n.id === "notifications")!} getStatusColor={getStatusColor} getStatusIcon={getStatusIcon} getStatusLabel={getStatusLabel} t={t} />
                         </div>
                       </div>
                     </div>
@@ -329,7 +508,7 @@ export default function Arquitectura() {
               <div className="lg:col-span-1">
                 <div className="card-premium p-6 h-full">
                   <div className="flex items-center justify-between mb-4">
-                    <h3 className="font-display font-semibold">Eventos en Vivo</h3>
+                    <h3 className="font-display font-semibold">{t.liveEventsTitle}</h3>
                     <Badge variant="outline" className="gap-1">
                       <span className="w-1.5 h-1.5 bg-success rounded-full animate-pulse" />
                       Live
@@ -366,7 +545,7 @@ export default function Arquitectura() {
 
                     {liveEvents.length === 0 && (
                       <div className="text-center py-8 text-muted-foreground text-sm">
-                        Esperando eventos...
+                        {t.waitingEvents}
                       </div>
                     )}
                   </div>
@@ -375,51 +554,36 @@ export default function Arquitectura() {
             </div>
           </section>
 
-          {/* Node Details */}
+          {/* What Each Component Does */}
           <section className="section-container mb-16">
-            <h2 className="text-2xl font-display font-bold text-center mb-8">
-              Componentes del Sistema
+            <h2 className="text-2xl md:text-3xl font-display font-bold text-center mb-8">
+              {t.componentsTitle}
             </h2>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {nodes.map((node, i) => (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {Object.entries(details).map(([key, detail], i) => (
                 <motion.div
-                  key={node.id}
+                  key={key}
                   initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="card-premium p-5"
+                  className="card-premium p-6"
                 >
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className={cn(
-                      "w-10 h-10 rounded-lg flex items-center justify-center transition-all",
-                      node.status === "processing" ? "bg-primary/20" : "bg-muted"
-                    )}>
-                      <node.icon className={cn(
-                        "w-5 h-5",
-                        node.status === "processing" ? "text-primary" : "text-muted-foreground"
-                      )} />
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <Info className="w-5 h-5 text-primary" />
                     </div>
-                    <div>
-                      <h4 className="font-semibold text-sm">{node.name}</h4>
-                      <div className="flex items-center gap-1">
-                        {getStatusIcon(node.status)}
-                        <span className="text-xs text-muted-foreground capitalize">
-                          {node.status === "idle" ? "En espera" : 
-                           node.status === "processing" ? "Procesando" :
-                           node.status === "success" ? "Completado" : "Error"}
-                        </span>
-                      </div>
-                    </div>
+                    <h3 className="font-display font-semibold">{detail.title}</h3>
                   </div>
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-muted-foreground">Eventos procesados:</span>
-                    <span className="font-mono font-semibold text-primary">{node.eventsProcessed}</span>
-                  </div>
-                  {node.lastEvent && (
-                    <div className="mt-2 pt-2 border-t border-border/30">
-                      <code className="text-xs text-muted-foreground">{node.lastEvent}</code>
-                    </div>
-                  )}
+                  <p className="text-sm text-muted-foreground mb-4">{detail.description}</p>
+                  <ul className="space-y-2">
+                    {detail.bullets.map((bullet, j) => (
+                      <li key={j} className="flex items-start gap-2 text-xs text-muted-foreground">
+                        <CheckCircle2 className="w-3 h-3 text-success mt-0.5 shrink-0" />
+                        {bullet}
+                      </li>
+                    ))}
+                  </ul>
                 </motion.div>
               ))}
             </div>
@@ -434,15 +598,14 @@ export default function Arquitectura() {
               className="card-premium p-8 md:p-12 text-center bg-gradient-to-br from-primary/5 to-secondary/5"
             >
               <h2 className="text-2xl md:text-3xl font-display font-bold mb-4">
-                ¿Quieres Esta Arquitectura en Tu Negocio?
+                {t.ctaTitle}
               </h2>
               <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                Diseñamos arquitecturas personalizadas que procesan tus eventos, 
-                automatizan operaciones y escalan sin límites.
+                {t.ctaSubtitle}
               </p>
               <Link to="/auditoria">
                 <Button size="lg" className="btn-neon gap-2">
-                  Solicitar Auditoría Enterprise
+                  {t.ctaButton}
                   <ArrowRight className="w-4 h-4" />
                 </Button>
               </Link>
@@ -459,10 +622,12 @@ interface NodeComponentProps {
   node: EventNode;
   getStatusColor: (status: EventStatus) => string;
   getStatusIcon: (status: EventStatus) => React.ReactNode;
+  getStatusLabel: (status: EventStatus) => string;
   highlight?: boolean;
+  t: { events: string };
 }
 
-function NodeComponent({ node, getStatusColor, getStatusIcon, highlight }: NodeComponentProps) {
+function NodeComponent({ node, getStatusColor, getStatusIcon, getStatusLabel, highlight, t }: NodeComponentProps) {
   return (
     <motion.div
       layout
@@ -482,7 +647,7 @@ function NodeComponent({ node, getStatusColor, getStatusIcon, highlight }: NodeC
           <div className="font-semibold text-sm">{node.name}</div>
           <div className="flex items-center gap-1 text-xs text-muted-foreground">
             {getStatusIcon(node.status)}
-            <span>{node.eventsProcessed} eventos</span>
+            <span>{node.eventsProcessed} {t.events}</span>
           </div>
         </div>
       </div>

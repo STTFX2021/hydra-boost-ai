@@ -4,7 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
-import { HydrAINavigator } from "@/components/hydrai-navigator/HydrAINavigator";
+import { ChatWidgetWorld } from "@/components/landing/ChatWidgetWorld";
 import { ProtectedAdminRoute } from "@/components/ProtectedAdminRoute";
 import Index from "./pages/Index";
 import Servicios from "./pages/Servicios";
@@ -72,7 +72,8 @@ const App = () => (
             <Route path="/cookies" element={<Cookies />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-          <HydrAINavigator />
+          {/* Global Chatbot - only one across all pages */}
+          <ChatWidgetWorld />
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>

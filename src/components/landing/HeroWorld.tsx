@@ -1,6 +1,7 @@
+import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle2, Play, Zap, Users, Clock } from "lucide-react";
+import { ArrowRight, CheckCircle2, Play, Pause, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLandingTranslation } from "@/lib/i18n";
 
@@ -44,7 +45,9 @@ const floatDelayedAnimation = {
 };
 
 export const HeroWorld = () => {
-  const { landing, language } = useLandingTranslation();
+  const { language } = useLandingTranslation();
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const content = {
     es: {
@@ -53,7 +56,7 @@ export const HeroWorld = () => {
       title2: "traen clientes 24/7",
       subtitle: "Chatbots inteligentes + Webs profesionales + Automatizaciones sin código.",
       subtitleBold: "Convierte visitantes en clientes mientras duermes.",
-      ctaPrimary: "Agenda Diagnóstico IA Gratis",
+      ctaPrimary: "Solicitar Auditoría Técnica",
       ctaSecondary: "Ver Casos de Éxito",
       trust: ["Sin permanencia", "Setup en 7 días", "Soporte 24/7"],
       stat1: "+127%",
@@ -61,6 +64,7 @@ export const HeroWorld = () => {
       stat2: "24/7",
       stat2Label: "Atención al cliente",
       videoTitle: "Ver demo en acción",
+      watchDemo: "Ver Demo",
     },
     en: {
       badge: "#1 in AI Automation for Local Businesses",
@@ -68,7 +72,7 @@ export const HeroWorld = () => {
       title2: "bring customers 24/7",
       subtitle: "Smart chatbots + Professional websites + No-code automations.",
       subtitleBold: "Convert visitors into customers while you sleep.",
-      ctaPrimary: "Schedule Free AI Diagnosis",
+      ctaPrimary: "Request Technical Audit",
       ctaSecondary: "View Success Cases",
       trust: ["No commitment", "7-day setup", "24/7 support"],
       stat1: "+127%",
@@ -76,6 +80,7 @@ export const HeroWorld = () => {
       stat2: "24/7",
       stat2Label: "Customer support",
       videoTitle: "Watch demo in action",
+      watchDemo: "Watch Demo",
     },
     fr: {
       badge: "#1 en Automatisation IA pour les Entreprises Locales",
@@ -83,7 +88,7 @@ export const HeroWorld = () => {
       title2: "attirent des clients 24/7",
       subtitle: "Chatbots intelligents + Sites web professionnels + Automatisations sans code.",
       subtitleBold: "Convertissez les visiteurs en clients pendant que vous dormez.",
-      ctaPrimary: "Planifier un Diagnostic IA Gratuit",
+      ctaPrimary: "Demander un Audit Technique",
       ctaSecondary: "Voir les Cas de Succès",
       trust: ["Sans engagement", "Setup en 7 jours", "Support 24/7"],
       stat1: "+127%",
@@ -91,6 +96,7 @@ export const HeroWorld = () => {
       stat2: "24/7",
       stat2Label: "Service client",
       videoTitle: "Voir la démo en action",
+      watchDemo: "Voir la Démo",
     },
     de: {
       badge: "#1 in KI-Automatisierung für lokale Unternehmen",
@@ -98,7 +104,7 @@ export const HeroWorld = () => {
       title2: "Kunden 24/7 bringen",
       subtitle: "Intelligente Chatbots + Professionelle Websites + No-Code-Automatisierungen.",
       subtitleBold: "Verwandeln Sie Besucher in Kunden, während Sie schlafen.",
-      ctaPrimary: "Kostenlose KI-Diagnose planen",
+      ctaPrimary: "Technisches Audit anfordern",
       ctaSecondary: "Erfolgsgeschichten ansehen",
       trust: ["Keine Bindung", "7 Tage Setup", "24/7 Support"],
       stat1: "+127%",
@@ -106,6 +112,7 @@ export const HeroWorld = () => {
       stat2: "24/7",
       stat2Label: "Kundensupport",
       videoTitle: "Demo ansehen",
+      watchDemo: "Demo ansehen",
     },
     pt: {
       badge: "#1 em Automação IA para Negócios Locais",
@@ -113,7 +120,7 @@ export const HeroWorld = () => {
       title2: "trazem clientes 24/7",
       subtitle: "Chatbots inteligentes + Sites profissionais + Automações sem código.",
       subtitleBold: "Converta visitantes em clientes enquanto você dorme.",
-      ctaPrimary: "Agendar Diagnóstico IA Grátis",
+      ctaPrimary: "Solicitar Auditoria Técnica",
       ctaSecondary: "Ver Casos de Sucesso",
       trust: ["Sem compromisso", "Setup em 7 dias", "Suporte 24/7"],
       stat1: "+127%",
@@ -121,6 +128,7 @@ export const HeroWorld = () => {
       stat2: "24/7",
       stat2Label: "Atendimento ao cliente",
       videoTitle: "Ver demo em ação",
+      watchDemo: "Ver Demo",
     },
     it: {
       badge: "#1 in Automazione IA per Aziende Locali",
@@ -128,7 +136,7 @@ export const HeroWorld = () => {
       title2: "portano clienti 24/7",
       subtitle: "Chatbot intelligenti + Siti web professionali + Automazioni senza codice.",
       subtitleBold: "Converti i visitatori in clienti mentre dormi.",
-      ctaPrimary: "Prenota Diagnosi IA Gratuita",
+      ctaPrimary: "Richiedi Audit Tecnico",
       ctaSecondary: "Vedi Casi di Successo",
       trust: ["Senza impegno", "Setup in 7 giorni", "Supporto 24/7"],
       stat1: "+127%",
@@ -136,10 +144,22 @@ export const HeroWorld = () => {
       stat2: "24/7",
       stat2Label: "Assistenza clienti",
       videoTitle: "Guarda la demo",
+      watchDemo: "Guarda Demo",
     },
   };
 
   const t = content[language] || content.es;
+
+  const handlePlayClick = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
 
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-gradient-to-br from-background via-background to-muted/20">
@@ -221,28 +241,52 @@ export const HeroWorld = () => {
             </motion.div>
           </motion.div>
 
-          {/* Visual - Video/Demo Preview */}
+          {/* Visual - Video Demo */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             className="relative"
           >
-            {/* Main Demo Preview */}
+            {/* Main Video Preview */}
             <div className="relative z-10">
               <div className="card-premium p-2 overflow-hidden neon-border">
-                {/* Demo placeholder - can replace with actual video */}
-                <div className="relative aspect-video bg-gradient-to-br from-muted to-muted/50 rounded-lg overflow-hidden">
-                  <div className="absolute inset-0 flex items-center justify-center">
+                <div 
+                  className="relative aspect-video bg-gradient-to-br from-muted to-muted/50 rounded-lg overflow-hidden cursor-pointer group"
+                  onClick={handlePlayClick}
+                >
+                  {/* Video Element */}
+                  <video
+                    ref={videoRef}
+                    className="w-full h-full object-cover"
+                    poster="/video/hydra-ai-hero-poster.jpg"
+                    playsInline
+                    onEnded={() => setIsPlaying(false)}
+                  >
+                    <source src="/video/hydra-ai-hero-1080p.mp4" type="video/mp4" />
+                  </video>
+                  
+                  {/* Play/Pause Overlay */}
+                  <div 
+                    className={`absolute inset-0 flex items-center justify-center bg-background/30 transition-opacity duration-300 ${
+                      isPlaying ? 'opacity-0 hover:opacity-100' : 'opacity-100'
+                    }`}
+                  >
                     <motion.button
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
-                      className="w-20 h-20 rounded-full bg-primary/20 backdrop-blur-sm border border-primary/50 flex items-center justify-center group"
+                      className="w-20 h-20 rounded-full bg-primary/90 backdrop-blur-sm border border-primary/50 flex items-center justify-center group shadow-lg shadow-primary/30"
                     >
-                      <Play className="w-8 h-8 text-primary fill-primary/30 group-hover:scale-110 transition-transform" />
+                      {isPlaying ? (
+                        <Pause className="w-8 h-8 text-primary-foreground" />
+                      ) : (
+                        <Play className="w-8 h-8 text-primary-foreground ml-1" fill="currentColor" />
+                      )}
                     </motion.button>
                   </div>
-                  <div className="absolute bottom-4 left-4 right-4">
+                  
+                  {/* Bottom info bar */}
+                  <div className={`absolute bottom-4 left-4 right-4 transition-opacity duration-300 ${isPlaying ? 'opacity-0' : 'opacity-100'}`}>
                     <div className="bg-background/80 backdrop-blur-sm rounded-lg p-4 border border-border/50">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">

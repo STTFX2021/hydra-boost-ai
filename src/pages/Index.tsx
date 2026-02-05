@@ -12,7 +12,6 @@ import {
   FAQ,
   TechStack,
   FinalCTA,
-  ChatWidgetWorld,
 } from "@/components/landing";
 
 const Index = () => {
@@ -40,7 +39,6 @@ const Index = () => {
         <TechStack />
         <FinalCTA />
         <Footer />
-        <ChatWidgetWorld />
       </div>
     </>
   );
