@@ -12,7 +12,9 @@ import {
   FAQ,
   TechStack,
   FinalCTA,
+  LeadFormMultiStep,
 } from "@/components/landing";
+import { Shield, Zap } from "lucide-react";
 
 const Index = () => {
   return (
@@ -33,6 +35,60 @@ const Index = () => {
         <UseCaseTabs />
         <BaseImplementations />
         <ROICalculator />
+        
+        {/* Enterprise Audit Section */}
+        <section id="audit" className="section-padding relative overflow-hidden">
+          <div className="glow-orb-primary w-96 h-96 -top-48 -left-48" />
+          <div className="section-container relative z-10">
+            <div className="grid lg:grid-cols-2 gap-12 items-start">
+              {/* Left: Benefits */}
+              <div>
+                <div className="badge-primary mb-6 inline-flex items-center gap-2">
+                  <Zap className="w-3 h-3" />
+                  Technical Audit
+                </div>
+                <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">
+                  Enterprise Infrastructure
+                  <span className="text-gradient-primary block">Audit</span>
+                </h2>
+                <p className="text-lg text-muted-foreground mb-8">
+                  Comprehensive technical assessment of your automation opportunities. 
+                  Get a detailed analysis of your stack, security requirements, and ROI projections.
+                </p>
+                
+                <div className="space-y-4">
+                  {[
+                    "Full stack architecture review",
+                    "Security & compliance assessment",
+                    "Integration complexity analysis",
+                    "Custom ROI projections",
+                    "Priority recommendations",
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <div className="w-6 h-6 rounded-full bg-success/20 flex items-center justify-center">
+                        <Shield className="w-3 h-3 text-success" />
+                      </div>
+                      <span className="text-sm">{item}</span>
+                    </div>
+                  ))}
+                </div>
+                
+                <div className="mt-8 p-4 rounded-xl bg-primary/5 border border-primary/20">
+                  <p className="text-sm text-muted-foreground">
+                    <span className="font-semibold text-foreground">Valued at €2,500</span> — 
+                    Complimentary for qualified enterprises
+                  </p>
+                </div>
+              </div>
+              
+              {/* Right: Form */}
+              <div>
+                <LeadFormMultiStep variant="inline" />
+              </div>
+            </div>
+          </div>
+        </section>
+        
         <EnterpriseElite />
         <ProcessSection />
         <FAQ />
