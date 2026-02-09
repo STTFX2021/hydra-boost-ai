@@ -20,6 +20,33 @@ const validateEmail = (email: string): boolean => {
   return emailRegex.test(email);
 };
 
+async function sendToN8N(url: string, payload: Record<string, unknown>, retries = 0): Promise<boolean> {
+  const MAX_RETRIES = 3;
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (res.ok) {
+      console.log(`n8n webhook delivered (attempt ${retries + 1})`);
+      return true;
+    }
+    const errText = await res.text();
+    console.error(`n8n webhook failed (attempt ${retries + 1}):`, errText);
+  } catch (err) {
+    console.error(`n8n webhook error (attempt ${retries + 1}):`, err);
+  }
+  if (retries < MAX_RETRIES) {
+    const delay = Math.pow(2, retries) * 1000; // 1s, 2s, 4s
+    console.log(`Retrying n8n in ${delay}ms...`);
+    await new Promise((r) => setTimeout(r, delay));
+    return sendToN8N(url, payload, retries + 1);
+  }
+  console.error("n8n webhook failed after all retries");
+  return false;
+}
+
 const handler = async (req: Request): Promise<Response> => {
   // Handle CORS preflight
   if (req.method === "OPTIONS") {
@@ -157,36 +184,21 @@ const handler = async (req: Request): Promise<Response> => {
       console.error("Discord error:", discordError);
     }
 
-    // Send to n8n webhook if configured
+    // Send to n8n webhook with retry logic
+    let n8nDelivered = false;
     const N8N_WEBHOOK_URL = Deno.env.get("N8N_WEBHOOK_URL");
     if (N8N_WEBHOOK_URL) {
-      try {
-        const n8nPayload = {
-          source: "hydrailabs_contact_form",
-          timestamp: new Date().toISOString(),
-          lead: {
-            name: cleanName,
-            email: cleanEmail,
-            phone: cleanPhone,
-            message: cleanMessage,
-          }
-        };
-
-        const n8nRes = await fetch(N8N_WEBHOOK_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(n8nPayload),
-        });
-
-        if (n8nRes.ok) {
-          console.log("n8n webhook triggered successfully");
-        } else {
-          console.error("n8n webhook failed:", await n8nRes.text());
+      const n8nPayload = {
+        source: "hydrailabs_contact_form",
+        timestamp: new Date().toISOString(),
+        lead: {
+          name: cleanName,
+          email: cleanEmail,
+          phone: cleanPhone,
+          message: cleanMessage,
         }
-      } catch (n8nError) {
-        console.error("n8n webhook error:", n8nError);
-        // Don't fail the request if n8n fails - lead is already saved
-      }
+      };
+      n8nDelivered = await sendToN8N(N8N_WEBHOOK_URL, n8nPayload);
     }
 
     // Send email via Resend - ALWAYS include message
@@ -254,10 +266,10 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    console.log(`Contact submission processed: Discord=${discordSuccess}, Email=${emailSuccess}, Message="${cleanMessage}"`);
+    console.log(`Contact submission processed: Discord=${discordSuccess}, Email=${emailSuccess}, n8n=${n8nDelivered}, Message="${cleanMessage}"`);
 
     return new Response(
-      JSON.stringify({ ok: true, discord: discordSuccess, email: emailSuccess }),
+      JSON.stringify({ ok: true, discord: discordSuccess, email: emailSuccess, n8n_delivered: n8nDelivered }),
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
 
