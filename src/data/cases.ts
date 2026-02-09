@@ -6,6 +6,11 @@ import autoquoteHub from "@/assets/cases/autoquote-hub.jpg";
 import solReservas from "@/assets/cases/sol-reservas.jpg";
 import insightNarrator from "@/assets/cases/insight-narrator.jpg";
 import tuHogarMadrid from "@/assets/cases/tu-hogar-madrid.jpg";
+import razorGrace from "@/assets/cases/razor-grace.jpg";
+import crossfitConnect from "@/assets/cases/crossfit-connect.jpg";
+import locandaConnect from "@/assets/cases/locanda-connect.jpg";
+import cruzaTapas from "@/assets/cases/cruza-tapas.jpg";
+import innerSunYoga from "@/assets/cases/inner-sun-yoga.jpg";
 
 export interface Case {
   id: string;
@@ -49,7 +54,7 @@ export const cases: Case[] = [
     },
     tags: ["#reservas", "#whatsapp", "#automatizaciones"],
     color: "primary",
-    imageUrl: chicBookings,
+    imageUrl: razorGrace,
     imageAlt: {
       es: "Razor Grace Barbería – reservas online",
       en: "Razor Grace Barbershop – online booking",
@@ -74,7 +79,7 @@ export const cases: Case[] = [
     },
     tags: ["#fitness", "#reservas", "#comunidad"],
     color: "secondary",
-    imageUrl: smileStudio,
+    imageUrl: crossfitConnect,
     imageAlt: {
       es: "CrossFit Connect Pro – gestión de gimnasio",
       en: "CrossFit Connect Pro – gym management",
@@ -99,7 +104,7 @@ export const cases: Case[] = [
     },
     tags: ["#pedidos", "#delivery", "#automatizaciones"],
     color: "accent",
-    imageUrl: atelierEmbers,
+    imageUrl: locandaConnect,
     imageAlt: {
       es: "Locanda Pizzería – pedidos online",
       en: "Locanda Pizzeria – online orders",
@@ -124,7 +129,7 @@ export const cases: Case[] = [
     },
     tags: ["#hostelería", "#reservas", "#pedidos"],
     color: "primary",
-    imageUrl: solReservas,
+    imageUrl: cruzaTapas,
     imageAlt: {
       es: "Cruza Tapas Digital – bar de tapas",
       en: "Cruza Tapas Digital – tapas bar",
@@ -149,7 +154,7 @@ export const cases: Case[] = [
     },
     tags: ["#wellness", "#reservas", "#membresías"],
     color: "secondary",
-    imageUrl: insightNarrator,
+    imageUrl: innerSunYoga,
     imageAlt: {
       es: "Inner Sun Yoga – estudio de yoga",
       en: "Inner Sun Yoga – yoga studio",
