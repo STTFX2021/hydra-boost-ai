@@ -14,6 +14,7 @@ import {
   FinalCTA,
   LeadFormMultiStep,
 } from "@/components/landing";
+import { PRICING_DEMO_VIDEO_URL, isValidUrl } from "@/lib/constants";
 import { Shield, Zap } from "lucide-react";
 
 const Index = () => {
@@ -27,15 +28,76 @@ const Index = () => {
       />
       <OrganizationSchema />
       <LocalBusinessSchema />
-      
+
       <div className="min-h-screen bg-background">
         <Header />
+
         <HeroWorld />
+
+        {/* Demo Video (only renders if URL is valid) */}
+        {isValidUrl(PRICING_DEMO_VIDEO_URL) && (
+          <section id="demo" className="section-padding relative overflow-hidden">
+            <div className="section-container relative z-10">
+              <div className="grid lg:grid-cols-2 gap-12 items-center">
+                {/* Left: Copy */}
+                <div>
+                  <div className="badge-primary mb-6 inline-flex items-center gap-2">
+                    <Zap className="w-3 h-3" />
+                    Live Demo
+                  </div>
+
+                  <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">
+                    Watch how it works
+                    <span className="text-gradient-primary block">in 60 seconds</span>
+                  </h2>
+
+                  <p className="text-lg text-muted-foreground mb-8">
+                    Real example of how HydrAI captures leads, qualifies them, and routes them to your team
+                    automatically.
+                  </p>
+
+                  <div className="flex flex-wrap gap-3">
+                    <a
+                      href="#audit"
+                      className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold bg-primary text-primary-foreground hover:opacity-90 transition"
+                    >
+                      Request Free Audit
+                    </a>
+
+                    <a
+                      href="https://youtu.be/iqP-AjMtGBA"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold border border-border hover:bg-muted/40 transition"
+                    >
+                      Open on YouTube
+                    </a>
+                  </div>
+                </div>
+
+                {/* Right: Video */}
+                <div className="rounded-2xl border border-border bg-muted/10 overflow-hidden">
+                  <div className="relative w-full" style={{ paddingTop: "56.25%" }}>
+                    <iframe
+                      src={PRICING_DEMO_VIDEO_URL}
+                      title="HydrAI Labs — Demo"
+                      className="absolute inset-0 w-full h-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
         <TrustBar />
         <UseCaseTabs />
         <BaseImplementations />
         <ROICalculator />
-        
+
         {/* Enterprise Audit Section */}
         <section id="audit" className="section-padding relative overflow-hidden">
           <div className="glow-orb-primary w-96 h-96 -top-48 -left-48" />
@@ -52,10 +114,10 @@ const Index = () => {
                   <span className="text-gradient-primary block">Audit</span>
                 </h2>
                 <p className="text-lg text-muted-foreground mb-8">
-                  Comprehensive technical assessment of your automation opportunities. 
-                  Get a detailed analysis of your stack, security requirements, and ROI projections.
+                  Comprehensive technical assessment of your automation opportunities. Get a detailed analysis of your
+                  stack, security requirements, and ROI projections.
                 </p>
-                
+
                 <div className="space-y-4">
                   {[
                     "Full stack architecture review",
@@ -72,15 +134,15 @@ const Index = () => {
                     </div>
                   ))}
                 </div>
-                
+
                 <div className="mt-8 p-4 rounded-xl bg-primary/5 border border-primary/20">
                   <p className="text-sm text-muted-foreground">
-                    <span className="font-semibold text-foreground">Valued at €2,500</span> — 
-                    Complimentary for qualified enterprises
+                    <span className="font-semibold text-foreground">Valued at €2,500</span> — Complimentary for
+                    qualified enterprises
                   </p>
                 </div>
               </div>
-              
+
               {/* Right: Form */}
               <div>
                 <LeadFormMultiStep variant="inline" />
@@ -88,7 +150,7 @@ const Index = () => {
             </div>
           </div>
         </section>
-        
+
         <EnterpriseElite />
         <ProcessSection />
         <FAQ />
