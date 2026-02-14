@@ -1,7 +1,7 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle2, Play, Pause, Zap } from "lucide-react";
+import { ArrowRight, CheckCircle2, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLandingTranslation } from "@/lib/i18n";
 
@@ -47,8 +47,6 @@ const floatDelayedAnimation = {
 export const HeroWorld = () => {
   const { language } = useLandingTranslation();
   const [isPlaying, setIsPlaying] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
   const content = {
     es: {
       badge: "#1 en Automatización IA para Negocios Locales",
@@ -151,14 +149,7 @@ export const HeroWorld = () => {
   const t = content[language] || content.es;
 
   const handlePlayClick = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
-      } else {
-        videoRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
-    }
+    setIsPlaying(!isPlaying);
   };
 
   return (
@@ -251,54 +242,16 @@ export const HeroWorld = () => {
             {/* Main Video Preview */}
             <div className="relative z-10">
               <div className="card-premium p-2 overflow-hidden neon-border">
-                <div 
-                  className="relative aspect-video bg-gradient-to-br from-muted to-muted/50 rounded-lg overflow-hidden cursor-pointer group"
-                  onClick={handlePlayClick}
-                >
-                  {/* Video Element */}
-                  <video
-                    ref={videoRef}
-                    className="w-full h-full object-cover"
-                    poster="/video/hydra-ai-hero-poster.jpg"
-                    playsInline
-                    onEnded={() => setIsPlaying(false)}
-                  >
-                    <source src="/video/hydra-ai-hero-1080p.mp4" type="video/mp4" />
-                  </video>
-                  
-                  {/* Play/Pause Overlay */}
-                  <div 
-                    className={`absolute inset-0 flex items-center justify-center bg-background/30 transition-opacity duration-300 ${
-                      isPlaying ? 'opacity-0 hover:opacity-100' : 'opacity-100'
-                    }`}
-                  >
-                    <motion.button
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="w-20 h-20 rounded-full bg-primary/90 backdrop-blur-sm border border-primary/50 flex items-center justify-center group shadow-lg shadow-primary/30"
-                    >
-                      {isPlaying ? (
-                        <Pause className="w-8 h-8 text-primary-foreground" />
-                      ) : (
-                        <Play className="w-8 h-8 text-primary-foreground ml-1" fill="currentColor" />
-                      )}
-                    </motion.button>
-                  </div>
-                  
-                  {/* Bottom info bar */}
-                  <div className={`absolute bottom-4 left-4 right-4 transition-opacity duration-300 ${isPlaying ? 'opacity-0' : 'opacity-100'}`}>
-                    <div className="bg-background/80 backdrop-blur-sm rounded-lg p-4 border border-border/50">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
-                          <Zap className="w-5 h-5 text-primary" />
-                        </div>
-                        <div>
-                          <p className="font-semibold text-sm">{t.videoTitle}</p>
-                          <p className="text-xs text-muted-foreground">2:34 min</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <div className="relative aspect-video bg-gradient-to-br from-muted to-muted/50 rounded-lg overflow-hidden">
+                  {/* YouTube Embed */}
+                  <iframe
+                    src="https://www.youtube-nocookie.com/embed/jvHA_QbYqf4?rel=0&modestbranding=1"
+                    title="HydrAI Labs Demo"
+                    className="absolute inset-0 w-full h-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                    loading="lazy"
+                  />
                 </div>
               </div>
             </div>
