@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { SEOHead, OrganizationSchema, LocalBusinessSchema } from "@/components/seo";
@@ -7,15 +8,21 @@ import {
   UseCaseTabs,
   BaseImplementations,
   EnterpriseElite,
-  ROICalculator,
-  ProcessSection,
-  FAQ,
-  TechStack,
-  FinalCTA,
   LeadFormMultiStep,
 } from "@/components/landing";
 import { PRICING_DEMO_VIDEO_URL, isValidUrl } from "@/lib/constants";
 import { Shield, Zap } from "lucide-react";
+
+// Lazy-loaded below-the-fold sections
+const ROICalculator = lazy(() => import("@/components/landing/ROICalculator").then(m => ({ default: m.ROICalculator })));
+const ProcessSection = lazy(() => import("@/components/landing/ProcessSection").then(m => ({ default: m.ProcessSection })));
+const FAQ = lazy(() => import("@/components/landing/FAQ").then(m => ({ default: m.FAQ })));
+const TechStack = lazy(() => import("@/components/landing/TechStack").then(m => ({ default: m.TechStack })));
+const FinalCTA = lazy(() => import("@/components/landing/FinalCTA").then(m => ({ default: m.FinalCTA })));
+
+const LazySection = ({ children }: { children: React.ReactNode }) => (
+  <Suspense fallback={<div className="min-h-[200px]" />}>{children}</Suspense>
+);
 
 const Index = () => {
   return (
@@ -96,7 +103,7 @@ const Index = () => {
         <TrustBar />
         <UseCaseTabs />
         <BaseImplementations />
-        <ROICalculator />
+        <LazySection><ROICalculator /></LazySection>
 
         {/* Enterprise Audit Section */}
         <section id="audit" className="section-padding relative overflow-hidden">
@@ -152,10 +159,10 @@ const Index = () => {
         </section>
 
         <EnterpriseElite />
-        <ProcessSection />
-        <FAQ />
-        <TechStack />
-        <FinalCTA />
+        <LazySection><ProcessSection /></LazySection>
+        <LazySection><FAQ /></LazySection>
+        <LazySection><TechStack /></LazySection>
+        <LazySection><FinalCTA /></LazySection>
         <Footer />
       </div>
     </>
