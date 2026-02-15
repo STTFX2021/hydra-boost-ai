@@ -1,4 +1,17 @@
-import { Flame, UtensilsCrossed, Stethoscope, Car, Hotel, BarChart3, Home, Scissors, Dumbbell, Pizza, Wine, Heart } from "lucide-react";
+import {
+  Flame,
+  UtensilsCrossed,
+  Stethoscope,
+  Car,
+  Hotel,
+  BarChart3,
+  Home,
+  Scissors,
+  Dumbbell,
+  Pizza,
+  Wine,
+  Heart,
+} from "lucide-react";
 import atelierEmbers from "@/assets/cases/atelier-embers.jpg";
 import chicBookings from "@/assets/cases/chic-bookings.jpg";
 import smileStudio from "@/assets/cases/smile-studio.jpg";
@@ -320,8 +333,8 @@ export const cases: Case[] = [
     id: "tu-hogar-madrid",
     title: "Tu Hogar Madrid",
     type: {
-      es: "Portal inmobiliario para clase media en Madrid",
-      en: "Real estate portal for middle class in Madrid",
+      es: "Portal inmobiliario ",
+      en: "Real estate portal ",
     },
     icon: Home,
     description: {
@@ -335,7 +348,7 @@ export const cases: Case[] = [
       es: "Tu Hogar Madrid – portal inmobiliario",
       en: "Tu Hogar Madrid – real estate portal",
     },
-    demoUrl: "https://tu-hogar-madrid.lovable.app",
+    demoUrl: "https://tu-hogar-21-nextgen.lovable.app",
     features: {
       es: ["Buscador con filtros", "Calculadora hipotecaria", "Chatbot cualificador"],
       en: ["Search with filters", "Mortgage calculator", "Qualifying chatbot"],
