@@ -2,12 +2,16 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { UtensilsCrossed, Stethoscope, ShoppingCart, Briefcase, Building2 } from "lucide-react";
 import { useLandingTranslation } from "@/lib/i18n";
+import { IndustryFlowModal } from "./IndustryFlowModal";
+import { TAB_TO_INDUSTRY, type IndustryId } from "@/lib/industryFlows";
 
 const icons = [UtensilsCrossed, Stethoscope, ShoppingCart, Briefcase, Building2];
 
 export const UseCaseTabs = () => {
   const { language } = useLandingTranslation();
   const [activeTab, setActiveTab] = useState(0);
+  const [flowOpen, setFlowOpen] = useState(false);
+  const [flowIndustry, setFlowIndustry] = useState<IndustryId>("restaurants");
 
   const content = {
     es: {
@@ -334,14 +338,24 @@ export const UseCaseTabs = () => {
                 </p>
               </div>
 
-              <div className="card-premium p-6 border-primary/30">
+              <button
+                type="button"
+                onClick={() => {
+                  setFlowIndustry(TAB_TO_INDUSTRY[activeTab]);
+                  setFlowOpen(true);
+                }}
+                className="card-premium p-6 border-primary/30 w-full text-left cursor-pointer hover:border-primary/60 transition-colors group"
+              >
                 <p className="text-sm text-muted-foreground mb-2">
                   {language === "es" ? "Resultado promedio" : "Average result"}
                 </p>
                 <p className="text-2xl md:text-3xl font-bold text-gradient-primary">
                   {t.cases[activeTab].resultado}
                 </p>
-              </div>
+                <p className="text-xs text-muted-foreground mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  {language === "es" ? "Click para ver el flujo →" : "Click to see the flow →"}
+                </p>
+              </button>
             </div>
 
             <div className="card-premium p-8">
@@ -365,6 +379,11 @@ export const UseCaseTabs = () => {
             </div>
           </motion.div>
         </AnimatePresence>
+        <IndustryFlowModal
+          open={flowOpen}
+          onClose={() => setFlowOpen(false)}
+          industryId={flowIndustry}
+        />
       </div>
     </section>
   );
