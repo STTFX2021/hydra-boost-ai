@@ -29,7 +29,7 @@ const handler = async (req: Request): Promise<Response> => {
   const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
   const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
   const resendApiKey = Deno.env.get("RESEND_API_KEY");
-  const discordWebhook = Deno.env.get("DISCORD_WEBHOOK_URL");
+  const discordWebhook = Deno.env.get("HydrAIlabs");
 
   const supabase = createClient(supabaseUrl, supabaseKey);
 

@@ -55,7 +55,7 @@ const handler = async (req: Request): Promise<Response> => {
 
   try {
     // Get required secrets
-    const DISCORD_WEBHOOK_URL = Deno.env.get("DISCORD_WEBHOOK_URL");
+    const DISCORD_WEBHOOK_URL = Deno.env.get("HydrAIlabs");
     const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
     const CONTACT_TO = Deno.env.get("CONTACT_TO") || "hola@hydrailabs.com";
     const CONTACT_FROM = Deno.env.get("CONTACT_FROM") || "HydrAI <onboarding@resend.dev>";
