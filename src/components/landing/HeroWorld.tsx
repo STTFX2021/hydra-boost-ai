@@ -1,9 +1,10 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle2, Zap } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLandingTranslation } from "@/lib/i18n";
+import { LiteYouTube } from "./LiteYouTube";
+import { HERO_DEMO_VIDEO_ID } from "@/lib/constants";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -46,7 +47,6 @@ const floatDelayedAnimation = {
 
 export const HeroWorld = () => {
   const { language } = useLandingTranslation();
-  const [isPlaying, setIsPlaying] = useState(false);
   const content = {
     es: {
       badge: "#1 en Automatización IA para Negocios Locales",
@@ -148,10 +148,6 @@ export const HeroWorld = () => {
 
   const t = content[language] || content.es;
 
-  const handlePlayClick = () => {
-    setIsPlaying(!isPlaying);
-  };
-
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-gradient-to-br from-background via-background to-muted/20">
       {/* Background effects */}
@@ -242,17 +238,10 @@ export const HeroWorld = () => {
             {/* Main Video Preview */}
             <div className="relative z-10">
               <div className="card-premium p-2 overflow-hidden neon-border">
-                <div className="relative aspect-video bg-gradient-to-br from-muted to-muted/50 rounded-lg overflow-hidden">
-                  {/* YouTube Embed */}
-                  <iframe
-                    src="https://www.youtube-nocookie.com/embed/jvHA_QbYqf4?rel=0&modestbranding=1"
-                    title="HydrAI Labs Demo"
-                    className="absolute inset-0 w-full h-full"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                    loading="lazy"
-                  />
-                </div>
+                <LiteYouTube
+                  videoId={HERO_DEMO_VIDEO_ID}
+                  title="HydrAI Labs Demo"
+                />
               </div>
             </div>
 

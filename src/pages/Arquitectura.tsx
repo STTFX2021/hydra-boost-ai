@@ -19,7 +19,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { PageLayout } from "@/components/layout/PageLayout";
-import { SEOHead } from "@/components/seo";
+import { SEOHead, BreadcrumbSchema } from "@/components/seo";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "@/lib/i18n";
@@ -367,6 +367,10 @@ export default function Arquitectura() {
         canonical="/arquitectura"
         keywords="event bus, orchestrator, arquitectura enterprise, automatización, workers, microservicios"
       />
+      <BreadcrumbSchema items={[
+        { name: "Inicio", url: "/" },
+        { name: "Arquitectura", url: "/arquitectura" },
+      ]} />
       
       <PageLayout>
         <div className="pt-24 pb-16">
