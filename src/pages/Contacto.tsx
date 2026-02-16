@@ -103,9 +103,7 @@ const Contacto = () => {
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
                 Hablemos de tu <span className="text-gradient-primary">proyecto</span>
               </h1>
-              <p className="text-lg text-muted-foreground mb-8">
-                Respondemos en menos de 24h. Sin compromisos.
-              </p>
+              <p className="text-lg text-muted-foreground mb-8">Respondemos en menos de 24h. Sin compromisos.</p>
             </div>
           </div>
         </section>
@@ -251,5 +249,44 @@ const Contacto = () => {
                   </div>
                 </div>
 
-                <div classNa
+                <div className="card-premium neon-border text-center p-6">
+                  <h4 className="font-display font-semibold mb-2">¿Prefieres una auditoría?</h4>
+                  <p className="text-sm text-muted-foreground mb-4">Descubre gratis cómo la IA puede ayudarte.</p>
+                  <a href="/auditoria">
+                    <Button className="btn-neon w-full">
+                      Auditoría gratuita
+                      <ArrowRight className="ml-2 w-4 h-4" />
+                    </Button>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
+        {/* Investor Hub CTA */}
+        <section className="section-container mb-16">
+          <div className="max-w-3xl mx-auto">
+            <div className="card-premium neon-border p-8 text-center">
+              <div className="badge-accent mb-4 inline-flex">
+                <Zap className="w-3 h-3 mr-1" /> Investor Hub
+              </div>
+              <h2 className="text-2xl font-display font-bold mb-3">Investor Hub</h2>
+              <p className="text-muted-foreground mb-6">
+                Construimos sistemas con potencial de escala. Únete como partner.
+              </p>
+              <a href="/inversores">
+                <Button className="btn-neon">
+                  Acceder al Investor Hub
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </a>
+            </div>
+          </div>
+        </section>
+      </PageLayout>
+    </>
+  );
+};
+
+export default Contacto;
