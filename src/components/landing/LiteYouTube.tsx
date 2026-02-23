@@ -29,12 +29,12 @@ export const LiteYouTube = ({ videoId, title = "Video", className = "" }: LiteYo
       {activated ? (
         <iframe
           className="absolute inset-0 w-full h-full"
-          src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`}
+          src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1&autoplay=0&iv_load_policy=3`}
           title={title}
+          frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
           loading="lazy"
-          referrerPolicy="strict-origin-when-cross-origin"
         />
       ) : (
         <>
