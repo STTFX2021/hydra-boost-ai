@@ -1,25 +1,17 @@
 import { PageLayout } from "@/components/layout/PageLayout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight, Zap, Phone } from "lucide-react";
+import { ArrowRight, Zap, Phone, CheckCircle2, Star, Crown, Sparkles } from "lucide-react";
 import { useTranslation } from "@/lib/i18n";
-import { useState } from "react";
 import { SEOHead, BreadcrumbSchema } from "@/components/seo";
-import {
-  PricingCard,
-  EliteSection,
-  VideoDemo,
-  IndividualsGrid,
-  MaintenancePacks,
-  ComparisonTable,
-} from "@/components/pricing";
+import { motion } from "framer-motion";
 
 const Precios = () => {
   return (
     <>
       <SEOHead
         title="Precios y Planes de Automatización IA | HydrAI Labs"
-        description="Packs de automatización desde 199€/mes. Starter, Pro y Autonomous. Chatbots, reservas, leads y más. Pago anual = 2 meses gratis. Sin permanencia."
+        description="Planes de automatización IA desde 497€/mes. Base, Growth y Enterprise. Chatbots, workflows, agentes IA y más."
         canonical="/precios"
         keywords="precios chatbot, coste automatizacion, planes ia negocios, precio chatbot whatsapp"
       />
@@ -36,131 +28,53 @@ const Precios = () => {
 
 const PreciosContent = () => {
   const { language } = useTranslation();
-  const [viewMode, setViewMode] = useState<'packs' | 'individuals'>('packs');
 
-  const packs = [
+  const plans = [
     {
-      id: "starter",
-      name: "Starter",
-      price: "199",
-      priceAnnual: "1.990",
+      id: "base",
+      name: "Base",
+      price: "497",
       badge: null,
-      idealFor:
-        language === 'es'
-          ? "Empezar a captar clientes sin perder mensajes ni oportunidades"
-          : "Start capturing clients without losing messages or opportunities",
-      features:
-        language === 'es'
-          ? [
-              "Captura de leads desde web, formulario o chat",
-              "Notificación instantánea al equipo (Discord/Slack/email)",
-              "Gestión de reservas y solicitudes",
-              "Resumen semanal de actividad",
-              "Soporte por email",
-            ]
-          : [
-              "Lead capture from web, form or chat",
-              "Instant team notification (Discord/Slack/email)",
-              "Booking and request management",
-              "Weekly activity summary",
-              "Email support",
-            ],
-      steps:
-        language === 'es'
-          ? [
-              "Un cliente te escribe o deja sus datos",
-              "Te llega al instante, todo organizado",
-              "Tienes control y seguimiento básico",
-            ]
-          : [
-              "A client writes or leaves their data",
-              "You receive it instantly, all organized",
-              "You have control and basic tracking",
-            ],
+      features: [
+        "Chatbot IA en tu web (atención 24/7)",
+        "3 workflows automatizados",
+        "Integración WhatsApp Business",
+        "Dashboard de métricas básico",
+        "Soporte por email 48h",
+        "Setup completo en 7 días",
+      ],
+      cta: "Empezar con Base",
     },
     {
-      id: "pro",
-      name: "Pro",
-      price: "499",
-      priceAnnual: "4.990",
-      badge: language === 'es' ? "Más popular" : "Most popular",
-      idealFor:
-        language === 'es'
-          ? "Aumentar conversiones con seguimiento automático"
-          : "Increase conversions with automatic follow-up",
-      features:
-        language === 'es'
-          ? [
-              "Todo lo de Starter",
-              "Seguimiento automático: recordatorios + mensajes",
-              "Radar de oportunidades: tendencias y acciones",
-              "Mensajes de venta listos para usar",
-              "Nutrición de leads (no se enfrían)",
-              "1 agente asistente (ventas u operaciones)",
-              "Soporte prioritario",
-            ]
-          : [
-              "Everything in Starter",
-              "Automatic follow-up: reminders + messages",
-              "Opportunity radar: trends and actions",
-              "Ready-to-use sales messages",
-              "Lead nurturing (they don't go cold)",
-              "1 assistant agent (sales or operations)",
-              "Priority support",
-            ],
-      steps:
-        language === 'es'
-          ? [
-              "Entran leads cada día",
-              "El sistema hace seguimiento y prioriza",
-              "Tú cierras más con menos esfuerzo",
-            ]
-          : [
-              "Leads come in every day",
-              "The system follows up and prioritizes",
-              "You close more with less effort",
-            ],
+      id: "growth",
+      name: "Growth",
+      price: "997",
+      badge: "Más popular",
+      features: [
+        "Todo lo del plan Base",
+        "10 workflows automatizados",
+        "Agente IA especializado en tu nicho",
+        "Integración CRM + email marketing",
+        "Soporte prioritario 24h",
+        "Reporting semanal con recomendaciones",
+        "Optimización continua del sistema",
+      ],
+      cta: "Empezar con Growth",
     },
     {
-      id: "autonomous",
-      name: "Autonomous",
-      price: "999",
-      priceAnnual: "9.990",
+      id: "enterprise",
+      name: "Enterprise",
+      price: "A medida",
       badge: "Premium",
-      idealFor:
-        language === 'es'
-          ? "Operación semi-autónoma + control 24/7"
-          : "Semi-autonomous operation + 24/7 control",
-      features:
-        language === 'es'
-          ? [
-              "Todo lo de Pro",
-              "Monitorización 24/7: alertas si algo falla",
-              "Rutinas predictivas: detección de bloqueos",
-              "3 agentes especializados (ventas, operaciones, soporte)",
-              "Automatizaciones profundas de procesos internos",
-              "Canal de soporte dedicado",
-            ]
-          : [
-              "Everything in Pro",
-              "24/7 monitoring: alerts if something fails",
-              "Predictive routines: bottleneck detection",
-              "3 specialized agents (sales, operations, support)",
-              "Deep automation of internal processes",
-              "Dedicated support channel",
-            ],
-      steps:
-        language === 'es'
-          ? [
-              "Automatizamos procesos clave",
-              "Vigilamos el sistema 24/7",
-              "Reducimos errores y te ahorramos horas",
-            ]
-          : [
-              "We automate key processes",
-              "We monitor the system 24/7",
-              "We reduce errors and save you hours",
-            ],
+      features: [
+        "Arquitectura Event Bus completa",
+        "Workflows y agentes ilimitados",
+        "Agentes CEO/CFO/CTO especializados",
+        "Integraciones a medida (ERP, POS, etc.)",
+        "SLA garantizado + soporte dedicado",
+        "Onboarding presencial en España",
+      ],
+      cta: "Solicitar Propuesta",
     },
   ];
 
@@ -168,114 +82,133 @@ const PreciosContent = () => {
     <PageLayout>
       {/* Hero */}
       <section className="relative section-padding overflow-hidden">
-        <div className="glow-orb-primary w-96 h-96 -top-48 left-1/2 -translate-x-1/2" />
         <div className="section-container relative z-10">
           <div className="max-w-3xl mx-auto text-center">
-            <div className="badge-primary mb-6 inline-flex">
-              <Zap className="w-3 h-3 mr-1" />{" "}
-              {language === 'es' ? 'Precios transparentes' : 'Transparent pricing'}
+            <div className="inline-flex items-center gap-1 px-4 py-1.5 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20 mb-6">
+              <Zap className="w-3 h-3" /> Precios transparentes
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
-              {language === 'es'
-                ? 'Elige tu nivel de automatización'
-                : 'Choose your automation level'}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 text-foreground">
+              Elige tu nivel de automatización
             </h1>
             <p className="text-lg text-muted-foreground mb-8">
-              {language === 'es'
-                ? 'Packs con descuento o automatizaciones individuales. Pago anual = 2 meses gratis.'
-                : 'Discounted packs or individual automations. Annual payment = 2 months free.'}
+              Planes flexibles que crecen con tu negocio. Sin permanencia.
             </p>
-
-            {/* Toggle */}
-            <div className="inline-flex rounded-full p-1 bg-muted/30 border border-border">
-              <button
-                onClick={() => setViewMode('packs')}
-                className={`px-6 py-2 rounded-full text-sm font-medium transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
-                  viewMode === 'packs'
-                    ? 'bg-primary text-primary-foreground'
-                    : 'text-muted-foreground hover:text-foreground'
-                }`}
-              >
-                {language === 'es' ? 'Paquetes' : 'Packages'}
-              </button>
-              <button
-                onClick={() => setViewMode('individuals')}
-                className={`px-6 py-2 rounded-full text-sm font-medium transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
-                  viewMode === 'individuals'
-                    ? 'bg-primary text-primary-foreground'
-                    : 'text-muted-foreground hover:text-foreground'
-                }`}
-              >
-                {language === 'es' ? 'Individuales' : 'Individual'}
-              </button>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* Video Demo */}
-      <VideoDemo language={language} />
+      {/* Plans */}
+      <section className="section-padding -mt-8">
+        <div className="section-container">
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {plans.map((plan, index) => {
+              const isPopular = plan.badge === "Más popular";
+              const isPremium = plan.badge === "Premium";
+              const isEnterprise = plan.id === "enterprise";
 
-      {/* Packs View */}
-      {viewMode === 'packs' && (
-        <section className="section-padding -mt-8">
-          <div className="section-container">
-            <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              {packs.map((pack, index) => (
-                <PricingCard
-                  key={pack.id}
-                  id={pack.id}
-                  name={pack.name}
-                  price={pack.price}
-                  priceAnnual={pack.priceAnnual}
-                  badge={pack.badge}
-                  idealFor={pack.idealFor}
-                  features={pack.features}
-                  steps={pack.steps}
-                  language={language}
-                  delay={index * 0.1}
-                />
-              ))}
-            </div>
+              return (
+                <motion.div
+                  key={plan.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.5, delay: index * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+                  whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+                  className={`relative rounded-2xl bg-card border p-6 flex flex-col transition-all duration-300 overflow-visible ${
+                    isPopular
+                      ? "border-primary shadow-neon-md"
+                      : isPremium
+                      ? "border-secondary/30"
+                      : "border-border"
+                  }`}
+                >
+                  {/* Badge */}
+                  {plan.badge && (
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
+                      <span
+                        className={`flex items-center gap-1 px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap shadow-lg ${
+                          isPremium
+                            ? "bg-secondary text-secondary-foreground"
+                            : "bg-primary text-primary-foreground"
+                        }`}
+                      >
+                        {isPremium ? <Crown className="w-3 h-3" /> : <Star className="w-3 h-3" />}
+                        {plan.badge}
+                      </span>
+                    </div>
+                  )}
+
+                  <div className="mb-4 pt-2">
+                    <h3 className="text-xl font-display font-bold text-foreground">{plan.name}</h3>
+                  </div>
+
+                  <div className="mb-5">
+                    {isEnterprise ? (
+                      <div className="flex items-baseline gap-1">
+                        <span className="text-3xl font-display font-bold text-foreground">A medida</span>
+                      </div>
+                    ) : (
+                      <div className="flex items-baseline gap-1">
+                        <span className="text-4xl font-display font-bold text-foreground">{plan.price}€</span>
+                        <span className="text-muted-foreground text-sm">/mes</span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Features */}
+                  <div className="mb-6 flex-1">
+                    <ul className="space-y-2.5">
+                      {plan.features.map((feature, i) => (
+                        <li key={i} className="flex items-start gap-2 text-sm">
+                          <CheckCircle2 className="w-4 h-4 text-success mt-0.5 shrink-0" />
+                          <span className="text-muted-foreground">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <Link to="/contacto">
+                    <Button
+                      className={`w-full ${
+                        isPopular
+                          ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                          : isPremium
+                          ? "bg-secondary text-secondary-foreground hover:bg-secondary/90"
+                          : "border-2 border-primary bg-transparent text-primary hover:bg-primary/10"
+                      }`}
+                    >
+                      {plan.cta}
+                      <ArrowRight className="ml-2 w-4 h-4" />
+                    </Button>
+                  </Link>
+                </motion.div>
+              );
+            })}
           </div>
-        </section>
-      )}
-
-      {/* Individuals View */}
-      {viewMode === 'individuals' && <IndividualsGrid language={language} />}
-
-      {/* Comparison Table */}
-      {viewMode === 'packs' && <ComparisonTable language={language} />}
-
-      {/* Elite Section */}
-      <EliteSection language={language} />
-
-      {/* Maintenance Packs */}
-      <MaintenancePacks language={language} />
+        </div>
+      </section>
 
       {/* CTA */}
       <section className="section-padding">
         <div className="section-container">
-          <div className="card-premium text-center p-12 neon-border max-w-2xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              {language === 'es' ? '¿Necesitas algo personalizado?' : 'Need something custom?'}
+          <div className="rounded-2xl bg-card border border-border text-center p-12 max-w-2xl mx-auto shadow-card">
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 text-foreground">
+              ¿Necesitas algo personalizado?
             </h2>
             <p className="text-muted-foreground mb-8">
-              {language === 'es'
-                ? 'Haz nuestra auditoría gratuita y te recomendamos el mejor plan.'
-                : 'Take our free audit and we recommend the best plan.'}
+              Haz nuestra auditoría gratuita y te recomendamos el mejor plan.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link to="/auditoria">
-                <Button size="lg" className="btn-neon text-lg px-8 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
-                  {language === 'es' ? 'Auditoría Gratis' : 'Free Audit'}
+                <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-lg px-8">
+                  Auditoría Gratis
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
               <Link to="/contacto">
-                <Button size="lg" variant="outline" className="btn-outline-neon focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
+                <Button size="lg" variant="outline" className="border-2 border-primary text-primary hover:bg-primary/10">
                   <Phone className="w-4 h-4 mr-2" />
-                  {language === 'es' ? 'Hablar con humano' : 'Talk to a human'}
+                  Hablar con humano
                 </Button>
               </Link>
             </div>
