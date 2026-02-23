@@ -10,7 +10,8 @@ import {
   EnterpriseElite,
   LeadFormMultiStep,
 } from "@/components/landing";
-import { PRICING_DEMO_VIDEO_URL, isValidUrl } from "@/lib/constants";
+import { LiteYouTube } from "@/components/landing/LiteYouTube";
+import { HERO_DEMO_VIDEO_ID } from "@/lib/constants";
 import { Shield, Zap } from "lucide-react";
 
 // Lazy-loaded below-the-fold sections
@@ -41,65 +42,53 @@ const Index = () => {
 
         <HeroWorld />
 
-        {/* Demo Video (only renders if URL is valid) */}
-        {isValidUrl(PRICING_DEMO_VIDEO_URL) && (
-          <section id="demo" className="section-padding relative overflow-hidden">
-            <div className="section-container relative z-10">
-              <div className="grid lg:grid-cols-2 gap-12 items-center">
-                {/* Left: Copy */}
-                <div>
-                  <div className="badge-primary mb-6 inline-flex items-center gap-2">
-                    <Zap className="w-3 h-3" />
-                    Live Demo
-                  </div>
-
-                  <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">
-                    Watch how it works
-                    <span className="text-gradient-primary block">in 60 seconds</span>
-                  </h2>
-
-                  <p className="text-lg text-muted-foreground mb-8">
-                    Real example of how HydrAI captures leads, qualifies them, and routes them to your team
-                    automatically.
-                  </p>
-
-                  <div className="flex flex-wrap gap-3">
-                    <a
-                      href="#audit"
-                      className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold bg-primary text-primary-foreground hover:opacity-90 transition"
-                    >
-                      Request Free Audit
-                    </a>
-
-                    <a
-                      href="https://youtu.be/86eFCPPktBU"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold border border-border hover:bg-muted/40 transition"
-                    >
-                      Open on YouTube
-                    </a>
-                  </div>
+        {/* Demo Video Section */}
+        <section id="demo" className="section-padding relative overflow-hidden">
+          <div className="section-container relative z-10">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Left: Copy */}
+              <div>
+                <div className="badge-primary mb-6 inline-flex items-center gap-2">
+                  <Zap className="w-3 h-3" />
+                  Live Demo
                 </div>
 
-                {/* Right: Video */}
-                <div className="rounded-2xl border border-border bg-muted/10 overflow-hidden">
-                  <div className="relative w-full" style={{ paddingTop: "56.25%" }}>
-                    <iframe
-                      src={PRICING_DEMO_VIDEO_URL}
-                      title="HydrAI Labs — Demo"
-                      className="absolute inset-0 w-full h-full"
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      allowFullScreen
-                      loading="lazy"
-                    />
-                  </div>
+                <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">
+                  Watch how it works
+                  <span className="text-gradient-primary block">in 60 seconds</span>
+                </h2>
+
+                <p className="text-lg text-muted-foreground mb-8">
+                  Real example of how HydrAI captures leads, qualifies them, and routes them to your team
+                  automatically.
+                </p>
+
+                <div className="flex flex-wrap gap-3">
+                  <a
+                    href="#audit"
+                    className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold bg-primary text-primary-foreground hover:opacity-90 transition"
+                  >
+                    Request Free Audit
+                  </a>
+
+                  <a
+                    href="https://youtu.be/jvHA_QbYqf4"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold border border-border hover:bg-muted/40 transition"
+                  >
+                    Open on YouTube
+                  </a>
                 </div>
               </div>
+
+              {/* Right: Video */}
+              <div className="rounded-2xl border border-border bg-muted/10 overflow-hidden">
+                <LiteYouTube videoId="jvHA_QbYqf4" title="HydrAI Labs — Demo" />
+              </div>
             </div>
-          </section>
-        )}
+          </div>
+        </section>
 
         <TrustBar />
         <UseCaseTabs />
