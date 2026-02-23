@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLandingTranslation } from "@/lib/i18n";
-import { LiteYouTube } from "./LiteYouTube";
+import LiteYouTube from "./LiteYouTube";
 import { HERO_DEMO_VIDEO_ID } from "@/lib/constants";
 
 const containerVariants = {
