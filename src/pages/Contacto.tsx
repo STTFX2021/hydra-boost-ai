@@ -1,4 +1,5 @@
 import { PageLayout } from "@/components/layout/PageLayout";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -252,12 +253,12 @@ const Contacto = () => {
                 <div className="card-premium neon-border text-center p-6">
                   <h4 className="font-display font-semibold mb-2">¿Prefieres una auditoría?</h4>
                   <p className="text-sm text-muted-foreground mb-4">Descubre gratis cómo la IA puede ayudarte.</p>
-                  <a href="/auditoria">
+                  <Link to="/auditoria">
                     <Button className="btn-neon w-full">
                       Auditoría gratuita
                       <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -275,12 +276,12 @@ const Contacto = () => {
               <p className="text-muted-foreground mb-6">
                 Construimos sistemas con potencial de escala. Únete como partner.
               </p>
-              <a href="/inversores">
+              <Link to="/inversores">
                 <Button className="btn-neon">
                   Acceder al Investor Hub
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
-              </a>
+              </Link>
             </div>
           </div>
         </section>
