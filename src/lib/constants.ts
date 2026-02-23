@@ -19,7 +19,7 @@ export const isValidUrl = (url: string): boolean => {
 export const DISCORD_INVITE_URL = "https://discord.gg/KrymATqa";
 
 // Pricing page demo video URL - YouTube embed (privacy-enhanced)
-export const PRICING_DEMO_VIDEO_URL = "https://www.youtube-nocookie.com/embed/86eFCPPktBU?rel=0&modestbranding=1";
+export const PRICING_DEMO_VIDEO_URL = "https://www.youtube-nocookie.com/embed/jvHA_QbYqf4?rel=0&modestbranding=1&autoplay=0&iv_load_policy=3";
 
 // Hero demo video ID (YouTube)
 export const HERO_DEMO_VIDEO_ID = "IcD68znrU_c";
