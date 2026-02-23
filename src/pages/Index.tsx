@@ -72,7 +72,7 @@ const Index = () => {
                     </a>
 
                     <a
-                      href="https://youtu.be/iqP-AjMtGBA"
+                      href="https://youtu.be/86eFCPPktBU"
                       target="_blank"
                       rel="noreferrer"
                       className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold border border-border hover:bg-muted/40 transition"

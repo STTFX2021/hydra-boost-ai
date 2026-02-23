@@ -19,10 +19,10 @@ export const isValidUrl = (url: string): boolean => {
 export const DISCORD_INVITE_URL = "https://discord.gg/KrymATqa";
 
 // Pricing page demo video URL - YouTube embed (privacy-enhanced)
-export const PRICING_DEMO_VIDEO_URL = "https://www.youtube-nocookie.com/embed/iqP-AjMtGBA?rel=0&modestbranding=1";
+export const PRICING_DEMO_VIDEO_URL = "https://www.youtube-nocookie.com/embed/86eFCPPktBU?rel=0&modestbranding=1";
 
 // Hero demo video ID (YouTube)
-export const HERO_DEMO_VIDEO_ID = "jvHA_QbYqf4";
+export const HERO_DEMO_VIDEO_ID = "IcD68znrU_c";
 
 // Booking/Calendar URL - replace with your actual Calendly/Cal.com URL
 export const BOOKING_URL = "https://calendly.com/hydrailabs/consulta";
