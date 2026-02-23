@@ -10,8 +10,7 @@ import {
   EnterpriseElite,
   LeadFormMultiStep,
 } from "@/components/landing";
-import LiteYouTube from "@/components/landing/LiteYouTube";
-import { HERO_DEMO_VIDEO_ID } from "@/lib/constants";
+import WorkflowAnimation from "@/components/WorkflowAnimation";
 import { Shield, Zap } from "lucide-react";
 
 // Lazy-loaded below-the-fold sections
@@ -84,7 +83,7 @@ const Index = () => {
 
               {/* Right: Video */}
               <div className="rounded-2xl border border-border bg-muted/10 overflow-hidden">
-                <LiteYouTube videoId="jvHA_QbYqf4" title="HydrAI Labs — Demo" />
+                <WorkflowAnimation />
               </div>
             </div>
           </div>

@@ -3,8 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLandingTranslation } from "@/lib/i18n";
-import LiteYouTube from "./LiteYouTube";
-import { HERO_DEMO_VIDEO_ID } from "@/lib/constants";
+import AutomationAnimation from "@/components/AutomationAnimation";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -238,10 +237,7 @@ export const HeroWorld = () => {
             {/* Main Video Preview */}
             <div className="relative z-10">
               <div className="card-premium p-2 overflow-hidden neon-border">
-                <LiteYouTube
-                  videoId={HERO_DEMO_VIDEO_ID}
-                  title="HydrAI Labs Demo"
-                />
+                <AutomationAnimation />
               </div>
             </div>
 
