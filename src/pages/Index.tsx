@@ -10,7 +10,7 @@ import {
   EnterpriseElite,
   LeadFormMultiStep,
 } from "@/components/landing";
-import { LiteYouTube } from "@/components/landing/LiteYouTube";
+import LiteYouTube from "@/components/landing/LiteYouTube";
 import { HERO_DEMO_VIDEO_ID } from "@/lib/constants";
 import { Shield, Zap } from "lucide-react";
 
