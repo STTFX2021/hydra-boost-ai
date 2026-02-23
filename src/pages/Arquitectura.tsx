@@ -571,7 +571,7 @@ export default function Arquitectura() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="card-premium p-6"
+                  className="rounded-xl border-2 border-[#cbd5e1] bg-[#f8fafc] p-6"
                 >
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
@@ -579,10 +579,10 @@ export default function Arquitectura() {
                     </div>
                     <h3 className="font-display font-semibold">{detail.title}</h3>
                   </div>
-                  <p className="text-sm text-muted-foreground mb-4">{detail.description}</p>
+                  <p className="text-sm text-muted-foreground font-medium mb-4">{detail.description}</p>
                   <ul className="space-y-2">
                     {detail.bullets.map((bullet, j) => (
-                      <li key={j} className="flex items-start gap-2 text-xs text-muted-foreground">
+                      <li key={j} className="flex items-start gap-2 text-xs text-muted-foreground font-medium">
                         <CheckCircle2 className="w-3 h-3 text-success mt-0.5 shrink-0" />
                         {bullet}
                       </li>

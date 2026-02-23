@@ -256,7 +256,7 @@ const Servicios = () => {
                       <h4 className="font-semibold mb-3">{t.includes}</h4>
                       <ul className="space-y-2 mb-6">
                         {service.features.map((feature, i) => (
-                          <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                          <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground font-medium">
                             <CheckCircle2 className="w-4 h-4 text-success mt-0.5 shrink-0" />
                             {feature}
                           </li>
@@ -275,13 +275,13 @@ const Servicios = () => {
                       </Link>
                     </div>
 
-                    <div className={`card-premium ${index % 2 === 1 ? "lg:order-1" : ""}`}>
+                    <div className={`rounded-xl border-2 border-[#cbd5e1] bg-[#f8fafc] p-6 ${index % 2 === 1 ? "lg:order-1" : ""}`}>
                       <div className="space-y-6">
                         <div>
                           <h4 className="text-sm font-semibold text-muted-foreground uppercase mb-3">{t.deliverables}</h4>
                           <ul className="space-y-2">
                             {service.deliverables.map((d, i) => (
-                              <li key={i} className="flex items-center gap-2 text-sm">
+                              <li key={i} className="flex items-center gap-2 text-sm font-medium">
                                 <CheckCircle2 className="w-4 h-4 text-primary" />
                                 {d}
                               </li>
