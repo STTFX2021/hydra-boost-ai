@@ -114,12 +114,12 @@ const PreciosContent = () => {
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.5, delay: index * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
                   whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
-                  className={`relative rounded-2xl bg-card border p-6 flex flex-col transition-all duration-300 overflow-visible ${
+                  className={`relative card-elevated card-elevated-hover p-6 flex flex-col overflow-visible ${
                     isPopular
                       ? "border-primary shadow-neon-md"
                       : isPremium
                       ? "border-secondary/30"
-                      : "border-border"
+                      : ""
                   }`}
                 >
                   {/* Badge */}
@@ -191,7 +191,7 @@ const PreciosContent = () => {
       {/* CTA */}
       <section className="section-padding">
         <div className="section-container">
-          <div className="rounded-2xl bg-card border border-border text-center p-12 max-w-2xl mx-auto shadow-card">
+          <div className="card-elevated text-center p-12 max-w-2xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 text-foreground">
               ¿Necesitas algo personalizado?
             </h2>
@@ -200,7 +200,7 @@ const PreciosContent = () => {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link to="/auditoria">
-                <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-lg px-8">
+                <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-lg px-8 btn-depth">
                   Auditoría Gratis
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>

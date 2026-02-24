@@ -85,7 +85,7 @@ const Casos = () => {
                 const features = project.features?.[language as 'es' | 'en'] || project.features?.es;
                 
                 return (
-                  <div key={project.id} className="card-premium group flex flex-col overflow-hidden">
+                  <div key={project.id} className="card-elevated card-elevated-hover group flex flex-col overflow-hidden p-6">
                     {/* Image */}
                     <div className="relative h-48 -mx-6 -mt-6 mb-4 overflow-hidden">
                       <img 
@@ -167,7 +167,7 @@ const Casos = () => {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {testimonials.map((testimonial) => (
-                <div key={testimonial.id} className="card-premium">
+                <div key={testimonial.id} className="card-elevated card-elevated-hover p-6">
                   {/* Stars */}
                   <div className="flex gap-1 mb-4">
                     {Array.from({ length: testimonial.rating }).map((_, i) => (
@@ -195,7 +195,7 @@ const Casos = () => {
         {/* CTA */}
         <section className="section-padding">
           <div className="section-container">
-            <div className="card-premium text-center p-12 neon-border max-w-2xl mx-auto">
+            <div className="card-elevated text-center p-12 max-w-2xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
                 {t.ctaTitle}
               </h2>
@@ -203,7 +203,7 @@ const Casos = () => {
                 {t.ctaSubtitle}
               </p>
               <Link to="/contacto">
-                <Button size="lg" className="btn-neon text-lg px-8">
+                <Button size="lg" className="btn-neon text-lg px-8 btn-depth">
                   {t.ctaButton}
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
