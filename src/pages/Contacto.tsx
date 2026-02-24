@@ -115,7 +115,7 @@ const Contacto = () => {
             <div className="grid lg:grid-cols-5 gap-12 max-w-6xl mx-auto">
               {/* Formulario */}
               <div className="lg:col-span-3">
-                <div className="card-premium">
+                <div className="card-elevated card-elevated-hover p-6">
                   <h2 className="text-xl font-display font-bold mb-6">Envíanos un mensaje</h2>
 
                   <form onSubmit={handleSubmit} className="space-y-6">
@@ -185,7 +185,7 @@ const Contacto = () => {
                       />
                     </div>
 
-                    <Button type="submit" className="btn-neon w-full" disabled={loading}>
+                    <Button type="submit" className="btn-neon btn-depth w-full" disabled={loading}>
                       {loading ? (
                         "Enviando..."
                       ) : (
@@ -205,7 +205,7 @@ const Contacto = () => {
                   href={DISCORD_INVITE_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="card-premium flex items-center gap-4 group"
+                  className="card-elevated card-elevated-hover p-4 flex items-center gap-4 group"
                 >
                   <div className="w-12 h-12 rounded-xl bg-[#5865F2]/10 flex items-center justify-center group-hover:bg-[#5865F2]/20 transition">
                     <svg className="w-6 h-6 text-[#5865F2]" viewBox="0 0 24 24" fill="currentColor">
@@ -219,7 +219,7 @@ const Contacto = () => {
                   <ArrowRight className="w-4 h-4 ml-auto text-muted-foreground group-hover:text-foreground transition" />
                 </a>
 
-                <a href="mailto:hola@hydrailabs.com" className="card-premium flex items-center gap-4 group">
+                <a href="mailto:hola@hydrailabs.com" className="card-elevated card-elevated-hover p-4 flex items-center gap-4 group">
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition">
                     <Mail className="w-6 h-6 text-primary" />
                   </div>
@@ -230,7 +230,7 @@ const Contacto = () => {
                   <ArrowRight className="w-4 h-4 ml-auto text-muted-foreground group-hover:text-foreground transition" />
                 </a>
 
-                <div className="card-premium flex items-center gap-4">
+                <div className="card-elevated card-elevated-hover p-4 flex items-center gap-4">
                   <div className="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center">
                     <MapPin className="w-6 h-6 text-secondary" />
                   </div>
@@ -240,7 +240,7 @@ const Contacto = () => {
                   </div>
                 </div>
 
-                <div className="card-premium flex items-center gap-4">
+                <div className="card-elevated card-elevated-hover p-4 flex items-center gap-4">
                   <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center">
                     <Clock className="w-6 h-6 text-accent" />
                   </div>
@@ -254,7 +254,7 @@ const Contacto = () => {
                   <h4 className="font-display font-semibold mb-2">¿Prefieres una auditoría?</h4>
                   <p className="text-sm text-muted-foreground mb-4">Descubre gratis cómo la IA puede ayudarte.</p>
                   <Link to="/auditoria">
-                    <Button className="btn-neon w-full">
+                    <Button className="btn-neon btn-depth w-full">
                       Auditoría gratuita
                       <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
@@ -277,7 +277,7 @@ const Contacto = () => {
                 Construimos sistemas con potencial de escala. Únete como partner.
               </p>
               <Link to="/inversores">
-                <Button className="btn-neon">
+                <Button className="btn-neon btn-depth">
                   Acceder al Investor Hub
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>

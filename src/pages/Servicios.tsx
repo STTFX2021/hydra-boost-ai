@@ -268,14 +268,14 @@ const Servicios = () => {
                       </div>
 
                       <Link to="/contacto">
-                        <Button className="btn-neon">
+                        <Button className="btn-neon btn-depth">
                           {t.requestService}
                           <ArrowRight className="ml-2 w-4 h-4" />
                         </Button>
                       </Link>
                     </div>
 
-                    <div className={`rounded-xl border-2 border-[#cbd5e1] bg-[#f8fafc] p-6 ${index % 2 === 1 ? "lg:order-1" : ""}`}>
+                    <div className={`card-elevated card-elevated-hover p-6 ${index % 2 === 1 ? "lg:order-1" : ""}`}>
                       <div className="space-y-6">
                         <div>
                           <h4 className="text-sm font-semibold text-muted-foreground uppercase mb-3">{t.deliverables}</h4>
@@ -324,7 +324,7 @@ const Servicios = () => {
                 {t.ctaSubtitle}
               </p>
               <Link to="/auditoria">
-                <Button size="lg" className="btn-neon text-lg px-8">
+                <Button size="lg" className="btn-neon btn-depth text-lg px-8">
                   {t.ctaButton}
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>

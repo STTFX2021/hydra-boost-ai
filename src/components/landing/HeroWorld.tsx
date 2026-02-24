@@ -148,7 +148,7 @@ export const HeroWorld = () => {
   const t = content[language] || content.es;
 
   return (
-    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-gradient-to-br from-background via-background to-muted/20">
+    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden section-tint bg-mesh-hydrai">
       {/* Background effects */}
       <div className="absolute inset-0 bg-grid opacity-10" />
       <div className="glow-orb-primary w-[700px] h-[700px] -top-80 -left-80 opacity-30" />
@@ -178,7 +178,7 @@ export const HeroWorld = () => {
               className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-bold tracking-tight leading-[1.1]"
             >
               {t.title1}
-              <span className="block text-gradient-primary">
+              <span className="block text-gradient-hydrai text-glow-soft">
                 {t.title2}
               </span>
             </motion.h1>
@@ -197,7 +197,7 @@ export const HeroWorld = () => {
             {/* CTAs */}
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4">
               <Link to="/auditoria">
-                <Button size="lg" className="btn-neon text-base px-8 py-6 group w-full sm:w-auto">
+                <Button size="lg" className="btn-neon btn-depth text-base px-8 py-6 group w-full sm:w-auto">
                   {t.ctaPrimary}
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
@@ -206,7 +206,7 @@ export const HeroWorld = () => {
                 <Button 
                   size="lg" 
                   variant="outline" 
-                  className="btn-outline-neon text-base px-8 py-6 w-full sm:w-auto"
+                  className="btn-outline-neon btn-depth text-base px-8 py-6 w-full sm:w-auto"
                 >
                   {t.ctaSecondary}
                 </Button>

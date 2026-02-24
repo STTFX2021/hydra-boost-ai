@@ -349,6 +349,78 @@
     @apply absolute top-0 left-0 right-0 h-1;
     background: var(--gradient-primary);
   }
+  /* ─── Depth & Premium Relief Utilities ─── */
+
+  /* Gradient text: cyan → sky → indigo */
+  .text-gradient-hydrai {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(
+      135deg,
+      hsl(190 100% 50%),
+      hsl(200 90% 55%),
+      hsl(230 70% 55%)
+    );
+  }
+
+  /* Subtle heading glow — use ONLY on headings */
+  .text-glow-soft {
+    text-shadow:
+      0 0 12px hsl(190 100% 50% / 0.25),
+      0 0 32px hsl(200 90% 55% / 0.12);
+  }
+
+  /* Elevated glass card */
+  .card-elevated {
+    @apply bg-white/80 backdrop-blur-md border border-border/60 rounded-2xl;
+    box-shadow:
+      0 1px 2px hsl(228 45% 9% / 0.04),
+      0 4px 12px hsl(228 45% 9% / 0.06),
+      0 12px 32px hsl(190 100% 50% / 0.06);
+  }
+
+  /* Hover lift for elevated cards */
+  .card-elevated-hover {
+    @apply transition-all duration-300;
+  }
+
+  .card-elevated-hover:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 2px 4px hsl(228 45% 9% / 0.05),
+      0 8px 20px hsl(228 45% 9% / 0.08),
+      0 20px 48px hsl(190 100% 50% / 0.1);
+  }
+
+  /* Section tint — gentle gradient overlay */
+  .section-tint {
+    background: linear-gradient(
+      180deg,
+      hsl(210 40% 98%) 0%,
+      hsl(200 60% 97%) 50%,
+      hsl(210 40% 98%) 100%
+    );
+  }
+
+  /* Mesh background — 3 soft radials */
+  .bg-mesh-hydrai {
+    background-image:
+      radial-gradient(ellipse 60% 50% at 10% 20%, hsl(190 100% 50% / 0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 60% at 85% 30%, hsl(230 70% 55% / 0.05) 0%, transparent 60%),
+      radial-gradient(ellipse 70% 50% at 50% 80%, hsl(200 90% 55% / 0.04) 0%, transparent 60%);
+  }
+
+  /* Button micro-interaction */
+  .btn-depth {
+    @apply transition-transform duration-200;
+  }
+
+  .btn-depth:hover {
+    transform: scale(1.02);
+  }
+
+  .btn-depth:active {
+    transform: scale(0.99);
+  }
 }
 
 @layer utilities {

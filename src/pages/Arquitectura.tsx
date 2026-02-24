@@ -435,7 +435,7 @@ export default function Arquitectura() {
             <div className="grid lg:grid-cols-3 gap-8">
               {/* Main Diagram */}
               <div className="lg:col-span-2">
-                <div className="card-premium p-8 relative overflow-hidden min-h-[500px]">
+                <div className="card-elevated p-8 relative overflow-hidden min-h-[500px]">
                   <div className="absolute inset-0 opacity-5">
                     <div className="h-full w-full" style={{
                       backgroundImage: "radial-gradient(circle, hsl(var(--primary)) 1px, transparent 1px)",
@@ -510,7 +510,7 @@ export default function Arquitectura() {
 
               {/* Live Events Feed */}
               <div className="lg:col-span-1">
-                <div className="card-premium p-6 h-full">
+                <div className="card-elevated p-6 h-full">
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="font-display font-semibold">{t.liveEventsTitle}</h3>
                     <Badge variant="outline" className="gap-1">
@@ -571,7 +571,7 @@ export default function Arquitectura() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="rounded-xl border-2 border-[#cbd5e1] bg-[#f8fafc] p-6"
+                  className="card-elevated card-elevated-hover p-6"
                 >
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
@@ -608,7 +608,7 @@ export default function Arquitectura() {
                 {t.ctaSubtitle}
               </p>
               <Link to="/auditoria">
-                <Button size="lg" className="btn-neon gap-2">
+                <Button size="lg" className="btn-neon btn-depth gap-2">
                   {t.ctaButton}
                   <ArrowRight className="w-4 h-4" />
                 </Button>
