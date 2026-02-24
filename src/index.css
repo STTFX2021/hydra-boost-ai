@@ -365,17 +365,17 @@
   /* Subtle heading glow — use ONLY on headings */
   .text-glow-soft {
     text-shadow:
-      0 0 12px hsl(190 100% 50% / 0.25),
-      0 0 32px hsl(200 90% 55% / 0.12);
+      0 0 16px hsl(190 100% 50% / 0.35),
+      0 0 40px hsl(200 90% 55% / 0.18);
   }
 
   /* Elevated glass card */
   .card-elevated {
     @apply bg-white/80 backdrop-blur-md border border-border/60 rounded-2xl;
     box-shadow:
-      0 1px 2px hsl(228 45% 9% / 0.04),
-      0 4px 12px hsl(228 45% 9% / 0.06),
-      0 12px 32px hsl(190 100% 50% / 0.06);
+      0 1px 3px hsl(228 45% 9% / 0.06),
+      0 6px 16px hsl(228 45% 9% / 0.08),
+      0 16px 40px hsl(190 100% 50% / 0.09);
   }
 
   /* Hover lift for elevated cards */
@@ -384,11 +384,11 @@
   }
 
   .card-elevated-hover:hover {
-    transform: translateY(-3px);
+    transform: translateY(-4px);
     box-shadow:
-      0 2px 4px hsl(228 45% 9% / 0.05),
-      0 8px 20px hsl(228 45% 9% / 0.08),
-      0 20px 48px hsl(190 100% 50% / 0.1);
+      0 2px 6px hsl(228 45% 9% / 0.07),
+      0 10px 24px hsl(228 45% 9% / 0.1),
+      0 24px 56px hsl(190 100% 50% / 0.14);
   }
 
   /* Section tint — gentle gradient overlay */
