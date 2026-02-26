@@ -102,7 +102,7 @@ export function Recommendation({
         <Button
           onClick={() => {
             onDiscordClick();
-            window.open(DISCORD_INVITE_URL, "_blank");
+            window.open(DISCORD_INVITE_URL, "_blank", "noopener,noreferrer");
           }}
           className="w-full h-12 text-base font-bold bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg shadow-primary/25"
         >
