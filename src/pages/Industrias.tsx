@@ -422,7 +422,7 @@ const IndustriasContent = () => {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {automations.map((automation) => (
-              <div key={automation.id} className="card-premium group hover:border-primary/50 transition-all duration-300">
+              <div key={automation.id} className="card-elevated card-elevated-hover group transition-all duration-300 p-5">
                 <div className="flex items-start gap-3 mb-3">
                   <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
                     <automation.icon className="w-5 h-5 text-primary" />
@@ -461,7 +461,7 @@ const IndustriasContent = () => {
             {packs.map((pack) => (
               <div 
                 key={pack.id} 
-                className={`relative card-premium flex flex-col ${pack.badge === (language === 'es' ? 'Más popular' : 'Most popular') ? 'border-primary neon-border' : pack.badge === 'Premium' ? 'border-accent' : ''}`}
+                className={`relative card-elevated card-elevated-hover flex flex-col p-6 ${pack.badge === (language === 'es' ? 'Más popular' : 'Most popular') ? 'border-primary neon-border' : pack.badge === 'Premium' ? 'border-accent' : ''}`}
               >
                 {pack.badge && (
                   <div className="absolute top-0 right-4 -translate-y-1/2">
@@ -567,7 +567,7 @@ const IndustriasContent = () => {
                   {/* Left: Flow & KPIs */}
                   <div className="space-y-6">
                     {/* Flow */}
-                    <div className="card-premium">
+                    <div className="card-elevated card-elevated-hover p-5">
                       <h4 className="font-display font-semibold mb-4">{language === 'es' ? 'Flujo del Bot' : 'Bot Flow'}</h4>
                       <ol className="space-y-3">
                         {industry.flow.map((step, i) => (
@@ -582,7 +582,7 @@ const IndustriasContent = () => {
                     </div>
 
                     {/* Intake Data */}
-                    <div className="card-premium">
+                    <div className="card-elevated card-elevated-hover p-5">
                       <h4 className="font-display font-semibold mb-4">{language === 'es' ? 'Datos que Captura' : 'Data Captured'}</h4>
                       <div className="flex flex-wrap gap-2">
                         {industry.intake.map((field, i) => (
@@ -592,7 +592,7 @@ const IndustriasContent = () => {
                     </div>
 
                     {/* KPIs */}
-                    <div className="card-premium">
+                    <div className="card-elevated card-elevated-hover p-5">
                       <h4 className="font-display font-semibold mb-4">{language === 'es' ? 'Resultados Esperados' : 'Expected Results'}</h4>
                       <div className="grid grid-cols-3 gap-3">
                         {industry.kpis.map((kpi, i) => (
@@ -605,7 +605,7 @@ const IndustriasContent = () => {
                   </div>
 
                   {/* Right: Conversation Example */}
-                  <div className="card-premium">
+                  <div className="card-elevated card-elevated-hover p-5">
                     <h4 className="font-display font-semibold mb-4 flex items-center gap-2">
                       <MessageSquare className="w-4 h-4 text-primary" />
                       {language === 'es' ? 'Ejemplo de Conversación' : 'Conversation Example'}
@@ -652,7 +652,7 @@ const IndustriasContent = () => {
       {/* CTA */}
       <section className="section-padding">
         <div className="section-container">
-          <div className="card-premium text-center p-12 neon-border max-w-3xl mx-auto">
+          <div className="card-elevated text-center p-12 max-w-3xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
               {language === 'es' ? '¿Tu sector no está aquí?' : "Your sector not listed?"}
             </h2>
@@ -662,7 +662,7 @@ const IndustriasContent = () => {
                 : 'We create custom automations for any business. Tell us your case.'}
             </p>
             <Link to="/contacto">
-              <Button size="lg" className="btn-neon text-lg px-8">
+              <Button size="lg" className="btn-neon text-lg px-8 btn-depth">
                 {t("nav.contact")}
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
