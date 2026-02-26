@@ -1,12 +1,26 @@
 import { PageLayout } from "@/components/layout/PageLayout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { 
   Globe, Bot, Calendar, Star, Users, TrendingUp,
-  ArrowRight, CheckCircle2, Clock, Zap
+  ArrowRight, CheckCircle2, Clock, Zap, Sparkles
 } from "lucide-react";
 import { useTranslation } from "@/lib/i18n";
 import { SEOHead, ServiceSchema, BreadcrumbSchema } from "@/components/seo";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
+};
 
 const Servicios = () => {
   const { language } = useTranslation();
@@ -37,6 +51,7 @@ const Servicios = () => {
           time: "7-14 días",
           price: "497€ + IVA",
           kpis: ["+300% visibilidad", "2x leads orgánicos"],
+          accent: "from-primary to-[hsl(200_100%_40%)]",
         },
         {
           id: "chatbotWeb",
@@ -49,6 +64,7 @@ const Servicios = () => {
           time: "3-5 días",
           price: "295€ + IVA",
           kpis: ["+60% leads capturados", "-80% tiempo respuesta"],
+          accent: "from-[hsl(230_70%_55%)] to-primary",
         },
         {
           id: "chatbotWhatsApp",
@@ -61,6 +77,7 @@ const Servicios = () => {
           time: "3-5 días",
           price: "350€ + IVA",
           kpis: ["+90% tasa respuesta", "-70% no-shows"],
+          accent: "from-[hsl(150_70%_40%)] to-primary",
         },
         {
           id: "reservas",
@@ -73,6 +90,7 @@ const Servicios = () => {
           time: "3-5 días",
           price: "197€ + IVA",
           kpis: ["-80% no-shows", "+40% reservas online"],
+          accent: "from-primary to-[hsl(200_90%_55%)]",
         },
         {
           id: "pasarelaPago",
@@ -85,6 +103,7 @@ const Servicios = () => {
           time: "2-3 días",
           price: "197€ + IVA",
           kpis: ["+35% conversión", "Cobro inmediato"],
+          accent: "from-[hsl(38_92%_50%)] to-primary",
         },
         {
           id: "tiendaOnline",
@@ -97,6 +116,7 @@ const Servicios = () => {
           time: "7-14 días",
           price: "497€ + IVA",
           kpis: ["Venta online 24/7", "+200% alcance"],
+          accent: "from-[hsl(280_70%_55%)] to-primary",
         },
       ],
     },
@@ -125,6 +145,7 @@ const Servicios = () => {
           time: "7-14 days",
           price: "€497 + VAT",
           kpis: ["+300% visibility", "2x organic leads"],
+          accent: "from-primary to-[hsl(200_100%_40%)]",
         },
         {
           id: "chatbotWeb",
@@ -137,6 +158,7 @@ const Servicios = () => {
           time: "3-5 days",
           price: "€295 + VAT",
           kpis: ["+60% leads captured", "-80% response time"],
+          accent: "from-[hsl(230_70%_55%)] to-primary",
         },
         {
           id: "chatbotWhatsApp",
@@ -149,6 +171,7 @@ const Servicios = () => {
           time: "3-5 days",
           price: "€350 + VAT",
           kpis: ["+90% response rate", "-70% no-shows"],
+          accent: "from-[hsl(150_70%_40%)] to-primary",
         },
         {
           id: "reservas",
@@ -161,6 +184,7 @@ const Servicios = () => {
           time: "3-5 days",
           price: "€197 + VAT",
           kpis: ["-80% no-shows", "+40% online bookings"],
+          accent: "from-primary to-[hsl(200_90%_55%)]",
         },
         {
           id: "pasarelaPago",
@@ -173,6 +197,7 @@ const Servicios = () => {
           time: "2-3 days",
           price: "€197 + VAT",
           kpis: ["+35% conversion", "Immediate payment"],
+          accent: "from-[hsl(38_92%_50%)] to-primary",
         },
         {
           id: "tiendaOnline",
@@ -185,6 +210,7 @@ const Servicios = () => {
           time: "7-14 days",
           price: "€497 + VAT",
           kpis: ["Online sales 24/7", "+200% reach"],
+          accent: "from-[hsl(280_70%_55%)] to-primary",
         },
       ],
     },
@@ -212,100 +238,187 @@ const Servicios = () => {
       
       <PageLayout>
         {/* Hero */}
-        <section className="relative section-padding overflow-hidden">
-          <div className="glow-orb-primary w-96 h-96 -top-48 -right-48" />
-          <div className="glow-orb-secondary w-64 h-64 bottom-0 left-0" />
+        <section className="relative section-padding overflow-hidden bg-mesh-hydrai">
+          <div className="glow-orb-primary w-[500px] h-[500px] -top-60 -right-60 opacity-20" />
+          <div className="glow-orb-accent w-80 h-80 bottom-0 left-10 opacity-15" />
           
           <div className="section-container relative z-10">
-            <div className="max-w-3xl mx-auto text-center">
-              <div className="badge-primary mb-6 inline-flex">
-                <Zap className="w-3 h-3 mr-1" /> {t.badge}
-              </div>
+            <motion.div 
+              className="max-w-3xl mx-auto text-center"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <motion.div 
+                className="badge-primary mb-6 inline-flex"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.2 }}
+              >
+                <Sparkles className="w-3.5 h-3.5 mr-1.5" /> {t.badge}
+              </motion.div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
-                {t.title} <span className="text-gradient-primary">{t.titleHighlight}</span>
+                {t.title}{" "}
+                <span className="text-gradient-hydrai text-glow-soft">{t.titleHighlight}</span>
               </h1>
-              <p className="text-lg text-muted-foreground mb-8">
+              <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
                 {t.subtitle}
               </p>
-            </div>
+
+              {/* Decorative divider */}
+              <motion.div
+                className="flex items-center justify-center gap-3 mt-4"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+              >
+                <div className="h-px w-16 bg-gradient-to-r from-transparent to-primary/40" />
+                <div className="w-2 h-2 rounded-full bg-primary/60 animate-pulse-slow" />
+                <div className="h-px w-16 bg-gradient-to-l from-transparent to-primary/40" />
+              </motion.div>
+            </motion.div>
           </div>
         </section>
 
         {/* Services List */}
-        <section className="section-padding bg-muted/10">
-          <div className="section-container">
-            <div className="space-y-16">
+        <section className="section-padding relative overflow-hidden">
+          {/* Subtle background pattern */}
+          <div className="absolute inset-0 bg-dots opacity-30 pointer-events-none" />
+          
+          <div className="section-container relative z-10">
+            <div className="space-y-24 lg:space-y-32">
               {t.services.map((service, index) => {
                 const IconComponent = service.icon;
+                const isReversed = index % 2 === 1;
+                
                 return (
-                  <div
+                  <motion.div
                     key={service.id}
                     id={service.id}
-                    className={`grid lg:grid-cols-2 gap-12 items-center ${
-                      index % 2 === 1 ? "lg:flex-row-reverse" : ""
-                    }`}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-80px" }}
+                    variants={containerVariants}
+                    className={`grid lg:grid-cols-2 gap-10 lg:gap-16 items-center`}
                   >
-                    <div className={index % 2 === 1 ? "lg:order-2" : ""}>
-                      <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
-                        <IconComponent className="w-8 h-8 text-primary" />
-                      </div>
-                      <h2 className="text-3xl font-display font-bold mb-2">{service.title}</h2>
-                      <p className="text-primary font-medium mb-4">{service.subtitle}</p>
-                      <p className="text-muted-foreground mb-6">{service.description}</p>
+                    {/* Content side */}
+                    <motion.div 
+                      className={isReversed ? "lg:order-2" : ""}
+                      variants={itemVariants}
+                    >
+                      {/* Icon with gradient background */}
+                      <motion.div 
+                        className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.accent} flex items-center justify-center mb-6 shadow-lg`}
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                      >
+                        <IconComponent className="w-8 h-8 text-white" />
+                      </motion.div>
+                      
+                      <h2 className="text-3xl lg:text-4xl font-display font-bold mb-2">{service.title}</h2>
+                      <p className="text-primary font-semibold mb-4 text-lg">{service.subtitle}</p>
+                      <p className="text-muted-foreground mb-6 leading-relaxed">{service.description}</p>
 
-                      <h4 className="font-semibold mb-3">{t.includes}</h4>
-                      <ul className="space-y-2 mb-6">
+                      <h4 className="font-semibold mb-3 text-sm uppercase tracking-wider text-foreground/80">{t.includes}</h4>
+                      <motion.ul 
+                        className="space-y-2.5 mb-6"
+                        variants={containerVariants}
+                      >
                         {service.features.map((feature, i) => (
-                          <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground font-medium">
+                          <motion.li 
+                            key={i} 
+                            className="flex items-start gap-2.5 text-sm text-muted-foreground font-medium"
+                            variants={itemVariants}
+                          >
                             <CheckCircle2 className="w-4 h-4 text-success mt-0.5 shrink-0" />
                             {feature}
-                          </li>
+                          </motion.li>
                         ))}
-                      </ul>
+                      </motion.ul>
 
                       <div className="flex items-center gap-4 mb-6">
-                        <span className="badge-primary text-sm font-semibold">{service.price}</span>
+                        <span className={`inline-flex items-center px-4 py-2 rounded-xl text-sm font-bold bg-gradient-to-r ${service.accent} text-white shadow-md`}>
+                          {service.price}
+                        </span>
                       </div>
 
                       <Link to="/contacto">
-                        <Button className="btn-neon btn-depth">
+                        <Button className="btn-neon btn-depth group">
                           {t.requestService}
-                          <ArrowRight className="ml-2 w-4 h-4" />
+                          <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                         </Button>
                       </Link>
-                    </div>
+                    </motion.div>
 
-                    <div className={`card-elevated card-elevated-hover p-6 ${index % 2 === 1 ? "lg:order-1" : ""}`}>
-                      <div className="space-y-6">
-                        <div>
-                          <h4 className="text-sm font-semibold text-muted-foreground uppercase mb-3">{t.deliverables}</h4>
-                          <ul className="space-y-2">
-                            {service.deliverables.map((d, i) => (
-                              <li key={i} className="flex items-center gap-2 text-sm font-medium">
-                                <CheckCircle2 className="w-4 h-4 text-primary" />
-                                {d}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
+                    {/* Card side */}
+                    <motion.div 
+                      className={isReversed ? "lg:order-1" : ""}
+                      variants={itemVariants}
+                    >
+                      <div className="card-elevated card-elevated-hover p-8 relative overflow-hidden">
+                        {/* Accent bar */}
+                        <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${service.accent}`} />
+                        
+                        <div className="space-y-6">
+                          <div>
+                            <h4 className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-4 flex items-center gap-2">
+                              <span className="w-5 h-px bg-primary" />
+                              {t.deliverables}
+                            </h4>
+                            <ul className="space-y-3">
+                              {service.deliverables.map((d, i) => (
+                                <motion.li 
+                                  key={i} 
+                                  className="flex items-center gap-3 text-sm font-medium group/item"
+                                  whileHover={{ x: 4 }}
+                                  transition={{ duration: 0.2 }}
+                                >
+                                  <div className="w-6 h-6 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 group-hover/item:bg-primary/20 transition-colors">
+                                    <CheckCircle2 className="w-3.5 h-3.5 text-primary" />
+                                  </div>
+                                  {d}
+                                </motion.li>
+                              ))}
+                            </ul>
+                          </div>
 
-                        <div className="flex items-center gap-2 text-sm">
-                          <Clock className="w-4 h-4 text-primary" />
-                          <span className="text-muted-foreground">{t.implementTime}</span>
-                          <span className="font-semibold">{service.time}</span>
-                        </div>
+                          {/* Divider */}
+                          <div className="h-px bg-gradient-to-r from-border/50 via-primary/20 to-border/50" />
 
-                        <div>
-                          <h4 className="text-sm font-semibold text-muted-foreground uppercase mb-3">{t.expectedKpis}</h4>
-                          <div className="flex flex-wrap gap-2">
-                            {service.kpis.map((kpi, i) => (
-                              <span key={i} className="badge-success text-xs">{kpi}</span>
-                            ))}
+                          <div className="flex items-center gap-3 text-sm bg-muted/30 rounded-xl p-3">
+                            <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                              <Clock className="w-4 h-4 text-primary" />
+                            </div>
+                            <div>
+                              <span className="text-muted-foreground text-xs">{t.implementTime}</span>
+                              <p className="font-bold text-foreground">{service.time}</p>
+                            </div>
+                          </div>
+
+                          {/* Divider */}
+                          <div className="h-px bg-gradient-to-r from-border/50 via-primary/20 to-border/50" />
+
+                          <div>
+                            <h4 className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-3 flex items-center gap-2">
+                              <span className="w-5 h-px bg-success" />
+                              {t.expectedKpis}
+                            </h4>
+                            <div className="flex flex-wrap gap-2">
+                              {service.kpis.map((kpi, i) => (
+                                <motion.span 
+                                  key={i} 
+                                  className="badge-success text-xs font-bold"
+                                  whileHover={{ scale: 1.05 }}
+                                >
+                                  {kpi}
+                                </motion.span>
+                              ))}
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
+                    </motion.div>
+                  </motion.div>
                 );
               })}
             </div>
@@ -313,23 +426,40 @@ const Servicios = () => {
         </section>
 
         {/* CTA */}
-        <section className="section-padding relative overflow-hidden">
-          <div className="glow-orb-primary w-96 h-96 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+        <section className="section-padding relative overflow-hidden bg-mesh-hydrai">
+          <div className="glow-orb-primary w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-15" />
           <div className="section-container relative z-10">
-            <div className="card-premium text-center p-12 neon-border">
-              <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-                {t.ctaTitle}
-              </h2>
-              <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-                {t.ctaSubtitle}
-              </p>
-              <Link to="/auditoria">
-                <Button size="lg" className="btn-neon btn-depth text-lg px-8">
-                  {t.ctaButton}
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
-              </Link>
-            </div>
+            <motion.div 
+              className="card-elevated text-center p-10 md:p-16 relative overflow-hidden"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              {/* Top gradient accent */}
+              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary via-[hsl(200_90%_55%)] to-[hsl(230_70%_55%)]" />
+              
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+              >
+                <Sparkles className="w-8 h-8 text-primary mx-auto mb-4 animate-pulse-slow" />
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-gradient-hydrai text-glow-soft">
+                  {t.ctaTitle}
+                </h2>
+                <p className="text-muted-foreground mb-8 max-w-xl mx-auto text-lg">
+                  {t.ctaSubtitle}
+                </p>
+                <Link to="/auditoria">
+                  <Button size="lg" className="btn-neon btn-depth text-lg px-10 py-6 group">
+                    {t.ctaButton}
+                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Link>
+              </motion.div>
+            </motion.div>
           </div>
         </section>
       </PageLayout>
