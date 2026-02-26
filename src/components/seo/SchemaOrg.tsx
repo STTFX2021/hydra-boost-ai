@@ -1,35 +1,32 @@
-import { Helmet } from 'react-helmet-async';
+import { Helmet } from "react-helmet-async";
 
-const BASE_URL = 'https://hydrailabs.com';
+const BASE_URL = "https://hydrailabs.com";
 
 // Organization Schema - used site-wide
 export const OrganizationSchema = () => {
   const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'HydrAI Labs',
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "HydrAI Labs",
     url: BASE_URL,
     logo: `${BASE_URL}/favicon.png`,
-    description: 'Agencia de Inteligencia Artificial para negocios locales: webs, chatbots 24/7 y automatizaciones que captan clientes mientras duermes.',
-    email: 'hola@hydrailabs.com',
-    sameAs: [
-      'https://discord.gg/KrymATqa',
-    ],
+    description:
+      "Agencia de Inteligencia Artificial para negocios locales: webs, chatbots 24/7 y automatizaciones que captan clientes mientras duermes.",
+    email: "hola@hydrailabs.com",
+    sameAs: ["https://discord.gg/uBd28UuhvP"],
     address: {
-      '@type': 'PostalAddress',
-      addressCountry: 'ES',
+      "@type": "PostalAddress",
+      addressCountry: "ES",
     },
     areaServed: {
-      '@type': 'Country',
-      name: 'España',
+      "@type": "Country",
+      name: "España",
     },
   };
 
   return (
     <Helmet>
-      <script type="application/ld+json">
-        {JSON.stringify(schema)}
-      </script>
+      <script type="application/ld+json">{JSON.stringify(schema)}</script>
     </Helmet>
   );
 };
@@ -37,33 +34,31 @@ export const OrganizationSchema = () => {
 // LocalBusiness Schema - for service pages
 export const LocalBusinessSchema = () => {
   const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    '@id': `${BASE_URL}/#localbusiness`,
-    name: 'HydrAI Labs',
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": `${BASE_URL}/#localbusiness`,
+    name: "HydrAI Labs",
     image: `${BASE_URL}/og-image.png`,
     url: BASE_URL,
-    telephone: '',
-    email: 'hola@hydrailabs.com',
-    description: 'Agencia de automatización con IA para negocios locales. Creamos webs, chatbots y automatizaciones.',
-    priceRange: '€€',
+    telephone: "",
+    email: "hola@hydrailabs.com",
+    description: "Agencia de automatización con IA para negocios locales. Creamos webs, chatbots y automatizaciones.",
+    priceRange: "€€",
     address: {
-      '@type': 'PostalAddress',
-      addressCountry: 'ES',
+      "@type": "PostalAddress",
+      addressCountry: "ES",
     },
     openingHoursSpecification: {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-      opens: '09:00',
-      closes: '18:00',
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "09:00",
+      closes: "18:00",
     },
   };
 
   return (
     <Helmet>
-      <script type="application/ld+json">
-        {JSON.stringify(schema)}
-      </script>
+      <script type="application/ld+json">{JSON.stringify(schema)}</script>
     </Helmet>
   );
 };
@@ -77,25 +72,25 @@ interface ServiceSchemaProps {
   priceCurrency?: string;
 }
 
-export const ServiceSchema = ({ name, description, url, price, priceCurrency = 'EUR' }: ServiceSchemaProps) => {
+export const ServiceSchema = ({ name, description, url, price, priceCurrency = "EUR" }: ServiceSchemaProps) => {
   const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
+    "@context": "https://schema.org",
+    "@type": "Service",
     name,
     description,
     url: `${BASE_URL}${url}`,
     provider: {
-      '@type': 'Organization',
-      name: 'HydrAI Labs',
+      "@type": "Organization",
+      name: "HydrAI Labs",
       url: BASE_URL,
     },
     areaServed: {
-      '@type': 'Country',
-      name: 'España',
+      "@type": "Country",
+      name: "España",
     },
     ...(price && {
       offers: {
-        '@type': 'Offer',
+        "@type": "Offer",
         price,
         priceCurrency,
       },
@@ -104,9 +99,7 @@ export const ServiceSchema = ({ name, description, url, price, priceCurrency = '
 
   return (
     <Helmet>
-      <script type="application/ld+json">
-        {JSON.stringify(schema)}
-      </script>
+      <script type="application/ld+json">{JSON.stringify(schema)}</script>
     </Helmet>
   );
 };
@@ -123,13 +116,13 @@ interface FAQSchemaProps {
 
 export const FAQSchema = ({ items }: FAQSchemaProps) => {
   const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
     mainEntity: items.map((item) => ({
-      '@type': 'Question',
+      "@type": "Question",
       name: item.question,
       acceptedAnswer: {
-        '@type': 'Answer',
+        "@type": "Answer",
         text: item.answer,
       },
     })),
@@ -137,9 +130,7 @@ export const FAQSchema = ({ items }: FAQSchemaProps) => {
 
   return (
     <Helmet>
-      <script type="application/ld+json">
-        {JSON.stringify(schema)}
-      </script>
+      <script type="application/ld+json">{JSON.stringify(schema)}</script>
     </Helmet>
   );
 };
@@ -156,10 +147,10 @@ interface BreadcrumbSchemaProps {
 
 export const BreadcrumbSchema = ({ items }: BreadcrumbSchemaProps) => {
   const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
     itemListElement: items.map((item, index) => ({
-      '@type': 'ListItem',
+      "@type": "ListItem",
       position: index + 1,
       name: item.name,
       item: `${BASE_URL}${item.url}`,
@@ -168,9 +159,7 @@ export const BreadcrumbSchema = ({ items }: BreadcrumbSchemaProps) => {
 
   return (
     <Helmet>
-      <script type="application/ld+json">
-        {JSON.stringify(schema)}
-      </script>
+      <script type="application/ld+json">{JSON.stringify(schema)}</script>
     </Helmet>
   );
 };
@@ -184,23 +173,21 @@ interface WebPageSchemaProps {
 
 export const WebPageSchema = ({ name, description, url }: WebPageSchemaProps) => {
   const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'WebPage',
+    "@context": "https://schema.org",
+    "@type": "WebPage",
     name,
     description,
     url: `${BASE_URL}${url}`,
     isPartOf: {
-      '@type': 'WebSite',
-      name: 'HydrAI Labs',
+      "@type": "WebSite",
+      name: "HydrAI Labs",
       url: BASE_URL,
     },
   };
 
   return (
     <Helmet>
-      <script type="application/ld+json">
-        {JSON.stringify(schema)}
-      </script>
+      <script type="application/ld+json">{JSON.stringify(schema)}</script>
     </Helmet>
   );
 };
