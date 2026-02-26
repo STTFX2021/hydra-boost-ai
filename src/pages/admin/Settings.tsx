@@ -23,7 +23,7 @@ const AdminSettings = () => {
       <div className="card-premium space-y-6">
         <div>
           <h3 className="font-semibold mb-4">Integraciones</h3>
-          
+
           <div className="space-y-4">
             <div>
               <label className="block text-sm mb-2">Resend API Key</label>
@@ -34,7 +34,12 @@ const AdminSettings = () => {
                 placeholder="re_xxxxx"
                 className="input-premium"
               />
-              <a href="https://resend.com/api-keys" target="_blank" rel="noopener" className="text-xs text-primary flex items-center gap-1 mt-1">
+              <a
+                href="https://resend.com/api-keys"
+                target="_blank"
+                rel="noopener"
+                className="text-xs text-primary flex items-center gap-1 mt-1"
+              >
                 Obtener API key <ExternalLink className="w-3 h-3" />
               </a>
             </div>
@@ -45,7 +50,7 @@ const AdminSettings = () => {
                 type="url"
                 value={settings.discordWebhook}
                 onChange={(e) => setSettings({ ...settings, discordWebhook: e.target.value })}
-                placeholder="https://discord.com/api/webhooks/..."
+                placeholder="https://discordapp.com/api/webhooks/1476563860805648445/LeOqqp-Si20yqpA9bXHo8pa4kA7JKGYCKzS0DW9nkhEh5lQVocguiiMHOw4CQN7kpYmi"
                 className="input-premium"
               />
             </div>
