@@ -16,7 +16,7 @@ export const isValidUrl = (url: string): boolean => {
 };
 
 // Discord invite URL for HydrAI Labs community
-export const DISCORD_INVITE_URL = "https://discord.gg/KrymATqa";
+export const DISCORD_INVITE_URL = "https://discord.gg/SncpYFjt";
 
 // Pricing page demo video URL - YouTube embed (privacy-enhanced)
 export const PRICING_DEMO_VIDEO_URL = "https://www.youtube-nocookie.com/embed/jvHA_QbYqf4?rel=0&modestbranding=1&autoplay=0&iv_load_policy=3";
