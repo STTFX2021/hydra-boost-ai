@@ -186,7 +186,7 @@ export function DemoMode({ onStartRealMission, onDiscordClick }: DemoModeProps) 
               <Button
                 onClick={() => {
                   onDiscordClick();
-                  window.open(DISCORD_INVITE_URL, "_blank");
+                  window.open(DISCORD_INVITE_URL, "_blank", "noopener,noreferrer");
                 }}
                 className="flex-1 h-10 bg-primary hover:bg-primary/90"
               >

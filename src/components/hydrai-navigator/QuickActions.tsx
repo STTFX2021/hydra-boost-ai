@@ -28,7 +28,7 @@ export function QuickActions({ onDiscordClick, sfx }: QuickActionsProps) {
       icon: <ExternalLink className="w-4 h-4" />,
       onClick: () => {
         onDiscordClick?.();
-        window.open(DISCORD_INVITE_URL, "_blank");
+        window.open(DISCORD_INVITE_URL, "_blank", "noopener,noreferrer");
       },
       highlight: true,
     },

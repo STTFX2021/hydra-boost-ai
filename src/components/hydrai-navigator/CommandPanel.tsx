@@ -360,7 +360,7 @@ export function CommandPanel({
                       onMouseEnter={() => sfx?.hover()}
                       onClick={() => {
                         onDiscordClick();
-                        window.open(DISCORD_INVITE_URL, "_blank");
+                        window.open(DISCORD_INVITE_URL, "_blank", "noopener,noreferrer");
                       }}
                       className="px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold shadow-lg shadow-primary/30"
                       whileHover={{ scale: 1.05, y: -2 }}
@@ -380,7 +380,7 @@ export function CommandPanel({
                   onMouseEnter={() => sfx?.hover()}
                   onClick={() => {
                     onDiscordClick();
-                    window.open(DISCORD_INVITE_URL, "_blank");
+                    window.open(DISCORD_INVITE_URL, "_blank", "noopener,noreferrer");
                   }}
                   className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-primary text-primary-foreground font-bold shadow-lg shadow-primary/30"
                   whileHover={{ scale: 1.02 }}
