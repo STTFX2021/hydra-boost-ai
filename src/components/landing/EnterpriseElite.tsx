@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Brain, Cpu, Users, BarChart3, Target, Wrench, X, Check, ArrowRight } from "lucide-react";
+import WorkflowShowcase from "@/components/WorkflowShowcase";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useLandingTranslation } from "@/lib/i18n";
@@ -269,6 +270,27 @@ export const EnterpriseElite = () => {
               </motion.div>
             ))}
           </div>
+        </motion.div>
+
+        {/* Workflow Showcase */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-20"
+        >
+          <div className="text-center mb-8">
+            <span className="badge-secondary mb-4 inline-flex items-center gap-2">
+              Workflows Reales
+            </span>
+            <h3 className="text-2xl font-display font-semibold mb-2">
+              Nuestros Workflows en Acción
+            </h3>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Así conectamos Apify + n8n para ejecutar campañas que generan leads reales. Haz clic en cada nodo para ver qué hace.
+            </p>
+          </div>
+          <WorkflowShowcase />
         </motion.div>
 
         {/* Stats */}
