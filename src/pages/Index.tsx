@@ -11,6 +11,7 @@ import {
   LeadFormMultiStep,
 } from "@/components/landing";
 import WorkflowAnimation from "@/components/WorkflowAnimation";
+import WorkflowShowcase from "@/components/WorkflowShowcase";
 import { Shield, Zap } from "lucide-react";
 
 // Lazy-loaded below-the-fold sections
@@ -149,6 +150,7 @@ const Index = () => {
 
         <EnterpriseElite />
         <LazySection><ProcessSection /></LazySection>
+        <WorkflowShowcase />
         <LazySection><FAQ /></LazySection>
         <LazySection><TechStack /></LazySection>
         <LazySection><FinalCTA /></LazySection>
