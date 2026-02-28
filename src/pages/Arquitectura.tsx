@@ -22,6 +22,7 @@ import { PageLayout } from "@/components/layout/PageLayout";
 import { SEOHead, BreadcrumbSchema } from "@/components/seo";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import WorkflowShowcase from "@/components/WorkflowShowcase";
 import { useTranslation } from "@/lib/i18n";
 
 type EventStatus = "idle" | "processing" | "success" | "error";
@@ -591,6 +592,22 @@ export default function Arquitectura() {
                 </motion.div>
               ))}
             </div>
+          </section>
+
+          {/* Workflow Showcase */}
+          <section className="section-container mb-16">
+            <div className="text-center mb-10">
+              <span className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase border border-primary/30 text-primary bg-primary/10 mb-4">
+                Workflows Reales
+              </span>
+              <h3 className="text-2xl md:text-3xl font-display font-bold mb-3">
+                Nuestros Workflows en Acción
+              </h3>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Así conectamos Apify + n8n para ejecutar campañas que generan leads reales. Haz clic en cada nodo para ver qué hace.
+              </p>
+            </div>
+            <WorkflowShowcase />
           </section>
 
           {/* CTA */}
