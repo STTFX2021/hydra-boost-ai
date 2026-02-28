@@ -31,37 +31,37 @@ const workflows: Record<TabKey, WorkflowData> = {
     emoji: "📧",
     totalProcessed: 41,
     nodes: [
-      { nombre: "Start", color_fondo: "#1a6b3a", icono: "▶", items: "1 item", detalle: "Trigger manual o programado vía cron. Arranca el pipeline completo de prospección. Puede ejecutarse a diario, semanal o bajo demanda con un clic." },
-      { nombre: "Contactos1", color_fondo: "#c45200", icono: "{}", items: "41 items", tool_badge: "Apify", badge_color: "bg-orange-500/20 text-orange-400", detalle: "Apify Actor recorre Google Maps y directorios del sector objetivo. Extrae nombre del negocio, email, teléfono, web y dirección. Resultado: 41 leads cualificados listos para contactar, filtrados por zona geográfica y sector." },
-      { nombre: "Preparar Email1", color_fondo: "#c45200", icono: "{}", items: "41 items", detalle: "Nodo de código JavaScript. Toma los datos de cada lead y construye un email 100% personalizado: asunto con nombre del negocio, cuerpo adaptado al sector, propuesta de valor específica y CTA directo. Genera 41 emails únicos, ninguno igual." },
-      { nombre: "Wait", color_fondo: "#8b5e00", icono: "⏸", items: "41 items", detalle: "Delay aleatorio configurable entre 30 y 90 segundos entre cada envío. Simula comportamiento humano natural, evita filtros anti-spam y protege la reputación del dominio remitente." },
-      { nombre: "Enviar con Resend", color_fondo: "#1a4080", icono: "🌐", items: "41 items", tool_badge: "Resend API", badge_color: "bg-blue-500/20 text-blue-400", detalle: "POST a api.resend.com desde dominio verificado. Garantiza entrega en bandeja principal (no spam). Tracking automático de apertura y clics. Los 41 emails se enviaron con éxito en esta ejecución." },
+      { nombre: "Start", color_fondo: "#1a6b3a", icono: "▶", items: "1 item", detalle: "El proceso arranca aquí. Puede iniciarse manualmente con un clic o programarse para ejecutarse solo cada día o cada semana." },
+      { nombre: "Contactos", color_fondo: "#c45200", icono: "{}", items: "41 items", tool_badge: "Apify", badge_color: "bg-orange-500/20 text-orange-400", detalle: "Apify es una herramienta que recorre Google Maps y directorios de empresas automáticamente. Extrae el nombre, email, teléfono y web de 41 negocios locales del sector que tú elijas, en la zona que tú elijas." },
+      { nombre: "Preparar Email", color_fondo: "#c45200", icono: "{}", items: "41 items", detalle: "Un código JavaScript toma los datos de cada negocio y escribe un email personalizado: con el nombre real del negocio, adaptado a su sector, con una propuesta concreta. Se generan 41 emails diferentes, ninguno igual." },
+      { nombre: "Espera", color_fondo: "#8b5e00", icono: "⏸", items: "41 items", detalle: "Entre cada envío el sistema espera entre 30 y 90 segundos de forma aleatoria. Esto imita el comportamiento humano y evita que los emails lleguen a la carpeta de spam." },
+      { nombre: "Enviar Email", color_fondo: "#1a4080", icono: "🌐", items: "41 items", tool_badge: "Resend API", badge_color: "bg-blue-500/20 text-blue-400", detalle: "Resend es el servicio que manda los emails desde el dominio verificado de la empresa. Garantiza que llegan a la bandeja principal, no a spam. Registra quién abre el email y quién hace clic." },
     ],
     steps: [
-      { titulo: "🚀 Trigger arranca el pipeline", descripcion: "El workflow inicia manual o en horario programado. Un clic ejecuta todo el proceso de principio a fin." },
-      { titulo: "🕷️ Apify extrae 41 leads reales", descripcion: "Scraping de Google Maps y directorios: nombre, email, teléfono y sector de negocios locales de la zona objetivo. Solo leads con email válido." },
-      { titulo: "✍️ Código personaliza cada email", descripcion: "JavaScript prepara un email único por lead: nombre del negocio, dolor específico del sector y CTA directo. Cero emails genéricos." },
-      { titulo: "⏱️ Delay anti-spam entre envíos", descripcion: "Espera aleatoria de 30-90s entre cada email. Máxima entregabilidad y protección del dominio." },
-      { titulo: "📤 Resend entrega en bandeja principal", descripcion: "API de Resend garantiza entrega y proporciona analytics de apertura y clics en tiempo real desde el dashboard." },
+      { titulo: "🚀 El proceso arranca", descripcion: "Se inicia solo o con un clic. Todo lo demás es automático." },
+      { titulo: "🕷️ Apify busca 41 empresas reales", descripcion: "Recorre Google Maps y extrae nombre, email y teléfono de negocios locales del sector que tú elijas." },
+      { titulo: "✍️ Se escribe un email para cada empresa", descripcion: "Cada email menciona el nombre real del negocio y está adaptado a su sector. Cero emails genéricos." },
+      { titulo: "⏱️ El sistema espera entre envíos", descripcion: "Espera aleatoria de 30 a 90 segundos. Evita spam y protege el dominio." },
+      { titulo: "📤 Los emails llegan a bandeja principal", descripcion: "Resend garantiza la entrega. Puedes ver quién abrió y quién hizo clic." },
     ],
   },
   whatsapp: {
-    label: "WhatsApp Business",
+    label: "WhatsApp",
     emoji: "💬",
     totalProcessed: 38,
     nodes: [
-      { nombre: "Start", color_fondo: "#1a6b3a", icono: "▶", items: "1 item", detalle: "Trigger manual o cron. Inicia el pipeline de outreach por WhatsApp Business. Mismo patrón que el workflow de email pero optimizado para el canal de mayor tasa de apertura: 95%." },
-      { nombre: "Apify WA Scraper", color_fondo: "#c45200", icono: "{}", items: "38 items", tool_badge: "Apify", badge_color: "bg-orange-500/20 text-orange-400", detalle: "Apify Actor especializado en extraer negocios locales con número de teléfono verificado. Filtra automáticamente los que tienen WhatsApp Business activo. Resultado: 38 contactos con número WA válido y operativo." },
-      { nombre: "Format Message", color_fondo: "#c45200", icono: "{}", items: "38 items", detalle: "Prepara el mensaje de WhatsApp personalizado: saludo con nombre del negocio, propuesta de valor en máximo 3 líneas y CTA con link directo. Formato optimizado para WA: sin HTML, emojis estratégicos, texto natural." },
-      { nombre: "Twilio WA API", color_fondo: "#c00020", icono: "📱", items: "38 items", tool_badge: "Twilio", badge_color: "bg-red-500/20 text-red-400", detalle: "Envío vía API oficial de WhatsApp Business a través de Twilio. Mensajes enviados desde número de empresa verificado por Meta. Templates aprobados. Tasa de apertura superior al 95% vs 20-30% del email." },
-      { nombre: "Log en Supabase", color_fondo: "#1a4080", icono: "🗃️", items: "38 items", tool_badge: "Supabase", badge_color: "bg-emerald-500/20 text-emerald-400", detalle: "Registra cada envío en Supabase: contacto, timestamp, estado del mensaje (enviado/entregado/leído). Si el lead responde, el agente IA de HydrAI toma el control de la conversación de forma automática, 24/7." },
+      { nombre: "Start", color_fondo: "#1a6b3a", icono: "▶", items: "1 item", detalle: "El proceso arranca. El sistema va a buscar negocios locales que tengan WhatsApp Business activo para contactarles directamente." },
+      { nombre: "Buscar Contactos", color_fondo: "#c45200", icono: "{}", items: "38 items", tool_badge: "Apify", badge_color: "bg-orange-500/20 text-orange-400", detalle: "Apify busca negocios locales en Google Maps y directorios. Filtra solo los que tienen WhatsApp Business activado y un número de teléfono válido. Resultado: 38 contactos listos para recibir el mensaje." },
+      { nombre: "Preparar Mensaje", color_fondo: "#c45200", icono: "{}", items: "38 items", detalle: "Se prepara un mensaje de WhatsApp para cada negocio: saludo con el nombre real, propuesta en máximo 3 líneas y un enlace directo para responder. Sin HTML, con emojis naturales, como si lo escribiera una persona." },
+      { nombre: "Enviar por WhatsApp", color_fondo: "#c00020", icono: "📱", items: "38 items", tool_badge: "Twilio", badge_color: "bg-red-500/20 text-red-400", detalle: "Twilio envía el mensaje por la API oficial de WhatsApp Business. El mensaje llega desde el número de empresa verificado por Meta. Más del 95% de los mensajes de WhatsApp se abren, frente al 20% del email." },
+      { nombre: "Guardar en Base de Datos", color_fondo: "#1a4080", icono: "🗃️", items: "38 items", tool_badge: "Supabase", badge_color: "bg-emerald-500/20 text-emerald-400", detalle: "Cada envío se guarda en la base de datos con el estado del mensaje. Si el negocio responde, el agente de inteligencia artificial de HydrAI toma el control de la conversación de forma automática y la continúa 24 horas al día." },
     ],
     steps: [
-      { titulo: "🚀 Pipeline de WA arranca", descripcion: "Trigger inicia la búsqueda de negocios con WhatsApp Business activo." },
-      { titulo: "🕷️ Apify filtra 38 números WA verificados", descripcion: "Solo extrae negocios con WhatsApp Business operativo. Cero números inválidos o personales." },
-      { titulo: "✍️ Mensaje personalizado en 3 líneas", descripcion: "Nombre del negocio + dolor del sector + solución concreta. Máximo 3 líneas. Natural, no spam." },
-      { titulo: "📱 Twilio entrega vía API oficial Meta", descripcion: "Número de empresa verificado. Templates aprobados por Meta. 95% tasa de apertura garantizada." },
-      { titulo: "🗃️ CRM registra y agente IA responde", descripcion: "Supabase guarda todo el hilo. Si contestan, el agente IA de HydrAI continúa la conversación y agenda la demo." },
+      { titulo: "🚀 El proceso arranca", descripcion: "Se inicia la búsqueda de negocios con WhatsApp Business activo." },
+      { titulo: "🕷️ Apify localiza 38 números verificados", descripcion: "Solo negocios con WhatsApp Business operativo. Cero números inválidos." },
+      { titulo: "✍️ Mensaje personalizado en 3 líneas", descripcion: "Nombre del negocio, problema concreto del sector y solución. Natural, no spam." },
+      { titulo: "📱 WhatsApp entrega el mensaje", descripcion: "Número de empresa verificado por Meta. Tasa de apertura superior al 95%." },
+      { titulo: "🗃️ La IA continúa la conversación", descripcion: "Si responden, el agente de HydrAI gestiona la conversación y agenda la reunión automáticamente." },
     ],
   },
   instagram: {
@@ -69,25 +69,25 @@ const workflows: Record<TabKey, WorkflowData> = {
     emoji: "📸",
     totalProcessed: 28,
     nodes: [
-      { nombre: "Start", color_fondo: "#1a6b3a", icono: "▶", items: "1 item", detalle: "Trigger manual. Inicia el scraping de perfiles de Instagram relevantes para el sector objetivo. Pipeline optimizado para outreach orgánico en Instagram Business." },
-      { nombre: "Apify IG Scraper", color_fondo: "#c45200", icono: "{}", items: "52 items", tool_badge: "Apify", badge_color: "bg-orange-500/20 text-orange-400", detalle: "Apify Actor especializado en Instagram. Busca perfiles por hashtag, ubicación geográfica y seguidores de la competencia. Extrae: username, followers, engagement rate, bio y email público. 52 perfiles target identificados en el sector." },
-      { nombre: "Filter & Score", color_fondo: "#7b2fa0", icono: "🔍", items: "28 items", detalle: "Filtra y puntúa cada perfil con IA: engagement rate mayor al 3%, rango de seguidores entre 500 y 50K, palabras clave del sector en la bio. Elimina bots e inactivos. De 52 perfiles iniciales quedan 28 leads de alta calidad. Calidad sobre cantidad." },
-      { nombre: "Generate DM", color_fondo: "#c45200", icono: "{}", items: "28 items", detalle: "GPT genera un DM único para cada perfil: referencia específica a su contenido o sector, propuesta de valor adaptada, CTA natural y no intrusivo. Máximo 150 caracteres para maximizar respuesta. Cero mensajes genéricos." },
-      { nombre: "Meta Graph API", color_fondo: "#c4006a", icono: "📸", items: "28 items", tool_badge: "Meta API", badge_color: "bg-pink-500/20 text-pink-400", detalle: "Envío vía Instagram Graph API oficial de Meta. Solo a perfiles que han interactuado previamente o habilitado mensajes de empresas. Cumple 100% políticas de Meta. Cada envío queda registrado automáticamente en Supabase para seguimiento." },
+      { nombre: "Start", color_fondo: "#1a6b3a", icono: "▶", items: "1 item", detalle: "El proceso arranca. El sistema va a buscar perfiles de Instagram del sector objetivo para enviarles un mensaje directo personalizado." },
+      { nombre: "Buscar Perfiles", color_fondo: "#c45200", icono: "{}", items: "52 items", tool_badge: "Apify", badge_color: "bg-orange-500/20 text-orange-400", detalle: "Apify busca perfiles de Instagram por hashtags, ubicación geográfica o seguidores de la competencia. Extrae el nombre de usuario, número de seguidores, nivel de interacción y el email si está visible en la bio. Se encuentran 52 perfiles del sector." },
+      { nombre: "Filtrar Perfiles", color_fondo: "#7b2fa0", icono: "🔍", items: "28 items", detalle: "La inteligencia artificial analiza cada perfil y descarta los que no interesan: cuentas con menos del 3% de interacción, bots, cuentas inactivas o fuera del rango de seguidores. De 52 perfiles quedan 28 de alta calidad." },
+      { nombre: "Escribir Mensaje", color_fondo: "#c45200", icono: "{}", items: "28 items", detalle: "La inteligencia artificial escribe un mensaje directo único para cada perfil. Menciona algo específico de su contenido o sector, propone una solución concreta y termina con una pregunta natural. Máximo 150 caracteres. Cero mensajes copiados." },
+      { nombre: "Enviar por Instagram", color_fondo: "#c4006a", icono: "📸", items: "28 items", tool_badge: "Meta API", badge_color: "bg-pink-500/20 text-pink-400", detalle: "El mensaje se envía por la API oficial de Instagram de Meta. Solo a perfiles que permiten mensajes de empresas. Cumple todas las normas de Meta. Cada envío queda registrado automáticamente en la base de datos." },
     ],
     steps: [
-      { titulo: "🚀 Trigger inicia scraping IG", descripcion: "Pipeline arranca para mapear perfiles de Instagram del sector objetivo por ubicación y hashtags." },
-      { titulo: "🕷️ Apify mapea 52 perfiles target", descripcion: "Búsqueda por hashtag y zona. Extrae followers, engagement y email público de cada perfil." },
-      { titulo: "🔍 IA filtra: 52 → 28 leads premium", descripcion: "Solo perfiles con engagement real. Elimina cuentas inactivas, bots y perfiles fuera del target." },
-      { titulo: "✍️ GPT redacta DM personalizado", descripcion: "Mensaje único por perfil referenciando su contenido real. Natural, conversacional, máximo 150 caracteres." },
-      { titulo: "📸 Meta API entrega el DM oficialmente", descripcion: "Instagram Graph API oficial. Cumple todas las políticas de Meta. Tracking automático en Supabase." },
+      { titulo: "🚀 El proceso arranca", descripcion: "Se inicia la búsqueda de perfiles de Instagram relevantes para el sector." },
+      { titulo: "🕷️ Apify encuentra 52 perfiles", descripcion: "Búsqueda por hashtag y zona. Extrae seguidores, interacción y email público de cada perfil." },
+      { titulo: "🔍 La IA filtra: 52 quedan en 28", descripcion: "Solo perfiles reales y activos con interacción genuina. Se eliminan bots e inactivos." },
+      { titulo: "✍️ La IA escribe un mensaje único", descripcion: "Personalizado para cada perfil, referenciando su contenido real. Máximo 150 caracteres." },
+      { titulo: "📸 Instagram entrega el mensaje", descripcion: "API oficial de Meta. Cumple todas las normas. Registro automático en base de datos." },
     ],
   },
 };
 
 const tabs: { key: TabKey; label: string; emoji: string }[] = [
   { key: "email", label: "Email Campaign", emoji: "📧" },
-  { key: "whatsapp", label: "WhatsApp Business", emoji: "💬" },
+  { key: "whatsapp", label: "WhatsApp", emoji: "💬" },
   { key: "instagram", label: "Instagram DM", emoji: "📸" },
 ];
 
@@ -125,6 +125,13 @@ export default function WorkflowShowcase() {
     if (intervalRef.current) clearInterval(intervalRef.current);
   };
 
+  const handleStepClick = (i: number) => {
+    setPaused(true);
+    setActiveNode(i);
+    setAnimStep(i);
+    if (intervalRef.current) clearInterval(intervalRef.current);
+  };
+
   const currentStep = paused ? activeNode : animStep;
   const detailNode = activeNode >= 0 ? wf.nodes[activeNode] : null;
 
@@ -140,7 +147,7 @@ export default function WorkflowShowcase() {
               onClick={() => setActiveTab(tab.key)}
               className={`px-4 py-2.5 rounded-full text-sm font-medium border transition-all duration-300 ${
                 activeTab === tab.key
-                  ? "bg-[hsl(var(--primary))]/20 border-[hsl(var(--primary))]/50 text-[hsl(var(--primary))]"
+                  ? "bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] border-[hsl(var(--primary))]"
                   : "border-[hsl(var(--border))]/30 text-muted-foreground hover:text-foreground hover:border-[hsl(var(--border))]/60"
               }`}
             >
@@ -165,7 +172,6 @@ export default function WorkflowShowcase() {
               <div className="flex items-center justify-between gap-1 overflow-x-auto pb-2">
                 {wf.nodes.map((node, i) => (
                   <div key={i} className="flex items-center flex-shrink-0">
-                    {/* Node */}
                     <button
                       onClick={() => handleNodeClick(i)}
                       className="flex flex-col items-center gap-1.5 cursor-pointer group"
@@ -195,7 +201,6 @@ export default function WorkflowShowcase() {
                     {i < wf.nodes.length - 1 && (
                       <div className="relative w-8 sm:w-12 h-[2px] mx-1 sm:mx-2 flex-shrink-0">
                         <div className="absolute inset-0 bg-white/10 rounded-full" />
-                        {/* Animated dot */}
                         <div
                           className="absolute top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full"
                           style={{
@@ -205,7 +210,6 @@ export default function WorkflowShowcase() {
                             boxShadow: currentStep >= i ? "0 0 6px hsl(var(--primary))" : "none",
                           }}
                         />
-                        {/* Arrow tip */}
                         <div
                           className="absolute right-0 top-1/2 -translate-y-1/2 w-0 h-0"
                           style={{
@@ -244,7 +248,7 @@ export default function WorkflowShowcase() {
                 </div>
               ) : (
                 <p className="text-xs text-muted-foreground italic">
-                  Haz clic en cualquier nodo para ver qué hace.
+                  💡 Haz clic en cualquier nodo para ver qué hace en detalle.
                 </p>
               )}
             </div>
@@ -253,9 +257,10 @@ export default function WorkflowShowcase() {
           {/* Right: Steps */}
           <div className="flex flex-col gap-2">
             {wf.steps.map((step, i) => (
-              <div
+              <button
                 key={i}
-                className={`rounded-xl p-4 transition-all duration-400 ${
+                onClick={() => handleStepClick(i)}
+                className={`rounded-xl p-4 transition-all duration-400 text-left ${
                   currentStep === i
                     ? "bg-foreground/[0.04] border-l-[3px] border-l-[hsl(var(--primary))] pl-5"
                     : "border-l-[3px] border-l-transparent"
@@ -276,13 +281,12 @@ export default function WorkflowShowcase() {
                     <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">{step.descripcion}</p>
                   </div>
                 </div>
-              </div>
+              </button>
             ))}
           </div>
         </div>
       </div>
 
-      {/* CSS Keyframes */}
       <style>{`
         @keyframes travelDot {
           0% { left: 0; }
