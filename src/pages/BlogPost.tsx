@@ -136,7 +136,7 @@ const BlogPost = () => {
               <p className="text-muted-foreground mb-4">
                 Descubre cómo la IA puede transformar tu negocio.
               </p>
-              <Link to="/auditoria">
+              <Link to="/auditoria-gratis">
                 <Button className="btn-neon">Auditoría AI gratis</Button>
               </Link>
             </div>

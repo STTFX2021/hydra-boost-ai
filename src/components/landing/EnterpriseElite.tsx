@@ -330,7 +330,7 @@ export const EnterpriseElite = () => {
           viewport={{ once: true }}
           className="mt-16 text-center"
         >
-          <Link to="/auditoria">
+          <Link to="/auditoria-gratis">
             <Button size="lg" className="bg-gradient-to-r from-secondary to-primary text-primary-foreground hover:opacity-90">
               {t.waitlistCta}
               <ArrowRight className="ml-2 w-4 h-4" />

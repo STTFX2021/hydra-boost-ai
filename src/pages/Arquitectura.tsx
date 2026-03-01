@@ -624,7 +624,7 @@ export default function Arquitectura() {
               <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
                 {t.ctaSubtitle}
               </p>
-              <Link to="/auditoria">
+              <Link to="/auditoria-gratis">
                 <Button size="lg" className="btn-neon btn-depth gap-2">
                   {t.ctaButton}
                   <ArrowRight className="w-4 h-4" />

@@ -121,7 +121,7 @@ export const Header = () => {
             </Link>
           )}
 
-          <Link to="/auditoria" className="hidden sm:block">
+          <Link to="/auditoria-gratis" className="hidden sm:block">
             <Button size="sm" className="btn-neon">
               {t("nav.audit")}
             </Button>
@@ -164,7 +164,7 @@ export const Header = () => {
                   </Button>
                 </Link>
               )}
-              <Link to="/auditoria" onClick={() => setMenuOpen(false)}>
+              <Link to="/auditoria-gratis" onClick={() => setMenuOpen(false)}>
                 <Button size="sm" className="btn-neon">
                   {t("nav.audit")}
                 </Button>

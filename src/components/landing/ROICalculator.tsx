@@ -222,7 +222,7 @@ export const ROICalculator = () => {
                   </div>
                 </div>
 
-                <Link to="/auditoria" className="block">
+                <Link to="/auditoria-gratis" className="block">
                   <Button size="lg" className="btn-neon w-full text-base py-6 group">
                     {t.ctaText}
                     <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />

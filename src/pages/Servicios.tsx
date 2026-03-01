@@ -452,7 +452,7 @@ const Servicios = () => {
                 <p className="text-muted-foreground mb-8 max-w-xl mx-auto text-lg">
                   {t.ctaSubtitle}
                 </p>
-                <Link to="/auditoria">
+                <Link to="/auditoria-gratis">
                   <Button size="lg" className="btn-neon btn-depth text-lg px-10 py-6 group">
                     {t.ctaButton}
                     <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />

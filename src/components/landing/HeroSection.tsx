@@ -70,7 +70,7 @@ export const HeroSection = () => {
 
           {/* Dual CTAs */}
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
-            <Link to="/auditoria">
+            <Link to="/auditoria-gratis">
               <Button size="lg" className="btn-neon text-base px-8 h-12 min-w-[240px]">
                 Agenda diagnóstico gratis
                 <ArrowRight className="ml-2 w-4 h-4" />
