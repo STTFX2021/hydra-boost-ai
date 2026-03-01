@@ -390,7 +390,7 @@ const IndustriasContent = () => {
               {t("industries.subtitle")}
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link to="/auditoria">
+              <Link to="/auditoria-gratis">
                 <Button size="lg" className="btn-neon text-lg px-8">
                   {language === 'es' ? 'Auditoría Gratis' : 'Free Audit'}
                   <ArrowRight className="ml-2 w-5 h-5" />
@@ -634,7 +634,7 @@ const IndustriasContent = () => {
                     </div>
 
                     <div className="mt-6 pt-6 border-t border-border/50">
-                      <Link to={`/auditoria?vertical=${industry.id}`}>
+                      <Link to={`/auditoria-gratis?vertical=${industry.id}`}>
                         <Button className="w-full btn-neon">
                           {t("industries.apply")}
                           <ArrowRight className="ml-2 w-4 h-4" />

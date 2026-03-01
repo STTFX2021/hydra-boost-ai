@@ -196,7 +196,7 @@ export const HeroWorld = () => {
 
             {/* CTAs */}
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4">
-              <Link to="/auditoria">
+              <Link to="/auditoria-gratis">
                 <Button size="lg" className="btn-neon btn-depth text-base px-8 py-6 group w-full sm:w-auto">
                   {t.ctaPrimary}
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />

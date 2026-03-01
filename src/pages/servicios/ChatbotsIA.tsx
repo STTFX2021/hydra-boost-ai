@@ -70,7 +70,7 @@ const ChatbotsIA = () => {
               Disponibles 24/7 en tu web, WhatsApp e Instagram.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/auditoria">
+              <Link to="/auditoria-gratis">
                 <Button size="lg" className="btn-neon text-lg px-8">
                   Auditoría gratis
                   <ArrowRight className="ml-2 w-5 h-5" />
@@ -222,7 +222,7 @@ const ChatbotsIA = () => {
             <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
               Descubre gratis cómo un chatbot con IA puede transformar tu negocio.
             </p>
-            <Link to="/auditoria">
+            <Link to="/auditoria-gratis">
               <Button size="lg" className="btn-neon text-lg px-8">
                 Auditoría AI gratis (3 min)
                 <ArrowRight className="ml-2 w-5 h-5" />

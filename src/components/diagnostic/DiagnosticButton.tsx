@@ -12,7 +12,7 @@ export function DiagnosticButton({ className = "", size = "default" }: Diagnosti
 
   return (
     <div className={`flex flex-col items-center gap-2 ${className}`}>
-      <Link to="/auditoria">
+      <Link to="/auditoria-gratis">
         <motion.button
           className={`
             relative group overflow-hidden

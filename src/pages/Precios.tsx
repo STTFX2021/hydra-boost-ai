@@ -199,7 +199,7 @@ const PreciosContent = () => {
               Haz nuestra auditoría gratuita y te recomendamos el mejor plan.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link to="/auditoria">
+              <Link to="/auditoria-gratis">
                 <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-lg px-8 btn-depth">
                   Auditoría Gratis
                   <ArrowRight className="ml-2 w-5 h-5" />

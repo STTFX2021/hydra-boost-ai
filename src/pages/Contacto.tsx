@@ -253,7 +253,7 @@ const Contacto = () => {
                 <div className="card-premium neon-border text-center p-6">
                   <h4 className="font-display font-semibold mb-2">¿Prefieres una auditoría?</h4>
                   <p className="text-sm text-muted-foreground mb-4">Descubre gratis cómo la IA puede ayudarte.</p>
-                  <Link to="/auditoria">
+                  <Link to="/auditoria-gratis">
                     <Button className="btn-neon btn-depth w-full">
                       Auditoría gratuita
                       <ArrowRight className="ml-2 w-4 h-4" />

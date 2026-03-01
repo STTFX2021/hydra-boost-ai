@@ -28,7 +28,7 @@ export const FinalCTA = () => {
             {t.subtitle}
           </p>
           
-          <Link to="/auditoria">
+          <Link to="/auditoria-gratis">
             <Button size="lg" className="btn-neon text-lg px-10">
               {t.cta}
               <ArrowRight className="ml-2 w-5 h-5" />

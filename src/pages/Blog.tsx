@@ -239,7 +239,7 @@ const BlogContent = () => {
                 ? "Haz nuestra auditoría gratuita y recibe recomendaciones personalizadas."
                 : "Take our free audit and receive personalized recommendations."}
             </p>
-            <Link to="/auditoria">
+            <Link to="/auditoria-gratis">
               <Button size="lg" className="btn-neon text-lg px-8">
                 {t("nav.audit")}
                 <ArrowRight className="ml-2 w-5 h-5" />
