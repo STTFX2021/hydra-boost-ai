@@ -16,6 +16,8 @@ import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Auditoria from "./pages/Auditoria";
 import AuditoriaGratis from "./pages/AuditoriaGratis";
+import AuditoriaSelector from "./pages/AuditoriaSelector";
+import AuditoriaLocal from "./pages/AuditoriaLocal";
 import Login from "./pages/Login";
 import AdminDashboard from "./pages/admin/Dashboard";
 import Privacidad from "./pages/legal/Privacidad";
@@ -60,6 +62,8 @@ const App = () => (
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/auditoria" element={<Auditoria />} />
             <Route path="/auditoria-gratis" element={<AuditoriaGratis />} />
+            <Route path="/auditoria-selector" element={<AuditoriaSelector />} />
+            <Route path="/auditoria-local" element={<AuditoriaLocal />} />
             <Route path="/inversores" element={<Inversores />} />
             <Route path="/login" element={<Login />} />
             <Route path="/admin/*" element={
