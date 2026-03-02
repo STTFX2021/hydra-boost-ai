@@ -26,7 +26,7 @@ export const Header = () => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -55,8 +55,12 @@ export const Header = () => {
         >
           <img
             src="/favicon.png"
-            alt="HydrAI Labs"
+            alt="HydrAI Labs - Agencia de automatización IA"
             className="w-9 h-9 rounded-lg"
+            width={36}
+            height={36}
+            loading="eager"
+            decoding="async"
           />
           <span className="text-gradient-primary">{t("brand")}</span>
         </Link>
