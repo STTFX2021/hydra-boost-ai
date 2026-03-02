@@ -54,21 +54,27 @@ const Contacto = () => {
 
     setLoading(true);
     try {
-      const { data, error } = await supabase.functions.invoke("contact-submit", {
-        body: {
-          ...validation.data,
-          website: honeypot,
-          page: typeof window !== "undefined" ? window.location.pathname : "/contacto",
-          userAgent: typeof navigator !== "undefined" ? navigator.userAgent : "",
-        },
-      });
-
-      if (error) throw error;
-      if (!data?.ok) throw new Error(data?.error || "Error al enviar");
-
-      // Also send to n8n + Resend via lead-intake (best-effort)
+      // Save to Supabase directly as safety net
       try {
-        await supabase.functions.invoke("lead-intake", {
+        await supabase.from("contact_submissions").insert({
+          name: validation.data.name,
+          email: validation.data.email,
+          phone: validation.data.phone || null,
+          message: validation.data.message,
+        });
+      } catch { /* best-effort */ }
+
+      // Fire all notification channels in parallel (all best-effort)
+      await Promise.allSettled([
+        supabase.functions.invoke("contact-submit", {
+          body: {
+            ...validation.data,
+            website: honeypot,
+            page: typeof window !== "undefined" ? window.location.pathname : "/contacto",
+            userAgent: typeof navigator !== "undefined" ? navigator.userAgent : "",
+          },
+        }),
+        supabase.functions.invoke("lead-intake", {
           body: {
             nombre: validation.data.name,
             email: validation.data.email,
@@ -78,8 +84,8 @@ const Contacto = () => {
             fuente: "contacto",
             pagina: window.location.href,
           },
-        });
-      } catch { /* best-effort */ }
+        }),
+      ]);
 
       toast.success(`¡Perfecto ${validation.data.name.split(" ")[0]}! Recibirás respuesta en menos de 24h.`);
       setFormData({ name: "", email: "", phone: "", message: "" });

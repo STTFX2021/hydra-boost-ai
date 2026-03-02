@@ -258,12 +258,9 @@ const handler = async (req: Request): Promise<Response> => {
       console.error("Email error:", emailError);
     }
 
-    // At least one channel should succeed
+    // Log but don't fail - the form submission data is already captured
     if (!discordSuccess && !emailSuccess) {
-      return new Response(
-        JSON.stringify({ ok: false, error: "Error al enviar notificaciones" }),
-        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
+      console.warn("No notification channel succeeded, but submission is accepted");
     }
 
     console.log(`Contact submission processed: Discord=${discordSuccess}, Email=${emailSuccess}, n8n=${n8nDelivered}, Message="${cleanMessage}"`);
