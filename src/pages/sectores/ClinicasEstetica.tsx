@@ -3,51 +3,54 @@ import { SEOHead, LocalBusinessSchema, FAQSchema, BreadcrumbSchema } from "@/com
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { 
-  Sparkles, Bot, Calendar, Star, CheckCircle2, ArrowRight, 
-  Zap, Clock, MessageSquare, Heart
+  Sparkles, Bot, CheckCircle2, ArrowRight, 
+  Calendar, Globe, MessageSquare
 } from "lucide-react";
 
 const faqs = [
   {
-    question: "¿Qué tipo de clínicas atienden?",
-    answer: "Clínicas de estética, medicina estética, dermatología, spa, centros de belleza y cualquier negocio del sector wellness que necesite automatizar citas y atención."
+    question: "¿Es legal usar WhatsApp para contactar pacientes?",
+    answer: "Sí, con el consentimiento del paciente que se recoge en el proceso de registro. Cumplimos RGPD en todos los flujos de comunicación. Te asesoramos en la auditoría gratuita."
   },
   {
-    question: "¿El chatbot puede informar sobre tratamientos?",
-    answer: "Sí, el bot aprende toda la información de tus tratamientos: precios orientativos, duración, contraindicaciones, etc. Responde consultas 24/7."
+    question: "¿Se integra con mi software de gestión de clínica?",
+    answer: "Nos integramos con los principales software de gestión: Doctoralia, ClinicCloud, Medscape y otros. Si tienes un sistema propio, lo analizamos."
   },
   {
-    question: "¿Cómo ayuda con los no-shows?",
-    answer: "Enviamos recordatorios 24-48h antes por WhatsApp/SMS. El cliente puede confirmar o cancelar directamente desde el mensaje."
+    question: "¿Cuánto tiempo ahorra el chatbot al día?",
+    answer: "En clínicas con 20-30 citas al día, el chatbot ahorra entre 2 y 3 horas diarias de gestión telefónica. Equivale a no necesitar una persona a tiempo parcial solo para citas."
   },
   {
-    question: "¿Puedo gestionar varios tratamientos por sesión?",
-    answer: "Sí, el sistema de reservas permite combinar tratamientos, ajusta la duración automáticamente y asigna al profesional adecuado."
+    question: "¿Puedo personalizar los mensajes del chatbot?",
+    answer: "Completamente. El chatbot habla con el tono de tu clínica, conoce tus tratamientos, precios y protocolos. Lo entrenamos con tu información."
   },
   {
-    question: "¿Funciona para vender bonos y paquetes?",
-    answer: "Sí, puedes configurar bonos de sesiones, paquetes de tratamientos y el sistema gestiona el seguimiento de sesiones consumidas."
+    question: "¿Qué pasa con los pacientes que prefieren llamar?",
+    answer: "El teléfono sigue funcionando exactamente igual. El chatbot es un canal adicional, no un sustituto. La mayoría de pacientes nuevos prefiere WhatsApp a llamar."
   }
 ];
 
-const solutions = [
+const services = [
   {
+    name: "Chatbot de Citas 24/7",
+    price: "Desde 295€",
+    description: "Paciente escribe por WhatsApp o web, el chatbot muestra disponibilidad real, agenda la cita, pide datos previos y manda recordatorio 24 horas antes. Cero ausencias por olvido.",
+    result: "-60% ausencias desde el primer mes",
     icon: Bot,
-    title: "Chatbot de Consultas 24/7",
-    description: "Responde sobre tratamientos, precios y disponibilidad a cualquier hora",
-    benefits: ["Captura leads mientras duermes", "Filtro de consultas básicas", "Deriva casos complejos"]
   },
   {
-    icon: Calendar,
-    title: "Reservas y Recordatorios",
-    description: "Sistema de citas online con confirmaciones y anti no-show",
-    benefits: ["-80% no-shows", "Agenda siempre llena", "Gestión de cancelaciones"]
+    name: "Web Profesional con SEO Local",
+    price: "Desde 197€",
+    description: "Web que aparece cuando buscan 'clínica [tu especialidad] en [tu ciudad]'. Diseño que transmite confianza médica, fotos reales, opiniones y sistema de cita online.",
+    result: "+200% visibilidad en Google local",
+    icon: Globe,
   },
   {
-    icon: Star,
-    title: "Reseñas y Fidelización",
-    description: "Solicita reseñas post-tratamiento y programa recordatorios de mantenimiento",
-    benefits: ["+300% reseñas/mes", "Clientes que vuelven", "Marketing automático"]
+    name: "Captación de Pacientes por Email y WhatsApp",
+    price: "Desde 350€",
+    description: "Identificamos personas en tu zona que buscan tus tratamientos y les enviamos una propuesta personalizada. Campaña automática que funciona mientras atiendes consulta.",
+    result: "+40 pacientes nuevos al mes",
+    icon: MessageSquare,
   },
 ];
 
@@ -55,10 +58,10 @@ const SectorClinicasEstetica = () => {
   return (
     <PageLayout>
       <SEOHead
-        title="IA para Clínicas Estéticas - Chatbots, Citas y Fidelización"
-        description="Automatiza tu clínica de estética con IA: chatbot para consultas de tratamientos, sistema de citas con recordatorios y solicitud de reseñas. Desde 790€."
+        title="Automatización IA para Clínicas y Centros de Estética | HydrAI Labs"
+        description="Chatbot de citas 24/7, recordatorios automáticos y captación de pacientes para clínicas y centros de estética en España. -60% ausencias. Desde 197€."
         canonical="/sectores/clinicas-estetica"
-        keywords="ia clinica estetica, chatbot medicina estetica, automatizar clinica belleza, citas automaticas estetica, marketing clinica estetica"
+        keywords="ia clinica estetica, chatbot clinica, automatizar clinica, citas automaticas clinica, captacion pacientes"
       />
       <LocalBusinessSchema />
       <FAQSchema items={faqs} />
@@ -72,18 +75,18 @@ const SectorClinicasEstetica = () => {
       <section className="relative section-padding overflow-hidden">
         <div className="glow-orb-accent w-96 h-96 -top-48 -left-48" />
         <div className="glow-orb-primary w-64 h-64 bottom-0 right-0" />
-        
         <div className="section-container relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <div className="badge-primary mb-6 inline-flex">
-              <Sparkles className="w-3 h-3 mr-1" /> Clínicas Estéticas
+              <Sparkles className="w-3 h-3 mr-1" /> Clínicas y Estética
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
-              IA que llena tu agenda de <span className="text-gradient-primary">tratamientos</span>
+              Tu Clínica con la Agenda Llena{" "}
+              <span className="text-gradient-primary">Sin Gestionar Citas Manualmente</span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              Chatbot que responde consultas de tratamientos 24/7. Reservas online con recordatorios. 
-              Reseñas y fidelización automática.
+              Chatbot que agenda citas a cualquier hora, recordatorios automáticos que eliminan ausencias
+              y captación de pacientes nuevos en piloto automático.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/auditoria?vertical=clinica">
@@ -102,37 +105,24 @@ const SectorClinicasEstetica = () => {
         </div>
       </section>
 
-      {/* Problem → Solution */}
+      {/* Problem */}
       <section className="section-padding bg-muted/20">
         <div className="section-container">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              Retos del sector <span className="text-gradient-secondary">estético</span>
+              ¿Te suena <span className="text-gradient-secondary">familiar</span>?
             </h2>
           </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-8">
             {[
-              { problem: "Consultas repetitivas sobre tratamientos", solution: "Bot con info de todos tus servicios", icon: MessageSquare },
-              { problem: "No-shows que te cuestan dinero", solution: "Recordatorios 24-48h antes", icon: Clock },
-              { problem: "Clientes que no vuelven", solution: "Recordatorios de mantenimiento", icon: Heart },
-              { problem: "Pocas reseñas online", solution: "Solicitud automática post-tratamiento", icon: Star },
-              { problem: "Agenda manual difícil de gestionar", solution: "Reservas online sincronizadas", icon: Calendar },
-              { problem: "Atención fuera de horario", solution: "Chatbot 24/7", icon: Bot },
+              { emoji: "📅", title: "La agenda se gestiona a mano y consume horas", text: "Tu recepcionista pasa horas al teléfono confirmando, cancelando y reorganizando citas. Tiempo que podría dedicar a los pacientes." },
+              { emoji: "👻", title: "Ausencias que destrozan la planificación", text: "Pacientes que no aparecen sin avisar. Huecos en la agenda que no se pueden cubrir a última hora. Ingresos perdidos cada día." },
+              { emoji: "🌐", title: "Pacientes nuevos que buscan online y no te encuentran", text: "El 70% de los pacientes busca clínicas en Google antes de llamar. Si no apareces o tu web no transmite confianza, van a la competencia." },
             ].map((item, i) => (
               <div key={i} className="card-premium">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-destructive/10 flex items-center justify-center">
-                    <item.icon className="w-5 h-5 text-destructive" />
-                  </div>
-                  <span className="font-semibold text-destructive">{item.problem}</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-success/10 flex items-center justify-center">
-                    <CheckCircle2 className="w-5 h-5 text-success" />
-                  </div>
-                  <span className="font-semibold text-success">{item.solution}</span>
-                </div>
+                <div className="text-4xl mb-4">{item.emoji}</div>
+                <h3 className="text-lg font-display font-bold mb-3">{item.title}</h3>
+                <p className="text-muted-foreground text-sm">{item.text}</p>
               </div>
             ))}
           </div>
@@ -144,26 +134,21 @@ const SectorClinicasEstetica = () => {
         <div className="section-container">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              Soluciones para <span className="text-gradient-primary">clínicas de estética</span>
+              Soluciones para <span className="text-gradient-primary">clínicas y centros de estética</span>
             </h2>
           </div>
-
           <div className="grid md:grid-cols-3 gap-8">
-            {solutions.map((solution, i) => (
-              <div key={i} className="card-premium">
+            {services.map((s, i) => (
+              <div key={i} className="card-premium flex flex-col">
                 <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
-                  <solution.icon className="w-7 h-7 text-primary" />
+                  <s.icon className="w-7 h-7 text-primary" />
                 </div>
-                <h3 className="text-xl font-display font-bold mb-3">{solution.title}</h3>
-                <p className="text-muted-foreground mb-4">{solution.description}</p>
-                <ul className="space-y-2">
-                  {solution.benefits.map((benefit, j) => (
-                    <li key={j} className="flex items-center gap-2 text-sm">
-                      <CheckCircle2 className="w-4 h-4 text-success" />
-                      {benefit}
-                    </li>
-                  ))}
-                </ul>
+                <h3 className="text-xl font-display font-bold mb-1">{s.name}</h3>
+                <span className="text-primary font-semibold text-sm mb-3">{s.price}</span>
+                <p className="text-muted-foreground text-sm mb-4 flex-1">{s.description}</p>
+                <div className="flex items-center gap-2 text-sm font-semibold text-success">
+                  <CheckCircle2 className="w-4 h-4" /> {s.result}
+                </div>
               </div>
             ))}
           </div>
@@ -173,12 +158,12 @@ const SectorClinicasEstetica = () => {
       {/* Stats */}
       <section className="section-padding bg-muted/20">
         <div className="section-container">
-          <div className="grid md:grid-cols-4 gap-6 text-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {[
-              { value: "-80%", label: "No-shows" },
-              { value: "+300%", label: "Reseñas/mes" },
-              { value: "+40%", label: "Clientes recurrentes" },
-              { value: "24/7", label: "Atención" },
+              { value: "-60%", label: "Reducción de ausencias" },
+              { value: "+200%", label: "Más visibilidad en Google" },
+              { value: "24/7", label: "Agenda siempre disponible" },
+              { value: "48h", label: "Implementación completa" },
             ].map((stat, i) => (
               <div key={i} className="card-premium">
                 <div className="stat-value text-2xl md:text-3xl mb-1">{stat.value}</div>
@@ -189,8 +174,32 @@ const SectorClinicasEstetica = () => {
         </div>
       </section>
 
-      {/* FAQ */}
+      {/* How it works */}
       <section className="section-padding">
+        <div className="section-container">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+              En 3 pasos tu clínica <span className="text-gradient-primary">funciona sola</span>
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            {[
+              { step: "1", title: "Auditoría gratuita de 30 minutos", text: "Analizamos cómo gestionas citas y cuántos pacientes pierdes por ausencias y falta de visibilidad online." },
+              { step: "2", title: "Implementamos en 48 horas", text: "Configuramos chatbot, web y campañas con tus tratamientos, precios y protocolos. Sin que toques nada técnico." },
+              { step: "3", title: "Tu clínica capta y retiene sola", text: "Desde el día 1 el sistema gestiona citas, recuerda a pacientes y capta nuevos mientras atiendes consulta." },
+            ].map((item, i) => (
+              <div key={i} className="card-premium text-center">
+                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4 text-primary font-display font-bold text-xl">{item.step}</div>
+                <h3 className="font-display font-bold mb-3">{item.title}</h3>
+                <p className="text-muted-foreground text-sm">{item.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="section-padding bg-muted/20">
         <div className="section-container">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-8 text-center">
@@ -214,14 +223,14 @@ const SectorClinicasEstetica = () => {
         <div className="section-container relative z-10">
           <div className="card-premium text-center p-12 neon-border">
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              ¿Lista para automatizar tu clínica?
+              ¿Cuántas citas pierdes cada semana por ausencias?
             </h2>
             <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-              Te analizamos gratis y te decimos exactamente qué automatizaciones necesitas.
+              Auditoría gratuita de 30 minutos para clínicas. Te mostramos exactamente cuánto puedes recuperar.
             </p>
             <Link to="/auditoria?vertical=clinica">
               <Button size="lg" className="btn-neon text-lg px-8">
-                Auditoría gratis (3 min)
+                Quiero mi auditoría gratuita
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>

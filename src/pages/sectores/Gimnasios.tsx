@@ -3,95 +3,95 @@ import { SEOHead, LocalBusinessSchema, FAQSchema, BreadcrumbSchema } from "@/com
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { 
-  UtensilsCrossed, Bot, CheckCircle2, ArrowRight, 
-  MessageSquare, Phone, Ghost, Megaphone
+  Dumbbell, Bot, CheckCircle2, ArrowRight, 
+  MessageSquare, TrendingDown, Calendar
 } from "lucide-react";
 
 const faqs = [
   {
-    question: "¿Cuánto cuesta automatizar un restaurante?",
-    answer: "El chatbot de reservas parte desde 295€ de implementación. La web profesional desde 197€. El paquete completo con chatbot, web y campañas de WhatsApp cuesta 850€. Sin cuotas mensuales obligatorias en los servicios individuales."
+    question: "¿Funciona con el software de gestión de mi gimnasio?",
+    answer: "Nos integramos con Glofox, Mindbody, Clubspot y otros. También funcionamos con sistemas propios. Lo verificamos en la auditoría gratuita sin coste."
   },
   {
-    question: "¿Cuánto tiempo tarda en estar funcionando?",
-    answer: "El chatbot de WhatsApp y reservas está operativo en 48 horas. La web completa en 5-7 días. Tú solo necesitas darnos acceso a tu número de WhatsApp Business y tu carta."
+    question: "¿El chatbot puede gestionar pagos y renovaciones?",
+    answer: "Sí. Puede recordar renovaciones próximas, gestionar el pago por link directo y avisar cuando una membresía está a punto de caducar. Todo por WhatsApp."
   },
   {
-    question: "¿Necesito saber de tecnología?",
-    answer: "No. Nosotros configuramos todo. Tú recibes las reservas en tu móvil como siempre, pero sin tener que responder manualmente. Si algo falla, te avisamos antes de que lo notes."
+    question: "¿Cuánto tiempo ahorra el sistema al mes?",
+    answer: "En gimnasios medianos ahorra entre 40 y 60 horas al mes en gestión de consultas, reservas y seguimiento de bajas. Equivale a casi una semana de trabajo de una persona."
   },
   {
-    question: "¿Funciona con mi sistema de reservas actual?",
-    answer: "Sí. Nos integramos con los sistemas más habituales: TheFork, Cover Manager, Google Reserve y cualquier sistema propio. Si tienes un sistema específico, lo analizamos en la auditoría gratuita."
+    question: "¿Puedo personalizar las ofertas de reactivación?",
+    answer: "Completamente. Tú defines qué oferta ofrecer (descuento, mes gratis, cambio de tarifa) y en qué momento. El sistema lo ejecuta automáticamente."
   },
   {
-    question: "¿Qué pasa si el chatbot no sabe responder algo?",
-    answer: "El chatbot escala automáticamente al dueño o encargado por WhatsApp cuando encuentra una pregunta que no puede gestionar. Siempre hay un humano como respaldo."
+    question: "¿Cómo sé si el sistema está funcionando?",
+    answer: "Tienes un dashboard en tiempo real con consultas recibidas, socios convertidos, bajas reactivadas y clases gestionadas. Informe automático cada lunes en tu email."
   }
 ];
 
 const services = [
   {
-    name: "Chatbot de Reservas 24/7",
+    name: "Chatbot de Conversión de Socios",
     price: "Desde 295€",
-    description: "Tu cliente escribe por WhatsApp, Instagram o la web a cualquier hora. El chatbot confirma la reserva, pregunta alergias, manda recordatorio 2 horas antes y gestiona cancelaciones. Todo sin que toques el teléfono.",
-    result: "-40% no-shows desde el primer mes",
+    description: "Persona pregunta por WhatsApp o web. El chatbot muestra precios, ofertas activas, hace tour virtual del gimnasio y ofrece prueba gratuita de 3 días. Convierte curiosos en socios.",
+    result: "+80% conversión de consultas",
     icon: Bot,
   },
   {
-    name: "Campañas WhatsApp para Mesas Vacías",
+    name: "Sistema de Reactivación de Bajas",
     price: "Desde 350€",
-    description: "Los lunes por la mañana el sistema detecta qué días de la semana tienen pocas reservas y manda automáticamente una oferta por WhatsApp a tus clientes anteriores. Tú no haces nada.",
-    result: "+35% ocupación entre semana",
-    icon: MessageSquare,
+    description: "Cuando un socio se da de baja, el sistema espera 7 días y le manda una oferta personalizada por WhatsApp. Si no responde, intenta email. Si no, un tercer contacto a los 30 días.",
+    result: "-30% bajas definitivas",
+    icon: TrendingDown,
   },
   {
-    name: "Web Profesional con Reservas Online",
+    name: "Gestión Automática de Clases",
     price: "Desde 197€",
-    description: "Web que carga en menos de 2 segundos, aparece en Google cuando buscan restaurantes en tu zona y tiene sistema de reservas integrado que funciona solo.",
-    result: "+127% reservas online en 60 días",
-    icon: UtensilsCrossed,
+    description: "Socios reservan clase desde WhatsApp. Recordatorio automático 2 horas antes. Si cancela, su plaza se oferta automáticamente a socios en lista de espera.",
+    result: "+60% ocupación en clases colectivas",
+    icon: Calendar,
   },
 ];
 
-const SectorRestaurantes = () => {
+const SectorGimnasios = () => {
   return (
     <PageLayout>
       <SEOHead
-        title="Automatización IA para Restaurantes | HydrAI Labs"
-        description="Chatbot 24/7, reservas automáticas y campañas por WhatsApp para restaurantes en España. -40% no-shows. +127% reservas online. Desde 197€."
-        canonical="/sectores/restaurantes"
-        keywords="ia restaurantes, chatbot restaurante, reservas automaticas restaurante, no-shows restaurante, whatsapp restaurante"
+        title="Automatización IA para Gimnasios | HydrAI Labs"
+        description="Chatbot de captación de socios, reactivación de bajas y gestión automática para gimnasios en España. -30% bajas. +80% conversión. Desde 197€."
+        canonical="/sectores/gimnasios"
+        keywords="ia gimnasios, chatbot gimnasio, automatizar gimnasio, captacion socios gimnasio, reactivacion bajas gimnasio"
       />
       <LocalBusinessSchema />
       <FAQSchema items={faqs} />
       <BreadcrumbSchema items={[
         { name: 'Inicio', url: '/' },
         { name: 'Sectores', url: '/industrias' },
-        { name: 'Restaurantes', url: '/sectores/restaurantes' }
+        { name: 'Gimnasios', url: '/sectores/gimnasios' }
       ]} />
 
       {/* Hero */}
       <section className="relative section-padding overflow-hidden">
-        <div className="glow-orb-primary w-96 h-96 -top-48 -left-48" />
-        <div className="glow-orb-accent w-64 h-64 bottom-0 right-0" />
+        <div className="glow-orb-secondary w-96 h-96 -top-48 -left-48" />
+        <div className="glow-orb-primary w-64 h-64 bottom-0 right-0" />
         <div className="section-container relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <div className="badge-primary mb-6 inline-flex">
-              <UtensilsCrossed className="w-3 h-3 mr-1" /> Restaurantes
+              <Dumbbell className="w-3 h-3 mr-1" /> Gimnasios
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
-              Tu Restaurante Lleno de Mesas{" "}
-              <span className="text-gradient-primary">Sin Gestionar Nada Manualmente</span>
+              Tu Gimnasio Captando Socios Nuevos y Recuperando Bajas{" "}
+              <span className="text-gradient-primary">en Piloto Automático</span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              Chatbot que responde reservas a las 3am, campañas de WhatsApp que llenan mesas vacías
-              y recordatorios automáticos que eliminan los no-shows.
+              Chatbot que convierte consultas en membresías, sistema automático que reactiva socios que se dan
+              de baja y campañas que llenan las clases colectivas.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/auditoria?vertical=restaurante">
+              <Link to="/auditoria?vertical=gimnasio">
                 <Button size="lg" className="btn-neon text-lg px-8">
-                  Auditoría para restaurantes
+                  Auditoría para gimnasios
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
@@ -115,21 +115,9 @@ const SectorRestaurantes = () => {
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              {
-                icon: Phone, emoji: "📞",
-                title: "El teléfono no para pero tú no puedes atenderlo todo",
-                text: "Clientes que llaman para reservar mientras estás en cocina o atendiendo mesas. Reservas que se pierden porque nadie coge el teléfono."
-              },
-              {
-                icon: Ghost, emoji: "👻",
-                title: "No-shows que te destrozan el servicio",
-                text: "Mesas reservadas que no aparecen sin avisar. Pérdida media de 3-4 mesas por servicio. Sin sistema de recordatorios automáticos."
-              },
-              {
-                icon: Megaphone, emoji: "📣",
-                title: "Mesas vacías entre semana que no sabes cómo llenar",
-                text: "Los fines de semana van solos pero los martes y miércoles el restaurante está medio vacío y no tienes tiempo de hacer marketing."
-              },
+              { emoji: "💪", title: "Socios que preguntan precio y desaparecen", text: "Alguien pregunta por WhatsApp cuánto cuesta la mensualidad, le contestas, y nunca más sabes de él. Sin seguimiento automático, sin segunda oportunidad." },
+              { emoji: "📉", title: "Bajas en enero que no recuperas nunca", text: "Enero y septiembre son picos de altas pero febrero y octubre son picos de bajas. Sin sistema de reactivación, esos socios van al gimnasio de enfrente." },
+              { emoji: "🏋️", title: "Clases colectivas a medio llenar", text: "Yoga a las 7pm con 4 personas cuando caben 15. Sin sistema de reservas ni recordatorios, los socios no aprovechan las clases y acaban dándose de baja." },
             ].map((item, i) => (
               <div key={i} className="card-premium">
                 <div className="text-4xl mb-4">{item.emoji}</div>
@@ -146,7 +134,7 @@ const SectorRestaurantes = () => {
         <div className="section-container">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              Automatizamos tu restaurante <span className="text-gradient-primary">en 48 horas</span>
+              Soluciones para <span className="text-gradient-primary">gimnasios</span>
             </h2>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
@@ -172,10 +160,10 @@ const SectorRestaurantes = () => {
         <div className="section-container">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {[
-              { value: "-40%", label: "Reducción de no-shows" },
-              { value: "+127%", label: "Más reservas online" },
-              { value: "24/7", label: "Atención sin personal extra" },
-              { value: "48h", label: "Tiempo de implementación" },
+              { value: "+80%", label: "Conversión de consultas" },
+              { value: "-30%", label: "Reducción de bajas" },
+              { value: "+60%", label: "Ocupación en clases" },
+              { value: "24/7", label: "Atención y reservas" },
             ].map((stat, i) => (
               <div key={i} className="card-premium">
                 <div className="stat-value text-2xl md:text-3xl mb-1">{stat.value}</div>
@@ -191,28 +179,17 @@ const SectorRestaurantes = () => {
         <div className="section-container">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              En 3 pasos tu restaurante <span className="text-gradient-primary">trabaja solo</span>
+              En 3 pasos tu gimnasio <span className="text-gradient-primary">crece solo</span>
             </h2>
           </div>
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {[
-              {
-                step: "1", title: "Auditoría gratuita de 30 minutos",
-                text: "Analizamos cómo gestionas las reservas ahora y cuántas mesas estás perdiendo por no tener automatización. Sin compromiso."
-              },
-              {
-                step: "2", title: "Implementamos en 48 horas",
-                text: "Configuramos el chatbot con el nombre de tu restaurante, tu carta, tus horarios y tu forma de trabajar. Sin que toques nada técnico."
-              },
-              {
-                step: "3", title: "Tu restaurante trabaja solo",
-                text: "Desde el día 1 el sistema gestiona reservas, manda recordatorios y llena mesas vacías mientras tú te concentras en la cocina y el servicio."
-              },
+              { step: "1", title: "Auditoría gratuita de 30 minutos", text: "Analizamos cuántos socios potenciales pierdes al mes y qué bajas podrías estar reactivando automáticamente." },
+              { step: "2", title: "Implementamos en 48 horas", text: "Configuramos chatbot, reactivación y gestión de clases con tus tarifas, horarios y ofertas. Sin que toques nada técnico." },
+              { step: "3", title: "Tu gimnasio capta y retiene solo", text: "Desde el día 1 el sistema convierte consultas, reactiva bajas y llena clases colectivas mientras tú gestionas el gimnasio." },
             ].map((item, i) => (
               <div key={i} className="card-premium text-center">
-                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4 text-primary font-display font-bold text-xl">
-                  {item.step}
-                </div>
+                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4 text-primary font-display font-bold text-xl">{item.step}</div>
                 <h3 className="font-display font-bold mb-3">{item.title}</h3>
                 <p className="text-muted-foreground text-sm">{item.text}</p>
               </div>
@@ -246,12 +223,12 @@ const SectorRestaurantes = () => {
         <div className="section-container relative z-10">
           <div className="card-premium text-center p-12 neon-border">
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              ¿Cuántas mesas estás perdiendo cada semana?
+              ¿Cuántos socios potenciales pierdes cada mes?
             </h2>
             <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-              Auditoría gratuita de 30 minutos. Te decimos exactamente cuánto puedes ganar automatizando tu restaurante.
+              Auditoría gratuita para gimnasios. Te mostramos exactamente cuánto podrías crecer automatizando captación y retención.
             </p>
-            <Link to="/auditoria?vertical=restaurante">
+            <Link to="/auditoria?vertical=gimnasio">
               <Button size="lg" className="btn-neon text-lg px-8">
                 Quiero mi auditoría gratuita
                 <ArrowRight className="ml-2 w-5 h-5" />
@@ -264,4 +241,4 @@ const SectorRestaurantes = () => {
   );
 };
 
-export default SectorRestaurantes;
+export default SectorGimnasios;

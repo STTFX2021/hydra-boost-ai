@@ -34,6 +34,12 @@ import PedidosRestaurantes from "./pages/servicios/PedidosRestaurantes";
 import SectorRestaurantes from "./pages/sectores/Restaurantes";
 import SectorInmobiliarias from "./pages/sectores/Inmobiliarias";
 import SectorClinicasEstetica from "./pages/sectores/ClinicasEstetica";
+import SectorGimnasios from "./pages/sectores/Gimnasios";
+// Blog article pages
+import ChatbotWhatsappRestaurante from "./pages/blog/ChatbotWhatsappRestaurante";
+import ScrapingLeadsInmobiliaria from "./pages/blog/ScrapingLeadsInmobiliaria";
+import AutomatizacionIANegocioLocal from "./pages/blog/AutomatizacionIANegocioLocal";
+import ChatbotVsPersona from "./pages/blog/ChatbotVsPersona";
 
 const queryClient = new QueryClient();
 
@@ -53,12 +59,17 @@ const App = () => (
             <Route path="/sectores/restaurantes" element={<SectorRestaurantes />} />
             <Route path="/sectores/inmobiliarias" element={<SectorInmobiliarias />} />
             <Route path="/sectores/clinicas-estetica" element={<SectorClinicasEstetica />} />
+            <Route path="/sectores/gimnasios" element={<SectorGimnasios />} />
             <Route path="/industrias" element={<Industrias />} />
             <Route path="/arquitectura" element={<Arquitectura />} />
             <Route path="/precios" element={<Precios />} />
             <Route path="/casos" element={<Casos />} />
             <Route path="/contacto" element={<Contacto />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/chatbot-whatsapp-restaurante" element={<ChatbotWhatsappRestaurante />} />
+            <Route path="/blog/scraping-leads-inmobiliaria" element={<ScrapingLeadsInmobiliaria />} />
+            <Route path="/blog/automatizacion-ia-negocio-local" element={<AutomatizacionIANegocioLocal />} />
+            <Route path="/blog/chatbot-vs-persona-atencion-cliente" element={<ChatbotVsPersona />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/auditoria" element={<Auditoria />} />
             <Route path="/auditoria-gratis" element={<AuditoriaGratis />} />
