@@ -106,7 +106,22 @@ export function LocalBusinessForm() {
 
       if (leadError) throw leadError;
 
-      // Best-effort notification
+      // Send to n8n + Resend via lead-intake edge function (best-effort)
+      try {
+        await supabase.functions.invoke("lead-intake", {
+          body: {
+            nombre: formData.name.trim(),
+            email: formData.email.trim(),
+            telefono: formData.phone.trim(),
+            tipo_negocio: formData.sector,
+            mensaje: formData.message.trim() || `Sector: ${formData.sector}, Ciudad: ${formData.city}, Problemas: ${formData.problems.join(", ")}`,
+            fuente: "auditoria",
+            pagina: window.location.href,
+          },
+        });
+      } catch { /* best-effort */ }
+
+      // Best-effort Discord notification
       try {
         await supabase.functions.invoke("send-lead-notification", {
           body: {
@@ -124,14 +139,20 @@ export function LocalBusinessForm() {
             },
           },
         });
-      } catch {
-        // silent
-      }
+      } catch { /* silent */ }
 
       setShowConfirmation(true);
     } catch (error) {
       console.error(error);
-      toast.error("Error al enviar. Inténtalo de nuevo.");
+      toast.error(
+        <div className="space-y-2">
+          <p>Hubo un problema técnico. Contáctanos directamente en WhatsApp:</p>
+          <a href="https://wa.me/34634425921" target="_blank" rel="noopener noreferrer" className="inline-block px-3 py-1 bg-[#25D366] text-white rounded-lg text-sm font-medium">
+            Abrir WhatsApp →
+          </a>
+        </div>,
+        { duration: 10000 }
+      );
     } finally {
       setIsSubmitting(false);
     }

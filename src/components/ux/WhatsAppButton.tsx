@@ -14,7 +14,7 @@ export const WhatsAppButton = () => {
   return (
     <AnimatePresence>
       <motion.a
-        href="https://wa.me/34600000000?text=Hola%2C%20quiero%20información%20sobre%20automatización%20IA"
+        href="https://wa.me/34634425921?text=Hola%2C%20me%20interesa%20saber%20m%C3%A1s%20sobre%20vuestros%20servicios%20de%20automatizaci%C3%B3n%20IA"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Contactar por WhatsApp"
