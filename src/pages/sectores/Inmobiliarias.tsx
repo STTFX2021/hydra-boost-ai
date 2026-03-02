@@ -3,51 +3,54 @@ import { SEOHead, LocalBusinessSchema, FAQSchema, BreadcrumbSchema } from "@/com
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { 
-  Building2, Bot, Calendar, Home, CheckCircle2, ArrowRight, 
-  Zap, MessageSquare, Camera, TrendingUp
+  Building2, Bot, CheckCircle2, ArrowRight, 
+  Phone, Search, MessageSquare
 } from "lucide-react";
 
 const faqs = [
   {
-    question: "¿Cómo ayuda un chatbot a una inmobiliaria?",
-    answer: "El chatbot responde preguntas sobre propiedades 24/7, filtra clientes según presupuesto/zona, agenda visitas y captura datos de contacto automáticamente."
+    question: "¿Cómo consigue el sistema propietarios que quieren vender?",
+    answer: "Usamos Apify para rastrear señales de intención en portales inmobiliarios, redes sociales y directorios. Identificamos propietarios con alta probabilidad de querer vender en los próximos 3-6 meses en tu zona."
   },
   {
-    question: "¿Se integra con mi CRM inmobiliario?",
-    answer: "Sí, podemos integrar con los principales CRMs del sector (Inmovilla, Sooprema, Witei, etc.) o con soluciones genéricas como HubSpot."
+    question: "¿El chatbot puede mostrar propiedades del catálogo?",
+    answer: "Sí. Se integra con tu CRM o portal y puede mostrar propiedades filtradas por las preferencias del lead: zona, precio, habitaciones. Lead recibe las opciones directamente en WhatsApp."
   },
   {
-    question: "¿Puede el bot mostrar propiedades disponibles?",
-    answer: "Sí, el bot accede a tu catálogo y puede filtrar por zona, precio, habitaciones, etc. Muestra fichas con fotos y enlaza a la ficha completa."
+    question: "¿Cumple con la LOPD el sistema de contacto?",
+    answer: "Sí. Solo contactamos a personas que han mostrado intención pública de vender o que han dado su consentimiento. Todos los flujos cumplen RGPD y LOPD."
   },
   {
-    question: "¿Funciona para alquiler vacacional?",
-    answer: "Sí, tenemos soluciones específicas para alquiler vacacional: disponibilidad en tiempo real, reservas automáticas e integración con Airbnb/Booking."
+    question: "¿Funciona con mi CRM actual?",
+    answer: "Nos integramos con los CRM más usados en inmobiliarias españolas: Inmovilla, Witei, Salesforce, HubSpot y otros. Lo verificamos en la auditoría gratuita."
   },
   {
-    question: "¿Cuánto se tarda en implementar?",
-    answer: "Entre 10 y 15 días laborables. Incluye integración con tu catálogo, entrenamiento del bot y configuración de automatizaciones."
+    question: "¿Cuánto tiempo tarda en generar primeros resultados?",
+    answer: "El chatbot de cualificación genera resultados desde el día 1. Las campañas de captación de propietarios generan primeros contactos en la primera semana de ejecución."
   }
 ];
 
-const solutions = [
+const services = [
   {
+    name: "Chatbot de Cualificación de Leads",
+    price: "Desde 295€",
+    description: "Lead llega por web, WhatsApp o portal inmobiliario. El chatbot responde en menos de 30 segundos, pregunta presupuesto, zona, timing y tipología. Solo llegan a tu agente los leads realmente interesados.",
+    result: "+300% leads cualificados",
     icon: Bot,
-    title: "Chatbot Inmobiliario 24/7",
-    description: "Responde sobre propiedades, filtra por presupuesto y agenda visitas",
-    benefits: ["Atención fuera de horario", "Cualificación automática", "Menos llamadas repetitivas"]
   },
   {
-    icon: Calendar,
-    title: "Agenda de Visitas Automática",
-    description: "El cliente elige día y hora, el bot sincroniza con tu calendario",
-    benefits: ["Sin llamadas para agendar", "Recordatorios automáticos", "Menos cancelaciones"]
+    name: "Scraping de Propietarios + Outreach",
+    price: "Desde 497€",
+    description: "Identificamos propietarios en tu zona que tienen viviendas para vender basándonos en señales de intención. Les contactamos por email y WhatsApp con propuesta personalizada. Tú recibes los interesados directamente.",
+    result: "+25 propietarios contactados/semana",
+    icon: Search,
   },
   {
-    icon: Camera,
-    title: "Tours Virtuales + Bot",
-    description: "El bot guía al cliente por el tour virtual y responde preguntas",
-    benefits: ["Visitas previas online", "Filtra curiosos", "Más tiempo para cerrar ventas"]
+    name: "Seguimiento Automático por WhatsApp",
+    price: "Desde 350€",
+    description: "Cada lead recibe seguimiento automático en los días 1, 3, 7 y 14 con mensajes personalizados según su perfil. El agente solo interviene cuando el lead responde que está listo para avanzar.",
+    result: "+45% conversión de leads a visitas",
+    icon: MessageSquare,
   },
 ];
 
@@ -55,10 +58,10 @@ const SectorInmobiliarias = () => {
   return (
     <PageLayout>
       <SEOHead
-        title="IA para Inmobiliarias - Chatbots, Visitas y Cualificación de Leads"
-        description="Automatiza tu inmobiliaria con IA: chatbot que filtra clientes, agenda visitas y muestra propiedades 24/7. Cualifica leads automáticamente. Desde 790€."
+        title="Automatización IA para Inmobiliarias | HydrAI Labs"
+        description="Chatbot de captación de leads, cualificación automática y seguimiento por WhatsApp para inmobiliarias en España. +300% leads cualificados. Desde 295€."
         canonical="/sectores/inmobiliarias"
-        keywords="ia inmobiliarias, chatbot inmobiliaria, automatizar inmobiliaria, leads inmobiliarios, visitas automaticas inmobiliaria"
+        keywords="ia inmobiliarias, chatbot inmobiliaria, leads inmobiliarios, cualificacion leads inmobiliaria, scraping inmobiliaria"
       />
       <LocalBusinessSchema />
       <FAQSchema items={faqs} />
@@ -72,18 +75,18 @@ const SectorInmobiliarias = () => {
       <section className="relative section-padding overflow-hidden">
         <div className="glow-orb-primary w-96 h-96 -top-48 -right-48" />
         <div className="glow-orb-secondary w-64 h-64 bottom-0 left-0" />
-        
         <div className="section-container relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <div className="badge-primary mb-6 inline-flex">
               <Building2 className="w-3 h-3 mr-1" /> Inmobiliarias
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
-              IA que cualifica leads <span className="text-gradient-primary">mientras duermes</span>
+              Tu Inmobiliaria Captando Compradores y Vendedores{" "}
+              <span className="text-gradient-primary">Mientras Duermes</span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              Chatbot que filtra clientes por presupuesto, muestra propiedades y agenda visitas. 
-              Tú solo cierras ventas.
+              Chatbot que cualifica leads automáticamente, scraping de propietarios que quieren vender
+              y seguimiento por WhatsApp sin trabajo manual.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/auditoria?vertical=inmobiliaria">
@@ -102,37 +105,24 @@ const SectorInmobiliarias = () => {
         </div>
       </section>
 
-      {/* Problem → Solution */}
+      {/* Problem */}
       <section className="section-padding bg-muted/20">
         <div className="section-container">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              Problemas del sector <span className="text-gradient-secondary">inmobiliario</span>
+              ¿Te suena <span className="text-gradient-secondary">familiar</span>?
             </h2>
           </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-8">
             {[
-              { problem: "Leads que no cualifican", solution: "Bot filtra por presupuesto/zona", icon: MessageSquare },
-              { problem: "Visitas que no cierran", solution: "Pre-cualificación antes de visitar", icon: Home },
-              { problem: "Clientes que llaman fuera de horario", solution: "Chatbot 24/7", icon: Bot },
-              { problem: "Tiempo perdido enseñando pisos", solution: "Tours virtuales previos", icon: Camera },
-              { problem: "Seguimiento manual de leads", solution: "CRM automatizado", icon: TrendingUp },
-              { problem: "Cancelaciones de visitas", solution: "Recordatorios automáticos", icon: Calendar },
+              { emoji: "📞", title: "Leads que llegan fuera de horario y se enfrían", text: "Un comprador interesado llena un formulario a las 10pm. Si no le contestas en menos de 5 minutos, llama a la siguiente inmobiliaria de la lista." },
+              { emoji: "🔍", title: "Encontrar propietarios que quieren vender es lento", text: "Horas buscando en portales, llamando a fríos, mandando emails que nadie abre. Sin sistema para identificar propietarios con intención real de vender." },
+              { emoji: "💬", title: "El seguimiento de leads se hace a mano o no se hace", text: "Leads que entran en el CRM y nunca reciben seguimiento porque el agente está ocupado con otras visitas. Ventas perdidas por falta de seguimiento sistemático." },
             ].map((item, i) => (
               <div key={i} className="card-premium">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-destructive/10 flex items-center justify-center">
-                    <item.icon className="w-5 h-5 text-destructive" />
-                  </div>
-                  <span className="font-semibold text-destructive">{item.problem}</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-success/10 flex items-center justify-center">
-                    <CheckCircle2 className="w-5 h-5 text-success" />
-                  </div>
-                  <span className="font-semibold text-success">{item.solution}</span>
-                </div>
+                <div className="text-4xl mb-4">{item.emoji}</div>
+                <h3 className="text-lg font-display font-bold mb-3">{item.title}</h3>
+                <p className="text-muted-foreground text-sm">{item.text}</p>
               </div>
             ))}
           </div>
@@ -147,23 +137,18 @@ const SectorInmobiliarias = () => {
               Soluciones para <span className="text-gradient-primary">inmobiliarias</span>
             </h2>
           </div>
-
           <div className="grid md:grid-cols-3 gap-8">
-            {solutions.map((solution, i) => (
-              <div key={i} className="card-premium">
+            {services.map((s, i) => (
+              <div key={i} className="card-premium flex flex-col">
                 <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
-                  <solution.icon className="w-7 h-7 text-primary" />
+                  <s.icon className="w-7 h-7 text-primary" />
                 </div>
-                <h3 className="text-xl font-display font-bold mb-3">{solution.title}</h3>
-                <p className="text-muted-foreground mb-4">{solution.description}</p>
-                <ul className="space-y-2">
-                  {solution.benefits.map((benefit, j) => (
-                    <li key={j} className="flex items-center gap-2 text-sm">
-                      <CheckCircle2 className="w-4 h-4 text-success" />
-                      {benefit}
-                    </li>
-                  ))}
-                </ul>
+                <h3 className="text-xl font-display font-bold mb-1">{s.name}</h3>
+                <span className="text-primary font-semibold text-sm mb-3">{s.price}</span>
+                <p className="text-muted-foreground text-sm mb-4 flex-1">{s.description}</p>
+                <div className="flex items-center gap-2 text-sm font-semibold text-success">
+                  <CheckCircle2 className="w-4 h-4" /> {s.result}
+                </div>
               </div>
             ))}
           </div>
@@ -173,12 +158,12 @@ const SectorInmobiliarias = () => {
       {/* Stats */}
       <section className="section-padding bg-muted/20">
         <div className="section-container">
-          <div className="grid md:grid-cols-4 gap-6 text-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {[
-              { value: "+50%", label: "Leads cualificados" },
-              { value: "-60%", label: "Visitas sin resultado" },
-              { value: "24/7", label: "Atención a clientes" },
-              { value: "+30%", label: "Conversión" },
+              { value: "+300%", label: "Leads cualificados" },
+              { value: "30seg", label: "Tiempo de respuesta al lead" },
+              { value: "+45%", label: "Conversión a visitas" },
+              { value: "24/7", label: "Captación activa" },
             ].map((stat, i) => (
               <div key={i} className="card-premium">
                 <div className="stat-value text-2xl md:text-3xl mb-1">{stat.value}</div>
@@ -189,8 +174,32 @@ const SectorInmobiliarias = () => {
         </div>
       </section>
 
-      {/* FAQ */}
+      {/* How it works */}
       <section className="section-padding">
+        <div className="section-container">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+              En 3 pasos tu inmobiliaria <span className="text-gradient-primary">capta sola</span>
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            {[
+              { step: "1", title: "Auditoría gratuita de 30 minutos", text: "Analizamos cómo captas leads ahora, cuántos se pierden y qué oportunidades de captación de propietarios tienes en tu zona." },
+              { step: "2", title: "Implementamos en 48 horas", text: "Configuramos chatbot, scraping y seguimiento automático personalizado para tu zona, tipología y mercado." },
+              { step: "3", title: "Tu inmobiliaria capta 24/7", text: "Desde el día 1 el sistema cualifica leads, contacta propietarios y hace seguimiento mientras tú cierras operaciones." },
+            ].map((item, i) => (
+              <div key={i} className="card-premium text-center">
+                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4 text-primary font-display font-bold text-xl">{item.step}</div>
+                <h3 className="font-display font-bold mb-3">{item.title}</h3>
+                <p className="text-muted-foreground text-sm">{item.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="section-padding bg-muted/20">
         <div className="section-container">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-8 text-center">
@@ -214,14 +223,14 @@ const SectorInmobiliarias = () => {
         <div className="section-container relative z-10">
           <div className="card-premium text-center p-12 neon-border">
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              ¿Listo para automatizar tu inmobiliaria?
+              ¿Cuántos leads se te escapan cada semana?
             </h2>
             <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-              Te analizamos gratis y te decimos exactamente qué automatizaciones necesitas.
+              Auditoría gratuita para inmobiliarias. Te mostramos cuántos compradores y vendedores podrías estar captando automáticamente.
             </p>
             <Link to="/auditoria?vertical=inmobiliaria">
               <Button size="lg" className="btn-neon text-lg px-8">
-                Auditoría gratis (3 min)
+                Quiero mi auditoría gratuita
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>
