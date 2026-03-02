@@ -44,8 +44,8 @@ const Casos = () => {
   return (
     <>
       <SEOHead
-        title="Casos de Éxito y Portfolio | HydrAI Labs"
-        description="Descubre cómo nuestros clientes han automatizado sus negocios con IA. Restaurantes, clínicas, inmobiliarias y más. Resultados reales y testimonios."
+        title="Casos de Éxito | HydrAI Labs"
+        description="Resultados reales de negocios locales que automatizaron con HydrAI Labs. Restaurantes, clínicas, inmobiliarias."
         canonical="/casos"
         keywords="casos exito ia, portfolio automatizacion, testimonios chatbot, resultados ia negocios"
       />

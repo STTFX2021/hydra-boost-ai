@@ -81,7 +81,7 @@ const Contacto = () => {
     <>
       <SEOHead
         title="Contacto | HydrAI Labs"
-        description="Contacta con HydrAI Labs. Respondemos en menos de 24h. Cuéntanos tu proyecto y te ayudamos a automatizar tu negocio con IA. Sin compromiso."
+        description="Habla con HydrAI Labs. Auditoría gratuita de automatización para tu negocio local."
         canonical="/contacto"
         keywords="contacto hydrailabs, consulta ia, presupuesto chatbot, agencia automatizacion contacto"
       />

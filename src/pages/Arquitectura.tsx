@@ -363,8 +363,8 @@ export default function Arquitectura() {
   return (
     <>
       <SEOHead
-        title="Arquitectura Enterprise | Event Bus & Orchestrators | HydrAI Labs"
-        description="Visualiza nuestra arquitectura de automatización enterprise: Event Bus, Orchestrators, Workers especializados procesando eventos en tiempo real."
+        title="Arquitectura IA | HydrAI Labs"
+        description="Cómo funciona la arquitectura de automatización IA de HydrAI Labs. Event Bus, Orchestrators y Agentes autónomos."
         canonical="/arquitectura"
         keywords="event bus, orchestrator, arquitectura enterprise, automatización, workers, microservicios"
       />
