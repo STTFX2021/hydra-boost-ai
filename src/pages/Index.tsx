@@ -15,11 +15,15 @@ import WorkflowAnimation from "@/components/WorkflowAnimation";
 import { Shield, Zap } from "lucide-react";
 
 // Lazy-loaded below-the-fold sections
-const ROICalculator = lazy(() => import("@/components/landing/ROICalculator").then(m => ({ default: m.ROICalculator })));
-const ProcessSection = lazy(() => import("@/components/landing/ProcessSection").then(m => ({ default: m.ProcessSection })));
-const FAQ = lazy(() => import("@/components/landing/FAQ").then(m => ({ default: m.FAQ })));
-const TechStack = lazy(() => import("@/components/landing/TechStack").then(m => ({ default: m.TechStack })));
-const FinalCTA = lazy(() => import("@/components/landing/FinalCTA").then(m => ({ default: m.FinalCTA })));
+const ROICalculator = lazy(() =>
+  import("@/components/landing/ROICalculator").then((m) => ({ default: m.ROICalculator })),
+);
+const ProcessSection = lazy(() =>
+  import("@/components/landing/ProcessSection").then((m) => ({ default: m.ProcessSection })),
+);
+const FAQ = lazy(() => import("@/components/landing/FAQ").then((m) => ({ default: m.FAQ })));
+const TechStack = lazy(() => import("@/components/landing/TechStack").then((m) => ({ default: m.TechStack })));
+const FinalCTA = lazy(() => import("@/components/landing/FinalCTA").then((m) => ({ default: m.FinalCTA })));
 
 const LazySection = ({ children }: { children: React.ReactNode }) => (
   <Suspense fallback={<div className="min-h-[200px]" />}>{children}</Suspense>
@@ -76,7 +80,7 @@ const Index = () => {
                     </a>
 
                     <a
-                      href="https://youtu.be/jvHA_QbYqf4"
+                      href="https://youtube/jvHA_QbYqf4"
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="Ver demo de HydrAI en YouTube"
@@ -98,7 +102,9 @@ const Index = () => {
           <TrustBar />
           <UseCaseTabs />
           <BaseImplementations />
-          <LazySection><ROICalculator /></LazySection>
+          <LazySection>
+            <ROICalculator />
+          </LazySection>
 
           {/* Enterprise Audit Section */}
           <section id="audit" aria-label="Auditoría Enterprise" className="section-padding relative overflow-hidden">
@@ -154,11 +160,19 @@ const Index = () => {
           </section>
 
           <EnterpriseElite />
-          <LazySection><ProcessSection /></LazySection>
-          
-          <LazySection><FAQ /></LazySection>
-          <LazySection><TechStack /></LazySection>
-          <LazySection><FinalCTA /></LazySection>
+          <LazySection>
+            <ProcessSection />
+          </LazySection>
+
+          <LazySection>
+            <FAQ />
+          </LazySection>
+          <LazySection>
+            <TechStack />
+          </LazySection>
+          <LazySection>
+            <FinalCTA />
+          </LazySection>
         </main>
         <Footer />
       </div>
