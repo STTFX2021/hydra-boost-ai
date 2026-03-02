@@ -57,7 +57,7 @@ const Contacto = () => {
       const { data, error } = await supabase.functions.invoke("contact-submit", {
         body: {
           ...validation.data,
-          website: honeypot, // honeypot field
+          website: honeypot,
           page: typeof window !== "undefined" ? window.location.pathname : "/contacto",
           userAgent: typeof navigator !== "undefined" ? navigator.userAgent : "",
         },
@@ -66,12 +66,35 @@ const Contacto = () => {
       if (error) throw error;
       if (!data?.ok) throw new Error(data?.error || "Error al enviar");
 
-      toast.success("¡Mensaje enviado! Te responderemos pronto.");
+      // Also send to n8n + Resend via lead-intake (best-effort)
+      try {
+        await supabase.functions.invoke("lead-intake", {
+          body: {
+            nombre: validation.data.name,
+            email: validation.data.email,
+            telefono: validation.data.phone || "",
+            tipo_negocio: "contacto",
+            mensaje: validation.data.message,
+            fuente: "contacto",
+            pagina: window.location.href,
+          },
+        });
+      } catch { /* best-effort */ }
+
+      toast.success(`¡Perfecto ${validation.data.name.split(" ")[0]}! Recibirás respuesta en menos de 24h.`);
       setFormData({ name: "", email: "", phone: "", message: "" });
       setHoneypot("");
     } catch (err: any) {
       console.error("Contact submit error:", err);
-      toast.error("No se pudo enviar. Inténtalo de nuevo.");
+      toast.error(
+        <div className="space-y-2">
+          <p>Hubo un problema técnico. Contáctanos directamente en WhatsApp:</p>
+          <a href="https://wa.me/34634425921" target="_blank" rel="noopener noreferrer" className="inline-block px-3 py-1 bg-[#25D366] text-white rounded-lg text-sm font-medium">
+            Abrir WhatsApp →
+          </a>
+        </div>,
+        { duration: 10000 }
+      );
     } finally {
       setLoading(false);
     }

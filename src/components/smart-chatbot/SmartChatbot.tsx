@@ -152,7 +152,7 @@ export const SmartChatbot = () => {
       addMessage("assistant", result.message);
     }
 
-    // Save lead
+    // Save lead to Supabase
     try {
       await supabase.from("leads").insert({
         name: contactForm.name,
@@ -164,7 +164,6 @@ export const SmartChatbot = () => {
         tags: [questionnaire.businessType || "unknown"],
       });
 
-      // Save assessment
       await supabase.from("assessments").insert({
         payload_json: {
           businessType: questionnaire.businessType,
@@ -179,6 +178,21 @@ export const SmartChatbot = () => {
     } catch (err) {
       console.warn("Lead save failed:", err);
     }
+
+    // Send to n8n + Resend via lead-intake (best-effort)
+    try {
+      await supabase.functions.invoke("lead-intake", {
+        body: {
+          nombre: contactForm.name,
+          email: contactForm.email,
+          telefono: contactForm.phone || "",
+          tipo_negocio: questionnaire.businessType || "unknown",
+          mensaje: `Chatbot audit - Respuestas: ${JSON.stringify(questionnaire.answers)}`,
+          fuente: "chatbot",
+          pagina: window.location.href,
+        },
+      });
+    } catch { /* best-effort */ }
 
     setFreeChat(true);
   };
