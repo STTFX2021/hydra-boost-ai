@@ -11,8 +11,8 @@ const Blog = () => {
   return (
     <>
       <SEOHead
-        title="Recursos y Herramientas IA | HydrAI Labs"
-        description="Descubre las herramientas de IA que usamos: OpenAI, Supabase, Make, WhatsApp Business y más. Stack tecnológico para automatizar tu negocio."
+        title="Blog | HydrAI Labs"
+        description="Artículos sobre automatización IA, chatbots y marketing digital para negocios locales en España."
         canonical="/blog"
         keywords="herramientas ia, stack tecnologico, openai negocios, automatizacion herramientas"
       />

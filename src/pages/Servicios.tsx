@@ -222,7 +222,7 @@ const Servicios = () => {
     <>
       <SEOHead
         title="Servicios de Automatización IA | HydrAI Labs"
-        description="Webs profesionales, chatbots 24/7, automatizaciones de reservas y gestión de reputación. Soluciones IA completas para negocios locales. Consulta gratis."
+        description="Chatbots IA, webs SEO, scraping y campañas automáticas por WhatsApp, Email e Instagram. Desde 197€."
         canonical="/servicios"
         keywords="servicios ia, chatbot negocios, automatizacion reservas, web ia, agencia automatizacion"
       />

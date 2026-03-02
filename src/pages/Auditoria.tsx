@@ -145,8 +145,8 @@ const AuditoriaWrapper = () => {
   return (
     <>
       <SEOHead
-        title="Enterprise Infrastructure Audit | HydrAI Labs"
-        description="Technical automation audit for enterprise. Analyze your infrastructure, security requirements, and get a custom automation roadmap."
+        title="Auditoría Enterprise | HydrAI Labs"
+        description="Auditoría técnica de automatización para empresas. Analiza tu infraestructura, seguridad y obtén un roadmap personalizado."
         canonical="/auditoria"
         keywords="enterprise automation audit, technical infrastructure review, AI automation assessment, compliance audit"
       />

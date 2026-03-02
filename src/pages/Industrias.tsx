@@ -16,8 +16,8 @@ const Industrias = () => {
   return (
     <>
       <SEOHead
-        title="Automatización por Industria | HydrAI Labs"
-        description="Soluciones IA especializadas por sector: restaurantes, clínicas, talleres, peluquerías, inmobiliarias. Chatbots y automatizaciones adaptados a tu negocio."
+        title="Sectores | HydrAI Labs"
+        description="Automatización IA para restaurantes, clínicas, inmobiliarias, gimnasios y más negocios locales en España."
         canonical="/industrias"
         keywords="automatizacion restaurantes, chatbot clinicas, ia talleres, peluqueria automatizada, inmobiliaria ia"
       />

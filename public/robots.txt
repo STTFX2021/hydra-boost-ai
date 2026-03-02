@@ -4,5 +4,6 @@ Disallow: /admin
 Disallow: /admin/*
 Disallow: /login
 Disallow: /inversores
+Disallow: /api/
 
 Sitemap: https://hydrailabs.com/sitemap.xml
