@@ -20,7 +20,7 @@ export default function WorkflowAnimation() {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveStep((prev) => (prev + 1) % 4);
-    }, 1000);
+    }, 1500);
     return () => clearInterval(interval);
   }, []);
 
