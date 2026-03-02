@@ -11,6 +11,11 @@ import {
   LeadFormMultiStep,
 } from "@/components/landing";
 import WorkflowAnimation from "@/components/WorkflowAnimation";
+import { InteractiveROICalculator } from "@/components/landing/InteractiveROICalculator";
+import { AutomationQuiz } from "@/components/landing/AutomationQuiz";
+import { SectorDemos } from "@/components/landing/SectorDemos";
+import { AnimatedCounters } from "@/components/landing/AnimatedCounters";
+import { TestimonialsSection } from "@/components/landing/TestimonialsSection";
 
 import { Shield, Zap } from "lucide-react";
 
@@ -102,6 +107,12 @@ const Index = () => {
           <TrustBar />
           <UseCaseTabs />
           <BaseImplementations />
+          <AnimatedCounters />
+          <SectorDemos />
+          <LazySection>
+            <InteractiveROICalculator />
+          </LazySection>
+          <AutomationQuiz />
           <LazySection>
             <ROICalculator />
           </LazySection>
@@ -159,7 +170,7 @@ const Index = () => {
             </div>
           </section>
 
-          <EnterpriseElite />
+          <TestimonialsSection />
           <LazySection>
             <ProcessSection />
           </LazySection>
