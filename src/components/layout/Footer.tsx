@@ -12,8 +12,16 @@ export const Footer = () => {
         <div className="grid gap-12 md:grid-cols-4">
           {/* Brand */}
           <div className="md:col-span-1 space-y-4">
-            <Link to="/" className="flex items-center gap-2">
-              <img src="/favicon.png" alt="HydrAI Labs" className="w-8 h-8 rounded" />
+            <Link to="/" aria-label="HydrAI Labs - Ir a inicio" className="flex items-center gap-2">
+              <img
+                src="/favicon.png"
+                alt="HydrAI Labs"
+                className="w-8 h-8 rounded"
+                width={32}
+                height={32}
+                loading="lazy"
+                decoding="async"
+              />
               <span className="font-display font-bold text-lg text-gradient-primary">HydrAI Labs</span>
             </Link>
             <p className="text-sm text-muted-foreground">
@@ -32,7 +40,7 @@ export const Footer = () => {
           </div>
 
           {/* Soluciones */}
-          <div className="space-y-4">
+          <nav aria-label="Soluciones" className="space-y-4">
             <h4 className="font-display font-semibold text-sm">{t("footer.solutions")}</h4>
             <ul className="space-y-2 text-sm">
               <li>
@@ -56,10 +64,10 @@ export const Footer = () => {
                 </Link>
               </li>
             </ul>
-          </div>
+          </nav>
 
           {/* Recursos */}
-          <div className="space-y-4">
+          <nav aria-label="Recursos" className="space-y-4">
             <h4 className="font-display font-semibold text-sm">{t("footer.resources")}</h4>
             <ul className="space-y-2 text-sm">
               <li>
@@ -77,6 +85,7 @@ export const Footer = () => {
                   href={DISCORD_INVITE_URL} 
                   target="_blank" 
                   rel="noopener noreferrer"
+                  aria-label="Unirse a la comunidad de HydrAI Labs en Discord"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   Discord
@@ -88,10 +97,10 @@ export const Footer = () => {
                 </Link>
               </li>
             </ul>
-          </div>
+          </nav>
 
           {/* Legal */}
-          <div className="space-y-4">
+          <nav aria-label="Legal" className="space-y-4">
             <h4 className="font-display font-semibold text-sm">{t("footer.legal")}</h4>
             <ul className="space-y-2 text-sm">
               <li>
@@ -110,7 +119,7 @@ export const Footer = () => {
                 </Link>
               </li>
             </ul>
-          </div>
+          </nav>
         </div>
 
         {/* Bottom bar */}

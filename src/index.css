@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap");
-
 /* HydrAI Labs Design System - Premium Neon */
 
 @layer base {
@@ -152,9 +150,24 @@
     @apply font-semibold tracking-tight;
     color: hsl(var(--foreground));
   }
+
+  /* Focus-visible for keyboard users */
+  *:focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+  }
 }
 
 @layer components {
+  /* Skip link for keyboard accessibility */
+  .skip-link {
+    @apply absolute -top-10 left-4 z-[100] bg-primary text-primary-foreground px-4 py-2 rounded-md text-sm font-medium transition-all;
+  }
+
+  .skip-link:focus {
+    @apply top-4;
+  }
+
   /* Neon text effects */
   .text-glow-primary {
     text-shadow:
@@ -536,5 +549,17 @@
   }
   .delay-500 {
     animation-delay: 500ms;
+  }
+}
+
+/* ─── Reduced motion preference ─── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

@@ -40,7 +40,7 @@ export const Header = () => {
   ];
 
   return (
-    <nav
+    <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         scrolled
@@ -48,9 +48,10 @@ export const Header = () => {
           : "bg-background/80 backdrop-blur-sm"
       )}
     >
-      <div className="section-container flex items-center justify-between h-18 py-4">
+      <nav aria-label="Navegación principal" className="section-container flex items-center justify-between h-18 py-4">
         <Link
           to="/"
+          aria-label="HydrAI Labs - Ir a inicio"
           className="flex items-center gap-3 font-display text-xl font-bold"
         >
           <img
@@ -91,6 +92,7 @@ export const Header = () => {
                 variant="ghost"
                 size="sm"
                 className="text-muted-foreground hover:text-foreground"
+                aria-label={`Cambiar idioma. Idioma actual: ${languageNames[language]}`}
               >
                 <Globe className="w-4 h-4 mr-1" />
                 {language.toUpperCase()}
@@ -137,16 +139,18 @@ export const Header = () => {
             size="sm"
             className="lg:hidden"
             onClick={() => setMenuOpen(!menuOpen)}
+            aria-label={menuOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
+            aria-expanded={menuOpen}
           >
             {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </Button>
         </div>
-      </div>
+      </nav>
 
       {/* Mobile Menu */}
       {menuOpen && (
         <div className="lg:hidden bg-background/95 backdrop-blur-lg border-t border-border/50">
-          <div className="section-container py-4 space-y-3">
+          <nav aria-label="Navegación móvil" className="section-container py-4 space-y-3">
             {navItems.map((item) => (
               <Link
                 key={item.to}
@@ -174,9 +178,9 @@ export const Header = () => {
                 </Button>
               </Link>
             </div>
-          </div>
+          </nav>
         </div>
       )}
-    </nav>
+    </header>
   );
 };

@@ -56,7 +56,7 @@ const Casos = () => {
       
       <PageLayout>
         {/* Hero */}
-        <section className="relative section-padding overflow-hidden">
+        <section aria-label="Casos de éxito" className="relative section-padding overflow-hidden">
           <div className="glow-orb-accent w-96 h-96 -top-48 -right-48" />
           <div className="glow-orb-primary w-64 h-64 bottom-0 left-0" />
           
@@ -76,7 +76,7 @@ const Casos = () => {
         </section>
 
         {/* Projects Grid */}
-        <section className="section-padding">
+        <section aria-label="Proyectos" className="section-padding">
           <div className="section-container">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {cases.map((project) => {
@@ -92,6 +92,10 @@ const Casos = () => {
                         src={project.imageUrl} 
                         alt={project.imageAlt[language as 'es' | 'en']}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        width={400}
+                        height={192}
+                        loading="lazy"
+                        decoding="async"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent" />
                     </div>
@@ -138,6 +142,7 @@ const Casos = () => {
                         href={project.demoUrl} 
                         target="_blank" 
                         rel="noopener noreferrer"
+                        aria-label={`${t.viewDemo}: ${project.title}`}
                         className="w-full"
                       >
                         <Button size="sm" variant="ghost" className="w-full group/btn hover:bg-primary/10">
@@ -154,7 +159,7 @@ const Casos = () => {
         </section>
 
         {/* Testimonials */}
-        <section className="section-padding bg-muted/10">
+        <section aria-label="Testimonios" className="section-padding bg-muted/10">
           <div className="section-container">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
@@ -193,7 +198,7 @@ const Casos = () => {
         </section>
 
         {/* CTA */}
-        <section className="section-padding">
+        <section aria-label="Solicitar auditoría" className="section-padding">
           <div className="section-container">
             <div className="card-elevated text-center p-12 max-w-2xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
