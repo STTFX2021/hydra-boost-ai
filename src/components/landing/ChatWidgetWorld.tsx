@@ -128,6 +128,7 @@ export const ChatWidgetWorld = () => {
       <AnimatePresence>
         {!isOpen && (
           <motion.button
+            aria-label="Abrir chat de soporte"
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
@@ -148,6 +149,8 @@ export const ChatWidgetWorld = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            role="dialog"
+            aria-label="Chat de soporte HydrAI"
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ 
               opacity: 1, 
@@ -180,6 +183,7 @@ export const ChatWidgetWorld = () => {
                   size="icon"
                   onClick={() => setIsMinimized(!isMinimized)}
                   className="h-8 w-8 text-primary-foreground hover:bg-primary-foreground/20"
+                  aria-label={isMinimized ? "Expandir chat" : "Minimizar chat"}
                 >
                   <Minimize2 className="w-4 h-4" />
                 </Button>
@@ -188,6 +192,7 @@ export const ChatWidgetWorld = () => {
                   size="icon"
                   onClick={() => setIsOpen(false)}
                   className="h-8 w-8 text-primary-foreground hover:bg-primary-foreground/20"
+                  aria-label="Cerrar chat"
                 >
                   <X className="w-4 h-4" />
                 </Button>
@@ -237,7 +242,9 @@ export const ChatWidgetWorld = () => {
                 {/* Input */}
                 <div className="p-4 border-t border-border bg-card">
                   <div className="flex gap-2">
+                    <label htmlFor="chat-input" className="sr-only">Mensaje</label>
                     <Input
+                      id="chat-input"
                       value={input}
                       onChange={(e) => setInput(e.target.value)}
                       onKeyPress={(e) => e.key === "Enter" && handleSend()}
@@ -250,6 +257,7 @@ export const ChatWidgetWorld = () => {
                       disabled={isLoading || !input.trim()}
                       size="icon"
                       className="bg-primary hover:bg-primary/90"
+                      aria-label="Enviar mensaje"
                     >
                       {isLoading ? (
                         <Loader2 className="w-4 h-4 animate-spin" />

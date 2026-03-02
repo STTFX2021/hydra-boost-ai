@@ -13,6 +13,7 @@ export function NavigatorButton({ onClick, sfx }: NavigatorButtonProps) {
 
   return (
     <motion.button
+      aria-label="Abrir asistente de HydrAI Labs"
       initial={{ opacity: 0, scale: 0.8, y: 20 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ delay: 1, type: "spring", stiffness: 200 }}
@@ -108,4 +109,3 @@ export function NavigatorButton({ onClick, sfx }: NavigatorButtonProps) {
     </motion.button>
   );
 }
-

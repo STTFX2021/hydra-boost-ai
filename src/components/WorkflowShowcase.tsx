@@ -140,10 +140,13 @@ export default function WorkflowShowcase() {
       <div className="max-w-7xl mx-auto relative z-10">
 
         {/* Tabs */}
-        <div className="flex justify-center gap-2 sm:gap-3 mb-12 flex-wrap">
+        <div className="flex justify-center gap-2 sm:gap-3 mb-12 flex-wrap" role="tablist" aria-label="Tipo de campaña">
           {tabs.map((tab) => (
             <button
               key={tab.key}
+              role="tab"
+              aria-selected={activeTab === tab.key}
+              aria-controls={`panel-${tab.key}`}
               onClick={() => setActiveTab(tab.key)}
               className={`px-4 py-2.5 rounded-full text-sm font-medium border transition-all duration-300 ${
                 activeTab === tab.key
@@ -157,7 +160,7 @@ export default function WorkflowShowcase() {
         </div>
 
         {/* Grid */}
-        <div className="grid lg:grid-cols-2 gap-8 items-start">
+        <div id={`panel-${activeTab}`} role="tabpanel" className="grid lg:grid-cols-2 gap-8 items-start">
           {/* Left: n8n Canvas */}
           <div>
             <div
@@ -174,6 +177,7 @@ export default function WorkflowShowcase() {
                   <div key={i} className="flex items-center flex-shrink-0">
                     <button
                       onClick={() => handleNodeClick(i)}
+                      aria-label={`Ver detalle del nodo: ${node.nombre}`}
                       className="flex flex-col items-center gap-1.5 cursor-pointer group"
                     >
                       <div
@@ -189,7 +193,7 @@ export default function WorkflowShowcase() {
                       <span className="text-[10px] sm:text-xs text-white/60 text-center leading-tight max-w-[72px] truncate">
                         {node.nombre}
                       </span>
-                      <span className="text-[9px] text-white/30 font-mono">{node.items}</span>
+                      <span className="text-[9px] text-white/40 font-mono">{node.items}</span>
                       {node.tool_badge && (
                         <span className={`text-[9px] px-1.5 py-0.5 rounded-full font-medium ${node.badge_color}`}>
                           {node.tool_badge}
@@ -260,6 +264,7 @@ export default function WorkflowShowcase() {
               <button
                 key={i}
                 onClick={() => handleStepClick(i)}
+                aria-label={`Paso ${i + 1}: ${step.titulo}`}
                 className={`rounded-xl p-4 transition-all duration-400 text-left ${
                   currentStep === i
                     ? "bg-foreground/[0.04] border-l-[3px] border-l-[hsl(var(--primary))] pl-5"
