@@ -34,6 +34,7 @@ export const Header = () => {
 
   const navItems = [
     { to: "/servicios", label: t("nav.industries") },
+    { to: "/ai-automation-marbella", label: "IA Marbella" },
     { to: "/arquitectura", label: t("nav.architecture") },
     { to: "/casos", label: t("nav.cases") },
     { to: "/contacto", label: t("nav.contact") },
