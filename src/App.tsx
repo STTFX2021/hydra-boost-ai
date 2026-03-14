@@ -39,6 +39,7 @@ import SectorRestaurantes from "./pages/sectores/Restaurantes";
 import SectorInmobiliarias from "./pages/sectores/Inmobiliarias";
 import SectorClinicasEstetica from "./pages/sectores/ClinicasEstetica";
 import SectorGimnasios from "./pages/sectores/Gimnasios";
+import AIAutomationMarbella from "./pages/AIAutomationMarbella";
 // Blog article pages
 import ChatbotWhatsappRestaurante from "./pages/blog/ChatbotWhatsappRestaurante";
 import ScrapingLeadsInmobiliaria from "./pages/blog/ScrapingLeadsInmobiliaria";
