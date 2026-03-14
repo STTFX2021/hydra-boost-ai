@@ -40,6 +40,12 @@ import SectorInmobiliarias from "./pages/sectores/Inmobiliarias";
 import SectorClinicasEstetica from "./pages/sectores/ClinicasEstetica";
 import SectorGimnasios from "./pages/sectores/Gimnasios";
 import AIAutomationMarbella from "./pages/AIAutomationMarbella";
+import AIAutomationMalaga from "./pages/AIAutomationMalaga";
+import AIAutomationCostadelSol from "./pages/AIAutomationCostadelSol";
+import AIAutomationEstepona from "./pages/AIAutomationEstepona";
+import AIAutomationFuengirola from "./pages/AIAutomationFuengirola";
+import AIAutomationBenalmadena from "./pages/AIAutomationBenalmadena";
+import AIAutomationTorremolinos from "./pages/AIAutomationTorremolinos";
 // Blog article pages
 import ChatbotWhatsappRestaurante from "./pages/blog/ChatbotWhatsappRestaurante";
 import ScrapingLeadsInmobiliaria from "./pages/blog/ScrapingLeadsInmobiliaria";
