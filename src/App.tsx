@@ -40,6 +40,12 @@ import SectorInmobiliarias from "./pages/sectores/Inmobiliarias";
 import SectorClinicasEstetica from "./pages/sectores/ClinicasEstetica";
 import SectorGimnasios from "./pages/sectores/Gimnasios";
 import AIAutomationMarbella from "./pages/AIAutomationMarbella";
+import AIAutomationMalaga from "./pages/AIAutomationMalaga";
+import AIAutomationCostadelSol from "./pages/AIAutomationCostadelSol";
+import AIAutomationEstepona from "./pages/AIAutomationEstepona";
+import AIAutomationFuengirola from "./pages/AIAutomationFuengirola";
+import AIAutomationBenalmadena from "./pages/AIAutomationBenalmadena";
+import AIAutomationTorremolinos from "./pages/AIAutomationTorremolinos";
 // Blog article pages
 import ChatbotWhatsappRestaurante from "./pages/blog/ChatbotWhatsappRestaurante";
 import ScrapingLeadsInmobiliaria from "./pages/blog/ScrapingLeadsInmobiliaria";
@@ -66,6 +72,12 @@ const App = () => (
             <Route path="/sectores/clinicas-estetica" element={<SectorClinicasEstetica />} />
             <Route path="/sectores/gimnasios" element={<SectorGimnasios />} />
             <Route path="/ai-automation-marbella" element={<AIAutomationMarbella />} />
+            <Route path="/ai-automation-malaga" element={<AIAutomationMalaga />} />
+            <Route path="/ai-automation-costa-del-sol" element={<AIAutomationCostadelSol />} />
+            <Route path="/ai-automation-estepona" element={<AIAutomationEstepona />} />
+            <Route path="/ai-automation-fuengirola" element={<AIAutomationFuengirola />} />
+            <Route path="/ai-automation-benalmadena" element={<AIAutomationBenalmadena />} />
+            <Route path="/ai-automation-torremolinos" element={<AIAutomationTorremolinos />} />
             <Route path="/industrias" element={<Industrias />} />
             <Route path="/arquitectura" element={<Arquitectura />} />
             <Route path="/precios" element={<Precios />} />
