@@ -72,6 +72,12 @@ const App = () => (
             <Route path="/sectores/clinicas-estetica" element={<SectorClinicasEstetica />} />
             <Route path="/sectores/gimnasios" element={<SectorGimnasios />} />
             <Route path="/ai-automation-marbella" element={<AIAutomationMarbella />} />
+            <Route path="/ai-automation-malaga" element={<AIAutomationMalaga />} />
+            <Route path="/ai-automation-costa-del-sol" element={<AIAutomationCostadelSol />} />
+            <Route path="/ai-automation-estepona" element={<AIAutomationEstepona />} />
+            <Route path="/ai-automation-fuengirola" element={<AIAutomationFuengirola />} />
+            <Route path="/ai-automation-benalmadena" element={<AIAutomationBenalmadena />} />
+            <Route path="/ai-automation-torremolinos" element={<AIAutomationTorremolinos />} />
             <Route path="/industrias" element={<Industrias />} />
             <Route path="/arquitectura" element={<Arquitectura />} />
             <Route path="/precios" element={<Precios />} />
