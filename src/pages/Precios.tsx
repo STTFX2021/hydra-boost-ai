@@ -10,8 +10,8 @@ const Precios = () => {
   return (
     <>
       <SEOHead
-        title="Precios | HydrAI Labs"
-        description="Planes de automatización IA desde 197€. Servicios individuales y paquetes completos para negocios locales."
+        title="Precios y Planes de Automatización IA | HydrAI Labs"
+        description="Planes de automatización IA para negocios locales desde implementación básica hasta arquitectura enterprise. Sin sorpresas, sin permanencia. Costa del Sol."
         canonical="/precios"
         keywords="precios chatbot, coste automatizacion, planes ia negocios, precio chatbot whatsapp"
       />

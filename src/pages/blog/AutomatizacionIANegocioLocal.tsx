@@ -8,8 +8,8 @@ import { Helmet } from "react-helmet-async";
 const AutomatizacionIANegocioLocal = () => (
   <PageLayout>
     <SEOHead
-      title="5 Procesos que Todo Negocio Local Puede Automatizar con IA Hoy Mismo"
-      description="Chatbots, recordatorios, captación de leads y gestión de reseñas. Los 5 procesos que más tiempo consumen en negocios locales y que se pueden automatizar desde 197€."
+      title="Automatización con IA para Negocios Locales: Guía 2026 | HydrAI Labs"
+      description="Guía completa sobre cómo los negocios locales pueden usar la inteligencia artificial para automatizar tareas, captar clientes y crecer sin contratar más personal."
       canonical="/blog/automatizacion-ia-negocio-local"
       ogType="article"
       publishedTime="2026-02-20"

@@ -34,8 +34,8 @@ const ChatbotsIA = () => {
   return (
     <PageLayout>
       <SEOHead
-        title="Chatbots IA para Negocios - Atención 24/7 con Inteligencia Artificial"
-        description="Implementamos chatbots con IA que responden 24/7, capturan leads y automatizan la atención al cliente. Desde 790€. Integración con WhatsApp, web e Instagram."
+        title="Chatbots IA para WhatsApp Business | HydrAI Labs"
+        description="Implementamos chatbots con inteligencia artificial para WhatsApp Business. Responde clientes 24/7, automatiza reservas y aumenta ventas. Costa del Sol y España."
         canonical="/servicios/chatbots-ia"
         keywords="chatbot ia, chatbot whatsapp, chatbot para empresas, asistente virtual negocio, bot atención cliente, chatbot restaurante"
       />

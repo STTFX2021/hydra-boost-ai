@@ -34,8 +34,8 @@ const PedidosRestaurantes = () => {
   return (
     <PageLayout>
       <SEOHead
-        title="Pedidos Online para Restaurantes - QR, Menú Digital y Pagos"
-        description="Sistema de pedidos online para restaurantes: menú digital con QR, comandas a cocina en tiempo real y pago desde mesa. Aumenta ticket medio un 20%. Desde 990€."
+        title="Sistema de Pedidos Online para Restaurantes | HydrAI Labs"
+        description="Sistema de pedidos online sin comisiones para restaurantes. Integración WhatsApp, web y TPV. Más rentabilidad que Glovo o Uber Eats. Costa del Sol."
         canonical="/servicios/pedidos-online-restaurantes"
         keywords="pedidos online restaurante, menu digital qr, sistema pedidos restaurante, carta digital restaurante, comandas digitales"
       />

@@ -38,8 +38,8 @@ const Index = () => {
   return (
     <>
       <SEOHead
-        title="HydrAI Labs | Automatizaciones IA que traen clientes 24/7"
-        description="Agencia de automatización IA para negocios locales en España. Chatbots, webs SEO y campañas automáticas. Desde 197€."
+        title="HydrAI Labs | Automatización IA para Negocios Locales en Costa del Sol"
+        description="Agencia de automatización con IA en Costa del Sol. Chatbots WhatsApp 24/7, automatizaciones n8n y captación de clientes para restaurantes, clínicas, inmobiliarias y gimnasios."
         canonical="/"
         keywords="automatización ia, chatbot whatsapp, chatbot ia restaurantes, automatizar negocios, agencia ia españa, n8n, make, automatizaciones sin código"
       />

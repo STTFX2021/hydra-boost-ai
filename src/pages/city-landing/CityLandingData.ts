@@ -42,7 +42,7 @@ export const cityConfigs: Record<string, CityLandingConfig> = {
     city: "Málaga",
     region: "Costa del Sol",
     seoTitle: "Automatización IA en Málaga | HydrAI Labs",
-    metaDescription: "Automatización IA para negocios en Málaga. Chatbots 24/7, automatización de procesos, captación automática de clientes y CRM inteligente para empresas locales.",
+    metaDescription: "Soluciones de IA para negocios en Málaga. Chatbots 24/7, automatizaciones n8n y captación de clientes para pymes y negocios locales de Málaga capital.",
     keywords: "automatización IA Málaga, agencia IA Málaga, IA para negocios Málaga, automatización de procesos Málaga, chatbot IA Málaga",
     heroSubline: "Automatiza atención al cliente, captación de leads y procesos con inteligencia artificial 24/7. Diseñado para negocios locales en la capital de la Costa del Sol.",
     problemText: [
@@ -65,8 +65,8 @@ export const cityConfigs: Record<string, CityLandingConfig> = {
     slug: "ai-automation-costa-del-sol",
     city: "Costa del Sol",
     region: "Andalucía",
-    seoTitle: "Automatización IA en la Costa del Sol | HydrAI Labs",
-    metaDescription: "Automatización IA para negocios en la Costa del Sol. Chatbots 24/7, automatización de procesos, captación automática de clientes y CRM inteligente para empresas locales.",
+    seoTitle: "Automatización IA en Costa del Sol | HydrAI Labs",
+    metaDescription: "Agencia especializada en automatización con IA en Costa del Sol. Chatbots WhatsApp, webs SEO y sistemas automáticos para negocios de Marbella a Torremolinos.",
     keywords: "automatización IA Costa del Sol, agencia IA Costa del Sol, IA para negocios Costa del Sol, automatización de procesos Costa del Sol, chatbot IA Costa del Sol",
     heroSubline: "Automatiza atención al cliente, captación de leads y procesos con inteligencia artificial 24/7. Soluciones diseñadas para el mercado turístico y empresarial de la Costa del Sol.",
     problemText: [
@@ -90,7 +90,7 @@ export const cityConfigs: Record<string, CityLandingConfig> = {
     city: "Estepona",
     region: "Costa del Sol",
     seoTitle: "Automatización IA en Estepona | HydrAI Labs",
-    metaDescription: "Automatización IA para negocios en Estepona. Chatbots 24/7, automatización de procesos, captación automática de clientes y CRM inteligente para empresas locales.",
+    metaDescription: "Chatbots IA y automatizaciones para negocios en Estepona. Webs profesionales, WhatsApp Business 24/7 y captación automática de clientes en Estepona.",
     keywords: "automatización IA Estepona, agencia IA Estepona, IA para negocios Estepona, automatización de procesos Estepona, chatbot IA Estepona",
     heroSubline: "Automatiza atención al cliente, captación de leads y procesos con inteligencia artificial 24/7. Pensado para negocios locales en Estepona y alrededores.",
     problemText: [
@@ -114,7 +114,7 @@ export const cityConfigs: Record<string, CityLandingConfig> = {
     city: "Fuengirola",
     region: "Costa del Sol",
     seoTitle: "Automatización IA en Fuengirola | HydrAI Labs",
-    metaDescription: "Automatización IA para negocios en Fuengirola. Chatbots 24/7, automatización de procesos, captación automática de clientes y CRM inteligente para empresas locales.",
+    metaDescription: "Soluciones IA para negocios en Fuengirola. Chatbots WhatsApp, automatizaciones y webs para restaurantes, clínicas y comercios de Fuengirola.",
     keywords: "automatización IA Fuengirola, agencia IA Fuengirola, IA para negocios Fuengirola, automatización de procesos Fuengirola, chatbot IA Fuengirola",
     heroSubline: "Automatiza atención al cliente, captación de leads y procesos con inteligencia artificial 24/7. Soluciones para negocios locales en Fuengirola.",
     problemText: [
@@ -138,7 +138,7 @@ export const cityConfigs: Record<string, CityLandingConfig> = {
     city: "Benalmádena",
     region: "Costa del Sol",
     seoTitle: "Automatización IA en Benalmádena | HydrAI Labs",
-    metaDescription: "Automatización IA para negocios en Benalmádena. Chatbots 24/7, automatización de procesos, captación automática de clientes y CRM inteligente para empresas locales.",
+    metaDescription: "Automatización con IA para negocios en Benalmádena. Chatbots 24/7, webs SEO y flujos automáticos para negocios locales de Benalmádena y Arroyo de la Miel.",
     keywords: "automatización IA Benalmádena, agencia IA Benalmádena, IA para negocios Benalmádena, automatización de procesos Benalmádena, chatbot IA Benalmádena",
     heroSubline: "Automatiza atención al cliente, captación de leads y procesos con inteligencia artificial 24/7. Soluciones para negocios locales en Benalmádena.",
     problemText: [
@@ -162,7 +162,7 @@ export const cityConfigs: Record<string, CityLandingConfig> = {
     city: "Torremolinos",
     region: "Costa del Sol",
     seoTitle: "Automatización IA en Torremolinos | HydrAI Labs",
-    metaDescription: "Automatización IA para negocios en Torremolinos. Chatbots 24/7, automatización de procesos, captación automática de clientes y CRM inteligente para empresas locales.",
+    metaDescription: "IA y automatización para negocios en Torremolinos. Chatbots WhatsApp, captación automática de clientes y webs profesionales para hostelería y comercios.",
     keywords: "automatización IA Torremolinos, agencia IA Torremolinos, IA para negocios Torremolinos, automatización de procesos Torremolinos, chatbot IA Torremolinos",
     heroSubline: "Automatiza atención al cliente, captación de leads y procesos con inteligencia artificial 24/7. Diseñado para negocios locales en Torremolinos.",
     problemText: [
