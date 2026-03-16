@@ -162,7 +162,7 @@ export const cityConfigs: Record<string, CityLandingConfig> = {
     city: "Torremolinos",
     region: "Costa del Sol",
     seoTitle: "Automatización IA en Torremolinos | HydrAI Labs",
-    metaDescription: "Automatización IA para negocios en Torremolinos. Chatbots 24/7, automatización de procesos, captación automática de clientes y CRM inteligente para empresas locales.",
+    metaDescription: "IA y automatización para negocios en Torremolinos. Chatbots WhatsApp, captación automática de clientes y webs profesionales para hostelería y comercios.",
     keywords: "automatización IA Torremolinos, agencia IA Torremolinos, IA para negocios Torremolinos, automatización de procesos Torremolinos, chatbot IA Torremolinos",
     heroSubline: "Automatiza atención al cliente, captación de leads y procesos con inteligencia artificial 24/7. Diseñado para negocios locales en Torremolinos.",
     problemText: [
