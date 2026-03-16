@@ -42,7 +42,7 @@ export const cityConfigs: Record<string, CityLandingConfig> = {
     city: "Málaga",
     region: "Costa del Sol",
     seoTitle: "Automatización IA en Málaga | HydrAI Labs",
-    metaDescription: "Automatización IA para negocios en Málaga. Chatbots 24/7, automatización de procesos, captación automática de clientes y CRM inteligente para empresas locales.",
+    metaDescription: "Soluciones de IA para negocios en Málaga. Chatbots 24/7, automatizaciones n8n y captación de clientes para pymes y negocios locales de Málaga capital.",
     keywords: "automatización IA Málaga, agencia IA Málaga, IA para negocios Málaga, automatización de procesos Málaga, chatbot IA Málaga",
     heroSubline: "Automatiza atención al cliente, captación de leads y procesos con inteligencia artificial 24/7. Diseñado para negocios locales en la capital de la Costa del Sol.",
     problemText: [
