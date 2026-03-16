@@ -1,7 +1,8 @@
 import { PageLayout } from "@/components/layout/PageLayout";
-import { SEOHead, LocalBusinessSchema, FAQSchema, BreadcrumbSchema } from "@/components/seo";
+import { LocalBusinessSchema, FAQSchema, BreadcrumbSchema } from "@/components/seo";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { 
   Sparkles, Bot, CheckCircle2, ArrowRight, 
   Calendar, Globe, MessageSquare
@@ -57,12 +58,17 @@ const services = [
 const SectorClinicasEstetica = () => {
   return (
     <PageLayout>
-      <SEOHead
-        title="Automatización IA para Clínicas de Estética | HydrAI Labs"
-        description="Chatbots y automatizaciones para clínicas estéticas y de belleza. Reservas automáticas, recordatorios de cita y captación de pacientes 24/7. Costa del Sol."
-        canonical="/sectores/clinicas-estetica"
-        keywords="ia clinica estetica, chatbot clinica, automatizar clinica, citas automaticas clinica, captacion pacientes"
-      />
+      <Helmet>
+        <title>Automatización IA para Clínicas de Estética | HydrAI Labs</title>
+        <meta name="description" content="Chatbots y automatizaciones para clínicas estéticas y de belleza. Reservas automáticas, recordatorios de cita y captación de pacientes 24/7. Costa del Sol." />
+        <link rel="canonical" href="https://hydrailabs.com/sectores/clinicas-estetica" />
+        <meta property="og:title" content="Automatización IA para Clínicas de Estética | HydrAI Labs" />
+        <meta property="og:description" content="Chatbots y automatizaciones para clínicas estéticas y de belleza. Reservas automáticas, recordatorios de cita y captación de pacientes 24/7. Costa del Sol." />
+        <meta property="og:url" content="https://hydrailabs.com/sectores/clinicas-estetica" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:title" content="Automatización IA para Clínicas de Estética | HydrAI Labs" />
+        <meta name="twitter:description" content="Chatbots y automatizaciones para clínicas estéticas y de belleza. Reservas automáticas, recordatorios de cita y captación de pacientes 24/7. Costa del Sol." />
+      </Helmet>
       <LocalBusinessSchema />
       <FAQSchema items={faqs} />
       <BreadcrumbSchema items={[

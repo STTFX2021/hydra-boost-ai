@@ -1,7 +1,8 @@
 import { PageLayout } from "@/components/layout/PageLayout";
-import { SEOHead, FAQSchema, BreadcrumbSchema } from "@/components/seo";
+import { FAQSchema, BreadcrumbSchema } from "@/components/seo";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -132,13 +133,17 @@ const benefits = [
 const AIAutomationMarbella = () => {
   return (
     <PageLayout>
-      <SEOHead
-        title="Automatización IA en Marbella | HydrAI Labs"
-        description="Agencia de automatización con inteligencia artificial en Marbella. Chatbots WhatsApp, webs y flujos automáticos para negocios locales de Marbella y Golden Mile."
-        canonical="/ai-automation-marbella"
-        keywords="automatización IA Marbella, agencia IA Marbella, IA para negocios Marbella, automatización de procesos Marbella, chatbot IA Marbella"
-        ogType="website"
-      />
+      <Helmet>
+        <title>Automatización IA en Marbella | HydrAI Labs</title>
+        <meta name="description" content="Agencia de automatización con inteligencia artificial en Marbella. Chatbots WhatsApp, webs y flujos automáticos para negocios locales de Marbella y Golden Mile." />
+        <link rel="canonical" href="https://hydrailabs.com/ai-automation-marbella" />
+        <meta property="og:title" content="Automatización IA en Marbella | HydrAI Labs" />
+        <meta property="og:description" content="Agencia de automatización con inteligencia artificial en Marbella. Chatbots WhatsApp, webs y flujos automáticos para negocios locales de Marbella y Golden Mile." />
+        <meta property="og:url" content="https://hydrailabs.com/ai-automation-marbella" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:title" content="Automatización IA en Marbella | HydrAI Labs" />
+        <meta name="twitter:description" content="Agencia de automatización con inteligencia artificial en Marbella. Chatbots WhatsApp, webs y flujos automáticos para negocios locales de Marbella y Golden Mile." />
+      </Helmet>
       <BreadcrumbSchema
         items={[
           { name: "Inicio", url: "https://hydrailabs.com/" },

@@ -3,18 +3,24 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, Zap, Phone, CheckCircle2, Star, Crown, Sparkles } from "lucide-react";
 import { useTranslation } from "@/lib/i18n";
-import { SEOHead, BreadcrumbSchema } from "@/components/seo";
+import { BreadcrumbSchema } from "@/components/seo";
+import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 
 const Precios = () => {
   return (
     <>
-      <SEOHead
-        title="Precios y Planes de Automatización IA | HydrAI Labs"
-        description="Planes de automatización IA para negocios locales desde implementación básica hasta arquitectura enterprise. Sin sorpresas, sin permanencia. Costa del Sol."
-        canonical="/precios"
-        keywords="precios chatbot, coste automatizacion, planes ia negocios, precio chatbot whatsapp"
-      />
+      <Helmet>
+        <title>Precios y Planes de Automatización IA | HydrAI Labs</title>
+        <meta name="description" content="Planes de automatización IA para negocios locales desde implementación básica hasta arquitectura enterprise. Sin sorpresas, sin permanencia. Costa del Sol." />
+        <link rel="canonical" href="https://hydrailabs.com/precios" />
+        <meta property="og:title" content="Precios y Planes de Automatización IA | HydrAI Labs" />
+        <meta property="og:description" content="Planes de automatización IA para negocios locales desde implementación básica hasta arquitectura enterprise. Sin sorpresas, sin permanencia. Costa del Sol." />
+        <meta property="og:url" content="https://hydrailabs.com/precios" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:title" content="Precios y Planes de Automatización IA | HydrAI Labs" />
+        <meta name="twitter:description" content="Planes de automatización IA para negocios locales desde implementación básica hasta arquitectura enterprise. Sin sorpresas, sin permanencia. Costa del Sol." />
+      </Helmet>
       <BreadcrumbSchema
         items={[
           { name: "Inicio", url: "/" },

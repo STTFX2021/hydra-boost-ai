@@ -1,7 +1,8 @@
 import { PageLayout } from "@/components/layout/PageLayout";
-import { SEOHead, ServiceSchema, FAQSchema, BreadcrumbSchema } from "@/components/seo";
+import { ServiceSchema, FAQSchema, BreadcrumbSchema } from "@/components/seo";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { 
   Globe, Bot, Calendar, CheckCircle2, ArrowRight, 
   Zap, Clock
@@ -104,12 +105,17 @@ const faqs = [
 const Automatizaciones = () => {
   return (
     <PageLayout>
-      <SEOHead
-        title="Automatizaciones con IA para Negocios | HydrAI Labs"
-        description="Automatiza tareas repetitivas con flujos n8n e IA. Ahorra tiempo, reduce errores y escala tu negocio sin contratar más personal. Agencia especializada en Costa del Sol."
-        canonical="/servicios/automatizaciones"
-        keywords="automatizaciones negocio, chatbot web, chatbot whatsapp, sistema reservas, tienda online, pasarela pago"
-      />
+      <Helmet>
+        <title>Automatizaciones con IA para Negocios | HydrAI Labs</title>
+        <meta name="description" content="Automatiza tareas repetitivas con flujos n8n e IA. Ahorra tiempo, reduce errores y escala tu negocio sin contratar más personal. Agencia especializada en Costa del Sol." />
+        <link rel="canonical" href="https://hydrailabs.com/servicios/automatizaciones" />
+        <meta property="og:title" content="Automatizaciones con IA para Negocios | HydrAI Labs" />
+        <meta property="og:description" content="Automatiza tareas repetitivas con flujos n8n e IA. Ahorra tiempo, reduce errores y escala tu negocio sin contratar más personal. Agencia especializada en Costa del Sol." />
+        <meta property="og:url" content="https://hydrailabs.com/servicios/automatizaciones" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:title" content="Automatizaciones con IA para Negocios | HydrAI Labs" />
+        <meta name="twitter:description" content="Automatiza tareas repetitivas con flujos n8n e IA. Ahorra tiempo, reduce errores y escala tu negocio sin contratar más personal. Agencia especializada en Costa del Sol." />
+      </Helmet>
       <ServiceSchema
         name="Automatizaciones para Negocios Locales"
         description="Soluciones completas de automatización: web profesional, chatbots IA, reservas online, pagos y tienda online."

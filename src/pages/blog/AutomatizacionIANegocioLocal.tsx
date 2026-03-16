@@ -1,5 +1,5 @@
 import { PageLayout } from "@/components/layout/PageLayout";
-import { SEOHead, BreadcrumbSchema } from "@/components/seo";
+import { BreadcrumbSchema } from "@/components/seo";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, ArrowLeft, Clock } from "lucide-react";
@@ -7,13 +7,18 @@ import { Helmet } from "react-helmet-async";
 
 const AutomatizacionIANegocioLocal = () => (
   <PageLayout>
-    <SEOHead
-      title="Automatización con IA para Negocios Locales: Guía 2026 | HydrAI Labs"
-      description="Guía completa sobre cómo los negocios locales pueden usar la inteligencia artificial para automatizar tareas, captar clientes y crecer sin contratar más personal."
-      canonical="/blog/automatizacion-ia-negocio-local"
-      ogType="article"
-      publishedTime="2026-02-20"
-    />
+    <Helmet>
+      <title>Automatización con IA para Negocios Locales: Guía 2026 | HydrAI Labs</title>
+      <meta name="description" content="Guía completa sobre cómo los negocios locales pueden usar la inteligencia artificial para automatizar tareas, captar clientes y crecer sin contratar más personal." />
+      <link rel="canonical" href="https://hydrailabs.com/blog/automatizacion-ia-negocio-local" />
+      <meta property="og:title" content="Automatización con IA para Negocios Locales: Guía 2026 | HydrAI Labs" />
+      <meta property="og:description" content="Guía completa sobre cómo los negocios locales pueden usar la inteligencia artificial para automatizar tareas, captar clientes y crecer sin contratar más personal." />
+      <meta property="og:url" content="https://hydrailabs.com/blog/automatizacion-ia-negocio-local" />
+      <meta property="og:type" content="article" />
+      <meta property="article:published_time" content="2026-02-20" />
+      <meta name="twitter:title" content="Automatización con IA para Negocios Locales: Guía 2026 | HydrAI Labs" />
+      <meta name="twitter:description" content="Guía completa sobre cómo los negocios locales pueden usar la inteligencia artificial para automatizar tareas, captar clientes y crecer sin contratar más personal." />
+    </Helmet>
     <Helmet>
       <script type="application/ld+json">{JSON.stringify({
         "@context": "https://schema.org", "@type": "Article",

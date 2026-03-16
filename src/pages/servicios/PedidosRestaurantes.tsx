@@ -1,7 +1,8 @@
 import { PageLayout } from "@/components/layout/PageLayout";
-import { SEOHead, ServiceSchema, FAQSchema, BreadcrumbSchema } from "@/components/seo";
+import { ServiceSchema, FAQSchema, BreadcrumbSchema } from "@/components/seo";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { 
   UtensilsCrossed, Smartphone, QrCode, CheckCircle2, ArrowRight, 
   Zap, Clock, CreditCard, ChefHat
@@ -33,12 +34,17 @@ const faqs = [
 const PedidosRestaurantes = () => {
   return (
     <PageLayout>
-      <SEOHead
-        title="Sistema de Pedidos Online para Restaurantes | HydrAI Labs"
-        description="Sistema de pedidos online sin comisiones para restaurantes. Integración WhatsApp, web y TPV. Más rentabilidad que Glovo o Uber Eats. Costa del Sol."
-        canonical="/servicios/pedidos-online-restaurantes"
-        keywords="pedidos online restaurante, menu digital qr, sistema pedidos restaurante, carta digital restaurante, comandas digitales"
-      />
+      <Helmet>
+        <title>Sistema de Pedidos Online para Restaurantes | HydrAI Labs</title>
+        <meta name="description" content="Sistema de pedidos online sin comisiones para restaurantes. Integración WhatsApp, web y TPV. Más rentabilidad que Glovo o Uber Eats. Costa del Sol." />
+        <link rel="canonical" href="https://hydrailabs.com/servicios/pedidos-online-restaurantes" />
+        <meta property="og:title" content="Sistema de Pedidos Online para Restaurantes | HydrAI Labs" />
+        <meta property="og:description" content="Sistema de pedidos online sin comisiones para restaurantes. Integración WhatsApp, web y TPV. Más rentabilidad que Glovo o Uber Eats. Costa del Sol." />
+        <meta property="og:url" content="https://hydrailabs.com/servicios/pedidos-online-restaurantes" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:title" content="Sistema de Pedidos Online para Restaurantes | HydrAI Labs" />
+        <meta name="twitter:description" content="Sistema de pedidos online sin comisiones para restaurantes. Integración WhatsApp, web y TPV. Más rentabilidad que Glovo o Uber Eats. Costa del Sol." />
+      </Helmet>
       <ServiceSchema
         name="Sistema de Pedidos Online para Restaurantes"
         description="Menú digital con QR, pedidos a cocina en tiempo real, pagos desde mesa y gestión centralizada para restaurantes."

@@ -1,7 +1,8 @@
 import { PageLayout } from "@/components/layout/PageLayout";
-import { SEOHead, FAQSchema, BreadcrumbSchema } from "@/components/seo";
+import { FAQSchema, BreadcrumbSchema } from "@/components/seo";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -109,13 +110,17 @@ export const CityLandingPage = ({ config }: Props) => {
 
   return (
     <PageLayout>
-      <SEOHead
-        title={config.seoTitle}
-        description={config.metaDescription}
-        canonical={`/${config.slug}`}
-        keywords={config.keywords}
-        ogType="website"
-      />
+      <Helmet>
+        <title>{config.seoTitle}</title>
+        <meta name="description" content={config.metaDescription} />
+        <link rel="canonical" href={`https://hydrailabs.com/${config.slug}`} />
+        <meta property="og:title" content={config.seoTitle} />
+        <meta property="og:description" content={config.metaDescription} />
+        <meta property="og:url" content={`https://hydrailabs.com/${config.slug}`} />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:title" content={config.seoTitle} />
+        <meta name="twitter:description" content={config.metaDescription} />
+      </Helmet>
       <BreadcrumbSchema
         items={[
           { name: "Inicio", url: "https://hydrailabs.com/" },

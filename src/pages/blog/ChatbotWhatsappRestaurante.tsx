@@ -1,5 +1,5 @@
 import { PageLayout } from "@/components/layout/PageLayout";
-import { SEOHead, BreadcrumbSchema } from "@/components/seo";
+import { BreadcrumbSchema } from "@/components/seo";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, ArrowLeft, Clock } from "lucide-react";
@@ -7,13 +7,18 @@ import { Helmet } from "react-helmet-async";
 
 const ChatbotWhatsappRestaurante = () => (
   <PageLayout>
-    <SEOHead
-      title="Cómo un Chatbot WhatsApp Aumentó Reservas en un Restaurante | HydrAI Labs Blog"
-      description="Caso real: cómo implementamos un chatbot WhatsApp en un restaurante de la Costa del Sol y aumentamos las reservas un 40% en 30 días."
-      canonical="/blog/chatbot-whatsapp-restaurante"
-      ogType="article"
-      publishedTime="2026-02-28"
-    />
+    <Helmet>
+      <title>Cómo un Chatbot WhatsApp Aumentó Reservas en un Restaurante | HydrAI Labs Blog</title>
+      <meta name="description" content="Caso real: cómo implementamos un chatbot WhatsApp en un restaurante de la Costa del Sol y aumentamos las reservas un 40% en 30 días." />
+      <link rel="canonical" href="https://hydrailabs.com/blog/chatbot-whatsapp-restaurante" />
+      <meta property="og:title" content="Cómo un Chatbot WhatsApp Aumentó Reservas en un Restaurante | HydrAI Labs Blog" />
+      <meta property="og:description" content="Caso real: cómo implementamos un chatbot WhatsApp en un restaurante de la Costa del Sol y aumentamos las reservas un 40% en 30 días." />
+      <meta property="og:url" content="https://hydrailabs.com/blog/chatbot-whatsapp-restaurante" />
+      <meta property="og:type" content="article" />
+      <meta property="article:published_time" content="2026-02-28" />
+      <meta name="twitter:title" content="Cómo un Chatbot WhatsApp Aumentó Reservas en un Restaurante | HydrAI Labs Blog" />
+      <meta name="twitter:description" content="Caso real: cómo implementamos un chatbot WhatsApp en un restaurante de la Costa del Sol y aumentamos las reservas un 40% en 30 días." />
+    </Helmet>
     <Helmet>
       <script type="application/ld+json">{JSON.stringify({
         "@context": "https://schema.org", "@type": "Article",
