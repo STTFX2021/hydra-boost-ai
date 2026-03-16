@@ -5,7 +5,8 @@ import { ArrowRight, Zap, ExternalLink, Star, CheckCircle2 } from "lucide-react"
 import { cases } from "@/data/cases";
 import { testimonials } from "@/data/testimonials";
 import { useTranslation } from "@/lib/i18n";
-import { SEOHead, BreadcrumbSchema } from "@/components/seo";
+import { BreadcrumbSchema } from "@/components/seo";
+import { Helmet } from "react-helmet-async";
 
 const Casos = () => {
   const { language } = useTranslation();

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PageLayout } from "@/components/layout/PageLayout";
-import { SEOHead, WebPageSchema, BreadcrumbSchema } from "@/components/seo";
+import { WebPageSchema, BreadcrumbSchema } from "@/components/seo";
+import { Helmet } from "react-helmet-async";
 import { ProfileSelector } from "@/components/diagnostic/ProfileSelector";
 import { LocalBusinessForm } from "@/components/diagnostic/LocalBusinessForm";
 import { motion } from "framer-motion";
