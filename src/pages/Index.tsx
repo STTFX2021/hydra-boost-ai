@@ -38,12 +38,17 @@ const LazySection = ({ children }: { children: React.ReactNode }) => (
 const Index = () => {
   return (
     <>
-      <SEOHead
-        title="HydrAI Labs | Automatización IA para Negocios Locales en Costa del Sol"
-        description="Agencia de automatización con IA en Costa del Sol. Chatbots WhatsApp 24/7, automatizaciones n8n y captación de clientes para restaurantes, clínicas, inmobiliarias y gimnasios."
-        canonical="/"
-        keywords="automatización ia, chatbot whatsapp, chatbot ia restaurantes, automatizar negocios, agencia ia españa, n8n, make, automatizaciones sin código"
-      />
+      <Helmet>
+        <title>HydrAI Labs | Automatización IA para Negocios Locales en Costa del Sol</title>
+        <meta name="description" content="Agencia de automatización con IA en Costa del Sol. Chatbots WhatsApp 24/7, automatizaciones n8n y captación de clientes para restaurantes, clínicas, inmobiliarias y gimnasios." />
+        <link rel="canonical" href="https://hydrailabs.com/" />
+        <meta property="og:title" content="HydrAI Labs | Automatización IA para Negocios Locales en Costa del Sol" />
+        <meta property="og:description" content="Agencia de automatización con IA en Costa del Sol. Chatbots WhatsApp 24/7, automatizaciones n8n y captación de clientes para restaurantes, clínicas, inmobiliarias y gimnasios." />
+        <meta property="og:url" content="https://hydrailabs.com/" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:title" content="HydrAI Labs | Automatización IA para Negocios Locales en Costa del Sol" />
+        <meta name="twitter:description" content="Agencia de automatización con IA en Costa del Sol. Chatbots WhatsApp 24/7, automatizaciones n8n y captación de clientes para restaurantes, clínicas, inmobiliarias y gimnasios." />
+      </Helmet>
       <OrganizationSchema />
       <LocalBusinessSchema />
 

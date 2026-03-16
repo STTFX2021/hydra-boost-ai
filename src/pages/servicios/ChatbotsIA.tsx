@@ -34,12 +34,17 @@ const faqs = [
 const ChatbotsIA = () => {
   return (
     <PageLayout>
-      <SEOHead
-        title="Chatbots IA para WhatsApp Business | HydrAI Labs"
-        description="Implementamos chatbots con inteligencia artificial para WhatsApp Business. Responde clientes 24/7, automatiza reservas y aumenta ventas. Costa del Sol y España."
-        canonical="/servicios/chatbots-ia"
-        keywords="chatbot ia, chatbot whatsapp, chatbot para empresas, asistente virtual negocio, bot atención cliente, chatbot restaurante"
-      />
+      <Helmet>
+        <title>Chatbots IA para WhatsApp Business | HydrAI Labs</title>
+        <meta name="description" content="Implementamos chatbots con inteligencia artificial para WhatsApp Business. Responde clientes 24/7, automatiza reservas y aumenta ventas. Costa del Sol y España." />
+        <link rel="canonical" href="https://hydrailabs.com/servicios/chatbots-ia" />
+        <meta property="og:title" content="Chatbots IA para WhatsApp Business | HydrAI Labs" />
+        <meta property="og:description" content="Implementamos chatbots con inteligencia artificial para WhatsApp Business. Responde clientes 24/7, automatiza reservas y aumenta ventas. Costa del Sol y España." />
+        <meta property="og:url" content="https://hydrailabs.com/servicios/chatbots-ia" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:title" content="Chatbots IA para WhatsApp Business | HydrAI Labs" />
+        <meta name="twitter:description" content="Implementamos chatbots con inteligencia artificial para WhatsApp Business. Responde clientes 24/7, automatiza reservas y aumenta ventas. Costa del Sol y España." />
+      </Helmet>
       <ServiceSchema
         name="Chatbots IA para Negocios"
         description="Chatbots con inteligencia artificial que responden 24/7, capturan leads y automatizan la atención al cliente para negocios locales."

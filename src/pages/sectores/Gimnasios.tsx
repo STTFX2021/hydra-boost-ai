@@ -58,12 +58,17 @@ const services = [
 const SectorGimnasios = () => {
   return (
     <PageLayout>
-      <SEOHead
-        title="Automatización IA para Gimnasios y CrossFit | HydrAI Labs"
-        description="Automatiza tu gimnasio con IA: chatbot WhatsApp, gestión de socios, recordatorios automáticos y captación de leads. Soluciones para gimnasios en Costa del Sol."
-        canonical="/sectores/gimnasios"
-        keywords="ia gimnasios, chatbot gimnasio, automatizar gimnasio, captacion socios gimnasio, reactivacion bajas gimnasio"
-      />
+      <Helmet>
+        <title>Automatización IA para Gimnasios y CrossFit | HydrAI Labs</title>
+        <meta name="description" content="Automatiza tu gimnasio con IA: chatbot WhatsApp, gestión de socios, recordatorios automáticos y captación de leads. Soluciones para gimnasios en Costa del Sol." />
+        <link rel="canonical" href="https://hydrailabs.com/sectores/gimnasios" />
+        <meta property="og:title" content="Automatización IA para Gimnasios y CrossFit | HydrAI Labs" />
+        <meta property="og:description" content="Automatiza tu gimnasio con IA: chatbot WhatsApp, gestión de socios, recordatorios automáticos y captación de leads. Soluciones para gimnasios en Costa del Sol." />
+        <meta property="og:url" content="https://hydrailabs.com/sectores/gimnasios" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:title" content="Automatización IA para Gimnasios y CrossFit | HydrAI Labs" />
+        <meta name="twitter:description" content="Automatiza tu gimnasio con IA: chatbot WhatsApp, gestión de socios, recordatorios automáticos y captación de leads. Soluciones para gimnasios en Costa del Sol." />
+      </Helmet>
       <LocalBusinessSchema />
       <FAQSchema items={faqs} />
       <BreadcrumbSchema items={[

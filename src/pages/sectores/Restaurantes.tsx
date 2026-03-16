@@ -58,12 +58,17 @@ const services = [
 const SectorRestaurantes = () => {
   return (
     <PageLayout>
-      <SEOHead
-        title="Automatización IA para Restaurantes | HydrAI Labs"
-        description="Soluciones de IA para restaurantes: chatbot WhatsApp para reservas, pedidos online sin comisiones y automatización de marketing. Costa del Sol y Málaga."
-        canonical="/sectores/restaurantes"
-        keywords="ia restaurantes, chatbot restaurante, reservas automaticas restaurante, no-shows restaurante, whatsapp restaurante"
-      />
+      <Helmet>
+        <title>Automatización IA para Restaurantes | HydrAI Labs</title>
+        <meta name="description" content="Soluciones de IA para restaurantes: chatbot WhatsApp para reservas, pedidos online sin comisiones y automatización de marketing. Costa del Sol y Málaga." />
+        <link rel="canonical" href="https://hydrailabs.com/sectores/restaurantes" />
+        <meta property="og:title" content="Automatización IA para Restaurantes | HydrAI Labs" />
+        <meta property="og:description" content="Soluciones de IA para restaurantes: chatbot WhatsApp para reservas, pedidos online sin comisiones y automatización de marketing. Costa del Sol y Málaga." />
+        <meta property="og:url" content="https://hydrailabs.com/sectores/restaurantes" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:title" content="Automatización IA para Restaurantes | HydrAI Labs" />
+        <meta name="twitter:description" content="Soluciones de IA para restaurantes: chatbot WhatsApp para reservas, pedidos online sin comisiones y automatización de marketing. Costa del Sol y Málaga." />
+      </Helmet>
       <LocalBusinessSchema />
       <FAQSchema items={faqs} />
       <BreadcrumbSchema items={[

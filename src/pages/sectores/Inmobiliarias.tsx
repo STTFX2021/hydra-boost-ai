@@ -58,12 +58,17 @@ const services = [
 const SectorInmobiliarias = () => {
   return (
     <PageLayout>
-      <SEOHead
-        title="Automatización IA para Inmobiliarias | HydrAI Labs"
-        description="IA para agencias inmobiliarias: captación automática de leads, chatbot 24/7 para WhatsApp y CRM automatizado. Especialistas en Costa del Sol."
-        canonical="/sectores/inmobiliarias"
-        keywords="ia inmobiliarias, chatbot inmobiliaria, leads inmobiliarios, cualificacion leads inmobiliaria, scraping inmobiliaria"
-      />
+      <Helmet>
+        <title>Automatización IA para Inmobiliarias | HydrAI Labs</title>
+        <meta name="description" content="IA para agencias inmobiliarias: captación automática de leads, chatbot 24/7 para WhatsApp y CRM automatizado. Especialistas en Costa del Sol." />
+        <link rel="canonical" href="https://hydrailabs.com/sectores/inmobiliarias" />
+        <meta property="og:title" content="Automatización IA para Inmobiliarias | HydrAI Labs" />
+        <meta property="og:description" content="IA para agencias inmobiliarias: captación automática de leads, chatbot 24/7 para WhatsApp y CRM automatizado. Especialistas en Costa del Sol." />
+        <meta property="og:url" content="https://hydrailabs.com/sectores/inmobiliarias" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:title" content="Automatización IA para Inmobiliarias | HydrAI Labs" />
+        <meta name="twitter:description" content="IA para agencias inmobiliarias: captación automática de leads, chatbot 24/7 para WhatsApp y CRM automatizado. Especialistas en Costa del Sol." />
+      </Helmet>
       <LocalBusinessSchema />
       <FAQSchema items={faqs} />
       <BreadcrumbSchema items={[
