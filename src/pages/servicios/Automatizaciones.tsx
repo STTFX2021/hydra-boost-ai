@@ -1,7 +1,8 @@
 import { PageLayout } from "@/components/layout/PageLayout";
-import { SEOHead, ServiceSchema, FAQSchema, BreadcrumbSchema } from "@/components/seo";
+import { ServiceSchema, FAQSchema, BreadcrumbSchema } from "@/components/seo";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { 
   Globe, Bot, Calendar, CheckCircle2, ArrowRight, 
   Zap, Clock

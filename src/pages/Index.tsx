@@ -1,7 +1,8 @@
 import { lazy, Suspense } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { SEOHead, OrganizationSchema, LocalBusinessSchema } from "@/components/seo";
+import { OrganizationSchema, LocalBusinessSchema } from "@/components/seo";
+import { Helmet } from "react-helmet-async";
 import {
   HeroWorld,
   TrustBar,
