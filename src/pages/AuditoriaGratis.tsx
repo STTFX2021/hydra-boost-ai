@@ -14,12 +14,17 @@ const AuditoriaGratis = () => {
 
   return (
     <PageLayout>
-      <SEOHead
-        title="Auditoría IA Gratuita para tu Negocio | HydrAI Labs"
-        description="Solicita tu auditoría gratuita de automatización IA. Analizamos tu negocio y te decimos exactamente qué automatizar para ahorrar tiempo y captar más clientes."
-        canonical="/auditoria-gratis"
-        keywords="auditoria ia gratis, automatizacion negocios, roi automatizacion"
-      />
+      <Helmet>
+        <title>Auditoría IA Gratuita para tu Negocio | HydrAI Labs</title>
+        <meta name="description" content="Solicita tu auditoría gratuita de automatización IA. Analizamos tu negocio y te decimos exactamente qué automatizar para ahorrar tiempo y captar más clientes." />
+        <link rel="canonical" href="https://hydrailabs.com/auditoria-gratis" />
+        <meta property="og:title" content="Auditoría IA Gratuita para tu Negocio | HydrAI Labs" />
+        <meta property="og:description" content="Solicita tu auditoría gratuita de automatización IA. Analizamos tu negocio y te decimos exactamente qué automatizar para ahorrar tiempo y captar más clientes." />
+        <meta property="og:url" content="https://hydrailabs.com/auditoria-gratis" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:title" content="Auditoría IA Gratuita para tu Negocio | HydrAI Labs" />
+        <meta name="twitter:description" content="Solicita tu auditoría gratuita de automatización IA. Analizamos tu negocio y te decimos exactamente qué automatizar para ahorrar tiempo y captar más clientes." />
+      </Helmet>
       <WebPageSchema
         name="Auditoría Gratis de Automatización IA"
         description="Solicita tu auditoría gratuita de automatización con IA."

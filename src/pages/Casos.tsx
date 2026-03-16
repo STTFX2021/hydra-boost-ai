@@ -44,12 +44,17 @@ const Casos = () => {
 
   return (
     <>
-      <SEOHead
-        title="Casos de Éxito en Automatización IA | HydrAI Labs"
-        description="Casos reales de negocios locales que han automatizado con HydrAI Labs: más reservas, menos trabajo manual y clientes 24/7 en Costa del Sol."
-        canonical="/casos"
-        keywords="casos exito ia, portfolio automatizacion, testimonios chatbot, resultados ia negocios"
-      />
+      <Helmet>
+        <title>Casos de Éxito en Automatización IA | HydrAI Labs</title>
+        <meta name="description" content="Casos reales de negocios locales que han automatizado con HydrAI Labs: más reservas, menos trabajo manual y clientes 24/7 en Costa del Sol." />
+        <link rel="canonical" href="https://hydrailabs.com/casos" />
+        <meta property="og:title" content="Casos de Éxito en Automatización IA | HydrAI Labs" />
+        <meta property="og:description" content="Casos reales de negocios locales que han automatizado con HydrAI Labs: más reservas, menos trabajo manual y clientes 24/7 en Costa del Sol." />
+        <meta property="og:url" content="https://hydrailabs.com/casos" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:title" content="Casos de Éxito en Automatización IA | HydrAI Labs" />
+        <meta name="twitter:description" content="Casos reales de negocios locales que han automatizado con HydrAI Labs: más reservas, menos trabajo manual y clientes 24/7 en Costa del Sol." />
+      </Helmet>
       <BreadcrumbSchema items={[
         { name: "Inicio", url: "/" },
         { name: "Casos de Éxito", url: "/casos" }
