@@ -58,8 +58,8 @@ const SectorGimnasios = () => {
   return (
     <PageLayout>
       <SEOHead
-        title="Automatización IA para Gimnasios | HydrAI Labs"
-        description="Chatbot de captación de socios, reactivación de bajas y gestión automática para gimnasios en España. -30% bajas. +80% conversión. Desde 197€."
+        title="Automatización IA para Gimnasios y CrossFit | HydrAI Labs"
+        description="Automatiza tu gimnasio con IA: chatbot WhatsApp, gestión de socios, recordatorios automáticos y captación de leads. Soluciones para gimnasios en Costa del Sol."
         canonical="/sectores/gimnasios"
         keywords="ia gimnasios, chatbot gimnasio, automatizar gimnasio, captacion socios gimnasio, reactivacion bajas gimnasio"
       />

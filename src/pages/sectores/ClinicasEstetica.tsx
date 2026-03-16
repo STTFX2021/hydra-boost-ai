@@ -58,8 +58,8 @@ const SectorClinicasEstetica = () => {
   return (
     <PageLayout>
       <SEOHead
-        title="Automatización IA para Clínicas y Centros de Estética | HydrAI Labs"
-        description="Chatbot de citas 24/7, recordatorios automáticos y captación de pacientes para clínicas y centros de estética en España. -60% ausencias. Desde 197€."
+        title="Automatización IA para Clínicas de Estética | HydrAI Labs"
+        description="Chatbots y automatizaciones para clínicas estéticas y de belleza. Reservas automáticas, recordatorios de cita y captación de pacientes 24/7. Costa del Sol."
         canonical="/sectores/clinicas-estetica"
         keywords="ia clinica estetica, chatbot clinica, automatizar clinica, citas automaticas clinica, captacion pacientes"
       />

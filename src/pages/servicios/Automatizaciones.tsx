@@ -105,8 +105,8 @@ const Automatizaciones = () => {
   return (
     <PageLayout>
       <SEOHead
-        title="Automatizaciones para Negocios - Chatbots, Reservas, Pagos | HydrAI Labs"
-        description="Web profesional, chatbots IA, reservas online, pasarela de pago y tienda online. Soluciones desde 197€ + IVA. Implementación en días."
+        title="Automatizaciones con IA para Negocios | HydrAI Labs"
+        description="Automatiza tareas repetitivas con flujos n8n e IA. Ahorra tiempo, reduce errores y escala tu negocio sin contratar más personal. Agencia especializada en Costa del Sol."
         canonical="/servicios/automatizaciones"
         keywords="automatizaciones negocio, chatbot web, chatbot whatsapp, sistema reservas, tienda online, pasarela pago"
       />

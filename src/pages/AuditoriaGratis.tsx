@@ -14,8 +14,8 @@ const AuditoriaGratis = () => {
   return (
     <PageLayout>
       <SEOHead
-        title="Auditoría Gratuita | HydrAI Labs"
-        description="Solicita tu auditoría gratuita de automatización. En menos de 24 horas te decimos qué procesos automatizar."
+        title="Auditoría IA Gratuita para tu Negocio | HydrAI Labs"
+        description="Solicita tu auditoría gratuita de automatización IA. Analizamos tu negocio y te decimos exactamente qué automatizar para ahorrar tiempo y captar más clientes."
         canonical="/auditoria-gratis"
         keywords="auditoria ia gratis, automatizacion negocios, roi automatizacion"
       />

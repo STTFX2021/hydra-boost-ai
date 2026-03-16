@@ -8,8 +8,8 @@ import { Helmet } from "react-helmet-async";
 const ChatbotWhatsappRestaurante = () => (
   <PageLayout>
     <SEOHead
-      title="Cómo un Restaurante en Madrid Redujo los No-Shows un 40% con un Chatbot de WhatsApp"
-      description="Un restaurante de cocina mediterránea en Madrid perdía 3-4 mesas por servicio. Con un chatbot de WhatsApp redujo las ausencias un 40% en 30 días."
+      title="Cómo un Chatbot WhatsApp Aumentó Reservas en un Restaurante | HydrAI Labs Blog"
+      description="Caso real: cómo implementamos un chatbot WhatsApp en un restaurante de la Costa del Sol y aumentamos las reservas un 40% en 30 días."
       canonical="/blog/chatbot-whatsapp-restaurante"
       ogType="article"
       publishedTime="2026-02-28"

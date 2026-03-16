@@ -59,7 +59,7 @@ const SectorInmobiliarias = () => {
     <PageLayout>
       <SEOHead
         title="Automatización IA para Inmobiliarias | HydrAI Labs"
-        description="Chatbot de captación de leads, cualificación automática y seguimiento por WhatsApp para inmobiliarias en España. +300% leads cualificados. Desde 295€."
+        description="IA para agencias inmobiliarias: captación automática de leads, chatbot 24/7 para WhatsApp y CRM automatizado. Especialistas en Costa del Sol."
         canonical="/sectores/inmobiliarias"
         keywords="ia inmobiliarias, chatbot inmobiliaria, leads inmobiliarios, cualificacion leads inmobiliaria, scraping inmobiliaria"
       />

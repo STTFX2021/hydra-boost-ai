@@ -59,7 +59,7 @@ const SectorRestaurantes = () => {
     <PageLayout>
       <SEOHead
         title="Automatización IA para Restaurantes | HydrAI Labs"
-        description="Chatbot 24/7, reservas automáticas y campañas por WhatsApp para restaurantes en España. -40% no-shows. +127% reservas online. Desde 197€."
+        description="Soluciones de IA para restaurantes: chatbot WhatsApp para reservas, pedidos online sin comisiones y automatización de marketing. Costa del Sol y Málaga."
         canonical="/sectores/restaurantes"
         keywords="ia restaurantes, chatbot restaurante, reservas automaticas restaurante, no-shows restaurante, whatsapp restaurante"
       />
