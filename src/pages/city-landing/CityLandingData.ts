@@ -138,7 +138,7 @@ export const cityConfigs: Record<string, CityLandingConfig> = {
     city: "Benalmádena",
     region: "Costa del Sol",
     seoTitle: "Automatización IA en Benalmádena | HydrAI Labs",
-    metaDescription: "Automatización IA para negocios en Benalmádena. Chatbots 24/7, automatización de procesos, captación automática de clientes y CRM inteligente para empresas locales.",
+    metaDescription: "Automatización con IA para negocios en Benalmádena. Chatbots 24/7, webs SEO y flujos automáticos para negocios locales de Benalmádena y Arroyo de la Miel.",
     keywords: "automatización IA Benalmádena, agencia IA Benalmádena, IA para negocios Benalmádena, automatización de procesos Benalmádena, chatbot IA Benalmádena",
     heroSubline: "Automatiza atención al cliente, captación de leads y procesos con inteligencia artificial 24/7. Soluciones para negocios locales en Benalmádena.",
     problemText: [
