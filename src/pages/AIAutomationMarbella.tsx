@@ -134,7 +134,7 @@ const AIAutomationMarbella = () => {
     <PageLayout>
       <SEOHead
         title="Automatización IA en Marbella | HydrAI Labs"
-        description="Automatización IA para negocios en Marbella. Chatbots 24/7, automatización de procesos, captación automática de clientes y CRM inteligente para empresas locales."
+        description="Agencia de automatización con inteligencia artificial en Marbella. Chatbots WhatsApp, webs y flujos automáticos para negocios locales de Marbella y Golden Mile."
         canonical="/ai-automation-marbella"
         keywords="automatización IA Marbella, agencia IA Marbella, IA para negocios Marbella, automatización de procesos Marbella, chatbot IA Marbella"
         ogType="website"

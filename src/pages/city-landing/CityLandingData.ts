@@ -90,7 +90,7 @@ export const cityConfigs: Record<string, CityLandingConfig> = {
     city: "Estepona",
     region: "Costa del Sol",
     seoTitle: "Automatización IA en Estepona | HydrAI Labs",
-    metaDescription: "Automatización IA para negocios en Estepona. Chatbots 24/7, automatización de procesos, captación automática de clientes y CRM inteligente para empresas locales.",
+    metaDescription: "Chatbots IA y automatizaciones para negocios en Estepona. Webs profesionales, WhatsApp Business 24/7 y captación automática de clientes en Estepona.",
     keywords: "automatización IA Estepona, agencia IA Estepona, IA para negocios Estepona, automatización de procesos Estepona, chatbot IA Estepona",
     heroSubline: "Automatiza atención al cliente, captación de leads y procesos con inteligencia artificial 24/7. Pensado para negocios locales en Estepona y alrededores.",
     problemText: [
