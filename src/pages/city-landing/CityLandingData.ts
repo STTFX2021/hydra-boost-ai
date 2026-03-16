@@ -65,8 +65,8 @@ export const cityConfigs: Record<string, CityLandingConfig> = {
     slug: "ai-automation-costa-del-sol",
     city: "Costa del Sol",
     region: "Andalucía",
-    seoTitle: "Automatización IA en la Costa del Sol | HydrAI Labs",
-    metaDescription: "Automatización IA para negocios en la Costa del Sol. Chatbots 24/7, automatización de procesos, captación automática de clientes y CRM inteligente para empresas locales.",
+    seoTitle: "Automatización IA en Costa del Sol | HydrAI Labs",
+    metaDescription: "Agencia especializada en automatización con IA en Costa del Sol. Chatbots WhatsApp, webs SEO y sistemas automáticos para negocios de Marbella a Torremolinos.",
     keywords: "automatización IA Costa del Sol, agencia IA Costa del Sol, IA para negocios Costa del Sol, automatización de procesos Costa del Sol, chatbot IA Costa del Sol",
     heroSubline: "Automatiza atención al cliente, captación de leads y procesos con inteligencia artificial 24/7. Soluciones diseñadas para el mercado turístico y empresarial de la Costa del Sol.",
     problemText: [
