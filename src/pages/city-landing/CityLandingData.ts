@@ -114,7 +114,7 @@ export const cityConfigs: Record<string, CityLandingConfig> = {
     city: "Fuengirola",
     region: "Costa del Sol",
     seoTitle: "Automatización IA en Fuengirola | HydrAI Labs",
-    metaDescription: "Automatización IA para negocios en Fuengirola. Chatbots 24/7, automatización de procesos, captación automática de clientes y CRM inteligente para empresas locales.",
+    metaDescription: "Soluciones IA para negocios en Fuengirola. Chatbots WhatsApp, automatizaciones y webs para restaurantes, clínicas y comercios de Fuengirola.",
     keywords: "automatización IA Fuengirola, agencia IA Fuengirola, IA para negocios Fuengirola, automatización de procesos Fuengirola, chatbot IA Fuengirola",
     heroSubline: "Automatiza atención al cliente, captación de leads y procesos con inteligencia artificial 24/7. Soluciones para negocios locales en Fuengirola.",
     problemText: [
