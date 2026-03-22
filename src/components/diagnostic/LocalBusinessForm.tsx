@@ -83,6 +83,8 @@ export function LocalBusinessForm() {
   const canAdvanceStep1 = formData.problems.length > 0 && formData.channels.length > 0;
   const canSubmit = formData.name.trim() && formData.phone.trim() && formData.email.trim() && formData.business.trim() && formData.privacy;
 
+  const N8N_WEBHOOK_URL = "https://hydrai.app.n8n.cloud/webhook/hydrai/lead";
+
   const handleSubmit = async () => {
     if (!canSubmit) {
       toast.error("Completa todos los campos obligatorios.");
@@ -91,6 +93,7 @@ export function LocalBusinessForm() {
 
     setIsSubmitting(true);
     try {
+      // 1. Guardar lead en Supabase
       const { error: leadError } = await supabase.from("leads").insert({
         name: formData.name.trim(),
         email: formData.email.trim(),
@@ -98,7 +101,7 @@ export function LocalBusinessForm() {
         business_name: formData.business.trim(),
         city: formData.city.trim(),
         vertical: formData.sector,
-        source: "negocio_local",
+        source: "auditoria-gratis",
         score: 70,
         status: "new",
         tags: [...formData.problems, ...formData.channels, `vol_${formData.volume}`],
@@ -106,40 +109,35 @@ export function LocalBusinessForm() {
 
       if (leadError) throw leadError;
 
-      // Send to n8n + Resend via lead-intake edge function (best-effort)
+      // 2. Enviar al webhook de n8n (POST directo)
       try {
-        await supabase.functions.invoke("lead-intake", {
-          body: {
-            nombre: formData.name.trim(),
-            email: formData.email.trim(),
-            telefono: formData.phone.trim(),
-            tipo_negocio: formData.sector,
-            mensaje: formData.message.trim() || `Sector: ${formData.sector}, Ciudad: ${formData.city}, Problemas: ${formData.problems.join(", ")}`,
-            fuente: "auditoria",
-            pagina: window.location.href,
-          },
-        });
-      } catch { /* best-effort */ }
+        const n8nPayload = {
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          phone: formData.phone.trim(),
+          business_name: formData.business.trim(),
+          sector: formData.sector,
+          city: formData.city.trim(),
+          message: formData.message.trim() || `Sector: ${formData.sector}, Ciudad: ${formData.city}, Problemas: ${formData.problems.join(", ")}`,
+          problems: formData.problems,
+          channels: formData.channels,
+          volume: formData.volume,
+          source: "auditoria-gratis",
+          page: window.location.href,
+        };
 
-      // Best-effort Discord notification
-      try {
-        await supabase.functions.invoke("send-lead-notification", {
-          body: {
-            type: "local_business_audit",
-            data: {
-              name: formData.name.trim(),
-              email: formData.email.trim(),
-              phone: formData.phone.trim(),
-              business: formData.business.trim(),
-              city: formData.city.trim(),
-              sector: formData.sector,
-              problems: formData.problems,
-              channels: formData.channels,
-              message: formData.message,
-            },
-          },
+        const n8nResponse = await fetch(N8N_WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(n8nPayload),
         });
-      } catch { /* silent */ }
+
+        if (!n8nResponse.ok) {
+          console.error(`[auditoria-gratis] n8n webhook error: ${n8nResponse.status}`, await n8nResponse.text());
+        }
+      } catch (n8nErr) {
+        console.error("[auditoria-gratis] n8n webhook call failed:", n8nErr);
+      }
 
       setShowConfirmation(true);
     } catch (error) {
