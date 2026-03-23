@@ -6,7 +6,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Progress } from "@/components/ui/progress";
-import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
 
@@ -93,55 +92,37 @@ export function LocalBusinessForm() {
 
     setIsSubmitting(true);
     try {
-      // 1. Guardar lead en Supabase
-      const { error: leadError } = await supabase.from("leads").insert({
+      // POST directo al webhook de n8n — n8n gestiona Supabase y notificaciones
+      const payload = {
         name: formData.name.trim(),
         email: formData.email.trim(),
         phone: formData.phone.trim(),
         business_name: formData.business.trim(),
+        sector: formData.sector,
         city: formData.city.trim(),
-        vertical: formData.sector,
+        message: formData.message.trim() || `Sector: ${formData.sector}, Ciudad: ${formData.city}, Problemas: ${formData.problems.join(", ")}`,
+        problems: formData.problems,
+        channels: formData.channels,
+        volume: formData.volume,
         source: "auditoria-gratis",
-        score: 70,
-        status: "new",
-        tags: [...formData.problems, ...formData.channels, `vol_${formData.volume}`],
+        page: window.location.href,
+      };
+
+      const response = await fetch(N8N_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       });
 
-      if (leadError) throw leadError;
-
-      // 2. Enviar al webhook de n8n (POST directo)
-      try {
-        const n8nPayload = {
-          name: formData.name.trim(),
-          email: formData.email.trim(),
-          phone: formData.phone.trim(),
-          business_name: formData.business.trim(),
-          sector: formData.sector,
-          city: formData.city.trim(),
-          message: formData.message.trim() || `Sector: ${formData.sector}, Ciudad: ${formData.city}, Problemas: ${formData.problems.join(", ")}`,
-          problems: formData.problems,
-          channels: formData.channels,
-          volume: formData.volume,
-          source: "auditoria-gratis",
-          page: window.location.href,
-        };
-
-        const n8nResponse = await fetch(N8N_WEBHOOK_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(n8nPayload),
-        });
-
-        if (!n8nResponse.ok) {
-          console.error(`[auditoria-gratis] n8n webhook error: ${n8nResponse.status}`, await n8nResponse.text());
-        }
-      } catch (n8nErr) {
-        console.error("[auditoria-gratis] n8n webhook call failed:", n8nErr);
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error(`[auditoria-gratis] n8n webhook error ${response.status}:`, errorText);
+        throw new Error(`Webhook error: ${response.status}`);
       }
 
       setShowConfirmation(true);
     } catch (error) {
-      console.error(error);
+      console.error("[auditoria-gratis] submit error:", error);
       toast.error(
         <div className="space-y-2">
           <p>Hubo un problema técnico. Contáctanos directamente en WhatsApp:</p>
