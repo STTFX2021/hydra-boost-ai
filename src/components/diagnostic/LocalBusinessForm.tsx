@@ -93,33 +93,52 @@ export function LocalBusinessForm() {
 
     setIsSubmitting(true);
     try {
-      // POST directo al webhook de n8n — n8n gestiona Supabase y notificaciones
-      const payload = {
-        name: formData.name.trim(),
-        email: formData.email.trim(),
-        phone: formData.phone.trim(),
-        business_name: formData.business.trim(),
-        sector: formData.sector,
-        city: formData.city.trim(),
-        message: formData.message.trim() || `Sector: ${formData.sector}, Ciudad: ${formData.city}, Problemas: ${formData.problems.join(", ")}`,
-        problems: formData.problems,
-        channels: formData.channels,
-        volume: formData.volume,
-        source: "auditoria-gratis",
-        page: window.location.href,
-      };
+      const cleanName = formData.name.trim();
+      const cleanEmail = formData.email.trim();
+      const cleanPhone = formData.phone.trim();
+      const cleanBusiness = formData.business.trim();
+      const cleanCity = formData.city.trim();
+      const cleanMessage = formData.message.trim() || `Sector: ${formData.sector}, Ciudad: ${formData.city}, Problemas: ${formData.problems.join(", ")}`;
 
-      const response = await fetch(N8N_WEBHOOK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error(`[auditoria-gratis] n8n webhook error ${response.status}:`, errorText);
-        throw new Error(`Webhook error: ${response.status}`);
+      // 1. Persist lead in DB (safety net)
+      try {
+        await supabase.from("leads").insert({
+          name: cleanName,
+          email: cleanEmail,
+          phone: cleanPhone,
+          business_name: cleanBusiness,
+          city: cleanCity,
+          vertical: formData.sector,
+          source: "auditoria-gratis",
+          score: 70,
+          status: "new",
+          tags: [...formData.problems, ...formData.channels, `vol_${formData.volume}`],
+        });
+      } catch (dbErr) {
+        console.warn("[auditoria-gratis] DB insert failed:", dbErr);
       }
+
+      // 2. Fire n8n webhook + lead-intake notification in parallel (best-effort)
+      await Promise.allSettled([
+        fetch(N8N_WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: cleanName, email: cleanEmail, phone: cleanPhone,
+            business_name: cleanBusiness, sector: formData.sector, city: cleanCity,
+            message: cleanMessage, problems: formData.problems,
+            channels: formData.channels, volume: formData.volume,
+            source: "auditoria-gratis", page: window.location.href,
+          }),
+        }),
+        supabase.functions.invoke("lead-intake", {
+          body: {
+            nombre: cleanName, email: cleanEmail, telefono: cleanPhone,
+            tipo_negocio: formData.sector, mensaje: cleanMessage,
+            fuente: "auditoria-gratis", pagina: window.location.href,
+          },
+        }),
+      ]);
 
       setShowConfirmation(true);
     } catch (error) {

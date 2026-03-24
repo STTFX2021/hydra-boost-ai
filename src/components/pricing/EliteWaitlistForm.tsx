@@ -108,6 +108,8 @@ export const EliteWaitlistForm = ({ open, onOpenChange, language }: EliteWaitlis
     setIsSubmitting(true);
 
     try {
+      const eliteMessage = `[ELITE WAITLIST]\nEmpresa: ${formData.company}\nSector: ${formData.sector}\nEquipo: ${formData.teamSize}\nReto: ${formData.challenge}`;
+
       // Save to leads table with elite tag
       const { error } = await supabase.from("leads").insert({
         name: formData.name,
@@ -120,12 +122,24 @@ export const EliteWaitlistForm = ({ open, onOpenChange, language }: EliteWaitlis
 
       if (error) throw error;
 
-      // Also save the full details to contact_submissions
-      await supabase.from("contact_submissions").insert({
-        name: formData.name,
-        email: formData.email,
-        message: `[ELITE WAITLIST]\nEmpresa: ${formData.company}\nSector: ${formData.sector}\nEquipo: ${formData.teamSize}\nReto: ${formData.challenge}`,
-      });
+      // Save full details + send notifications in parallel
+      await Promise.allSettled([
+        supabase.from("contact_submissions").insert({
+          name: formData.name,
+          email: formData.email,
+          message: eliteMessage,
+        }),
+        supabase.functions.invoke("lead-intake", {
+          body: {
+            nombre: formData.name,
+            email: formData.email,
+            tipo_negocio: formData.sector,
+            mensaje: eliteMessage,
+            fuente: "elite_waitlist",
+            pagina: window.location.href,
+          },
+        }),
+      ]);
 
       setIsSuccess(true);
     } catch (error) {
