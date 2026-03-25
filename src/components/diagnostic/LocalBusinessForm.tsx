@@ -191,7 +191,7 @@ export function LocalBusinessForm() {
       {/* Progress */}
       <div className="mb-8">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-xs font-mono text-muted-foreground">Paso {step + 1} de {totalSteps}</span>
+          <span className="text-xs font-mono text-muted-foreground">Paso {step + 1} de 3</span>
           <span className="text-xs font-mono text-primary">{Math.round(progress)}%</span>
         </div>
         <Progress value={progress} className="h-2" />
