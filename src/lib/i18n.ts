@@ -759,7 +759,7 @@ const legacyTranslations: TranslationsType = {
       cookies: 'Política de Cookies', 
       rights: 'Todos los derechos reservados.',
       email: 'hola@hydrailabs.com',
-      location: 'Madrid, España',
+      location: 'Marbella · Costa del Sol, Spain',
     },
     common: { 
       loading: 'Cargando...', 
