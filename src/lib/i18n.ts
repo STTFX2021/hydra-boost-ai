@@ -900,7 +900,7 @@ const legacyTranslations: TranslationsType = {
       cookies: 'Cookie-Richtlinie', 
       rights: 'Alle Rechte vorbehalten.',
       email: 'hallo@hydrailabs.com',
-      location: 'Madrid, Spanien',
+      location: 'Marbella · Costa del Sol, Spain',
     },
     common: { 
       loading: 'Laden...', 
