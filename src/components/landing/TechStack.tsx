@@ -2,12 +2,16 @@ import { motion } from "framer-motion";
 import { useLandingTranslation } from "@/lib/i18n";
 
 const technologies = [
-  { name: "n8n", icon: "⚙️" },
-  { name: "Supabase", icon: "🗄️" },
-  { name: "OpenAI", icon: "🤖" },
-  { name: "Anthropic", icon: "🧠" },
-  { name: "Make", icon: "🔄" },
-  { name: "Discord", icon: "💬" },
+  { name: "n8n", icon: "🔗", desc: "Orquestación de workflows" },
+  { name: "Make", icon: "🔧", desc: "Integración de apps sin código" },
+  { name: "Supabase", icon: "🗄️", desc: "Backend & base de datos" },
+  { name: "OpenAI", icon: "🤖", desc: "Modelos de lenguaje" },
+  { name: "Anthropic", icon: "🧠", desc: "IA avanzada" },
+  { name: "HeyGen", icon: "🎬", desc: "Vídeos con avatares IA" },
+  { name: "Flow", icon: "⚡", desc: "Automatización de flujos visuales" },
+  { name: "AntiGravity", icon: "🚀", desc: "Generación de contenido IA" },
+  { name: "Ollama", icon: "🤖", desc: "Modelos LLM locales y privados" },
+  { name: "Discord", icon: "💬", desc: "Notificaciones en tiempo real" },
 ];
 
 export const TechStack = () => {
@@ -45,7 +49,10 @@ export const TechStack = () => {
               className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors cursor-default"
             >
               <span className="text-2xl">{tech.icon}</span>
-              <span className="font-medium text-sm">{tech.name}</span>
+              <div className="flex flex-col">
+                <span className="font-medium text-sm">{tech.name}</span>
+                <span className="text-xs text-muted-foreground/70 hidden md:block">{tech.desc}</span>
+              </div>
             </motion.div>
           ))}
         </motion.div>
