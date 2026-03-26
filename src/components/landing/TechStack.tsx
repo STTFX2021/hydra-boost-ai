@@ -2,12 +2,16 @@ import { motion } from "framer-motion";
 import { useLandingTranslation } from "@/lib/i18n";
 
 const technologies = [
-  { name: "n8n", icon: "⚙️" },
-  { name: "Supabase", icon: "🗄️" },
-  { name: "OpenAI", icon: "🤖" },
-  { name: "Anthropic", icon: "🧠" },
-  { name: "Make", icon: "🔄" },
-  { name: "Discord", icon: "💬" },
+  { name: "n8n", icon: "🔗", desc: "Orquestación de workflows" },
+  { name: "Make", icon: "🔧", desc: "Integración de apps sin código" },
+  { name: "Supabase", icon: "🗄️", desc: "Backend & base de datos" },
+  { name: "OpenAI", icon: "🤖", desc: "Modelos de lenguaje" },
+  { name: "Anthropic", icon: "🧠", desc: "IA avanzada" },
+  { name: "HeyGen", icon: "🎬", desc: "Vídeos con avatares IA" },
+  { name: "Flow", icon: "⚡", desc: "Automatización de flujos visuales" },
+  { name: "AntiGravity", icon: "🚀", desc: "Generación de contenido IA" },
+  { name: "Ollama", icon: "🤖", desc: "Modelos LLM locales y privados" },
+  { name: "Discord", icon: "💬", desc: "Notificaciones en tiempo real" },
 ];
 
 export const TechStack = () => {
