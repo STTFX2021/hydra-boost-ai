@@ -48,7 +48,8 @@ export const AnimatedCounters = () => {
           <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
             Impacto real, números reales
           </h2>
-          <p className="text-lg text-muted-foreground">Estos son nuestros resultados este mes</p>
+          <p className="text-lg text-muted-foreground">Estos son nuestros resultados · Costa del Sol, Spain</p>
+          <p className="text-sm text-amber-400 mt-2 font-medium">⚡ Solo quedan 3 plazas disponibles este mes</p>
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">

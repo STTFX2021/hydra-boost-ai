@@ -49,7 +49,10 @@ export const TechStack = () => {
               className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors cursor-default"
             >
               <span className="text-2xl">{tech.icon}</span>
-              <span className="font-medium text-sm">{tech.name}</span>
+              <div className="flex flex-col">
+                <span className="font-medium text-sm">{tech.name}</span>
+                <span className="text-xs text-muted-foreground/70 hidden md:block">{tech.desc}</span>
+              </div>
             </motion.div>
           ))}
         </motion.div>
