@@ -759,7 +759,7 @@ const legacyTranslations: TranslationsType = {
       cookies: 'Política de Cookies', 
       rights: 'Todos los derechos reservados.',
       email: 'hola@hydrailabs.com',
-      location: 'Madrid, España',
+      location: 'Marbella · Costa del Sol, Spain',
     },
     common: { 
       loading: 'Cargando...', 
@@ -806,7 +806,7 @@ const legacyTranslations: TranslationsType = {
       cookies: 'Cookie Policy', 
       rights: 'All rights reserved.',
       email: 'hello@hydrailabs.com',
-      location: 'Madrid, Spain',
+      location: 'Marbella · Costa del Sol, Spain',
     },
     common: { 
       loading: 'Loading...', 
@@ -853,7 +853,7 @@ const legacyTranslations: TranslationsType = {
       cookies: 'Politique des Cookies', 
       rights: 'Tous droits réservés.',
       email: 'bonjour@hydrailabs.com',
-      location: 'Madrid, Espagne',
+      location: 'Marbella · Costa del Sol, Spain',
     },
     common: { 
       loading: 'Chargement...', 
@@ -900,7 +900,7 @@ const legacyTranslations: TranslationsType = {
       cookies: 'Cookie-Richtlinie', 
       rights: 'Alle Rechte vorbehalten.',
       email: 'hallo@hydrailabs.com',
-      location: 'Madrid, Spanien',
+      location: 'Marbella · Costa del Sol, Spain',
     },
     common: { 
       loading: 'Laden...', 
@@ -947,7 +947,7 @@ const legacyTranslations: TranslationsType = {
       cookies: 'Política de Cookies', 
       rights: 'Todos os direitos reservados.',
       email: 'ola@hydrailabs.com',
-      location: 'Madrid, Espanha',
+      location: 'Marbella · Costa del Sol, Spain',
     },
     common: { 
       loading: 'Carregando...', 
@@ -994,7 +994,7 @@ const legacyTranslations: TranslationsType = {
       cookies: 'Cookie Policy', 
       rights: 'Tutti i diritti riservati.',
       email: 'ciao@hydrailabs.com',
-      location: 'Madrid, Spagna',
+      location: 'Marbella · Costa del Sol, Spain',
     },
     common: { 
       loading: 'Caricamento...', 
