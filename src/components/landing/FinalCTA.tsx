@@ -21,11 +21,11 @@ export const FinalCTA = () => {
           className="card-premium text-center p-8 md:p-12 lg:p-16 neon-border max-w-4xl mx-auto"
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4">
-            {t.title.split('Piloto Automático')[0]}
+            ¿Listo para poner tu negocio en{" "}
             <span className="text-gradient-primary">Piloto Automático</span>?
           </h2>
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            {t.subtitle}
+            Agenda tu auditoría gratuita y te mostramos exactamente qué procesos automatizar y el ROI esperado.
           </p>
           
           <Link to="/auditoria-gratis">
