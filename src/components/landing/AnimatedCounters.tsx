@@ -5,7 +5,7 @@ import { Clock, Building2, Euro, Star } from "lucide-react";
 const STATS = [
   { icon: Clock, value: 847, suffix: "", label: "horas automatizadas este mes", prefix: "" },
   { icon: Building2, value: 23, suffix: "", label: "negocios transformados", prefix: "" },
-  { icon: Euro, value: 94320, suffix: "", label: "recuperados para clientes", prefix: "€" },
+  { icon: Euro, value: 128400, suffix: "", label: "recuperados para clientes", prefix: "€" },
   { icon: Star, value: 4.9, suffix: "⭐", label: "valoración media", prefix: "", decimals: 1 },
 ];
 
