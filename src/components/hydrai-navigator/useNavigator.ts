@@ -197,44 +197,29 @@ export function useNavigator() {
     addMessage("bot", `Genial ${data.name}. Te avisamos pronto. Mientras, nos vemos en Discord.`);
 
     try {
-      const leadPayload = {
-        name: data.name,
-        email: data.contact.includes("@") ? data.contact : `${data.contact}@placeholder.com`,
-        phone: data.contact.includes("@") ? null : data.contact,
-        business_name: data.business || state.business,
-        source: "hydrai_navigator",
-        vertical: state.mission,
-        tags: [state.channel, state.urgency].filter(Boolean),
-      };
-
-      const navMessage = `Navigator Lead: ${state.mission} | ${state.business} | ${state.channel} | ${state.urgency}`;
       const contactEmail = data.contact.includes("@") ? data.contact : `${data.contact}@placeholder.com`;
+      const navMessage = `Navigator Lead: ${state.mission} | ${state.business} | ${state.channel} | ${state.urgency}`;
 
-      const { error: leadError } = await supabase.from("leads").insert(leadPayload);
-      
-      if (leadError) {
-        await supabase.from("contact_submissions").insert({
-          name: data.name,
+      const { data: result, error } = await supabase.functions.invoke("lead-intake", {
+        body: {
+          request_id: crypto.randomUUID(),
+          nombre: data.name,
           email: contactEmail,
-          phone: data.contact.includes("@") ? null : data.contact,
-          message: navMessage,
-        });
-      }
-
-      // Send notification (best-effort)
-      try {
-        await supabase.functions.invoke("lead-intake", {
-          body: {
-            nombre: data.name,
-            email: contactEmail,
-            telefono: data.contact.includes("@") ? "" : data.contact,
-            tipo_negocio: data.business || state.business || "",
-            mensaje: navMessage,
-            fuente: "hydrai_navigator",
-            pagina: window.location.href,
+          telefono: data.contact.includes("@") ? "" : data.contact,
+          tipo_negocio: data.business || state.business || "",
+          mensaje: navMessage,
+          fuente: "hydrai_navigator",
+          pagina: window.location.href,
+          extra: {
+            mission: state.mission,
+            channel: state.channel,
+            urgency: state.urgency,
           },
-        });
-      } catch { /* best-effort */ }
+        },
+      });
+
+      if (error) console.warn("Lead save error:", error);
+      if (result?.warning) console.warn("Lead save partial:", result.warning);
 
       logEvent("lead_saved", { ...data, mission: state.mission });
     } catch (error) {
