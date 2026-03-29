@@ -83,8 +83,6 @@ export function LocalBusinessForm() {
   const canAdvanceStep1 = formData.problems.length > 0 && formData.channels.length > 0;
   const canSubmit = formData.name.trim() && formData.phone.trim() && formData.email.trim() && formData.business.trim() && formData.privacy;
 
-  const N8N_WEBHOOK_URL = "https://hydrai.app.n8n.cloud/webhook/hydrai/lead";
-
   const handleSubmit = async () => {
     if (!canSubmit) {
       toast.error("Completa todos los campos obligatorios.");
@@ -93,6 +91,7 @@ export function LocalBusinessForm() {
 
     setIsSubmitting(true);
     try {
+      const requestId = crypto.randomUUID();
       const cleanName = formData.name.trim();
       const cleanEmail = formData.email.trim();
       const cleanPhone = formData.phone.trim();
@@ -100,45 +99,35 @@ export function LocalBusinessForm() {
       const cleanCity = formData.city.trim();
       const cleanMessage = formData.message.trim() || `Sector: ${formData.sector}, Ciudad: ${formData.city}, Problemas: ${formData.problems.join(", ")}`;
 
-      // 1. Persist lead in DB (safety net)
-      try {
-        await supabase.from("leads").insert({
-          name: cleanName,
+      const { data, error } = await supabase.functions.invoke("lead-intake", {
+        body: {
+          request_id: requestId,
+          nombre: cleanName,
           email: cleanEmail,
-          phone: cleanPhone,
-          business_name: cleanBusiness,
-          city: cleanCity,
-          vertical: formData.sector,
-          source: "auditoria-gratis",
-          score: 70,
-          status: "new",
-          tags: [...formData.problems, ...formData.channels, `vol_${formData.volume}`],
-        });
-      } catch (dbErr) {
-        console.warn("[auditoria-gratis] DB insert failed:", dbErr);
+          telefono: cleanPhone,
+          tipo_negocio: formData.sector,
+          nombre_negocio: cleanBusiness,
+          ciudad: cleanCity,
+          mensaje: cleanMessage,
+          fuente: "auditoria-gratis",
+          pagina: window.location.href,
+          extra: {
+            problems: formData.problems,
+            channels: formData.channels,
+            volume: formData.volume,
+          },
+        },
+      });
+
+      if (error) throw error;
+
+      if (!data?.ok || !data?.stored) {
+        throw new Error(data?.error || "No se pudo guardar el lead");
       }
 
-      // 2. Fire n8n webhook + lead-intake notification in parallel (best-effort)
-      await Promise.allSettled([
-        fetch(N8N_WEBHOOK_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name: cleanName, email: cleanEmail, phone: cleanPhone,
-            business_name: cleanBusiness, sector: formData.sector, city: cleanCity,
-            message: cleanMessage, problems: formData.problems,
-            channels: formData.channels, volume: formData.volume,
-            source: "auditoria-gratis", page: window.location.href,
-          }),
-        }),
-        supabase.functions.invoke("lead-intake", {
-          body: {
-            nombre: cleanName, email: cleanEmail, telefono: cleanPhone,
-            tipo_negocio: formData.sector, mensaje: cleanMessage,
-            fuente: "auditoria-gratis", pagina: window.location.href,
-          },
-        }),
-      ]);
+      if (data.warning) {
+        console.warn("[auditoria-gratis] partial success:", data.warning);
+      }
 
       setShowConfirmation(true);
     } catch (error) {
