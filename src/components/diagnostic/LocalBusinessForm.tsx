@@ -212,6 +212,8 @@ export function LocalBusinessForm() {
                     {sectors.map((s) => (
                       <button
                         key={s.id}
+                        type="button"
+                        aria-pressed={formData.sector === s.id}
                         onClick={() => setFormData((p) => ({ ...p, sector: s.id }))}
                         className={`p-3 rounded-xl border text-left text-sm transition-all ${
                           formData.sector === s.id
@@ -227,12 +229,15 @@ export function LocalBusinessForm() {
                 </div>
 
                 <div>
-                  <p className="text-sm font-medium mb-2">¿En qué ciudad estás?</p>
+                  <label htmlFor="city" className="text-sm font-medium mb-2 block">¿En qué ciudad estás?</label>
                   <Input
+                    id="city"
+                    name="city"
                     value={formData.city}
                     onChange={(e) => setFormData((p) => ({ ...p, city: e.target.value }))}
                     placeholder="Ej: Madrid, Barcelona, Sevilla..."
                     className="bg-background/60 border-border/50 focus:border-primary/50"
+                    autoComplete="address-level2"
                   />
                 </div>
 
@@ -242,6 +247,8 @@ export function LocalBusinessForm() {
                     {volumeOptions.map((v) => (
                       <button
                         key={v.id}
+                        type="button"
+                        aria-pressed={formData.volume === v.id}
                         onClick={() => setFormData((p) => ({ ...p, volume: v.id }))}
                         className={`px-4 py-2 rounded-lg border text-sm transition-all ${
                           formData.volume === v.id
@@ -271,6 +278,8 @@ export function LocalBusinessForm() {
                     {problems.map((p) => (
                       <button
                         key={p.id}
+                        type="button"
+                        aria-pressed={formData.problems.includes(p.id)}
                         onClick={() => toggleArray("problems", p.id)}
                         className={`p-3 rounded-xl border text-left text-sm transition-all ${
                           formData.problems.includes(p.id)
@@ -291,6 +300,8 @@ export function LocalBusinessForm() {
                     {channels.map((c) => (
                       <button
                         key={c.id}
+                        type="button"
+                        aria-pressed={formData.channels.includes(c.id)}
                         onClick={() => toggleArray("channels", c.id)}
                         className={`px-3 py-2 rounded-lg border text-sm transition-all ${
                           formData.channels.includes(c.id)
@@ -317,8 +328,11 @@ export function LocalBusinessForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm mb-1.5 text-muted-foreground">Nombre completo *</label>
+                  <label htmlFor="nombre" className="block text-sm mb-1.5 text-muted-foreground">Nombre completo *</label>
                   <Input
+                    id="nombre"
+                    name="nombre"
+                    autoComplete="name"
                     value={formData.name}
                     onChange={(e) => setFormData((p) => ({ ...p, name: e.target.value }))}
                     placeholder="Ej: María García"
@@ -327,8 +341,12 @@ export function LocalBusinessForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm mb-1.5 text-muted-foreground">WhatsApp o teléfono *</label>
+                  <label htmlFor="telefono" className="block text-sm mb-1.5 text-muted-foreground">WhatsApp o teléfono *</label>
                   <Input
+                    id="telefono"
+                    name="telefono"
+                    type="tel"
+                    autoComplete="tel"
                     value={formData.phone}
                     onChange={(e) => setFormData((p) => ({ ...p, phone: e.target.value }))}
                     placeholder="Ej: +34 612 345 678"
@@ -340,9 +358,12 @@ export function LocalBusinessForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm mb-1.5 text-muted-foreground">Email *</label>
+                  <label htmlFor="email" className="block text-sm mb-1.5 text-muted-foreground">Email *</label>
                   <Input
+                    id="email"
+                    name="email"
                     type="email"
+                    autoComplete="email"
                     value={formData.email}
                     onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))}
                     placeholder="Ej: maria@mirestaurante.com"
@@ -351,8 +372,11 @@ export function LocalBusinessForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm mb-1.5 text-muted-foreground">Nombre de tu negocio *</label>
+                  <label htmlFor="negocio" className="block text-sm mb-1.5 text-muted-foreground">Nombre de tu negocio *</label>
                   <Input
+                    id="negocio"
+                    name="negocio"
+                    autoComplete="organization"
                     value={formData.business}
                     onChange={(e) => setFormData((p) => ({ ...p, business: e.target.value }))}
                     placeholder="Ej: Restaurante La Paella"
@@ -361,8 +385,10 @@ export function LocalBusinessForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm mb-1.5 text-muted-foreground">Mensaje opcional</label>
+                  <label htmlFor="mensaje" className="block text-sm mb-1.5 text-muted-foreground">Mensaje opcional</label>
                   <Textarea
+                    id="mensaje"
+                    name="mensaje"
                     value={formData.message}
                     onChange={(e) => setFormData((p) => ({ ...p, message: e.target.value }))}
                     placeholder="¿Algo que quieras contarnos antes de la auditoría? (opcional)"
