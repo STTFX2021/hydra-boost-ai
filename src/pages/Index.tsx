@@ -62,7 +62,7 @@ const Index = () => {
           <HeroWorld />
 
           {/* Demo Video Section */}
-          <section id="demo" aria-label="Demo en vivo" className="section-padding relative overflow-hidden">
+          <section id="demo" aria-label="Demo en vivo" className="section-padding relative overflow-hidden section-alt">
             <div className="section-container relative z-10">
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 {/* Left: Copy */}
