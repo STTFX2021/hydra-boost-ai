@@ -134,13 +134,14 @@ export const HeroWorld = () => {
     <section className="relative min-h-[100svh] flex items-center overflow-hidden bg-background">
       {/* ── Layered background ── */}
       <div className="absolute inset-0">
-        {/* Mesh gradient */}
+        {/* Mesh gradient with violet accent */}
         <div
           className="absolute inset-0 opacity-40"
           style={{
             background:
               "radial-gradient(ellipse 80% 60% at 20% 40%, hsl(var(--primary) / 0.15), transparent 60%)," +
-              "radial-gradient(ellipse 60% 50% at 80% 30%, hsl(230 70% 55% / 0.08), transparent 55%)," +
+              "radial-gradient(ellipse 50% 45% at 75% 25%, hsl(270 70% 60% / 0.08), transparent 55%)," +
+              "radial-gradient(ellipse 60% 50% at 80% 30%, hsl(230 70% 55% / 0.06), transparent 55%)," +
               "radial-gradient(ellipse 70% 40% at 50% 90%, hsl(200 90% 55% / 0.06), transparent 50%)",
           }}
         />
