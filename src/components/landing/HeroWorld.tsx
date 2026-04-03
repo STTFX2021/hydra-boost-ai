@@ -134,13 +134,14 @@ export const HeroWorld = () => {
     <section className="relative min-h-[100svh] flex items-center overflow-hidden bg-background">
       {/* ── Layered background ── */}
       <div className="absolute inset-0">
-        {/* Mesh gradient */}
+        {/* Mesh gradient with violet accent */}
         <div
           className="absolute inset-0 opacity-40"
           style={{
             background:
               "radial-gradient(ellipse 80% 60% at 20% 40%, hsl(var(--primary) / 0.15), transparent 60%)," +
-              "radial-gradient(ellipse 60% 50% at 80% 30%, hsl(230 70% 55% / 0.08), transparent 55%)," +
+              "radial-gradient(ellipse 50% 45% at 75% 25%, hsl(270 70% 60% / 0.08), transparent 55%)," +
+              "radial-gradient(ellipse 60% 50% at 80% 30%, hsl(230 70% 55% / 0.06), transparent 55%)," +
               "radial-gradient(ellipse 70% 40% at 50% 90%, hsl(200 90% 55% / 0.06), transparent 50%)",
           }}
         />
@@ -164,7 +165,9 @@ export const HeroWorld = () => {
         >
           {/* ── Badge ── */}
           <motion.div variants={item}>
-            <span className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full text-sm font-semibold bg-primary/8 border border-primary/20 text-foreground backdrop-blur-sm">
+            <span className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full text-sm font-semibold bg-primary/8 border border-primary/20 text-foreground backdrop-blur-sm"
+              style={{ borderColor: 'hsl(270 70% 60% / 0.15)', boxShadow: '0 0 12px hsl(270 70% 60% / 0.08)' }}
+            >
               <Sparkles className="w-4 h-4 text-primary" />
               {t.badge}
             </span>
@@ -173,7 +176,7 @@ export const HeroWorld = () => {
           {/* ── Headline ── */}
           <motion.h1
             variants={item}
-            className="text-5xl sm:text-6xl lg:text-7xl xl:text-[5.25rem] font-display font-bold tracking-tight leading-[1.05]"
+            className="text-5xl sm:text-6xl lg:text-7xl xl:text-[5.25rem] font-display font-bold tracking-tight leading-[1.05] text-glow-violet"
           >
             <span className="text-foreground">{t.title1}</span>
             <br />
@@ -194,7 +197,7 @@ export const HeroWorld = () => {
             <Link to="/auditoria-gratis">
               <Button
                 size="lg"
-                className="btn-neon btn-depth text-base px-10 py-6 group min-w-[260px] rounded-2xl shadow-lg"
+                className="btn-neon btn-depth text-base px-10 py-6 group min-w-[260px] rounded-2xl shadow-lg hover:shadow-[0_6px_24px_hsl(270_70%_60%/0.2)]"
               >
                 {t.cta1}
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />

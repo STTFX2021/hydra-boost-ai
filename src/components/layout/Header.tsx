@@ -58,7 +58,7 @@ export const Header = () => {
           <img
             src="/favicon.png"
             alt="HydrAI Labs - Agencia de automatización IA"
-            className="w-9 h-9 rounded-lg"
+            className="w-9 h-9 rounded-lg logo-violet-halo"
             width={36}
             height={36}
             loading="eager"

@@ -407,10 +407,10 @@
 
   /* ─── Depth & Premium Relief Utilities ─── */
 
-  /* Gradient text: cyan → sky → indigo */
+  /* Gradient text: cyan → sky → indigo → violet */
   .text-gradient-hydrai {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(190 100% 50%), hsl(200 90% 55%), hsl(230 70% 55%));
+    background-image: linear-gradient(135deg, hsl(190 100% 50%), hsl(200 90% 55%), hsl(260 65% 58%));
   }
 
   /* Subtle heading glow — use ONLY on headings */
@@ -418,6 +418,18 @@
     text-shadow:
       0 0 16px hsl(190 100% 50% / 0.35),
       0 0 40px hsl(200 90% 55% / 0.18);
+  }
+
+  /* Violet accent glow for hero headline */
+  .text-glow-violet {
+    text-shadow:
+      0 0 20px hsl(270 70% 60% / 0.25),
+      0 0 50px hsl(260 65% 58% / 0.12);
+  }
+
+  /* Logo violet halo */
+  .logo-violet-halo {
+    filter: drop-shadow(0 0 6px hsl(270 70% 60% / 0.35));
   }
 
   /* Elevated glass card */
