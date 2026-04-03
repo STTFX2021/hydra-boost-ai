@@ -132,26 +132,32 @@ export const HeroWorld = () => {
 
   return (
     <section className="relative min-h-[100svh] flex items-center overflow-hidden bg-background">
-      {/* ── Layered background ── */}
+      {/* ── Layered dark background ── */}
       <div className="absolute inset-0">
-        {/* Mesh gradient with violet accent */}
+        {/* Deep radial mesh */}
         <div
-          className="absolute inset-0 opacity-40"
+          className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 80% 60% at 20% 40%, hsl(var(--primary) / 0.15), transparent 60%)," +
-              "radial-gradient(ellipse 50% 45% at 75% 25%, hsl(270 70% 60% / 0.08), transparent 55%)," +
-              "radial-gradient(ellipse 60% 50% at 80% 30%, hsl(230 70% 55% / 0.06), transparent 55%)," +
-              "radial-gradient(ellipse 70% 40% at 50% 90%, hsl(200 90% 55% / 0.06), transparent 50%)",
+              "radial-gradient(ellipse 80% 60% at 20% 40%, hsl(190 100% 50% / 0.07), transparent 60%)," +
+              "radial-gradient(ellipse 60% 50% at 75% 25%, hsl(260 60% 55% / 0.06), transparent 55%)," +
+              "radial-gradient(ellipse 70% 40% at 50% 90%, hsl(200 90% 55% / 0.04), transparent 50%)",
           }}
         />
         {/* Subtle grid */}
-        <div className="absolute inset-0 bg-grid opacity-[0.04]" />
+        <div className="absolute inset-0 bg-grid opacity-[0.03]" />
         {/* Top light streak */}
         <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[2px]"
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[1px]"
           style={{
-            background: "linear-gradient(90deg, transparent, hsl(var(--primary) / 0.4), transparent)",
+            background: "linear-gradient(90deg, transparent, hsl(190 100% 50% / 0.3), hsl(260 60% 55% / 0.2), transparent)",
+          }}
+        />
+        {/* Bottom glow */}
+        <div
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] opacity-[0.04]"
+          style={{
+            background: "radial-gradient(ellipse at center, hsl(190 100% 50%), transparent 70%)",
           }}
         />
       </div>
@@ -165,8 +171,8 @@ export const HeroWorld = () => {
         >
           {/* ── Badge ── */}
           <motion.div variants={item}>
-            <span className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full text-sm font-semibold bg-primary/8 border border-primary/20 text-foreground backdrop-blur-sm"
-              style={{ borderColor: 'hsl(270 70% 60% / 0.15)', boxShadow: '0 0 12px hsl(270 70% 60% / 0.08)' }}
+            <span className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full text-sm font-semibold backdrop-blur-sm border border-primary/15 text-foreground"
+              style={{ background: 'hsl(190 100% 50% / 0.06)', boxShadow: '0 0 20px hsl(190 100% 50% / 0.06)' }}
             >
               <Sparkles className="w-4 h-4 text-primary" />
               {t.badge}
@@ -197,7 +203,7 @@ export const HeroWorld = () => {
             <Link to="/auditoria-gratis">
               <Button
                 size="lg"
-                className="btn-neon btn-depth text-base px-10 py-6 group min-w-[260px] rounded-2xl shadow-lg hover:shadow-[0_6px_24px_hsl(270_70%_60%/0.2)]"
+                className="btn-neon btn-depth text-base px-10 py-6 group min-w-[260px] rounded-2xl"
               >
                 {t.cta1}
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -234,7 +240,7 @@ export const HeroWorld = () => {
               <div
                 key={i}
                 className={`text-center py-4 ${
-                  i < t.stats.length - 1 ? "border-r border-border/50" : ""
+                  i < t.stats.length - 1 ? "border-r border-border/40" : ""
                 }`}
               >
                 <p className="text-3xl sm:text-4xl font-display font-bold text-gradient-hydrai">

@@ -265,7 +265,7 @@ export const UseCaseTabs = () => {
   const t = content[language as keyof typeof content] || content.es;
 
   return (
-    <section className="section-padding bg-muted/5">
+    <section className="section-padding section-alt">
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

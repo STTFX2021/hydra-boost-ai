@@ -19,15 +19,15 @@ export const TechStack = () => {
   const t = landing.techStack;
 
   return (
-    <section className="py-12 border-y border-border/30">
+    <section className="py-16 border-y border-border/20 section-alt">
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-8"
+          className="text-center mb-10"
         >
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-muted-foreground uppercase tracking-wider">
             {t.title}
           </p>
         </motion.div>

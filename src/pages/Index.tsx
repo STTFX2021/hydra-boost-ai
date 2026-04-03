@@ -62,7 +62,7 @@ const Index = () => {
           <HeroWorld />
 
           {/* Demo Video Section */}
-          <section id="demo" aria-label="Demo en vivo" className="section-padding relative overflow-hidden">
+          <section id="demo" aria-label="Demo en vivo" className="section-padding relative overflow-hidden section-alt">
             <div className="section-container relative z-10">
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 {/* Left: Copy */}
@@ -124,7 +124,7 @@ const Index = () => {
           </LazySection>
 
           {/* Enterprise Audit Section */}
-          <section id="audit" aria-label="Auditoría Enterprise" className="section-padding relative overflow-hidden">
+          <section id="audit" aria-label="Auditoría Enterprise" className="section-padding relative overflow-hidden section-alt">
             <div className="glow-orb-primary w-96 h-96 -top-48 -left-48" />
             <div className="section-container relative z-10">
               <div className="grid lg:grid-cols-2 gap-12 items-start">

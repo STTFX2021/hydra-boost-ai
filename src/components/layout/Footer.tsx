@@ -7,7 +7,10 @@ export const Footer = () => {
   const { t } = useTranslation();
 
   return (
-    <footer className="border-t border-border/30 bg-card/30">
+    <footer className="border-t border-border/20 bg-background">
+      {/* Top gradient line */}
+      <div className="h-px w-full" style={{ background: 'linear-gradient(90deg, transparent, hsl(190 100% 50% / 0.3), hsl(260 60% 55% / 0.2), transparent)' }} />
+
       <div className="section-container py-16">
         <div className="grid gap-12 md:grid-cols-4">
           {/* Brand */}
@@ -16,19 +19,19 @@ export const Footer = () => {
               <img
                 src="/favicon.png"
                 alt="HydrAI Labs"
-                className="w-8 h-8 rounded"
+                className="w-8 h-8 rounded logo-violet-halo"
                 width={32}
                 height={32}
                 loading="lazy"
                 decoding="async"
               />
-              <span className="font-display font-bold text-lg text-gradient-primary">HydrAI Labs</span>
+              <span className="font-display font-bold text-lg text-gradient-hydrai">HydrAI Labs</span>
             </Link>
             <p className="text-sm text-muted-foreground">
               {t("footer.description")}
             </p>
             <div className="space-y-2 text-sm text-muted-foreground">
-              <a href={`mailto:${t("footer.email")}`} className="flex items-center gap-2 hover:text-foreground transition-colors">
+              <a href={`mailto:${t("footer.email")}`} className="flex items-center gap-2 hover:text-primary transition-colors">
                 <Mail className="w-4 h-4" />
                 {t("footer.email")}
               </a>
@@ -41,25 +44,25 @@ export const Footer = () => {
 
           {/* Soluciones */}
           <nav aria-label="Soluciones" className="space-y-4">
-            <h4 className="font-display font-semibold text-sm">{t("footer.solutions")}</h4>
+            <h4 className="font-display font-semibold text-sm text-foreground">{t("footer.solutions")}</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/servicios" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link to="/servicios" className="text-muted-foreground hover:text-primary transition-colors">
                   {t("footer.solutionsBase")}
                 </Link>
               </li>
               <li>
-                <Link to="/industrias" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link to="/industrias" className="text-muted-foreground hover:text-primary transition-colors">
                   {t("footer.solutionsEnterprise")}
                 </Link>
               </li>
               <li>
-                <Link to="/casos" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link to="/casos" className="text-muted-foreground hover:text-primary transition-colors">
                   {t("footer.solutionsCases")}
                 </Link>
               </li>
               <li>
-                <Link to="/precios" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link to="/precios" className="text-muted-foreground hover:text-primary transition-colors">
                   {t("footer.solutionsProcess")}
                 </Link>
               </li>
@@ -68,15 +71,15 @@ export const Footer = () => {
 
           {/* Recursos */}
           <nav aria-label="Recursos" className="space-y-4">
-            <h4 className="font-display font-semibold text-sm">{t("footer.resources")}</h4>
+            <h4 className="font-display font-semibold text-sm text-foreground">{t("footer.resources")}</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/blog" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link to="/blog" className="text-muted-foreground hover:text-primary transition-colors">
                   {t("footer.resourcesBlog")}
                 </Link>
               </li>
               <li>
-                <Link to="/casos" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link to="/casos" className="text-muted-foreground hover:text-primary transition-colors">
                   {t("footer.resourcesCases")}
                 </Link>
               </li>
@@ -86,13 +89,13 @@ export const Footer = () => {
                   target="_blank" 
                   rel="noopener noreferrer"
                   aria-label="Unirse a la comunidad de HydrAI Labs en Discord"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   Discord
                 </a>
               </li>
               <li>
-                <Link to="/contacto" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link to="/contacto" className="text-muted-foreground hover:text-primary transition-colors">
                   {t("footer.resourcesContact")}
                 </Link>
               </li>
@@ -101,20 +104,20 @@ export const Footer = () => {
 
           {/* Legal */}
           <nav aria-label="Legal" className="space-y-4">
-            <h4 className="font-display font-semibold text-sm">{t("footer.legal")}</h4>
+            <h4 className="font-display font-semibold text-sm text-foreground">{t("footer.legal")}</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/privacidad" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link to="/privacidad" className="text-muted-foreground hover:text-primary transition-colors">
                   {t("footer.privacy")}
                 </Link>
               </li>
               <li>
-                <Link to="/terminos" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link to="/terminos" className="text-muted-foreground hover:text-primary transition-colors">
                   {t("footer.terms")}
                 </Link>
               </li>
               <li>
-                <Link to="/cookies" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link to="/cookies" className="text-muted-foreground hover:text-primary transition-colors">
                   {t("footer.cookies")}
                 </Link>
               </li>
@@ -123,7 +126,7 @@ export const Footer = () => {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 pt-8 border-t border-border/30 text-center">
+        <div className="mt-12 pt-8 border-t border-border/20 text-center">
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} HydrAI Labs - {t("footer.rights")}
           </p>

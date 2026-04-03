@@ -45,7 +45,7 @@ export const BaseImplementations = () => {
   const t = landing.base;
 
   return (
-    <section id="implementaciones" className="section-padding bg-muted/10">
+    <section id="implementaciones" className="section-padding section-alt">
       <div className="section-container">
         {/* Header */}
         <motion.div
@@ -59,7 +59,7 @@ export const BaseImplementations = () => {
             {t.badge}
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4">
-            {t.title} <span className="text-gradient-primary">{t.titleHighlight}</span>
+            {t.title} <span className="text-gradient-hydrai">{t.titleHighlight}</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             {t.subtitle}
@@ -87,7 +87,7 @@ export const BaseImplementations = () => {
                 className="card-premium group flex flex-col h-full"
               >
                 <motion.div 
-                  className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors"
+                  className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/15 transition-colors"
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 >
@@ -155,7 +155,7 @@ export const BaseImplementations = () => {
                 variants={itemVariants}
                 whileHover={{ y: -4, scale: 1.02 }}
               >
-                <div className="w-full h-32 bg-muted/50 rounded-lg mb-4 flex items-center justify-center">
+                <div className="w-full h-32 rounded-lg mb-4 flex items-center justify-center" style={{ background: 'hsl(var(--muted) / 0.5)' }}>
                   <span className="text-4xl">{i === 0 ? "🍽️" : i === 1 ? "💇" : "💼"}</span>
                 </div>
                 <p className="font-semibold text-sm text-primary">{item.sector}</p>

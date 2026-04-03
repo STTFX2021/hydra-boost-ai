@@ -45,8 +45,8 @@ export const Header = () => {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         scrolled
-          ? "bg-background border-b border-border shadow-sm"
-          : "bg-background/80 backdrop-blur-sm"
+          ? "bg-background/95 backdrop-blur-lg border-b border-border/40 shadow-lg shadow-black/10"
+          : "bg-transparent"
       )}
     >
       <nav aria-label="Navegación principal" className="section-container flex items-center justify-between h-18 py-4">
@@ -64,7 +64,7 @@ export const Header = () => {
             loading="eager"
             decoding="async"
           />
-          <span className="text-gradient-primary">{t("brand")}</span>
+          <span className="text-gradient-hydrai">{t("brand")}</span>
         </Link>
 
         {/* Desktop Nav */}
@@ -150,7 +150,7 @@ export const Header = () => {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="lg:hidden bg-background/95 backdrop-blur-lg border-t border-border/50">
+        <div className="lg:hidden bg-background/95 backdrop-blur-xl border-t border-border/30">
           <nav aria-label="Navegación móvil" className="section-container py-4 space-y-3">
             {navItems.map((item) => (
               <Link

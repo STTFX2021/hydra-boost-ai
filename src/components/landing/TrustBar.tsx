@@ -27,7 +27,7 @@ export const TrustBar = () => {
   const t = content[language as keyof typeof content] || content.es;
 
   return (
-    <section className="py-12 border-y border-border/30 bg-muted/5 overflow-hidden">
+    <section className="py-12 border-y border-border/20 overflow-hidden">
       <div className="section-container">
         <motion.p 
           initial={{ opacity: 0, y: 10 }}
