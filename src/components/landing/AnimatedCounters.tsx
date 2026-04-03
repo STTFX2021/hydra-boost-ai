@@ -42,14 +42,15 @@ export const AnimatedCounters = () => {
   }, []);
 
   return (
-    <section className="section-padding relative overflow-hidden bg-gradient-to-b from-background via-muted/30 to-background" ref={ref}>
-      <div className="section-container">
+    <section className="section-padding relative overflow-hidden section-alt" ref={ref}>
+      <div className="glow-orb-primary w-[500px] h-[500px] -top-64 left-1/2 -translate-x-1/2 opacity-[0.06]" />
+      <div className="section-container relative z-10">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
             Impacto real, números reales
           </h2>
           <p className="text-lg text-muted-foreground">Estos son nuestros resultados · Costa del Sol, Spain</p>
-          <p className="text-sm text-amber-400 mt-2 font-medium">⚡ Solo quedan 3 plazas disponibles este mes</p>
+          <p className="text-sm text-warning mt-2 font-medium">⚡ Solo quedan 3 plazas disponibles este mes</p>
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -63,10 +64,12 @@ export const AnimatedCounters = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="card-premium text-center"
+                className="card-premium text-center group"
               >
-                <Icon className="w-8 h-8 text-primary mx-auto mb-3" />
-                <div className="text-3xl md:text-4xl font-bold text-gradient-primary mb-2">
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/15 transition-colors">
+                  <Icon className="w-6 h-6 text-primary" />
+                </div>
+                <div className="text-3xl md:text-4xl font-bold text-gradient-hydrai mb-2">
                   {stat.prefix}{typeof stat.value === "number" && stat.value > 1000 ? count.toLocaleString() : count}{stat.suffix}
                 </div>
                 <p className="text-sm text-muted-foreground">{stat.label}</p>

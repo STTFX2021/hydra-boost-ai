@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 const DEMOS = [
   {
@@ -63,8 +62,8 @@ export const SectorDemos = () => {
               onClick={() => setActiveDemo(activeDemo === d.id ? null : d.id)}
               className={`px-6 py-3 rounded-xl border text-sm font-semibold transition-all ${
                 activeDemo === d.id
-                  ? "bg-primary/20 border-primary/50 text-foreground"
-                  : "bg-card border-border/60 text-muted-foreground hover:border-primary/30"
+                  ? "bg-primary/15 border-primary/40 text-foreground"
+                  : "bg-card border-border/40 text-muted-foreground hover:border-primary/30"
               }`}
             >
               {d.label}
@@ -82,16 +81,16 @@ export const SectorDemos = () => {
               className="max-w-md mx-auto"
             >
               <div className="card-premium p-0 overflow-hidden">
-                <div className="bg-gradient-to-r from-primary to-secondary px-4 py-3 flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-primary-foreground">
-                    <MessageSquare className="w-4 h-4" />
+                <div className="px-4 py-3 flex items-center justify-between" style={{ background: 'linear-gradient(135deg, hsl(190 100% 50% / 0.15), hsl(260 60% 55% / 0.1))' }}>
+                  <div className="flex items-center gap-2 text-foreground">
+                    <MessageSquare className="w-4 h-4 text-primary" />
                     <span className="text-sm font-semibold">Demo: {demo.label}</span>
                   </div>
-                  <button onClick={() => setActiveDemo(null)} className="text-primary-foreground/70 hover:text-primary-foreground">
+                  <button onClick={() => setActiveDemo(null)} className="text-muted-foreground hover:text-foreground">
                     <X className="w-4 h-4" />
                   </button>
                 </div>
-                <div className="p-4 space-y-3 bg-background">
+                <div className="p-4 space-y-3">
                   {demo.messages.map((msg, i) => (
                     <motion.div
                       key={i}

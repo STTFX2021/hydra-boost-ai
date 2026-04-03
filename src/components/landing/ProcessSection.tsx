@@ -30,7 +30,7 @@ export const ProcessSection = () => {
   const t = landing.process;
 
   return (
-    <section className="section-padding bg-muted/10">
+    <section className="section-padding section-alt">
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -39,7 +39,7 @@ export const ProcessSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-            {t.title} <span className="text-gradient-primary">{t.titleHighlight}</span>
+            {t.title} <span className="text-gradient-hydrai">{t.titleHighlight}</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             {t.subtitle}
@@ -62,12 +62,13 @@ export const ProcessSection = () => {
               {/* Connector line */}
               {i < t.steps.length - 1 && (
                 <motion.div 
-                  className="hidden lg:block absolute top-8 left-full w-full h-0.5 bg-gradient-to-r from-primary/50 to-transparent z-0"
+                  className="hidden lg:block absolute top-8 left-full w-full h-0.5 z-0"
+                  style={{ background: 'linear-gradient(90deg, hsl(190 100% 50% / 0.3), transparent)' }}
                   initial={{ scaleX: 0 }}
                   whileInView={{ scaleX: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.3 + i * 0.15, duration: 0.5 }}
-                  style={{ transformOrigin: "left" }}
+                  style2={{ transformOrigin: "left" }}
                 />
               )}
               
