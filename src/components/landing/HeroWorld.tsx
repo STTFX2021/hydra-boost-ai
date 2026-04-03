@@ -164,7 +164,9 @@ export const HeroWorld = () => {
         >
           {/* ── Badge ── */}
           <motion.div variants={item}>
-            <span className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full text-sm font-semibold bg-primary/8 border border-primary/20 text-foreground backdrop-blur-sm">
+            <span className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full text-sm font-semibold bg-primary/8 border border-primary/20 text-foreground backdrop-blur-sm"
+              style={{ borderColor: 'hsl(270 70% 60% / 0.15)', boxShadow: '0 0 12px hsl(270 70% 60% / 0.08)' }}
+            >
               <Sparkles className="w-4 h-4 text-primary" />
               {t.badge}
             </span>
@@ -173,7 +175,7 @@ export const HeroWorld = () => {
           {/* ── Headline ── */}
           <motion.h1
             variants={item}
-            className="text-5xl sm:text-6xl lg:text-7xl xl:text-[5.25rem] font-display font-bold tracking-tight leading-[1.05]"
+            className="text-5xl sm:text-6xl lg:text-7xl xl:text-[5.25rem] font-display font-bold tracking-tight leading-[1.05] text-glow-violet"
           >
             <span className="text-foreground">{t.title1}</span>
             <br />
