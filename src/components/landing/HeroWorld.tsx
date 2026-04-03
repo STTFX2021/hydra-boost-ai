@@ -197,7 +197,7 @@ export const HeroWorld = () => {
             <Link to="/auditoria-gratis">
               <Button
                 size="lg"
-                className="btn-neon btn-depth text-base px-10 py-6 group min-w-[260px] rounded-2xl shadow-lg"
+                className="btn-neon btn-depth text-base px-10 py-6 group min-w-[260px] rounded-2xl shadow-lg hover:shadow-[0_6px_24px_hsl(270_70%_60%/0.2)]"
               >
                 {t.cta1}
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
