@@ -63,12 +63,11 @@ export const ProcessSection = () => {
               {i < t.steps.length - 1 && (
                 <motion.div 
                   className="hidden lg:block absolute top-8 left-full w-full h-0.5 z-0"
-                  style={{ background: 'linear-gradient(90deg, hsl(190 100% 50% / 0.3), transparent)' }}
+                  style={{ background: 'linear-gradient(90deg, hsl(190 100% 50% / 0.3), transparent)', transformOrigin: "left" }}
                   initial={{ scaleX: 0 }}
                   whileInView={{ scaleX: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.3 + i * 0.15, duration: 0.5 }}
-                  style2={{ transformOrigin: "left" }}
                 />
               )}
               
