@@ -11,3 +11,6 @@ export { UseCaseTabs } from "./UseCaseTabs";
 export { ROICalculator } from "./ROICalculator";
 export { LeadFormMultiStep } from "./LeadFormMultiStep";
 export { ChatWidgetWorld } from "./ChatWidgetWorld";
+export { IntegrationsShowcase } from "./IntegrationsShowcase";
+export { AgentsTeaser } from "./AgentsTeaser";
+export { InsightsTeaser } from "./InsightsTeaser";

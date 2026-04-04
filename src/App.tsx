@@ -30,6 +30,7 @@ import Cookies from "./pages/legal/Cookies";
 import Inversores from "./pages/Inversores";
 import NotFound from "./pages/NotFound";
 import Arquitectura from "./pages/Arquitectura";
+import AgentesIA from "./pages/AgentesIA";
 // Service pages
 import ChatbotsIA from "./pages/servicios/ChatbotsIA";
 import Automatizaciones from "./pages/servicios/Automatizaciones";
@@ -80,6 +81,7 @@ const App = () => (
             <Route path="/ai-automation-torremolinos" element={<AIAutomationTorremolinos />} />
             <Route path="/industrias" element={<Industrias />} />
             <Route path="/arquitectura" element={<Arquitectura />} />
+            <Route path="/agentes-ia" element={<AgentesIA />} />
             <Route path="/precios" element={<Precios />} />
             <Route path="/casos" element={<Casos />} />
             <Route path="/contacto" element={<Contacto />} />

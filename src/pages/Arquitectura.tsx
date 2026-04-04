@@ -624,12 +624,20 @@ export default function Arquitectura() {
               <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
                 {t.ctaSubtitle}
               </p>
-              <Link to="/auditoria-gratis">
-                <Button size="lg" className="btn-neon btn-depth gap-2">
-                  {t.ctaButton}
-                  <ArrowRight className="w-4 h-4" />
-                </Button>
-              </Link>
+              <div className="flex flex-wrap items-center justify-center gap-4">
+                <Link to="/auditoria-gratis">
+                  <Button size="lg" className="btn-neon btn-depth gap-2">
+                    {t.ctaButton}
+                    <ArrowRight className="w-4 h-4" />
+                  </Button>
+                </Link>
+                <Link to="/agentes-ia">
+                  <Button size="lg" variant="outline" className="btn-outline-neon gap-2">
+                    {language === "es" ? "Ver Catálogo de Agentes" : "View Agent Catalog"}
+                    <ArrowRight className="w-4 h-4" />
+                  </Button>
+                </Link>
+              </div>
             </motion.div>
           </section>
         </div>
