@@ -43,6 +43,7 @@ const copy = {
     cta1: "Solicitar Auditoría Gratis",
     cta2: "Ver Demo",
     trust: ["Sin permanencia", "Setup en 7 días", "Soporte 24/7"],
+    urgency: "⚡ Solo quedan 3 plazas disponibles este mes",
     stats: [
       { value: 127, suffix: "%", label: "Más leads" },
       { value: 15, suffix: "h", label: "Ahorro / semana" },
@@ -58,6 +59,7 @@ const copy = {
     cta1: "Request Free Audit",
     cta2: "Watch Demo",
     trust: ["No commitment", "7-day setup", "24/7 support"],
+    urgency: "⚡ Only 3 spots left this month",
     stats: [
       { value: 127, suffix: "%", label: "More leads" },
       { value: 15, suffix: "h", label: "Saved / week" },
@@ -73,6 +75,7 @@ const copy = {
     cta1: "Demander un Audit Gratuit",
     cta2: "Voir la Démo",
     trust: ["Sans engagement", "Setup en 7 jours", "Support 24/7"],
+    urgency: "⚡ Plus que 3 places ce mois-ci",
     stats: [
       { value: 127, suffix: "%", label: "Plus de leads" },
       { value: 15, suffix: "h", label: "Économisées / sem." },
@@ -88,6 +91,7 @@ const copy = {
     cta1: "Kostenloses Audit anfordern",
     cta2: "Demo ansehen",
     trust: ["Keine Bindung", "7 Tage Setup", "24/7 Support"],
+    urgency: "⚡ Nur noch 3 Plätze diesen Monat",
     stats: [
       { value: 127, suffix: "%", label: "Mehr Leads" },
       { value: 15, suffix: "h", label: "Gespart / Woche" },
@@ -103,6 +107,7 @@ const copy = {
     cta1: "Solicitar Auditoria Grátis",
     cta2: "Ver Demo",
     trust: ["Sem compromisso", "Setup em 7 dias", "Suporte 24/7"],
+    urgency: "⚡ Apenas 3 vagas restantes este mês",
     stats: [
       { value: 127, suffix: "%", label: "Mais leads" },
       { value: 15, suffix: "h", label: "Poupança / sem." },
@@ -118,6 +123,7 @@ const copy = {
     cta1: "Richiedi Audit Gratuito",
     cta2: "Guarda Demo",
     trust: ["Senza impegno", "Setup in 7 giorni", "Supporto 24/7"],
+    urgency: "⚡ Solo 3 posti rimasti questo mese",
     stats: [
       { value: 127, suffix: "%", label: "Più lead" },
       { value: 15, suffix: "h", label: "Risparmio / sett." },
@@ -134,45 +140,38 @@ export const HeroWorld = () => {
     <section className="relative min-h-[100svh] flex items-center overflow-hidden bg-background">
       {/* ── Layered dark background ── */}
       <div className="absolute inset-0">
-        {/* Deep radial mesh */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 80% 60% at 20% 40%, hsl(190 100% 50% / 0.07), transparent 60%)," +
-              "radial-gradient(ellipse 60% 50% at 75% 25%, hsl(260 60% 55% / 0.06), transparent 55%)," +
-              "radial-gradient(ellipse 70% 40% at 50% 90%, hsl(200 90% 55% / 0.04), transparent 50%)",
+              "radial-gradient(ellipse 80% 60% at 20% 40%, hsl(190 100% 50% / 0.06), transparent 60%)," +
+              "radial-gradient(ellipse 60% 50% at 75% 25%, hsl(260 60% 55% / 0.05), transparent 55%)," +
+              "radial-gradient(ellipse 70% 40% at 50% 90%, hsl(200 90% 55% / 0.03), transparent 50%)",
           }}
         />
-        {/* Subtle grid */}
-        <div className="absolute inset-0 bg-grid opacity-[0.03]" />
-        {/* Top light streak */}
+        <div className="absolute inset-0 bg-grid opacity-[0.02]" />
         <div
           className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[1px]"
-          style={{
-            background: "linear-gradient(90deg, transparent, hsl(190 100% 50% / 0.3), hsl(260 60% 55% / 0.2), transparent)",
-          }}
+          style={{ background: "linear-gradient(90deg, transparent, hsl(190 100% 50% / 0.25), hsl(260 60% 55% / 0.15), transparent)" }}
         />
-        {/* Bottom glow */}
         <div
-          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] opacity-[0.04]"
-          style={{
-            background: "radial-gradient(ellipse at center, hsl(190 100% 50%), transparent 70%)",
-          }}
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] opacity-[0.03]"
+          style={{ background: "radial-gradient(ellipse at center, hsl(190 100% 50%), transparent 70%)" }}
         />
       </div>
 
-      <div className="section-container relative z-10 py-28 md:py-36 lg:py-40">
+      <div className="section-container relative z-10 py-32 md:py-40 lg:py-44">
         <motion.div
-          className="max-w-4xl mx-auto text-center space-y-8"
+          className="max-w-4xl mx-auto text-center space-y-10"
           variants={container}
           initial="hidden"
           animate="visible"
         >
           {/* ── Badge ── */}
           <motion.div variants={item}>
-            <span className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full text-sm font-semibold backdrop-blur-sm border border-primary/15 text-foreground"
-              style={{ background: 'hsl(190 100% 50% / 0.06)', boxShadow: '0 0 20px hsl(190 100% 50% / 0.06)' }}
+            <span
+              className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full text-sm font-semibold backdrop-blur-sm border border-primary/15 text-foreground"
+              style={{ background: "hsl(190 100% 50% / 0.06)", boxShadow: "0 0 20px hsl(190 100% 50% / 0.06)" }}
             >
               <Sparkles className="w-4 h-4 text-primary" />
               {t.badge}
@@ -182,7 +181,7 @@ export const HeroWorld = () => {
           {/* ── Headline ── */}
           <motion.h1
             variants={item}
-            className="text-5xl sm:text-6xl lg:text-7xl xl:text-[5.25rem] font-display font-bold tracking-tight leading-[1.05] text-glow-violet"
+            className="text-5xl sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-display font-bold tracking-tight leading-[1.05] text-glow-violet"
           >
             <span className="text-foreground">{t.title1}</span>
             <br />
@@ -201,47 +200,38 @@ export const HeroWorld = () => {
           {/* ── CTAs ── */}
           <motion.div variants={item} className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
             <Link to="/auditoria-gratis">
-              <Button
-                size="lg"
-                className="btn-neon btn-depth text-base px-10 py-6 group min-w-[260px] rounded-2xl"
-              >
+              <Button size="lg" className="btn-neon btn-depth text-base px-10 py-6 group min-w-[260px] rounded-2xl">
                 {t.cta1}
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
             <Link to="/casos">
-              <Button
-                size="lg"
-                variant="outline"
-                className="btn-outline-neon btn-depth text-base px-8 py-6 min-w-[200px] rounded-2xl gap-2"
-              >
+              <Button size="lg" variant="outline" className="btn-outline-neon btn-depth text-base px-8 py-6 min-w-[200px] rounded-2xl gap-2">
                 <Play className="w-4 h-4 fill-primary text-primary" />
                 {t.cta2}
               </Button>
             </Link>
           </motion.div>
 
-          {/* ── Trust pills ── */}
-          <motion.div variants={item} className="flex flex-wrap items-center justify-center gap-5 pt-2">
-            {t.trust.map((text, i) => (
-              <div key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
-                <CheckCircle2 className="w-4 h-4 text-success shrink-0" />
-                {text}
-              </div>
-            ))}
+          {/* ── Trust pills + urgency ── */}
+          <motion.div variants={item} className="space-y-3">
+            <div className="flex flex-wrap items-center justify-center gap-5">
+              {t.trust.map((text, i) => (
+                <div key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <CheckCircle2 className="w-4 h-4 text-success shrink-0" />
+                  {text}
+                </div>
+              ))}
+            </div>
+            <p className="text-sm text-warning font-medium">{t.urgency}</p>
           </motion.div>
 
           {/* ── Stats row ── */}
-          <motion.div
-            variants={item}
-            className="grid grid-cols-3 max-w-md mx-auto pt-10"
-          >
+          <motion.div variants={item} className="grid grid-cols-3 max-w-md mx-auto pt-6">
             {t.stats.map((stat, i) => (
               <div
                 key={i}
-                className={`text-center py-4 ${
-                  i < t.stats.length - 1 ? "border-r border-border/40" : ""
-                }`}
+                className={`text-center py-4 ${i < t.stats.length - 1 ? "border-r border-border/40" : ""}`}
               >
                 <p className="text-3xl sm:text-4xl font-display font-bold text-gradient-hydrai">
                   {stat.suffix === "%" ? "+" : ""}
