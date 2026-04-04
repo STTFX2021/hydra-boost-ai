@@ -30,6 +30,7 @@ import Cookies from "./pages/legal/Cookies";
 import Inversores from "./pages/Inversores";
 import NotFound from "./pages/NotFound";
 import Arquitectura from "./pages/Arquitectura";
+import AgentesIA from "./pages/AgentesIA";
 // Service pages
 import ChatbotsIA from "./pages/servicios/ChatbotsIA";
 import Automatizaciones from "./pages/servicios/Automatizaciones";
