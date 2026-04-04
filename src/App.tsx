@@ -81,6 +81,7 @@ const App = () => (
             <Route path="/ai-automation-torremolinos" element={<AIAutomationTorremolinos />} />
             <Route path="/industrias" element={<Industrias />} />
             <Route path="/arquitectura" element={<Arquitectura />} />
+            <Route path="/agentes-ia" element={<AgentesIA />} />
             <Route path="/precios" element={<Precios />} />
             <Route path="/casos" element={<Casos />} />
             <Route path="/contacto" element={<Contacto />} />
