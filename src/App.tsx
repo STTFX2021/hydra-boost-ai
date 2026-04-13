@@ -31,6 +31,7 @@ import Inversores from "./pages/Inversores";
 import NotFound from "./pages/NotFound";
 import Arquitectura from "./pages/Arquitectura";
 import AgentesIA from "./pages/AgentesIA";
+import AgentDetail from "./pages/AgentDetail";
 // Service pages
 import ChatbotsIA from "./pages/servicios/ChatbotsIA";
 import Automatizaciones from "./pages/servicios/Automatizaciones";
@@ -82,6 +83,7 @@ const App = () => (
             <Route path="/industrias" element={<Industrias />} />
             <Route path="/arquitectura" element={<Arquitectura />} />
             <Route path="/agentes-ia" element={<AgentesIA />} />
+            <Route path="/agentes-ia/:slug" element={<AgentDetail />} />
             <Route path="/precios" element={<Precios />} />
             <Route path="/casos" element={<Casos />} />
             <Route path="/contacto" element={<Contacto />} />
