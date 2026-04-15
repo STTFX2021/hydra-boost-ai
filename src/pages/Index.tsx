@@ -84,7 +84,7 @@ const Index = () => {
                     <a href="#audit" className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold bg-primary text-primary-foreground hover:opacity-90 transition">
                       Request Free Audit
                     </a>
-                    <a href="https://youtube/jvHA_QbYqf4" target="_blank" rel="noopener noreferrer" aria-label="Ver demo de HydrAI en YouTube" className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold border border-border hover:bg-muted/40 transition">
+                    <a <a href="https://www.youtube.com/@HydrAILabs" target="_blank" rel="noopener noreferrer" aria-label="Ver canal de HydrAI en YouTube" className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold border border-border hover:bg-muted/40 transition"> target="_blank" rel="noopener noreferrer" aria-label="Ver demo de HydrAI en YouTube" className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold border border-border hover:bg-muted/40 transition">
                       Open on YouTube
                     </a>
                   </div>
