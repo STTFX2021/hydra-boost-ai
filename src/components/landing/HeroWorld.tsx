@@ -16,7 +16,10 @@ const AnimatedNumber = ({ target, suffix = "" }: { target: number; suffix?: stri
     const unsub = rounded.on("change", (v) => {
       if (ref.current) ref.current.textContent = v + suffix;
     });
-    return () => { controls.stop(); unsub(); };
+    return () => {
+      controls.stop();
+      unsub();
+    };
   }, [target, suffix, motionVal, rounded]);
 
   return <span ref={ref}>0{suffix}</span>;
@@ -36,7 +39,7 @@ const item = {
 const copy = {
   es: {
     badge: "🚀 #1 en Automatización IA para Negocios",
-    title1: "Automatizaciones IA",
+    title1: "Webs que hacen crecer tu negocio",
     title2: "que traen clientes 24/7",
     sub: "Chatbots inteligentes · Webs SEO · CRM automatizado",
     subBold: "Convierte visitantes en clientes mientras duermes.",
@@ -152,7 +155,10 @@ export const HeroWorld = () => {
         <div className="absolute inset-0 bg-grid opacity-[0.02]" />
         <div
           className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[1px]"
-          style={{ background: "linear-gradient(90deg, transparent, hsl(190 100% 50% / 0.25), hsl(260 60% 55% / 0.15), transparent)" }}
+          style={{
+            background:
+              "linear-gradient(90deg, transparent, hsl(190 100% 50% / 0.25), hsl(260 60% 55% / 0.15), transparent)",
+          }}
         />
         <div
           className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] opacity-[0.03]"
@@ -206,7 +212,11 @@ export const HeroWorld = () => {
               </Button>
             </Link>
             <Link to="/casos">
-              <Button size="lg" variant="outline" className="btn-outline-neon btn-depth text-base px-8 py-6 min-w-[200px] rounded-2xl gap-2">
+              <Button
+                size="lg"
+                variant="outline"
+                className="btn-outline-neon btn-depth text-base px-8 py-6 min-w-[200px] rounded-2xl gap-2"
+              >
                 <Play className="w-4 h-4 fill-primary text-primary" />
                 {t.cta2}
               </Button>
@@ -229,10 +239,7 @@ export const HeroWorld = () => {
           {/* ── Stats row ── */}
           <motion.div variants={item} className="grid grid-cols-3 max-w-md mx-auto pt-6">
             {t.stats.map((stat, i) => (
-              <div
-                key={i}
-                className={`text-center py-4 ${i < t.stats.length - 1 ? "border-r border-border/40" : ""}`}
-              >
+              <div key={i} className={`text-center py-4 ${i < t.stats.length - 1 ? "border-r border-border/40" : ""}`}>
                 <p className="text-3xl sm:text-4xl font-display font-bold text-gradient-hydrai">
                   {stat.suffix === "%" ? "+" : ""}
                   <AnimatedNumber target={stat.value} suffix={stat.suffix} />
