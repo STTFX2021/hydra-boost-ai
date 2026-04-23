@@ -40,7 +40,7 @@ const copy = {
   es: {
     badge: "🚀 #1 en Automatización IA para Negocios",
     title1: "Webs que hacen crecer tu negocio",
-    title2: "que traen clientes 24/7",
+    title2: "Crea y Maneja clientes 24/7",
     sub: "Chatbots inteligentes · Webs SEO · CRM automatizado",
     subBold: "Convierte visitantes en clientes mientras duermes.",
     cta1: "Solicitar Auditoría Gratis",
