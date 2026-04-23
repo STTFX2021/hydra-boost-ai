@@ -14,7 +14,7 @@ import {
   AgentsTeaser,
   InsightsTeaser,
 } from "@/components/landing";
-import WorkflowAnimation from "@/components/WorkflowAnimation";
+import { GrowthSystemSection } from "@/components/landing/GrowthSystemSection";
 import { InteractiveROICalculator } from "@/components/landing/InteractiveROICalculator";
 import { AutomationQuiz } from "@/components/landing/AutomationQuiz";
 import { SectorDemos } from "@/components/landing/SectorDemos";
