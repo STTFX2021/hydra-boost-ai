@@ -734,7 +734,7 @@ const legacyTranslations: TranslationsType = {
       services: 'Servicios', 
       industries: 'Automatizaciones', 
       pricing: 'Precios', 
-      cases: 'Casos', 
+      cases: 'Resultados', 
       resources: 'Recursos', 
       contact: 'Contacto', 
       login: 'Admin', 
