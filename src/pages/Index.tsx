@@ -64,37 +64,7 @@ const Index = () => {
         <main id="main-content">
           <HeroWorld />
 
-          {/* Demo Video Section */}
-          <section id="demo" aria-label="Demo en vivo" className="section-padding relative overflow-hidden section-alt">
-            <div className="section-container relative z-10">
-              <div className="grid lg:grid-cols-2 gap-12 items-center">
-                <div>
-                  <div className="badge-primary mb-6 inline-flex items-center gap-2">
-                    <Zap className="w-3 h-3" />
-                    Live Demo
-                  </div>
-                  <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">
-                    Watch how it works
-                    <span className="text-gradient-primary block">in 60 seconds</span>
-                  </h2>
-                  <p className="text-lg text-muted-foreground mb-8">
-                    Real example of how HydrAI captures leads, qualifies them, and routes them to your team automatically.
-                  </p>
-                  <div className="flex flex-wrap gap-3">
-                    <a href="#audit" className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold bg-primary text-primary-foreground hover:opacity-90 transition">
-                      Request Free Audit
-                    </a>
-                    <a href="https://www.youtube.com/@HydrAILabs" target="_blank" rel="noopener noreferrer" aria-label="Ver canal de HydrAI en YouTube" className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold border border-border hover:bg-muted/40 transition">
-                      Open on YouTube
-                    </a>
-                  </div>
-                </div>
-                <div className="rounded-2xl border border-border bg-muted/10 overflow-hidden">
-                  <WorkflowAnimation />
-                </div>
-              </div>
-            </div>
-          </section>
+          <GrowthSystemSection />
 
           <TrustBar />
           <UseCaseTabs />
