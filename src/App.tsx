@@ -48,6 +48,18 @@ import AIAutomationEstepona from "./pages/AIAutomationEstepona";
 import AIAutomationFuengirola from "./pages/AIAutomationFuengirola";
 import AIAutomationBenalmadena from "./pages/AIAutomationBenalmadena";
 import AIAutomationTorremolinos from "./pages/AIAutomationTorremolinos";
+// Local SEO (Spanish slugs)
+import AgenciaIAMalaga from "./pages/AgenciaIAMalaga";
+import AgenciaIAMarbella from "./pages/AgenciaIAMarbella";
+import AgenciaIAFuengirola from "./pages/AgenciaIAFuengirola";
+import AgenciaIAEstepona from "./pages/AgenciaIAEstepona";
+import AutomatizacionIACostaDelSol from "./pages/AutomatizacionIACostaDelSol";
+// Vertical landing pages
+import ChatbotWhatsappRestaurantesMalaga from "./pages/ChatbotWhatsappRestaurantesMalaga";
+import AutomatizacionIAClinicasEsteticasMalaga from "./pages/AutomatizacionIAClinicasEsteticasMalaga";
+import AgentesIAInmobiliariasCostaDelSol from "./pages/AgentesIAInmobiliariasCostaDelSol";
+import ChatbotIAHotelesMarbella from "./pages/ChatbotIAHotelesMarbella";
+import AutomatizacionIAPymesMalaga from "./pages/AutomatizacionIAPymesMalaga";
 // Blog article pages
 import ChatbotWhatsappRestaurante from "./pages/blog/ChatbotWhatsappRestaurante";
 import ScrapingLeadsInmobiliaria from "./pages/blog/ScrapingLeadsInmobiliaria";
@@ -80,6 +92,18 @@ const App = () => (
             <Route path="/ai-automation-fuengirola" element={<AIAutomationFuengirola />} />
             <Route path="/ai-automation-benalmadena" element={<AIAutomationBenalmadena />} />
             <Route path="/ai-automation-torremolinos" element={<AIAutomationTorremolinos />} />
+            {/* Spanish-slug local SEO */}
+            <Route path="/agencia-ia-malaga" element={<AgenciaIAMalaga />} />
+            <Route path="/agencia-ia-marbella" element={<AgenciaIAMarbella />} />
+            <Route path="/agencia-ia-fuengirola" element={<AgenciaIAFuengirola />} />
+            <Route path="/agencia-ia-estepona" element={<AgenciaIAEstepona />} />
+            <Route path="/automatizacion-ia-costa-del-sol" element={<AutomatizacionIACostaDelSol />} />
+            {/* Vertical landings */}
+            <Route path="/chatbot-whatsapp-restaurantes-malaga" element={<ChatbotWhatsappRestaurantesMalaga />} />
+            <Route path="/automatizacion-ia-clinicas-esteticas-malaga" element={<AutomatizacionIAClinicasEsteticasMalaga />} />
+            <Route path="/agentes-ia-inmobiliarias-costa-del-sol" element={<AgentesIAInmobiliariasCostaDelSol />} />
+            <Route path="/chatbot-ia-hoteles-marbella" element={<ChatbotIAHotelesMarbella />} />
+            <Route path="/automatizacion-ia-pymes-malaga" element={<AutomatizacionIAPymesMalaga />} />
             <Route path="/industrias" element={<Industrias />} />
             <Route path="/arquitectura" element={<Arquitectura />} />
             <Route path="/agentes-ia" element={<AgentesIA />} />
