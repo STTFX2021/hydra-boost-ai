@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { OrganizationSchema, LocalBusinessSchema } from "@/components/seo";
+import { OrganizationSchema, LocalBusinessSchema, WebSiteSchema } from "@/components/seo";
 import { Helmet } from "react-helmet-async";
 import {
   HeroWorld,
@@ -13,6 +13,7 @@ import {
   IntegrationsShowcase,
   AgentsTeaser,
   InsightsTeaser,
+  LocalSEOLinks,
 } from "@/components/landing";
 import { GrowthSystemSection } from "@/components/landing/GrowthSystemSection";
 import { InteractiveROICalculator } from "@/components/landing/InteractiveROICalculator";
@@ -54,6 +55,7 @@ const Index = () => {
       </Helmet>
       <OrganizationSchema />
       <LocalBusinessSchema />
+      <WebSiteSchema />
 
       <div className="min-h-screen bg-background">
         <a href="#main-content" className="skip-link">
@@ -73,6 +75,7 @@ const Index = () => {
           <AnimatedCounters />
           <SectorDemos />
           <AgentsTeaser />
+          <LocalSEOLinks />
 
           <LazySection>
             <InteractiveROICalculator />

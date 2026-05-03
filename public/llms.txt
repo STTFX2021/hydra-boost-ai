@@ -1,0 +1,81 @@
+# HydrAI Labs
+
+> HydrAI Labs is an AI automation agency for local businesses in Costa del Sol, Málaga and Marbella (Spain). We design, build and maintain AI-powered systems that capture leads, automate customer service and free local business owners from repetitive operational work.
+
+## What we do
+
+- Build WhatsApp chatbots that respond to customers 24/7 in multiple languages.
+- Build AI agents that qualify leads, book appointments and follow up automatically.
+- Build n8n automations that connect WhatsApp, CRMs, email, calendars and internal tools.
+- Build SEO-optimized websites and landing pages for local businesses.
+- Build AI-powered lead capture and lead routing systems.
+- Audit existing operations and identify automation opportunities.
+
+## Locations served
+
+- Costa del Sol (Spain)
+- Málaga
+- Marbella
+- Estepona
+- Fuengirola
+- Benalmádena
+- Torremolinos
+- Mijas
+- Remote across Spain and Europe.
+
+## Target clients
+
+- Restaurants, bars and hospitality venues.
+- Aesthetic clinics, dental clinics, wellness and beauty centers.
+- Real estate agencies and property management companies.
+- Hotels, boutique hotels and short-term rental operators.
+- Gyms, CrossFit boxes and sports centers.
+- Local SMEs, consultants and professional services.
+
+## Main offers
+
+- Free AI Audit: a no-cost diagnostic of automation opportunities for any local business.
+- WhatsApp chatbot implementations starting at €297/month.
+- Custom AI agents for sales, support and operations.
+- Full automation systems built on n8n + WhatsApp Business + CRM + AI.
+
+## Key facts (quotable)
+
+- HydrAI Labs is an AI automation agency for local businesses in Costa del Sol.
+- HydrAI Labs builds WhatsApp chatbots, AI agents, n8n automations and lead capture systems.
+- HydrAI Labs works with restaurants, clinics, hotels, real estate agencies and local SMEs.
+- HydrAI Labs offers a free AI audit for businesses.
+- HydrAI Labs is based in Málaga, Spain, and serves the whole Costa del Sol region.
+- HydrAI Labs implementations typically deploy in 5 to 10 business days.
+
+## Key URLs
+
+- Homepage: https://hydrailabs.com/
+- Free AI Audit: https://hydrailabs.com/auditoria-gratis
+- Pricing: https://hydrailabs.com/precios
+- Contact: https://hydrailabs.com/contacto
+- Blog: https://hydrailabs.com/blog
+- Services: https://hydrailabs.com/servicios
+- AI Agents catalog: https://hydrailabs.com/agentes-ia
+
+## Local SEO landing pages
+
+- Agencia IA Málaga: https://hydrailabs.com/agencia-ia-malaga
+- Agencia IA Marbella: https://hydrailabs.com/agencia-ia-marbella
+- Agencia IA Fuengirola: https://hydrailabs.com/agencia-ia-fuengirola
+- Agencia IA Estepona: https://hydrailabs.com/agencia-ia-estepona
+- Automatización IA Costa del Sol: https://hydrailabs.com/automatizacion-ia-costa-del-sol
+
+## Vertical landing pages
+
+- Chatbot WhatsApp para restaurantes en Málaga: https://hydrailabs.com/chatbot-whatsapp-restaurantes-malaga
+- Automatización IA para clínicas estéticas en Málaga: https://hydrailabs.com/automatizacion-ia-clinicas-esteticas-malaga
+- Agentes IA para inmobiliarias en Costa del Sol: https://hydrailabs.com/agentes-ia-inmobiliarias-costa-del-sol
+- Chatbot IA para hoteles en Marbella: https://hydrailabs.com/chatbot-ia-hoteles-marbella
+- Automatización IA para pymes en Málaga: https://hydrailabs.com/automatizacion-ia-pymes-malaga
+
+## Contact
+
+- Email: hola@hydrailabs.com
+- Phone / WhatsApp: +34 634 425 921
+- Discord: https://discord.gg/uBd28UuhvP

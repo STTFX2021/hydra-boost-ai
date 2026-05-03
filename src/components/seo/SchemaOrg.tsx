@@ -207,3 +207,89 @@ export const WebPageSchema = ({ name, description, url }: WebPageSchemaProps) =>
     </Helmet>
   );
 };
+
+// WebSite Schema (with SearchAction) — site-wide
+export const WebSiteSchema = () => {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${BASE_URL}/#website`,
+    name: "HydrAI Labs",
+    url: BASE_URL,
+    inLanguage: "es-ES",
+    publisher: {
+      "@type": "Organization",
+      name: "HydrAI Labs",
+      url: BASE_URL,
+    },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${BASE_URL}/blog?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
+  };
+
+  return (
+    <Helmet>
+      <script type="application/ld+json">{JSON.stringify(schema)}</script>
+    </Helmet>
+  );
+};
+
+// ProfessionalService Schema — for local SEO landing pages
+interface ProfessionalServiceSchemaProps {
+  name: string;
+  description: string;
+  url: string;
+  city?: string;
+  region?: string;
+}
+
+export const ProfessionalServiceSchema = ({
+  name,
+  description,
+  url,
+  city = "Málaga",
+  region = "Andalucía",
+}: ProfessionalServiceSchemaProps) => {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    name,
+    description,
+    url: `${BASE_URL}${url}`,
+    image: `${BASE_URL}/og-image.png`,
+    "@id": `${BASE_URL}${url}#service`,
+    priceRange: "€€",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: city,
+      addressRegion: region,
+      addressCountry: "ES",
+    },
+    areaServed: [
+      "Marbella",
+      "Málaga",
+      "Estepona",
+      "Fuengirola",
+      "Benalmádena",
+      "Torremolinos",
+      "Costa del Sol",
+    ],
+    provider: {
+      "@type": "Organization",
+      name: "HydrAI Labs",
+      url: BASE_URL,
+    },
+  };
+
+  return (
+    <Helmet>
+      <script type="application/ld+json">{JSON.stringify(schema)}</script>
+    </Helmet>
+  );
+};
+

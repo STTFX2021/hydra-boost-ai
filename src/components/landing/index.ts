@@ -14,3 +14,4 @@ export { ChatWidgetWorld } from "./ChatWidgetWorld";
 export { IntegrationsShowcase } from "./IntegrationsShowcase";
 export { AgentsTeaser } from "./AgentsTeaser";
 export { InsightsTeaser } from "./InsightsTeaser";
+export { LocalSEOLinks } from "./LocalSEOLinks";
