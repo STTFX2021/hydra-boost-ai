@@ -75,6 +75,7 @@ const Index = () => {
           <AnimatedCounters />
           <SectorDemos />
           <AgentsTeaser />
+          <LocalSEOLinks />
 
           <LazySection>
             <InteractiveROICalculator />
