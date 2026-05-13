@@ -3,8 +3,53 @@ import { persist } from 'zustand/middleware';
 
 export type Language = 'es' | 'en' | 'fr' | 'de' | 'pt' | 'it';
 
+// Supported languages with hreflang codes (ISO 639-1 + region where helpful).
+// Used by SEOHead to emit <link rel="alternate" hreflang="..."> tags.
+export const SUPPORTED_LANGUAGES: ReadonlyArray<Language> = ['es', 'en', 'fr', 'de', 'pt', 'it'];
+
+export const HREFLANG_MAP: Record<Language, string> = {
+  es: 'es-ES',
+  en: 'en',
+  fr: 'fr',
+  de: 'de',
+  pt: 'pt',
+  it: 'it',
+};
+
+export const OG_LOCALE_MAP: Record<Language, string> = {
+  es: 'es_ES',
+  en: 'en_US',
+  fr: 'fr_FR',
+  de: 'de_DE',
+  pt: 'pt_PT',
+  it: 'it_IT',
+};
+
+// Default / canonical language (matches existing indexed URLs in Google).
+export const DEFAULT_LANGUAGE: Language = 'es';
+
+// Read ?lang=xx from URL on init so hreflang alternates are functional
+// (Google can crawl /precios?lang=en and the app loads in English).
+const getQueryLanguage = (): Language | null => {
+  if (typeof window === 'undefined') return null;
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get('lang')?.toLowerCase();
+    if (q && (SUPPORTED_LANGUAGES as readonly string[]).includes(q)) {
+      return q as Language;
+    }
+  } catch {
+    // ignore
+  }
+  return null;
+};
+
 // Detect browser language automatically
 const detectBrowserLanguage = (): Language => {
+  // 1. URL query param wins (for hreflang + share links)
+  const urlLang = getQueryLanguage();
+  if (urlLang) return urlLang;
+
   const storedLang = localStorage.getItem('hydrai-language');
   if (storedLang) {
     try {
