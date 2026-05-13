@@ -6,7 +6,7 @@ import {
   Globe, Bot, Calendar, Star, Users, TrendingUp,
   ArrowRight, CheckCircle2, Clock, Zap, Sparkles
 } from "lucide-react";
-import { useTranslation } from "@/lib/i18n";
+import { useTranslation, usePageSEO } from "@/lib/i18n";
 import { SEOHead, ServiceSchema, BreadcrumbSchema } from "@/components/seo";
 
 const containerVariants = {
@@ -216,13 +216,15 @@ const Servicios = () => {
     },
   };
 
-  const t = content[language as keyof typeof content] || content.es;
+  // Spanish for 'es', English for all other supported languages (until full translations land)
+  const t = language === 'es' ? content.es : content.en;
+  const seo = usePageSEO('servicios');
 
   return (
     <>
       <SEOHead
-        title="Servicios de Automatización IA | HydrAI Labs"
-        description="Chatbots IA, webs SEO, scraping y campañas automáticas por WhatsApp, Email e Instagram. Desde 197€."
+        title={seo.title}
+        description={seo.description}
         canonical="/servicios"
         keywords="servicios ia, chatbot negocios, automatizacion reservas, web ia, agencia automatizacion"
       />

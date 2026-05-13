@@ -1442,3 +1442,133 @@ export function useContactTranslation(): ContactCopy & { language: Language } {
   const { language } = useI18n();
   return { ...contactTranslations[language], language };
 }
+
+// ===== Page SEO meta (Home / Servicios / Precios) =====
+export interface PageSEO { title: string; description: string; }
+type PageKey = 'home' | 'servicios' | 'precios';
+
+const pageSEOTranslations: Record<Language, Record<PageKey, PageSEO>> = {
+  es: {
+    home: { title: 'HydrAI Labs | Automatización IA para Negocios Locales en Costa del Sol', description: 'Agencia de automatización con IA en Costa del Sol. Chatbots WhatsApp 24/7, automatizaciones n8n y captación de clientes para restaurantes, clínicas, inmobiliarias y gimnasios.' },
+    servicios: { title: 'Servicios de Automatización IA | HydrAI Labs', description: 'Chatbots IA, webs SEO, scraping y campañas automáticas por WhatsApp, Email e Instagram. Desde 197€.' },
+    precios: { title: 'Precios y Planes de Automatización IA | HydrAI Labs', description: 'Planes de automatización IA para negocios locales desde implementación básica hasta arquitectura enterprise. Sin sorpresas, sin permanencia. Costa del Sol.' },
+  },
+  en: {
+    home: { title: 'HydrAI Labs | AI Automation for Local Businesses on Costa del Sol', description: 'AI automation agency on Costa del Sol. 24/7 WhatsApp chatbots, n8n automations and lead generation for restaurants, clinics, real estate and gyms.' },
+    servicios: { title: 'AI Automation Services | HydrAI Labs', description: 'AI chatbots, SEO websites, scraping and automated WhatsApp, Email & Instagram campaigns. From €197.' },
+    precios: { title: 'AI Automation Pricing & Plans | HydrAI Labs', description: 'AI automation plans for local businesses, from basic implementation to enterprise architecture. No surprises, no lock-in. Costa del Sol.' },
+  },
+  fr: {
+    home: { title: "HydrAI Labs | Automatisation IA pour Entreprises Locales sur la Costa del Sol", description: "Agence d'automatisation IA sur la Costa del Sol. Chatbots WhatsApp 24/7, automatisations n8n et acquisition clients pour restaurants, cliniques, immobilier et salles de sport." },
+    servicios: { title: "Services d'Automatisation IA | HydrAI Labs", description: "Chatbots IA, sites SEO, scraping et campagnes automatisées WhatsApp, Email et Instagram. À partir de 197€." },
+    precios: { title: "Tarifs et Plans d'Automatisation IA | HydrAI Labs", description: "Plans d'automatisation IA pour entreprises locales, de l'implémentation de base à l'architecture entreprise. Sans surprises, sans engagement." },
+  },
+  de: {
+    home: { title: 'HydrAI Labs | KI-Automatisierung für lokale Unternehmen an der Costa del Sol', description: 'KI-Automatisierungsagentur an der Costa del Sol. 24/7 WhatsApp-Chatbots, n8n-Automatisierungen und Kundengewinnung für Restaurants, Kliniken, Immobilien und Fitnessstudios.' },
+    servicios: { title: 'KI-Automatisierungsdienste | HydrAI Labs', description: 'KI-Chatbots, SEO-Websites, Scraping und automatisierte WhatsApp-, E-Mail- und Instagram-Kampagnen. Ab 197€.' },
+    precios: { title: 'Preise und Pläne für KI-Automatisierung | HydrAI Labs', description: 'KI-Automatisierungspläne für lokale Unternehmen, von der Basisimplementierung bis zur Enterprise-Architektur. Keine Überraschungen, keine Bindung.' },
+  },
+  pt: {
+    home: { title: 'HydrAI Labs | Automação IA para Negócios Locais na Costa del Sol', description: 'Agência de automação com IA na Costa del Sol. Chatbots WhatsApp 24/7, automações n8n e captação de clientes para restaurantes, clínicas, imobiliárias e ginásios.' },
+    servicios: { title: 'Serviços de Automação IA | HydrAI Labs', description: 'Chatbots IA, sites SEO, scraping e campanhas automáticas por WhatsApp, Email e Instagram. Desde 197€.' },
+    precios: { title: 'Preços e Planos de Automação IA | HydrAI Labs', description: 'Planos de automação IA para negócios locais, da implementação básica à arquitetura enterprise. Sem surpresas, sem permanência.' },
+  },
+  it: {
+    home: { title: 'HydrAI Labs | Automazione IA per Attività Locali sulla Costa del Sol', description: "Agenzia di automazione IA sulla Costa del Sol. Chatbot WhatsApp 24/7, automazioni n8n e acquisizione clienti per ristoranti, cliniche, immobiliari e palestre." },
+    servicios: { title: 'Servizi di Automazione IA | HydrAI Labs', description: 'Chatbot IA, siti SEO, scraping e campagne automatiche WhatsApp, Email e Instagram. Da 197€.' },
+    precios: { title: 'Prezzi e Piani di Automazione IA | HydrAI Labs', description: "Piani di automazione IA per attività locali, dall'implementazione base all'architettura enterprise. Senza sorprese, senza vincoli." },
+  },
+};
+
+export function usePageSEO(page: PageKey): PageSEO & { language: Language } {
+  const { language } = useI18n();
+  return { ...pageSEOTranslations[language][page], language };
+}
+
+// ===== Pricing page copy =====
+export interface PricingCopy {
+  badge: string; title: string; subtitle: string;
+  popular: string; premium: string; perMonth: string; custom: string;
+  ctaTitle: string; ctaSubtitle: string; ctaAudit: string; ctaHuman: string;
+  plans: Array<{ id: string; name: string; price: string; badge: string | null; features: string[]; cta: string; }>;
+}
+
+const pricingTranslations: Record<Language, PricingCopy> = {
+  es: {
+    badge: 'Precios transparentes', title: 'Elige tu nivel de automatización',
+    subtitle: 'Planes flexibles que crecen con tu negocio. Sin permanencia.',
+    popular: 'Más popular', premium: 'Premium', perMonth: '/mes', custom: 'A medida',
+    ctaTitle: '¿Necesitas algo personalizado?', ctaSubtitle: 'Haz nuestra auditoría gratuita y te recomendamos el mejor plan.',
+    ctaAudit: 'Auditoría Gratis', ctaHuman: 'Hablar con humano',
+    plans: [
+      { id: 'base', name: 'Base', price: '497', badge: null, cta: 'Empezar con Base', features: ['Chatbot IA en tu web (atención 24/7)', '3 workflows automatizados', 'Integración WhatsApp Business', 'Dashboard de métricas básico', 'Soporte por email 48h', 'Setup completo en 7 días'] },
+      { id: 'growth', name: 'Growth', price: '997', badge: 'Más popular', cta: 'Empezar con Growth', features: ['Todo lo del plan Base', '10 workflows automatizados', 'Agente IA especializado en tu nicho', 'Integración CRM + email marketing', 'Soporte prioritario 24h', 'Reporting semanal con recomendaciones', 'Optimización continua del sistema'] },
+      { id: 'enterprise', name: 'Enterprise', price: 'A medida', badge: 'Premium', cta: 'Solicitar Propuesta', features: ['Arquitectura Event Bus completa', 'Workflows y agentes ilimitados', 'Agentes CEO/CFO/CTO especializados', 'Integraciones a medida (ERP, POS, etc.)', 'SLA garantizado + soporte dedicado', 'Onboarding presencial en España'] },
+    ],
+  },
+  en: {
+    badge: 'Transparent pricing', title: 'Choose your automation level',
+    subtitle: 'Flexible plans that grow with your business. No lock-in.',
+    popular: 'Most popular', premium: 'Premium', perMonth: '/mo', custom: 'Custom',
+    ctaTitle: 'Need something custom?', ctaSubtitle: 'Take our free audit and we will recommend the best plan.',
+    ctaAudit: 'Free Audit', ctaHuman: 'Talk to a human',
+    plans: [
+      { id: 'base', name: 'Base', price: '497', badge: null, cta: 'Start with Base', features: ['AI chatbot on your website (24/7)', '3 automated workflows', 'WhatsApp Business integration', 'Basic metrics dashboard', '48h email support', 'Full setup in 7 days'] },
+      { id: 'growth', name: 'Growth', price: '997', badge: 'Most popular', cta: 'Start with Growth', features: ['Everything in Base', '10 automated workflows', 'Niche-specialized AI agent', 'CRM + email marketing integration', '24h priority support', 'Weekly reporting with recommendations', 'Continuous system optimization'] },
+      { id: 'enterprise', name: 'Enterprise', price: 'Custom', badge: 'Premium', cta: 'Request a Proposal', features: ['Full Event Bus architecture', 'Unlimited workflows and agents', 'Specialized CEO/CFO/CTO agents', 'Custom integrations (ERP, POS, etc.)', 'Guaranteed SLA + dedicated support', 'On-site onboarding in Spain'] },
+    ],
+  },
+  fr: {
+    badge: 'Tarifs transparents', title: "Choisissez votre niveau d'automatisation",
+    subtitle: 'Plans flexibles qui évoluent avec votre entreprise. Sans engagement.',
+    popular: 'Le plus populaire', premium: 'Premium', perMonth: '/mois', custom: 'Sur mesure',
+    ctaTitle: 'Besoin de quelque chose de personnalisé ?', ctaSubtitle: 'Faites notre audit gratuit et nous vous recommandons le meilleur plan.',
+    ctaAudit: 'Audit Gratuit', ctaHuman: 'Parler à un humain',
+    plans: [
+      { id: 'base', name: 'Base', price: '497', badge: null, cta: 'Commencer avec Base', features: ['Chatbot IA sur votre site (24/7)', '3 workflows automatisés', 'Intégration WhatsApp Business', 'Tableau de bord basique', 'Support email 48h', 'Mise en place en 7 jours'] },
+      { id: 'growth', name: 'Growth', price: '997', badge: 'Le plus populaire', cta: 'Commencer avec Growth', features: ['Tout du plan Base', '10 workflows automatisés', 'Agent IA spécialisé pour votre niche', 'Intégration CRM + email marketing', 'Support prioritaire 24h', 'Reporting hebdomadaire avec recommandations', 'Optimisation continue du système'] },
+      { id: 'enterprise', name: 'Enterprise', price: 'Sur mesure', badge: 'Premium', cta: 'Demander une Proposition', features: ['Architecture Event Bus complète', 'Workflows et agents illimités', 'Agents CEO/CFO/CTO spécialisés', 'Intégrations sur mesure (ERP, POS, etc.)', 'SLA garanti + support dédié', 'Onboarding sur place en Espagne'] },
+    ],
+  },
+  de: {
+    badge: 'Transparente Preise', title: 'Wählen Sie Ihr Automatisierungsniveau',
+    subtitle: 'Flexible Pläne, die mit Ihrem Unternehmen wachsen. Ohne Bindung.',
+    popular: 'Am beliebtesten', premium: 'Premium', perMonth: '/Monat', custom: 'Individuell',
+    ctaTitle: 'Brauchen Sie etwas Individuelles?', ctaSubtitle: 'Machen Sie unser kostenloses Audit und wir empfehlen den besten Plan.',
+    ctaAudit: 'Kostenloses Audit', ctaHuman: 'Mit Mensch sprechen',
+    plans: [
+      { id: 'base', name: 'Base', price: '497', badge: null, cta: 'Mit Base starten', features: ['KI-Chatbot auf Ihrer Website (24/7)', '3 automatisierte Workflows', 'WhatsApp Business Integration', 'Basis-Metrik-Dashboard', 'E-Mail-Support 48h', 'Komplettes Setup in 7 Tagen'] },
+      { id: 'growth', name: 'Growth', price: '997', badge: 'Am beliebtesten', cta: 'Mit Growth starten', features: ['Alles aus Base', '10 automatisierte Workflows', 'Auf Ihre Nische spezialisierter KI-Agent', 'CRM + E-Mail-Marketing Integration', 'Prioritäts-Support 24h', 'Wöchentliches Reporting mit Empfehlungen', 'Kontinuierliche Systemoptimierung'] },
+      { id: 'enterprise', name: 'Enterprise', price: 'Individuell', badge: 'Premium', cta: 'Angebot anfordern', features: ['Vollständige Event Bus Architektur', 'Unbegrenzte Workflows und Agenten', 'Spezialisierte CEO/CFO/CTO-Agenten', 'Individuelle Integrationen (ERP, POS, etc.)', 'Garantierte SLA + dedizierter Support', 'Vor-Ort-Onboarding in Spanien'] },
+    ],
+  },
+  pt: {
+    badge: 'Preços transparentes', title: 'Escolha o seu nível de automação',
+    subtitle: 'Planos flexíveis que crescem com o seu negócio. Sem permanência.',
+    popular: 'Mais popular', premium: 'Premium', perMonth: '/mês', custom: 'Sob medida',
+    ctaTitle: 'Precisa de algo personalizado?', ctaSubtitle: 'Faça a nossa auditoria gratuita e recomendamos o melhor plano.',
+    ctaAudit: 'Auditoria Grátis', ctaHuman: 'Falar com humano',
+    plans: [
+      { id: 'base', name: 'Base', price: '497', badge: null, cta: 'Começar com Base', features: ['Chatbot IA no seu site (24/7)', '3 workflows automatizados', 'Integração WhatsApp Business', 'Dashboard de métricas básico', 'Suporte por email 48h', 'Setup completo em 7 dias'] },
+      { id: 'growth', name: 'Growth', price: '997', badge: 'Mais popular', cta: 'Começar com Growth', features: ['Tudo do plano Base', '10 workflows automatizados', 'Agente IA especializado no seu nicho', 'Integração CRM + email marketing', 'Suporte prioritário 24h', 'Relatório semanal com recomendações', 'Otimização contínua do sistema'] },
+      { id: 'enterprise', name: 'Enterprise', price: 'Sob medida', badge: 'Premium', cta: 'Pedir Proposta', features: ['Arquitetura Event Bus completa', 'Workflows e agentes ilimitados', 'Agentes CEO/CFO/CTO especializados', 'Integrações sob medida (ERP, POS, etc.)', 'SLA garantido + suporte dedicado', 'Onboarding presencial em Espanha'] },
+    ],
+  },
+  it: {
+    badge: 'Prezzi trasparenti', title: 'Scegli il tuo livello di automazione',
+    subtitle: 'Piani flessibili che crescono con la tua attività. Senza vincoli.',
+    popular: 'Più popolare', premium: 'Premium', perMonth: '/mese', custom: 'Su misura',
+    ctaTitle: 'Hai bisogno di qualcosa di personalizzato?', ctaSubtitle: 'Fai il nostro audit gratuito e ti consigliamo il piano migliore.',
+    ctaAudit: 'Audit Gratuito', ctaHuman: 'Parla con un umano',
+    plans: [
+      { id: 'base', name: 'Base', price: '497', badge: null, cta: 'Inizia con Base', features: ['Chatbot IA sul tuo sito (24/7)', '3 workflow automatizzati', 'Integrazione WhatsApp Business', 'Dashboard di metriche di base', 'Supporto email 48h', 'Setup completo in 7 giorni'] },
+      { id: 'growth', name: 'Growth', price: '997', badge: 'Più popolare', cta: 'Inizia con Growth', features: ['Tutto del piano Base', '10 workflow automatizzati', 'Agente IA specializzato per la tua nicchia', 'Integrazione CRM + email marketing', 'Supporto prioritario 24h', 'Reportistica settimanale con raccomandazioni', 'Ottimizzazione continua del sistema'] },
+      { id: 'enterprise', name: 'Enterprise', price: 'Su misura', badge: 'Premium', cta: 'Richiedi Proposta', features: ['Architettura Event Bus completa', 'Workflow e agenti illimitati', 'Agenti CEO/CFO/CTO specializzati', 'Integrazioni su misura (ERP, POS, etc.)', 'SLA garantito + supporto dedicato', 'Onboarding in loco in Spagna'] },
+    ],
+  },
+};
+
+export function usePricingTranslation(): PricingCopy & { language: Language } {
+  const { language } = useI18n();
+  return { ...pricingTranslations[language], language };
+}
