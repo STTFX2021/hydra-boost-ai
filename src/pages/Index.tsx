@@ -1,8 +1,8 @@
 import { lazy, Suspense } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { OrganizationSchema, LocalBusinessSchema, WebSiteSchema } from "@/components/seo";
-import { Helmet } from "react-helmet-async";
+import { OrganizationSchema, LocalBusinessSchema, WebSiteSchema, SEOHead } from "@/components/seo";
+import { usePageSEO } from "@/lib/i18n";
 import {
   HeroWorld,
   TrustBar,
@@ -40,19 +40,10 @@ const LazySection = ({ children }: { children: React.ReactNode }) => (
 );
 
 const Index = () => {
+  const seo = usePageSEO('home');
   return (
     <>
-      <Helmet>
-        <title>HydrAI Labs | Automatización IA para Negocios Locales en Costa del Sol</title>
-        <meta name="description" content="Agencia de automatización con IA en Costa del Sol. Chatbots WhatsApp 24/7, automatizaciones n8n y captación de clientes para restaurantes, clínicas, inmobiliarias y gimnasios." />
-        <link rel="canonical" href="https://hydrailabs.com/" />
-        <meta property="og:title" content="HydrAI Labs | Automatización IA para Negocios Locales en Costa del Sol" />
-        <meta property="og:description" content="Agencia de automatización con IA en Costa del Sol. Chatbots WhatsApp 24/7, automatizaciones n8n y captación de clientes para restaurantes, clínicas, inmobiliarias y gimnasios." />
-        <meta property="og:url" content="https://hydrailabs.com/" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:title" content="HydrAI Labs | Automatización IA para Negocios Locales en Costa del Sol" />
-        <meta name="twitter:description" content="Agencia de automatización con IA en Costa del Sol. Chatbots WhatsApp 24/7, automatizaciones n8n y captación de clientes para restaurantes, clínicas, inmobiliarias y gimnasios." />
-      </Helmet>
+      <SEOHead title={seo.title} description={seo.description} canonical="/" />
       <OrganizationSchema />
       <LocalBusinessSchema />
       <WebSiteSchema />
