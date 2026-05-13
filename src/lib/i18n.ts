@@ -1128,3 +1128,317 @@ export function useLandingTranslation() {
     },
   };
 }
+
+// ============================================================
+// Page-level translations (Contact, Services, Pricing, Index)
+// ============================================================
+
+interface ContactCopy {
+  badge: string;
+  heroTitle: string;
+  heroTitleHighlight: string;
+  heroSubtitle: string;
+  formTitle: string;
+  nameLabel: string;
+  namePlaceholder: string;
+  emailLabel: string;
+  emailPlaceholder: string;
+  phoneLabel: string;
+  phonePlaceholder: string;
+  messageLabel: string;
+  messagePlaceholder: string;
+  send: string;
+  sending: string;
+  successPrefix: string;
+  successSuffix: string;
+  errorWhatsapp: string;
+  errorWhatsappCta: string;
+  discordTitle: string;
+  discordSubtitle: string;
+  emailTitle: string;
+  locationTitle: string;
+  locationValue: string;
+  responseTitle: string;
+  responseValue: string;
+  auditCardTitle: string;
+  auditCardSubtitle: string;
+  auditCardCta: string;
+  investorBadge: string;
+  investorTitle: string;
+  investorSubtitle: string;
+  investorCta: string;
+  seoTitle: string;
+  seoDescription: string;
+  validationNameShort: string;
+  validationEmailInvalid: string;
+  validationMessageShort: string;
+  validationFormError: string;
+  breadcrumbHome: string;
+  breadcrumbContact: string;
+}
+
+const contactTranslations: Record<Language, ContactCopy> = {
+  es: {
+    badge: 'Contacto',
+    heroTitle: 'Hablemos de tu',
+    heroTitleHighlight: 'proyecto',
+    heroSubtitle: 'Respondemos en menos de 24h. Sin compromisos.',
+    formTitle: 'Envíanos un mensaje',
+    nameLabel: 'Nombre *',
+    namePlaceholder: 'Tu nombre',
+    emailLabel: 'Email *',
+    emailPlaceholder: 'tu@email.com',
+    phoneLabel: 'Teléfono (opcional)',
+    phonePlaceholder: '+34 600 000 000',
+    messageLabel: 'Mensaje *',
+    messagePlaceholder: 'Cuéntanos sobre tu negocio y qué necesitas...',
+    send: 'Enviar mensaje',
+    sending: 'Enviando...',
+    successPrefix: '¡Perfecto',
+    successSuffix: '! Recibirás respuesta en menos de 24h.',
+    errorWhatsapp: 'Hubo un problema técnico. Contáctanos directamente en WhatsApp:',
+    errorWhatsappCta: 'Abrir WhatsApp →',
+    discordTitle: 'Discord',
+    discordSubtitle: 'Únete a nuestra comunidad',
+    emailTitle: 'Email',
+    locationTitle: 'Ubicación',
+    locationValue: '100% Remoto (España)',
+    responseTitle: 'Tiempo de respuesta',
+    responseValue: '< 24 horas laborables',
+    auditCardTitle: '¿Prefieres una auditoría?',
+    auditCardSubtitle: 'Descubre gratis cómo la IA puede ayudarte.',
+    auditCardCta: 'Auditoría gratuita',
+    investorBadge: 'Investor Hub',
+    investorTitle: 'Investor Hub',
+    investorSubtitle: 'Construimos sistemas con potencial de escala. Únete como partner.',
+    investorCta: 'Acceder al Investor Hub',
+    seoTitle: 'Contacto | HydrAI Labs',
+    seoDescription: 'Habla con HydrAI Labs. Auditoría gratuita de automatización para tu negocio local.',
+    validationNameShort: 'Nombre muy corto',
+    validationEmailInvalid: 'Email inválido',
+    validationMessageShort: 'Mensaje muy corto',
+    validationFormError: 'Revisa los datos del formulario',
+    breadcrumbHome: 'Inicio',
+    breadcrumbContact: 'Contacto',
+  },
+  en: {
+    badge: 'Contact',
+    heroTitle: "Let's talk about your",
+    heroTitleHighlight: 'project',
+    heroSubtitle: 'We reply in under 24h. No strings attached.',
+    formTitle: 'Send us a message',
+    nameLabel: 'Name *',
+    namePlaceholder: 'Your name',
+    emailLabel: 'Email *',
+    emailPlaceholder: 'you@email.com',
+    phoneLabel: 'Phone (optional)',
+    phonePlaceholder: '+34 600 000 000',
+    messageLabel: 'Message *',
+    messagePlaceholder: 'Tell us about your business and what you need...',
+    send: 'Send message',
+    sending: 'Sending...',
+    successPrefix: 'Perfect',
+    successSuffix: '! You will get a reply in under 24h.',
+    errorWhatsapp: 'There was a technical issue. Contact us directly on WhatsApp:',
+    errorWhatsappCta: 'Open WhatsApp →',
+    discordTitle: 'Discord',
+    discordSubtitle: 'Join our community',
+    emailTitle: 'Email',
+    locationTitle: 'Location',
+    locationValue: '100% Remote (Spain)',
+    responseTitle: 'Response time',
+    responseValue: '< 24 business hours',
+    auditCardTitle: 'Prefer an audit?',
+    auditCardSubtitle: 'Discover for free how AI can help you.',
+    auditCardCta: 'Free audit',
+    investorBadge: 'Investor Hub',
+    investorTitle: 'Investor Hub',
+    investorSubtitle: 'We build systems with scale potential. Join us as a partner.',
+    investorCta: 'Access Investor Hub',
+    seoTitle: 'Contact | HydrAI Labs',
+    seoDescription: 'Talk to HydrAI Labs. Free automation audit for your local business.',
+    validationNameShort: 'Name too short',
+    validationEmailInvalid: 'Invalid email',
+    validationMessageShort: 'Message too short',
+    validationFormError: 'Please check the form data',
+    breadcrumbHome: 'Home',
+    breadcrumbContact: 'Contact',
+  },
+  fr: {
+    badge: 'Contact',
+    heroTitle: 'Parlons de votre',
+    heroTitleHighlight: 'projet',
+    heroSubtitle: 'Nous répondons en moins de 24h. Sans engagement.',
+    formTitle: 'Envoyez-nous un message',
+    nameLabel: 'Nom *',
+    namePlaceholder: 'Votre nom',
+    emailLabel: 'Email *',
+    emailPlaceholder: 'vous@email.com',
+    phoneLabel: 'Téléphone (optionnel)',
+    phonePlaceholder: '+34 600 000 000',
+    messageLabel: 'Message *',
+    messagePlaceholder: 'Parlez-nous de votre entreprise et de vos besoins...',
+    send: 'Envoyer le message',
+    sending: 'Envoi...',
+    successPrefix: 'Parfait',
+    successSuffix: '! Vous recevrez une réponse en moins de 24h.',
+    errorWhatsapp: 'Un problème technique est survenu. Contactez-nous directement sur WhatsApp :',
+    errorWhatsappCta: 'Ouvrir WhatsApp →',
+    discordTitle: 'Discord',
+    discordSubtitle: 'Rejoignez notre communauté',
+    emailTitle: 'Email',
+    locationTitle: 'Localisation',
+    locationValue: '100% Distant (Espagne)',
+    responseTitle: 'Temps de réponse',
+    responseValue: '< 24 heures ouvrables',
+    auditCardTitle: 'Vous préférez un audit ?',
+    auditCardSubtitle: "Découvrez gratuitement comment l'IA peut vous aider.",
+    auditCardCta: 'Audit gratuit',
+    investorBadge: 'Investor Hub',
+    investorTitle: 'Investor Hub',
+    investorSubtitle: 'Nous construisons des systèmes à fort potentiel. Rejoignez-nous comme partenaire.',
+    investorCta: "Accéder à l'Investor Hub",
+    seoTitle: 'Contact | HydrAI Labs',
+    seoDescription: "Parlez à HydrAI Labs. Audit d'automatisation gratuit pour votre entreprise locale.",
+    validationNameShort: 'Nom trop court',
+    validationEmailInvalid: 'Email invalide',
+    validationMessageShort: 'Message trop court',
+    validationFormError: 'Vérifiez les données du formulaire',
+    breadcrumbHome: 'Accueil',
+    breadcrumbContact: 'Contact',
+  },
+  de: {
+    badge: 'Kontakt',
+    heroTitle: 'Sprechen wir über Ihr',
+    heroTitleHighlight: 'Projekt',
+    heroSubtitle: 'Wir antworten in unter 24 Std. Unverbindlich.',
+    formTitle: 'Senden Sie uns eine Nachricht',
+    nameLabel: 'Name *',
+    namePlaceholder: 'Ihr Name',
+    emailLabel: 'E-Mail *',
+    emailPlaceholder: 'sie@email.com',
+    phoneLabel: 'Telefon (optional)',
+    phonePlaceholder: '+34 600 000 000',
+    messageLabel: 'Nachricht *',
+    messagePlaceholder: 'Erzählen Sie uns von Ihrem Unternehmen und Ihren Bedürfnissen...',
+    send: 'Nachricht senden',
+    sending: 'Senden...',
+    successPrefix: 'Perfekt',
+    successSuffix: '! Sie erhalten eine Antwort in unter 24 Std.',
+    errorWhatsapp: 'Es gab ein technisches Problem. Kontaktieren Sie uns direkt über WhatsApp:',
+    errorWhatsappCta: 'WhatsApp öffnen →',
+    discordTitle: 'Discord',
+    discordSubtitle: 'Treten Sie unserer Community bei',
+    emailTitle: 'E-Mail',
+    locationTitle: 'Standort',
+    locationValue: '100% Remote (Spanien)',
+    responseTitle: 'Antwortzeit',
+    responseValue: '< 24 Geschäftsstunden',
+    auditCardTitle: 'Lieber ein Audit?',
+    auditCardSubtitle: 'Entdecken Sie kostenlos, wie KI Ihnen helfen kann.',
+    auditCardCta: 'Kostenloses Audit',
+    investorBadge: 'Investor Hub',
+    investorTitle: 'Investor Hub',
+    investorSubtitle: 'Wir bauen skalierbare Systeme. Werden Sie unser Partner.',
+    investorCta: 'Zum Investor Hub',
+    seoTitle: 'Kontakt | HydrAI Labs',
+    seoDescription: 'Sprechen Sie mit HydrAI Labs. Kostenloses Automatisierungs-Audit für Ihr lokales Unternehmen.',
+    validationNameShort: 'Name zu kurz',
+    validationEmailInvalid: 'Ungültige E-Mail',
+    validationMessageShort: 'Nachricht zu kurz',
+    validationFormError: 'Bitte überprüfen Sie die Formulardaten',
+    breadcrumbHome: 'Start',
+    breadcrumbContact: 'Kontakt',
+  },
+  pt: {
+    badge: 'Contato',
+    heroTitle: 'Vamos falar sobre seu',
+    heroTitleHighlight: 'projeto',
+    heroSubtitle: 'Respondemos em menos de 24h. Sem compromisso.',
+    formTitle: 'Envie-nos uma mensagem',
+    nameLabel: 'Nome *',
+    namePlaceholder: 'Seu nome',
+    emailLabel: 'Email *',
+    emailPlaceholder: 'voce@email.com',
+    phoneLabel: 'Telefone (opcional)',
+    phonePlaceholder: '+34 600 000 000',
+    messageLabel: 'Mensagem *',
+    messagePlaceholder: 'Conte-nos sobre seu negócio e o que você precisa...',
+    send: 'Enviar mensagem',
+    sending: 'Enviando...',
+    successPrefix: 'Perfeito',
+    successSuffix: '! Você receberá uma resposta em menos de 24h.',
+    errorWhatsapp: 'Houve um problema técnico. Contate-nos diretamente no WhatsApp:',
+    errorWhatsappCta: 'Abrir WhatsApp →',
+    discordTitle: 'Discord',
+    discordSubtitle: 'Junte-se à nossa comunidade',
+    emailTitle: 'Email',
+    locationTitle: 'Localização',
+    locationValue: '100% Remoto (Espanha)',
+    responseTitle: 'Tempo de resposta',
+    responseValue: '< 24 horas úteis',
+    auditCardTitle: 'Prefere uma auditoria?',
+    auditCardSubtitle: 'Descubra gratuitamente como a IA pode ajudá-lo.',
+    auditCardCta: 'Auditoria grátis',
+    investorBadge: 'Investor Hub',
+    investorTitle: 'Investor Hub',
+    investorSubtitle: 'Construímos sistemas com potencial de escala. Junte-se como parceiro.',
+    investorCta: 'Acessar Investor Hub',
+    seoTitle: 'Contato | HydrAI Labs',
+    seoDescription: 'Fale com a HydrAI Labs. Auditoria gratuita de automação para seu negócio local.',
+    validationNameShort: 'Nome muito curto',
+    validationEmailInvalid: 'Email inválido',
+    validationMessageShort: 'Mensagem muito curta',
+    validationFormError: 'Verifique os dados do formulário',
+    breadcrumbHome: 'Início',
+    breadcrumbContact: 'Contato',
+  },
+  it: {
+    badge: 'Contatto',
+    heroTitle: 'Parliamo del tuo',
+    heroTitleHighlight: 'progetto',
+    heroSubtitle: 'Rispondiamo in meno di 24h. Senza impegno.',
+    formTitle: 'Inviaci un messaggio',
+    nameLabel: 'Nome *',
+    namePlaceholder: 'Il tuo nome',
+    emailLabel: 'Email *',
+    emailPlaceholder: 'tu@email.com',
+    phoneLabel: 'Telefono (opzionale)',
+    phonePlaceholder: '+34 600 000 000',
+    messageLabel: 'Messaggio *',
+    messagePlaceholder: 'Raccontaci della tua azienda e di cosa hai bisogno...',
+    send: 'Invia messaggio',
+    sending: 'Invio...',
+    successPrefix: 'Perfetto',
+    successSuffix: '! Riceverai una risposta in meno di 24h.',
+    errorWhatsapp: 'Si è verificato un problema tecnico. Contattaci direttamente su WhatsApp:',
+    errorWhatsappCta: 'Apri WhatsApp →',
+    discordTitle: 'Discord',
+    discordSubtitle: 'Unisciti alla nostra community',
+    emailTitle: 'Email',
+    locationTitle: 'Posizione',
+    locationValue: '100% Remoto (Spagna)',
+    responseTitle: 'Tempo di risposta',
+    responseValue: '< 24 ore lavorative',
+    auditCardTitle: 'Preferisci un audit?',
+    auditCardSubtitle: "Scopri gratis come l'IA può aiutarti.",
+    auditCardCta: 'Audit gratuito',
+    investorBadge: 'Investor Hub',
+    investorTitle: 'Investor Hub',
+    investorSubtitle: 'Costruiamo sistemi con potenziale di scala. Unisciti come partner.',
+    investorCta: 'Accedi all\'Investor Hub',
+    seoTitle: 'Contatto | HydrAI Labs',
+    seoDescription: "Parla con HydrAI Labs. Audit gratuito di automazione per la tua attività locale.",
+    validationNameShort: 'Nome troppo corto',
+    validationEmailInvalid: 'Email non valida',
+    validationMessageShort: 'Messaggio troppo corto',
+    validationFormError: 'Controlla i dati del modulo',
+    breadcrumbHome: 'Home',
+    breadcrumbContact: 'Contatto',
+  },
+};
+
+export function useContactTranslation(): ContactCopy & { language: Language } {
+  const { language } = useI18n();
+  return { ...contactTranslations[language], language };
+}
