@@ -1,26 +1,16 @@
 import { PageLayout } from "@/components/layout/PageLayout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight, Zap, Phone, CheckCircle2, Star, Crown, Sparkles } from "lucide-react";
-import { useTranslation } from "@/lib/i18n";
-import { BreadcrumbSchema } from "@/components/seo";
-import { Helmet } from "react-helmet-async";
+import { ArrowRight, Zap, Phone, CheckCircle2, Star, Crown } from "lucide-react";
+import { usePricingTranslation, usePageSEO } from "@/lib/i18n";
+import { BreadcrumbSchema, SEOHead } from "@/components/seo";
 import { motion } from "framer-motion";
 
 const Precios = () => {
+  const seo = usePageSEO('precios');
   return (
     <>
-      <Helmet>
-        <title>Precios y Planes de Automatización IA | HydrAI Labs</title>
-        <meta name="description" content="Planes de automatización IA para negocios locales desde implementación básica hasta arquitectura enterprise. Sin sorpresas, sin permanencia. Costa del Sol." />
-        <link rel="canonical" href="https://hydrailabs.com/precios" />
-        <meta property="og:title" content="Precios y Planes de Automatización IA | HydrAI Labs" />
-        <meta property="og:description" content="Planes de automatización IA para negocios locales desde implementación básica hasta arquitectura enterprise. Sin sorpresas, sin permanencia. Costa del Sol." />
-        <meta property="og:url" content="https://hydrailabs.com/precios" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:title" content="Precios y Planes de Automatización IA | HydrAI Labs" />
-        <meta name="twitter:description" content="Planes de automatización IA para negocios locales desde implementación básica hasta arquitectura enterprise. Sin sorpresas, sin permanencia. Costa del Sol." />
-      </Helmet>
+      <SEOHead title={seo.title} description={seo.description} canonical="/precios" />
       <BreadcrumbSchema
         items={[
           { name: "Inicio", url: "/" },
@@ -33,56 +23,7 @@ const Precios = () => {
 };
 
 const PreciosContent = () => {
-  const { language } = useTranslation();
-
-  const plans = [
-    {
-      id: "base",
-      name: "Base",
-      price: "497",
-      badge: null,
-      features: [
-        "Chatbot IA en tu web (atención 24/7)",
-        "3 workflows automatizados",
-        "Integración WhatsApp Business",
-        "Dashboard de métricas básico",
-        "Soporte por email 48h",
-        "Setup completo en 7 días",
-      ],
-      cta: "Empezar con Base",
-    },
-    {
-      id: "growth",
-      name: "Growth",
-      price: "997",
-      badge: "Más popular",
-      features: [
-        "Todo lo del plan Base",
-        "10 workflows automatizados",
-        "Agente IA especializado en tu nicho",
-        "Integración CRM + email marketing",
-        "Soporte prioritario 24h",
-        "Reporting semanal con recomendaciones",
-        "Optimización continua del sistema",
-      ],
-      cta: "Empezar con Growth",
-    },
-    {
-      id: "enterprise",
-      name: "Enterprise",
-      price: "A medida",
-      badge: "Premium",
-      features: [
-        "Arquitectura Event Bus completa",
-        "Workflows y agentes ilimitados",
-        "Agentes CEO/CFO/CTO especializados",
-        "Integraciones a medida (ERP, POS, etc.)",
-        "SLA garantizado + soporte dedicado",
-        "Onboarding presencial en España",
-      ],
-      cta: "Solicitar Propuesta",
-    },
-  ];
+  const t = usePricingTranslation();
 
   return (
     <PageLayout>
@@ -91,13 +32,13 @@ const PreciosContent = () => {
         <div className="section-container relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <div className="inline-flex items-center gap-1 px-4 py-1.5 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20 mb-6">
-              <Zap className="w-3 h-3" /> Precios transparentes
+              <Zap className="w-3 h-3" /> {t.badge}
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 text-foreground">
-              Elige tu nivel de automatización
+              {t.title}
             </h1>
             <p className="text-lg text-muted-foreground mb-8">
-              Planes flexibles que crecen con tu negocio. Sin permanencia.
+              {t.subtitle}
             </p>
           </div>
         </div>
@@ -107,9 +48,9 @@ const PreciosContent = () => {
       <section className="section-padding -mt-8">
         <div className="section-container">
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {plans.map((plan, index) => {
-              const isPopular = plan.badge === "Más popular";
-              const isPremium = plan.badge === "Premium";
+            {t.plans.map((plan, index) => {
+              const isPopular = plan.id === "growth";
+              const isPremium = plan.id === "enterprise";
               const isEnterprise = plan.id === "enterprise";
 
               return (
@@ -128,7 +69,6 @@ const PreciosContent = () => {
                       : ""
                   }`}
                 >
-                  {/* Badge */}
                   {plan.badge && (
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
                       <span
@@ -151,17 +91,16 @@ const PreciosContent = () => {
                   <div className="mb-5">
                     {isEnterprise ? (
                       <div className="flex items-baseline gap-1">
-                        <span className="text-3xl font-display font-bold text-foreground">A medida</span>
+                        <span className="text-3xl font-display font-bold text-foreground">{t.custom}</span>
                       </div>
                     ) : (
                       <div className="flex items-baseline gap-1">
                         <span className="text-4xl font-display font-bold text-foreground">{plan.price}€</span>
-                        <span className="text-muted-foreground text-sm">/mes</span>
+                        <span className="text-muted-foreground text-sm">{t.perMonth}</span>
                       </div>
                     )}
                   </div>
 
-                  {/* Features */}
                   <div className="mb-6 flex-1">
                     <ul className="space-y-2.5">
                       {plan.features.map((feature, i) => (
@@ -199,22 +138,22 @@ const PreciosContent = () => {
         <div className="section-container">
           <div className="card-elevated text-center p-12 max-w-2xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 text-foreground">
-              ¿Necesitas algo personalizado?
+              {t.ctaTitle}
             </h2>
             <p className="text-muted-foreground mb-8">
-              Haz nuestra auditoría gratuita y te recomendamos el mejor plan.
+              {t.ctaSubtitle}
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link to="/auditoria-gratis">
                 <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-lg px-8 btn-depth">
-                  Auditoría Gratis
+                  {t.ctaAudit}
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
               <Link to="/contacto">
                 <Button size="lg" variant="outline" className="border-2 border-primary text-primary hover:bg-primary/10">
                   <Phone className="w-4 h-4 mr-2" />
-                  Hablar con humano
+                  {t.ctaHuman}
                 </Button>
               </Link>
             </div>
