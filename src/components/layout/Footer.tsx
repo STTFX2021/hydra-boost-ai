@@ -133,6 +133,7 @@ export const Footer = () => {
               <li><Link to="/auditoria-gratis" className="text-muted-foreground hover:text-primary transition-colors">Auditoría gratis</Link></li>
               <li><Link to="/ai-discoverability" className="text-muted-foreground hover:text-primary transition-colors">AI Discoverability</Link></li>
               <li><Link to="/automatizacion-ia-restaurantes-costa-del-sol" className="text-muted-foreground hover:text-primary transition-colors">Automatización IA Restaurantes</Link></li>
+              <li><Link to="/restaurantes-ia-reservas-whatsapp-costa-del-sol" className="text-muted-foreground hover:text-primary transition-colors">IA Reservas Restaurantes</Link></li>
               <li><Link to="/automatizacion-ia-clinicas-costa-del-sol" className="text-muted-foreground hover:text-primary transition-colors">Automatización IA Clínicas</Link></li>
               <li><Link to="/automatizacion-ia-inmobiliarias-costa-del-sol" className="text-muted-foreground hover:text-primary transition-colors">Automatización IA Inmobiliarias</Link></li>
               <li><Link to="/chatbots-whatsapp-negocios-locales" className="text-muted-foreground hover:text-primary transition-colors">Chatbots WhatsApp</Link></li>
