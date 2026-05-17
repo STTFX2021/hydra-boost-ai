@@ -324,6 +324,13 @@ export const VerticalLandingPage = ({ config }: Props) => {
               <span className="text-border">·</span>
               <Link to="/" className="text-primary hover:underline">Inicio</Link>
             </div>
+            {["automatizacion-ia-restaurantes-costa-del-sol", "agentes-ia-voz-restaurantes", "chatbots-whatsapp-negocios-locales"].includes(config.slug) && (
+              <div className="pt-2">
+                <Link to="/restaurantes-ia-reservas-whatsapp-costa-del-sol" className="text-primary hover:underline text-sm font-semibold">
+                  → IA para reservas de restaurantes en Costa del Sol
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </section>
