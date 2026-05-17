@@ -38,14 +38,14 @@ const item = {
 /* ── Content i18n ── */
 const copy = {
   es: {
-    badge: "🚀 #1 en Automatización IA para Negocios",
-    title1: "Webs que hacen crecer tu negocio",
-    title2: "Consigue el máximo potencial para tu Negocio",
-    sub: "Chatbots inteligentes · Webs SEO · CRM automatizado",
-    subBold: "Convierte visitantes en clientes mientras duermes.",
-    cta1: "Solicitar Auditoría Gratis",
-    cta2: "Ver Demo",
-    trust: ["Sin permanencia", "Setup en 7 días", "Soporte 24/7"],
+    badge: "🚀 Automatización IA para negocios locales · Costa del Sol",
+    title1: "Automatización IA para negocios locales",
+    title2: "que pierden clientes por no responder a tiempo",
+    sub: "Creamos asistentes de WhatsApp, voz y automatizaciones que captan leads, responden clientes y reducen tareas repetitivas para restaurantes, clínicas, inmobiliarias, gimnasios y servicios locales.",
+    subBold: "Recibe un diagnóstico gratis en 24h.",
+    cta1: "Recibe un diagnóstico gratis en 24h",
+    cta2: "Ver ejemplos para mi sector",
+    trust: ["Sin permanencia", "Setup en 5-10 días", "Especialistas Costa del Sol"],
     urgency: "⚡ Solo quedan 3 plazas disponibles este mes",
     stats: [
       { value: 127, suffix: "%", label: "Más leads" },
@@ -211,7 +211,7 @@ export const HeroWorld = () => {
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
-            <Link to="/casos">
+            <Link to="/sectores/restaurantes">
               <Button
                 size="lg"
                 variant="outline"

@@ -25,7 +25,7 @@ export const MobileStickyCTA = () => {
         >
           <Link to="/auditoria-gratis" className="block">
             <button className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-primary to-secondary text-primary-foreground font-semibold text-sm shadow-lg">
-              Auditoría Gratis
+              Solicitar auditoría gratuita
               <ArrowRight className="w-4 h-4" />
             </button>
           </Link>
