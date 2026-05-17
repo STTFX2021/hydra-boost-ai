@@ -6,52 +6,36 @@ import { useLandingTranslation } from "@/lib/i18n";
 
 const FAQS_ES = [
   {
-    q: "¿Cuánto tiempo tarda el setup completo?",
-    a: "7 días hábiles desde la aprobación del proyecto. Incluye: configuración de chatbot, automatizaciones iniciales, integración con tus herramientas existentes y formación del equipo."
+    q: "¿Qué es una automatización IA para negocios locales?",
+    a: "Es un conjunto de sistemas que usan inteligencia artificial para responder clientes, captar leads, gestionar reservas y tareas repetitivas sin que tu equipo tenga que estar pendiente. Para un restaurante, una clínica, una inmobiliaria o un gimnasio significa atender por WhatsApp, recordar citas, cualificar leads de Instagram o procesar pedidos de forma automática."
   },
   {
-    q: "¿Necesito conocimientos técnicos para usar vuestros sistemas?",
-    a: "NO. Todo está diseñado sin código. Te damos formación completa y documentación paso a paso. Si algo falla, nuestro soporte 24/7 lo resuelve."
+    q: "¿Cuánto cuesta automatizar un negocio con IA?",
+    a: "Nuestros sistemas para negocios locales arrancan desde 297 €/mes (Base) y escalan según volumen y canales. La auditoría inicial es gratuita: te decimos qué automatizar primero, cuánto cuesta y qué retorno puedes esperar antes de contratar nada."
   },
   {
-    q: "¿Qué pasa si no ahorro las 10 horas/mes prometidas?",
-    a: "Devolución 100% sin preguntas. Es nuestra garantía de satisfacción. Medimos las horas ahorradas con métricas reales."
+    q: "¿Qué puede automatizar HydrAI Labs?",
+    a: "Chatbots de WhatsApp, agentes de voz para llamadas, reservas y agenda, recordatorios anti no-show, captación de leads de redes sociales, cualificación y enrutado de oportunidades, integración con CRM, automatización de seguimiento comercial y flujos internos con n8n."
   },
   {
-    q: "¿Funciona con mi CRM/herramientas actuales?",
-    a: "Sí. Integramos con 500+ herramientas vía Make/n8n: HubSpot, Salesforce, Notion, Google Sheets, WhatsApp, Instagram, etc. Si no está en la lista, lo conectamos via API custom."
+    q: "¿HydrAI Labs trabaja con restaurantes?",
+    a: "Sí. Tenemos sistemas específicos para restaurantes: chatbot WhatsApp multilingüe para reservas y dudas del menú, gestión de pedidos take-away, agentes de voz para reservas telefónicas y recordatorios para reducir no-shows."
   },
   {
-    q: "¿Los datos de mis clientes están seguros?",
-    a: "Totalmente. Cumplimos RGPD europeo. Datos encriptados end-to-end, servidores en UE (Frankfurt), backups diarios."
+    q: "¿Se puede automatizar WhatsApp?",
+    a: "Sí. Conectamos un número de WhatsApp Business a un asistente IA que responde 24/7 en varios idiomas, gestiona reservas reales contra tu sistema, cualifica leads de Meta Ads y escala a una persona humana cuando hace falta."
   },
   {
-    q: "¿Puedo cancelar en cualquier momento?",
-    a: "Sí. Sin permanencia. Cancelas cuando quieras con 30 días de preaviso. Exportamos todos tus datos en formato estándar."
+    q: "¿Se puede crear un agente de voz para llamadas?",
+    a: "Sí. Implementamos agentes de voz IA (basados en Vapi y modelos avanzados) que atienden llamadas entrantes, gestionan reservas, responden preguntas frecuentes y derivan al equipo cuando la conversación lo requiere."
   },
   {
-    q: "¿El chatbot suena 'robótico'?",
-    a: "NO. Usamos los modelos de IA más avanzados. Responde como humano, entiende contexto, aprende de tus FAQs y escala tu tono de marca."
+    q: "¿Trabajáis en Costa del Sol?",
+    a: "Sí. HydrAI Labs está basada en Málaga y trabaja con negocios locales en toda la Costa del Sol: Marbella, Málaga, Estepona, Fuengirola, Benalmádena, Torremolinos y Mijas. También trabajamos en remoto en el resto de España y Europa."
   },
   {
-    q: "¿Cuál es la diferencia con contratar un programador?",
-    a: "Más rápido, más barato, sin gestión. Un dev te cobra 3.000-5.000€/mes + 3-6 meses de desarrollo. Nosotros: 997€/mes, listo en 7 días, soporte incluido."
-  },
-  {
-    q: "¿Qué tipo de negocios se benefician más?",
-    a: "Restaurantes, clínicas, inmobiliarias, gimnasios, barberías, estudios de yoga y cualquier negocio local con atención al cliente repetitiva. Si contestas las mismas preguntas cada día, podemos automatizarlo."
-  },
-  {
-    q: "¿Cómo funciona el chatbot de WhatsApp?",
-    a: "Conectamos un número de WhatsApp Business a nuestro sistema de IA. El bot responde 24/7 con el tono de tu marca, gestiona reservas, toma pedidos y escala a un humano cuando es necesario."
-  },
-  {
-    q: "¿Ofrecéis soporte después de la implementación?",
-    a: "Sí. Todos los planes incluyen soporte técnico prioritario, actualizaciones mensuales del sistema y un dashboard de métricas en tiempo real para que veas el rendimiento."
-  },
-  {
-    q: "¿Puedo ver una demo antes de contratar?",
-    a: "Por supuesto. Ofrecemos un diagnóstico gratuito de 30 minutos donde analizamos tu negocio y te mostramos exactamente cómo funcionaría la automatización en tu caso concreto."
+    q: "¿Qué diferencia a HydrAI Labs de una agencia web normal?",
+    a: "Una agencia web te entrega una página y se va. Nosotros construimos sistemas operativos completos: captación, atención al cliente, automatización de procesos y seguimiento comercial — integrados con tus herramientas y medibles en métricas reales. No vendemos diseño, vendemos resultados de operación."
   }
 ];
 
