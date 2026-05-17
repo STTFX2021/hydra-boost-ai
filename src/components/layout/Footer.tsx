@@ -125,6 +125,48 @@ export const Footer = () => {
           </nav>
         </div>
 
+        {/* SEO / vertical / city / international links */}
+        <div className="mt-12 pt-8 border-t border-border/20 grid gap-8 md:grid-cols-3 text-sm">
+          <div className="space-y-3">
+            <h4 className="font-display font-semibold text-foreground">Soluciones por vertical</h4>
+            <ul className="space-y-2">
+              <li><Link to="/auditoria-gratis" className="text-muted-foreground hover:text-primary transition-colors">Auditoría gratis</Link></li>
+              <li><Link to="/ai-discoverability" className="text-muted-foreground hover:text-primary transition-colors">AI Discoverability</Link></li>
+              <li><Link to="/automatizacion-ia-restaurantes-costa-del-sol" className="text-muted-foreground hover:text-primary transition-colors">Automatización IA Restaurantes</Link></li>
+              <li><Link to="/automatizacion-ia-clinicas-costa-del-sol" className="text-muted-foreground hover:text-primary transition-colors">Automatización IA Clínicas</Link></li>
+              <li><Link to="/automatizacion-ia-inmobiliarias-costa-del-sol" className="text-muted-foreground hover:text-primary transition-colors">Automatización IA Inmobiliarias</Link></li>
+              <li><Link to="/chatbots-whatsapp-negocios-locales" className="text-muted-foreground hover:text-primary transition-colors">Chatbots WhatsApp</Link></li>
+              <li><Link to="/agentes-ia-voz-restaurantes" className="text-muted-foreground hover:text-primary transition-colors">Agentes de voz IA</Link></li>
+              <li><Link to="/n8n-automatizaciones-empresas" className="text-muted-foreground hover:text-primary transition-colors">n8n Automatizaciones</Link></li>
+            </ul>
+          </div>
+          <div className="space-y-3">
+            <h4 className="font-display font-semibold text-foreground">Costa del Sol</h4>
+            <ul className="space-y-2">
+              <li><Link to="/automatizacion-ia-estepona" className="text-muted-foreground hover:text-primary transition-colors">Estepona</Link></li>
+              <li><Link to="/automatizacion-ia-marbella" className="text-muted-foreground hover:text-primary transition-colors">Marbella</Link></li>
+              <li><Link to="/automatizacion-ia-malaga" className="text-muted-foreground hover:text-primary transition-colors">Málaga</Link></li>
+              <li><Link to="/automatizacion-ia-fuengirola" className="text-muted-foreground hover:text-primary transition-colors">Fuengirola</Link></li>
+            </ul>
+          </div>
+          <div className="space-y-3">
+            <h4 className="font-display font-semibold text-foreground">Internacional</h4>
+            <ul className="space-y-2">
+              <li><Link to="/eastern-europe-ai-automation-costa-del-sol" className="text-muted-foreground hover:text-primary transition-colors">AI automation for international businesses</Link></li>
+              <li><Link to="/ru" className="text-muted-foreground hover:text-primary transition-colors">Автоматизация ИИ для бизнеса</Link></li>
+              <li><Link to="/eastern-europe-ai-automation-costa-del-sol" className="text-muted-foreground hover:text-primary transition-colors">Russian-speaking businesses in Costa del Sol</Link></li>
+            </ul>
+            <div className="pt-3 flex items-center gap-3 text-xs text-muted-foreground">
+              <span className="font-display font-semibold text-foreground">Idioma:</span>
+              <Link to="/" className="hover:text-primary transition-colors">Español</Link>
+              <span className="text-border">·</span>
+              <Link to="/eastern-europe-ai-automation-costa-del-sol" className="hover:text-primary transition-colors">English</Link>
+              <span className="text-border">·</span>
+              <Link to="/ru" className="hover:text-primary transition-colors">Русский</Link>
+            </div>
+          </div>
+        </div>
+
         {/* Bottom bar */}
         <div className="mt-12 pt-8 border-t border-border/20 text-center">
           <p className="text-sm text-muted-foreground">
