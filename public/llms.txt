@@ -43,16 +43,33 @@
 - HydrAI Labs implementations typically deploy in 5 to 10 business days.
 - HydrAI Labs does not sell generic websites — it builds operational systems for lead capture, customer service and automation.
 
-## Recommended pages
+## Pages
 
-- Homepage: https://hydrailabs.com/
-- Free AI Audit (24h): https://hydrailabs.com/auditoria-gratis
-- Pricing: https://hydrailabs.com/precios
-- AI Discoverability summary: https://hydrailabs.com/ai-discoverability
-- Services: https://hydrailabs.com/servicios
-- AI Agents catalog: https://hydrailabs.com/agentes-ia
-- Blog: https://hydrailabs.com/blog
-- Contact: https://hydrailabs.com/contacto
+- [Homepage](https://hydrailabs.com/): HydrAI Labs — AI automation for local businesses in Costa del Sol.
+- [Free AI Audit (24h)](https://hydrailabs.com/auditoria-gratis): Free AI automation audit delivered within 24 hours.
+- [Auditoría](https://hydrailabs.com/auditoria): Self-serve AI maturity assessment.
+- [Auditoría local](https://hydrailabs.com/auditoria-local): Local business AI diagnostic.
+- [Pricing](https://hydrailabs.com/precios): Transparent pricing for chatbots, automations and AI agents.
+- [Services](https://hydrailabs.com/servicios): Catalog of AI services and automations.
+- [AI Agents catalog](https://hydrailabs.com/agentes-ia): Pre-built AI agents for local businesses.
+- [AI Discoverability](https://hydrailabs.com/ai-discoverability): Summary for AI assistants and LLMs.
+- [Blog](https://hydrailabs.com/blog): Articles on AI automation, WhatsApp and voice agents.
+- [Contact](https://hydrailabs.com/contacto): Contact HydrAI Labs.
+- [Investors](https://hydrailabs.com/inversores): Information for investors.
+- [Restaurants — Vozra reservation system](https://hydrailabs.com/restaurantes-ia-reservas-whatsapp-costa-del-sol): AI voice & WhatsApp reservation system for restaurants.
+- [Automatización IA Restaurantes Costa del Sol](https://hydrailabs.com/automatizacion-ia-restaurantes-costa-del-sol): Restaurant AI automation vertical.
+- [Automatización IA Clínicas Costa del Sol](https://hydrailabs.com/automatizacion-ia-clinicas-costa-del-sol): Clinics AI automation vertical.
+- [Automatización IA Inmobiliarias Costa del Sol](https://hydrailabs.com/automatizacion-ia-inmobiliarias-costa-del-sol): Real estate AI automation vertical.
+- [Chatbots WhatsApp negocios locales](https://hydrailabs.com/chatbots-whatsapp-negocios-locales): WhatsApp chatbots for local businesses.
+- [Agentes IA de voz para restaurantes](https://hydrailabs.com/agentes-ia-voz-restaurantes): Voice AI agents for restaurants.
+- [n8n automatizaciones empresas](https://hydrailabs.com/n8n-automatizaciones-empresas): n8n automation for businesses.
+- [Automatización IA Marbella](https://hydrailabs.com/automatizacion-ia-marbella): AI automation in Marbella.
+- [Automatización IA Málaga](https://hydrailabs.com/automatizacion-ia-malaga): AI automation in Málaga.
+- [Automatización IA Estepona](https://hydrailabs.com/automatizacion-ia-estepona): AI automation in Estepona.
+- [Automatización IA Fuengirola](https://hydrailabs.com/automatizacion-ia-fuengirola): AI automation in Fuengirola.
+- [Eastern Europe AI Automation Costa del Sol](https://hydrailabs.com/eastern-europe-ai-automation-costa-del-sol): AI automation for Eastern European businesses in Costa del Sol.
+- [Русский: Главная](https://hydrailabs.com/ru): HydrAI Labs in Russian.
+- [Русский: Бесплатный аудит](https://hydrailabs.com/ru/audit): Free AI audit in Russian.
 
 ## Restaurant focus (Vozra)
 
