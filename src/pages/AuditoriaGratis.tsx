@@ -5,6 +5,7 @@ import { WebPageSchema, BreadcrumbSchema } from "@/components/seo";
 import { Helmet } from "react-helmet-async";
 import { ProfileSelector } from "@/components/diagnostic/ProfileSelector";
 import { LocalBusinessForm } from "@/components/diagnostic/LocalBusinessForm";
+import { WhatWeReview } from "@/components/landing";
 import { motion } from "framer-motion";
 import { Sparkles, Shield, Zap, TrendingUp } from "lucide-react";
 
@@ -108,6 +109,8 @@ const AuditoriaGratis = () => {
           )}
         </div>
       </section>
+
+      <WhatWeReview />
     </PageLayout>
   );
 };

@@ -60,6 +60,9 @@ const Index = () => {
         <main id="main-content">
           <HeroWorld />
 
+          <WhatWeReview />
+          <DifferentiatorBlock />
+
           <GrowthSystemSection />
 
           <TrustBar />
@@ -69,6 +72,7 @@ const Index = () => {
           <AnimatedCounters />
           <SectorDemos />
           <AgentsTeaser />
+          <LocalSpecialists />
           <LocalSEOLinks />
 
           <LazySection>
