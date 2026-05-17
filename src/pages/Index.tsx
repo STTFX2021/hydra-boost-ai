@@ -14,6 +14,9 @@ import {
   AgentsTeaser,
   InsightsTeaser,
   LocalSEOLinks,
+  WhatWeReview,
+  LocalSpecialists,
+  DifferentiatorBlock,
 } from "@/components/landing";
 import { GrowthSystemSection } from "@/components/landing/GrowthSystemSection";
 import { InteractiveROICalculator } from "@/components/landing/InteractiveROICalculator";

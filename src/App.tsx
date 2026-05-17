@@ -119,11 +119,11 @@ const App = () => (
             <Route path="/chatbots-whatsapp-negocios-locales" element={<VerticalLandingPage config={verticalConfigs["chatbots-whatsapp-negocios-locales"]} />} />
             <Route path="/agentes-ia-voz-restaurantes" element={<VerticalLandingPage config={verticalConfigs["agentes-ia-voz-restaurantes"]} />} />
             <Route path="/n8n-automatizaciones-empresas" element={<VerticalLandingPage config={verticalConfigs["n8n-automatizaciones-empresas"]} />} />
-            {/* City aliases (automatizacion-ia-*) */}
-            <Route path="/automatizacion-ia-estepona" element={<CityLandingPage config={{ ...cityConfigs.estepona, slug: "automatizacion-ia-estepona" }} />} />
-            <Route path="/automatizacion-ia-marbella" element={<CityLandingPage config={{ ...cityConfigs.marbella, slug: "automatizacion-ia-marbella" }} />} />
-            <Route path="/automatizacion-ia-malaga" element={<CityLandingPage config={{ ...cityConfigs.malaga, slug: "automatizacion-ia-malaga" }} />} />
-            <Route path="/automatizacion-ia-fuengirola" element={<CityLandingPage config={{ ...cityConfigs.fuengirola, slug: "automatizacion-ia-fuengirola" }} />} />
+            {/* City aliases (automatizacion-ia-*) — canonical points to /ai-automation-* */}
+            <Route path="/automatizacion-ia-estepona" element={<CityLandingPage config={cityConfigs.estepona} />} />
+            <Route path="/automatizacion-ia-marbella" element={<AIAutomationMarbella />} />
+            <Route path="/automatizacion-ia-malaga" element={<CityLandingPage config={cityConfigs.malaga} />} />
+            <Route path="/automatizacion-ia-fuengirola" element={<CityLandingPage config={cityConfigs.fuengirola} />} />
             {/* AI discoverability */}
             <Route path="/ai-discoverability" element={<AIDiscoverability />} />
             {/* International expansion */}
