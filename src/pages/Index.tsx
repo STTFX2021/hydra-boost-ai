@@ -14,6 +14,9 @@ import {
   AgentsTeaser,
   InsightsTeaser,
   LocalSEOLinks,
+  WhatWeReview,
+  LocalSpecialists,
+  DifferentiatorBlock,
 } from "@/components/landing";
 import { GrowthSystemSection } from "@/components/landing/GrowthSystemSection";
 import { InteractiveROICalculator } from "@/components/landing/InteractiveROICalculator";
@@ -57,6 +60,9 @@ const Index = () => {
         <main id="main-content">
           <HeroWorld />
 
+          <WhatWeReview />
+          <DifferentiatorBlock />
+
           <GrowthSystemSection />
 
           <TrustBar />
@@ -66,6 +72,7 @@ const Index = () => {
           <AnimatedCounters />
           <SectorDemos />
           <AgentsTeaser />
+          <LocalSpecialists />
           <LocalSEOLinks />
 
           <LazySection>

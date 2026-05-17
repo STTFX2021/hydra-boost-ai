@@ -60,6 +60,14 @@ import AutomatizacionIAClinicasEsteticasMalaga from "./pages/AutomatizacionIACli
 import AgentesIAInmobiliariasCostaDelSol from "./pages/AgentesIAInmobiliariasCostaDelSol";
 import ChatbotIAHotelesMarbella from "./pages/ChatbotIAHotelesMarbella";
 import AutomatizacionIAPymesMalaga from "./pages/AutomatizacionIAPymesMalaga";
+import { VerticalLandingPage } from "./pages/vertical-landing/VerticalLandingPage";
+import { verticalConfigs } from "./pages/vertical-landing/VerticalLandingData";
+import { CityLandingPage } from "./pages/city-landing/CityLandingPage";
+import { cityConfigs } from "./pages/city-landing/CityLandingData";
+import AIDiscoverability from "./pages/AIDiscoverability";
+import EasternEuropeAICostaDelSol from "./pages/EasternEuropeAICostaDelSol";
+import { RussianLandingPage } from "./pages/ru/RussianLandingPage";
+import { russianConfigs } from "./pages/ru/RussianLandingData";
 // Blog article pages
 import ChatbotWhatsappRestaurante from "./pages/blog/ChatbotWhatsappRestaurante";
 import ScrapingLeadsInmobiliaria from "./pages/blog/ScrapingLeadsInmobiliaria";
@@ -104,6 +112,29 @@ const App = () => (
             <Route path="/agentes-ia-inmobiliarias-costa-del-sol" element={<AgentesIAInmobiliariasCostaDelSol />} />
             <Route path="/chatbot-ia-hoteles-marbella" element={<ChatbotIAHotelesMarbella />} />
             <Route path="/automatizacion-ia-pymes-malaga" element={<AutomatizacionIAPymesMalaga />} />
+            {/* New vertical landings (Phase 4) */}
+            <Route path="/automatizacion-ia-restaurantes-costa-del-sol" element={<VerticalLandingPage config={verticalConfigs["automatizacion-ia-restaurantes-costa-del-sol"]} />} />
+            <Route path="/automatizacion-ia-clinicas-costa-del-sol" element={<VerticalLandingPage config={verticalConfigs["automatizacion-ia-clinicas-costa-del-sol"]} />} />
+            <Route path="/automatizacion-ia-inmobiliarias-costa-del-sol" element={<VerticalLandingPage config={verticalConfigs["automatizacion-ia-inmobiliarias-costa-del-sol"]} />} />
+            <Route path="/chatbots-whatsapp-negocios-locales" element={<VerticalLandingPage config={verticalConfigs["chatbots-whatsapp-negocios-locales"]} />} />
+            <Route path="/agentes-ia-voz-restaurantes" element={<VerticalLandingPage config={verticalConfigs["agentes-ia-voz-restaurantes"]} />} />
+            <Route path="/n8n-automatizaciones-empresas" element={<VerticalLandingPage config={verticalConfigs["n8n-automatizaciones-empresas"]} />} />
+            {/* City aliases (automatizacion-ia-*) — canonical points to /ai-automation-* */}
+            <Route path="/automatizacion-ia-estepona" element={<CityLandingPage config={cityConfigs.estepona} />} />
+            <Route path="/automatizacion-ia-marbella" element={<AIAutomationMarbella />} />
+            <Route path="/automatizacion-ia-malaga" element={<CityLandingPage config={cityConfigs.malaga} />} />
+            <Route path="/automatizacion-ia-fuengirola" element={<CityLandingPage config={cityConfigs.fuengirola} />} />
+            {/* AI discoverability */}
+            <Route path="/ai-discoverability" element={<AIDiscoverability />} />
+            {/* International expansion */}
+            <Route path="/eastern-europe-ai-automation-costa-del-sol" element={<EasternEuropeAICostaDelSol />} />
+            {/* Russian landing pages */}
+            <Route path="/ru" element={<RussianLandingPage config={russianConfigs.home} />} />
+            <Route path="/ru/audit" element={<RussianLandingPage config={russianConfigs.audit} />} />
+            <Route path="/ru/ai-automation-costa-del-sol" element={<RussianLandingPage config={russianConfigs["ai-automation-costa-del-sol"]} />} />
+            <Route path="/ru/ai-automation-restaurants" element={<RussianLandingPage config={russianConfigs["ai-automation-restaurants"]} />} />
+            <Route path="/ru/whatsapp-chatbots" element={<RussianLandingPage config={russianConfigs["whatsapp-chatbots"]} />} />
+            <Route path="/ru/voice-ai-agents-restaurants" element={<RussianLandingPage config={russianConfigs["voice-ai-agents-restaurants"]} />} />
             <Route path="/industrias" element={<Industrias />} />
             <Route path="/arquitectura" element={<Arquitectura />} />
             <Route path="/agentes-ia" element={<AgentesIA />} />
