@@ -13,21 +13,32 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
+# OpenAI
+User-agent: OAI-SearchBot
+Allow: /
+
 User-agent: GPTBot
 Allow: /
 
 User-agent: ChatGPT-User
 Allow: /
 
-User-agent: PerplexityBot
-Allow: /
-
+# Anthropic
 User-agent: ClaudeBot
 Allow: /
 
+User-agent: Claude-Web
+Allow: /
+
+# Google AI / Gemini
 User-agent: Google-Extended
 Allow: /
 
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+# Common Crawl (used by many LLMs)
 User-agent: CCBot
 Allow: /
 
