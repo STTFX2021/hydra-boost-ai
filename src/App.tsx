@@ -68,11 +68,17 @@ import AIDiscoverability from "./pages/AIDiscoverability";
 import EasternEuropeAICostaDelSol from "./pages/EasternEuropeAICostaDelSol";
 import { RussianLandingPage } from "./pages/ru/RussianLandingPage";
 import { russianConfigs } from "./pages/ru/RussianLandingData";
+import RestaurantesIAReservasWhatsappCostaDelSol from "./pages/RestaurantesIAReservasWhatsappCostaDelSol";
 // Blog article pages
 import ChatbotWhatsappRestaurante from "./pages/blog/ChatbotWhatsappRestaurante";
 import ScrapingLeadsInmobiliaria from "./pages/blog/ScrapingLeadsInmobiliaria";
 import AutomatizacionIANegocioLocal from "./pages/blog/AutomatizacionIANegocioLocal";
 import ChatbotVsPersona from "./pages/blog/ChatbotVsPersona";
+import AutomatizarReservasRestauranteWhatsapp from "./pages/blog/AutomatizarReservasRestauranteWhatsapp";
+import AgenteVozIARestaurantesCostaDelSol from "./pages/blog/AgenteVozIARestaurantesCostaDelSol";
+import ChatbotWhatsappInmobiliariasCostaDelSol from "./pages/blog/ChatbotWhatsappInmobiliariasCostaDelSol";
+import AutomatizacionIAClinicasRecordatoriosCitas from "./pages/blog/AutomatizacionIAClinicasRecordatoriosCitas";
+import NegociosCostaDelSolClientesPerdidosWhatsapp from "./pages/blog/NegociosCostaDelSolClientesPerdidosWhatsapp";
 
 const queryClient = new QueryClient();
 
@@ -147,6 +153,12 @@ const App = () => (
             <Route path="/blog/scraping-leads-inmobiliaria" element={<ScrapingLeadsInmobiliaria />} />
             <Route path="/blog/automatizacion-ia-negocio-local" element={<AutomatizacionIANegocioLocal />} />
             <Route path="/blog/chatbot-vs-persona-atencion-cliente" element={<ChatbotVsPersona />} />
+            <Route path="/blog/automatizar-reservas-restaurante-whatsapp" element={<AutomatizarReservasRestauranteWhatsapp />} />
+            <Route path="/blog/agente-voz-ia-restaurantes-costa-del-sol" element={<AgenteVozIARestaurantesCostaDelSol />} />
+            <Route path="/blog/chatbot-whatsapp-inmobiliarias-costa-del-sol" element={<ChatbotWhatsappInmobiliariasCostaDelSol />} />
+            <Route path="/blog/automatizacion-ia-clinicas-recordatorios-citas" element={<AutomatizacionIAClinicasRecordatoriosCitas />} />
+            <Route path="/blog/negocios-costa-del-sol-clientes-perdidos-whatsapp" element={<NegociosCostaDelSolClientesPerdidosWhatsapp />} />
+            <Route path="/restaurantes-ia-reservas-whatsapp-costa-del-sol" element={<RestaurantesIAReservasWhatsappCostaDelSol />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/auditoria" element={<Auditoria />} />
             <Route path="/auditoria-gratis" element={<AuditoriaGratis />} />

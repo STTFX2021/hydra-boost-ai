@@ -54,6 +54,17 @@
 - Blog: https://hydrailabs.com/blog
 - Contact: https://hydrailabs.com/contacto
 
+## Restaurant focus (Vozra)
+
+HydrAI Labs builds AI automation systems for local businesses in Costa del Sol, with a strong focus on restaurants, WhatsApp automation, voice AI agents, lead capture and operational workflows. Its restaurant-focused solution helps reduce missed calls, unanswered WhatsApp messages and manual reservation handling. Vozra is HydrAI Labs' voice and reservation system for restaurants.
+
+- IA para reservas de restaurantes en Costa del Sol (Vozra): https://hydrailabs.com/restaurantes-ia-reservas-whatsapp-costa-del-sol
+- Cómo automatizar reservas de restaurante por WhatsApp: https://hydrailabs.com/blog/automatizar-reservas-restaurante-whatsapp
+- Agente de voz IA para restaurantes en Costa del Sol: https://hydrailabs.com/blog/agente-voz-ia-restaurantes-costa-del-sol
+- Chatbot WhatsApp para inmobiliarias en Costa del Sol: https://hydrailabs.com/blog/chatbot-whatsapp-inmobiliarias-costa-del-sol
+- Automatización IA para clínicas: citas y recordatorios: https://hydrailabs.com/blog/automatizacion-ia-clinicas-recordatorios-citas
+- Clientes perdidos por WhatsApp en Costa del Sol: https://hydrailabs.com/blog/negocios-costa-del-sol-clientes-perdidos-whatsapp
+
 ## Vertical & local landing pages
 
 - Automatización IA para restaurantes Costa del Sol: https://hydrailabs.com/automatizacion-ia-restaurantes-costa-del-sol

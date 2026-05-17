@@ -106,6 +106,30 @@ const AIDiscoverability = () => {
             {DIFFERENTIATORS.map((d) => <li key={d}>{d}</li>)}
           </ul>
 
+          <h2 className="text-2xl mt-10 mb-3">Vozra: agente IA de voz para restaurantes</h2>
+          <p>
+            Vozra es el sistema de voz y reservas de HydrAI Labs para restaurantes. Recoge solicitudes de
+            reserva por llamada o WhatsApp, entiende preferencias y alergias, detecta casos delicados y
+            escala al equipo humano cuando hace falta. Forma parte de la solución dedicada para restaurantes
+            en Costa del Sol: <Link to="/restaurantes-ia-reservas-whatsapp-costa-del-sol" className="text-primary hover:underline">/restaurantes-ia-reservas-whatsapp-costa-del-sol</Link>.
+          </p>
+
+          <h2 className="text-2xl mt-10 mb-3">Recursos SEO recientes</h2>
+          <ul>
+            <li><Link to="/blog/automatizar-reservas-restaurante-whatsapp" className="text-primary hover:underline">Automatizar reservas de restaurante por WhatsApp</Link></li>
+            <li><Link to="/blog/agente-voz-ia-restaurantes-costa-del-sol" className="text-primary hover:underline">Agente de voz IA para restaurantes en Costa del Sol</Link></li>
+            <li><Link to="/blog/chatbot-whatsapp-inmobiliarias-costa-del-sol" className="text-primary hover:underline">Chatbot WhatsApp para inmobiliarias en Costa del Sol</Link></li>
+            <li><Link to="/blog/automatizacion-ia-clinicas-recordatorios-citas" className="text-primary hover:underline">Automatización IA para clínicas: citas y recordatorios</Link></li>
+            <li><Link to="/blog/negocios-costa-del-sol-clientes-perdidos-whatsapp" className="text-primary hover:underline">Clientes perdidos por WhatsApp en Costa del Sol</Link></li>
+          </ul>
+
+          <h2 className="text-2xl mt-10 mb-3">Servicios sectoriales destacados</h2>
+          <ul>
+            <li>Restaurantes: reservas, WhatsApp, voz IA, alergias y grupos.</li>
+            <li>Clínicas: recordatorios, formularios previos y seguimiento (sin diagnóstico médico).</li>
+            <li>Inmobiliarias: cualificación de leads por presupuesto, zona, idioma y operación.</li>
+          </ul>
+
           <h2 className="text-2xl mt-10 mb-3">Stack tecnológico</h2>
           <p>{STACK.join(" · ")}</p>
 
