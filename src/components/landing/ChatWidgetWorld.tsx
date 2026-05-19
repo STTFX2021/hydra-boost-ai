@@ -36,11 +36,11 @@ export const ChatWidgetWorld = () => {
       title: "HydrAI AI Assistant",
       powered: "Powered by Claude",
     },
-    fr: {
-      greeting: "Bonjour! 👋 Je suis Alex, Solutions Architect chez HydrAI. Quel processus vous prend le plus de temps dans votre entreprise?",
-      placeholder: "Écrivez votre message...",
-      online: "En ligne • Répond en ~2s",
-      title: "Assistant IA HydrAI",
+    ru: {
+      greeting: "Hi! 👋 I'm Alex, Solutions Architect at HydrAI. What process is taking the most time in your business?",
+      placeholder: "Type your message...",
+      online: "Online • Responds in ~2s",
+      title: "HydrAI AI Assistant",
       powered: "Powered by Claude",
     },
     de: {
@@ -48,20 +48,6 @@ export const ChatWidgetWorld = () => {
       placeholder: "Schreiben Sie Ihre Nachricht...",
       online: "Online • Antwortet in ~2s",
       title: "HydrAI KI-Assistent",
-      powered: "Powered by Claude",
-    },
-    pt: {
-      greeting: "Olá! 👋 Sou Alex, Solutions Architect da HydrAI. Qual processo está tomando mais tempo no seu negócio?",
-      placeholder: "Digite sua mensagem...",
-      online: "Online • Responde em ~2s",
-      title: "Assistente IA HydrAI",
-      powered: "Powered by Claude",
-    },
-    it: {
-      greeting: "Ciao! 👋 Sono Alex, Solutions Architect di HydrAI. Quale processo ti sta rubando più tempo nella tua azienda?",
-      placeholder: "Scrivi il tuo messaggio...",
-      online: "Online • Risponde in ~2s",
-      title: "Assistente IA HydrAI",
       powered: "Powered by Claude",
     },
   };
