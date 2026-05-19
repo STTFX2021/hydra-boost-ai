@@ -1051,9 +1051,9 @@ const pageSEOTranslations: Record<Language, Record<PageKey, PageSEO>> = {
     precios: { title: 'AI Automation Pricing & Plans | HydrAI Labs', description: 'AI automation plans for local businesses, from basic implementation to enterprise architecture. No surprises, no lock-in. Costa del Sol.' },
   },
   ru: {
-    home: { title: 'HydrAI Labs | AI Automation for Local Businesses on Costa del Sol', description: 'AI automation agency on Costa del Sol. 24/7 WhatsApp chatbots, n8n automations and lead generation for restaurants, clinics, real estate and gyms.' },
-    servicios: { title: 'AI Automation Services | HydrAI Labs', description: 'AI chatbots, SEO websites, scraping and automated WhatsApp, Email & Instagram campaigns. From €197.' },
-    precios: { title: 'AI Automation Pricing & Plans | HydrAI Labs', description: 'AI automation plans for local businesses, from basic implementation to enterprise architecture. No surprises, no lock-in. Costa del Sol.' },
+    home: { title: 'HydrAI Labs | ИИ-автоматизация для бизнеса на Коста-дель-Соль', description: 'Агентство ИИ-автоматизации на Коста-дель-Соль. WhatsApp-чат-боты 24/7, n8n-автоматизации и привлечение клиентов для ресторанов, клиник, агентств недвижимости и фитнес-клубов.' },
+    servicios: { title: 'Услуги ИИ-автоматизации | HydrAI Labs', description: 'ИИ-чат-боты, SEO-сайты, скрапинг и автоматические кампании в WhatsApp, email и Instagram. От 197 €.' },
+    precios: { title: 'Цены и тарифы ИИ-автоматизации | HydrAI Labs', description: 'Тарифы ИИ-автоматизации для локального бизнеса — от базового внедрения до enterprise-архитектуры. Без сюрпризов, без привязки. Коста-дель-Соль.' },
   },
   de: {
     home: { title: 'HydrAI Labs | KI-Automatisierung für lokale Unternehmen an der Costa del Sol', description: 'KI-Automatisierungsagentur an der Costa del Sol. 24/7 WhatsApp-Chatbots, n8n-Automatisierungen und Kundengewinnung für Restaurants, Kliniken, Immobilien und Fitnessstudios.' },
