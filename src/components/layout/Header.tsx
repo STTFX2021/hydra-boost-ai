@@ -12,7 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-const availableLanguages: Language[] = ['es', 'en', 'fr', 'de', 'pt', 'it'];
+const availableLanguages: Language[] = ['es', 'en', 'de', 'ru'];
 
 export const Header = () => {
   const { t, language } = useTranslation();
