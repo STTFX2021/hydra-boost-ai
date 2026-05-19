@@ -101,41 +101,6 @@ const COPY: Record<Language, Copy> = {
       },
     ],
   },
-  fr: {
-    badge: "Comment ça marche",
-    heading1: "Comment nous construisons",
-    heading2: "des Systèmes de Croissance",
-    intro: "Dites-nous vos objectifs, vos problèmes et vos blocages. Nous créons le site web et le système d'automatisation parfaits pour votre entreprise.",
-    ctaPrimary: "Audit gratuit",
-    ctaSecondary: "Voir les résultats",
-    stats: [
-      { v: "7j", l: "Mise en place" },
-      { v: "24/7", l: "Toujours actif" },
-      { v: "+120", l: "Entreprises" },
-    ],
-    steps: [
-      {
-        title: "Le client arrive avec ses problèmes",
-        text: "Dites-nous ce qui bloque votre croissance.",
-        chips: ["Appels manqués", "Pas de leads", "Site obsolète", "Réservations perdues", "Travail manuel"],
-      },
-      {
-        title: "HydrAI analyse l'entreprise",
-        text: "Nous étudions votre activité et détectons les meilleures opportunités.",
-        chips: ["Cerveau IA", "Carte stratégique", "Analytique", "Planification"],
-      },
-      {
-        title: "Nous construisons la solution",
-        text: "Un système conçu pour faire grandir votre entreprise.",
-        chips: ["Site qui convertit", "Chatbot intelligent", "Réservations automatiques", "Flux WhatsApp", "Intégration CRM", "Assistants IA", "Tunnels de leads"],
-      },
-      {
-        title: "L'entreprise grandit",
-        text: "Plus de clients. Moins de chaos. Croissance automatique.",
-        chips: ["Plus de leads", "Plus de réservations", "Clients satisfaits", "Notifications", "Courbes en hausse", "Activité 24/7", "Outreach auto"],
-      },
-    ],
-  },
   de: {
     badge: "So funktioniert es",
     heading1: "So bauen wir",
@@ -168,76 +133,6 @@ const COPY: Record<Language, Copy> = {
         title: "Das Geschäft wächst",
         text: "Mehr Kunden. Weniger Chaos. Automatisches Wachstum.",
         chips: ["Mehr Leads", "Mehr Buchungen", "Zufriedene Kunden", "Benachrichtigungen", "Steigende Kurven", "24/7-Aktivität", "Auto-Outreach"],
-      },
-    ],
-  },
-  pt: {
-    badge: "Como funciona",
-    heading1: "Como construímos",
-    heading2: "Sistemas de Crescimento",
-    intro: "Diga-nos seus objetivos, problemas e gargalos. Criamos o site e o sistema de automação perfeitos para o seu negócio.",
-    ctaPrimary: "Auditoria grátis",
-    ctaSecondary: "Ver resultados",
-    stats: [
-      { v: "7d", l: "Setup médio" },
-      { v: "24/7", l: "Sempre ativo" },
-      { v: "+120", l: "Negócios" },
-    ],
-    steps: [
-      {
-        title: "O cliente chega com problemas",
-        text: "Conte-nos o que está bloqueando seu crescimento.",
-        chips: ["Chamadas perdidas", "Sem leads", "Site desatualizado", "Reservas perdidas", "Trabalho manual"],
-      },
-      {
-        title: "HydrAI analisa o negócio",
-        text: "Estudamos seu negócio e detectamos as melhores oportunidades.",
-        chips: ["Cérebro IA", "Mapa estratégico", "Analytics", "Planejamento"],
-      },
-      {
-        title: "Construímos a solução",
-        text: "Um sistema desenhado para fazer seu negócio crescer.",
-        chips: ["Site que converte", "Chatbot inteligente", "Reservas automáticas", "Fluxos WhatsApp", "Integração CRM", "Assistentes IA", "Funis de leads"],
-      },
-      {
-        title: "O negócio cresce",
-        text: "Mais clientes. Menos caos. Crescimento automático.",
-        chips: ["Mais leads", "Mais reservas", "Clientes felizes", "Notificações", "Gráficos em alta", "Atividade 24/7", "Outreach automático"],
-      },
-    ],
-  },
-  it: {
-    badge: "Come funziona",
-    heading1: "Come costruiamo",
-    heading2: "Sistemi di Crescita",
-    intro: "Raccontaci i tuoi obiettivi, problemi e colli di bottiglia. Creiamo il sito web e il sistema di automazione perfetti per la tua attività.",
-    ctaPrimary: "Audit gratuito",
-    ctaSecondary: "Vedi i risultati",
-    stats: [
-      { v: "7g", l: "Setup medio" },
-      { v: "24/7", l: "Sempre attivo" },
-      { v: "+120", l: "Aziende" },
-    ],
-    steps: [
-      {
-        title: "Il cliente arriva con problemi",
-        text: "Dicci cosa sta bloccando la tua crescita.",
-        chips: ["Chiamate perse", "Nessun lead", "Sito obsoleto", "Prenotazioni perse", "Lavoro manuale"],
-      },
-      {
-        title: "HydrAI analizza l'attività",
-        text: "Studiamo la tua attività e individuiamo le migliori opportunità.",
-        chips: ["Cervello IA", "Mappa strategica", "Analytics", "Pianificazione"],
-      },
-      {
-        title: "Costruiamo la soluzione",
-        text: "Un sistema progettato per far crescere la tua attività.",
-        chips: ["Sito ad alta conversione", "Chatbot intelligente", "Prenotazioni automatiche", "Flussi WhatsApp", "Integrazione CRM", "Assistenti IA", "Funnel di lead"],
-      },
-      {
-        title: "L'attività cresce",
-        text: "Più clienti. Meno caos. Crescita automatica.",
-        chips: ["Più lead", "Più prenotazioni", "Clienti felici", "Notifiche", "Grafici in crescita", "Attività 24/7", "Outreach automatico"],
       },
     ],
   },
