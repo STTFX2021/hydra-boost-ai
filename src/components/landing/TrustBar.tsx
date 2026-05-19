@@ -18,7 +18,7 @@ export const TrustBar = () => {
   const content = {
     es: { title: "Tecnologías que usamos para automatizar tu negocio" },
     en: { title: "Technologies we use to automate your business" },
-    ru: { title: "Technologies we use to automate your business" },
+    ru: { title: "Технологии, которые мы используем для автоматизации вашего бизнеса" },
     de: { title: "Technologien, die wir zur Automatisierung Ihres Unternehmens verwenden" },
   };
 
