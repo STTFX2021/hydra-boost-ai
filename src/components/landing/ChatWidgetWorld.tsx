@@ -37,11 +37,11 @@ export const ChatWidgetWorld = () => {
       powered: "Powered by Claude",
     },
     ru: {
-      greeting: "Hi! 👋 I'm Alex, Solutions Architect at HydrAI. What process is taking the most time in your business?",
-      placeholder: "Type your message...",
-      online: "Online • Responds in ~2s",
-      title: "HydrAI AI Assistant",
-      powered: "Powered by Claude",
+      greeting: "Привет! 👋 Я Алекс, Solutions Architect в HydrAI. Какой процесс отнимает у вашего бизнеса больше всего времени?",
+      placeholder: "Напишите сообщение...",
+      online: "Онлайн • Отвечает за ~2 сек",
+      title: "ИИ-ассистент HydrAI",
+      powered: "На базе Claude",
     },
     de: {
       greeting: "Hallo! 👋 Ich bin Alex, Solutions Architect bei HydrAI. Welcher Prozess kostet Sie in Ihrem Unternehmen am meisten Zeit?",
