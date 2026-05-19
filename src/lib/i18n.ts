@@ -1101,15 +1101,15 @@ const pricingTranslations: Record<Language, PricingCopy> = {
     ],
   },
   ru: {
-    badge: 'Transparent pricing', title: 'Choose your automation level',
-    subtitle: 'Flexible plans that grow with your business. No lock-in.',
-    popular: 'Most popular', premium: 'Premium', perMonth: '/mo', custom: 'Custom',
-    ctaTitle: 'Need something custom?', ctaSubtitle: 'Take our free audit and we will recommend the best plan.',
-    ctaAudit: 'Free Audit', ctaHuman: 'Talk to a human',
+    badge: 'Прозрачные цены', title: 'Выберите ваш уровень автоматизации',
+    subtitle: 'Гибкие тарифы, растущие вместе с вашим бизнесом. Без привязки.',
+    popular: 'Самый популярный', premium: 'Premium', perMonth: '/мес', custom: 'По запросу',
+    ctaTitle: 'Нужно индивидуальное решение?', ctaSubtitle: 'Пройдите бесплатный аудит — мы предложим оптимальный тариф.',
+    ctaAudit: 'Бесплатный аудит', ctaHuman: 'Поговорить с человеком',
     plans: [
-      { id: 'base', name: 'Base', price: '497', badge: null, cta: 'Start with Base', features: ['AI chatbot on your website (24/7)', '3 automated workflows', 'WhatsApp Business integration', 'Basic metrics dashboard', '48h email support', 'Full setup in 7 days'] },
-      { id: 'growth', name: 'Growth', price: '997', badge: 'Most popular', cta: 'Start with Growth', features: ['Everything in Base', '10 automated workflows', 'Niche-specialized AI agent', 'CRM + email marketing integration', '24h priority support', 'Weekly reporting with recommendations', 'Continuous system optimization'] },
-      { id: 'enterprise', name: 'Enterprise', price: 'Custom', badge: 'Premium', cta: 'Request a Proposal', features: ['Full Event Bus architecture', 'Unlimited workflows and agents', 'Specialized CEO/CFO/CTO agents', 'Custom integrations (ERP, POS, etc.)', 'Guaranteed SLA + dedicated support', 'On-site onboarding in Spain'] },
+      { id: 'base', name: 'Base', price: '497', badge: null, cta: 'Начать с Base', features: ['ИИ-чат-бот на вашем сайте (24/7)', '3 автоматизированных воркфлоу', 'Интеграция WhatsApp Business', 'Базовый дашборд метрик', 'Поддержка по email 48ч', 'Полная настройка за 7 дней'] },
+      { id: 'growth', name: 'Growth', price: '997', badge: 'Самый популярный', cta: 'Начать с Growth', features: ['Всё из тарифа Base', '10 автоматизированных воркфлоу', 'ИИ-агент, специализированный под вашу нишу', 'Интеграция CRM + email-маркетинг', 'Приоритетная поддержка 24ч', 'Еженедельные отчёты с рекомендациями', 'Постоянная оптимизация системы'] },
+      { id: 'enterprise', name: 'Enterprise', price: 'По запросу', badge: 'Premium', cta: 'Запросить предложение', features: ['Полная архитектура Event Bus', 'Безлимит воркфлоу и агентов', 'Специализированные агенты CEO/CFO/CTO', 'Индивидуальные интеграции (ERP, POS и др.)', 'Гарантированный SLA + выделенная поддержка', 'Очный онбординг в Испании'] },
     ],
   },
   de: {
