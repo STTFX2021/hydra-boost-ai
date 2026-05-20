@@ -5,11 +5,70 @@ import { Link } from "react-router-dom";
 import { PageLayout } from "@/components/layout/PageLayout";
 import { SEOHead, BreadcrumbSchema } from "@/components/seo";
 import { AGENTS_DATA } from "@/data/agents";
+import { useI18n } from "@/lib/i18n";
 
-const CATEGORIES = [
-  "Ventas", "Atención al Cliente", "Marketing", "Operaciones",
-  "Conocimiento", "Automatización", "Legal",
-];
+const COPY = {
+  es: {
+    categories: ["Ventas", "Atención al Cliente", "Marketing", "Operaciones", "Conocimiento", "Automatización", "Legal"],
+    catalog: "Catálogo de Soluciones",
+    h1a: "Agentes IA que trabajan",
+    h1b: "por tu negocio 24/7",
+    sub: "Soluciones modulares y listas para implementar. Haz clic en cada agente para ver cómo funciona paso a paso.",
+    problem: "Problema",
+    result: "Resultado",
+    seeHow: "Ver cómo funciona",
+    ctaA: "¿Qué agente necesita",
+    ctaB: "tu negocio?",
+    ctaSub: "Te ayudamos a identificar las automatizaciones con mayor impacto. Auditoría gratuita y sin compromiso.",
+    ctaBtn: "Solicitar Auditoría Gratis",
+    breadcrumb: "Inicio",
+  },
+  en: {
+    categories: ["Sales", "Customer Support", "Marketing", "Operations", "Knowledge", "Automation", "Legal"],
+    catalog: "Solutions Catalog",
+    h1a: "AI Agents that work",
+    h1b: "for your business 24/7",
+    sub: "Modular, ready-to-deploy solutions. Click each agent to see how it works step by step.",
+    problem: "Problem",
+    result: "Result",
+    seeHow: "See how it works",
+    ctaA: "Which agent does",
+    ctaB: "your business need?",
+    ctaSub: "We help you identify the highest-impact automations. Free, no-commitment audit.",
+    ctaBtn: "Request Free Audit",
+    breadcrumb: "Home",
+  },
+  de: {
+    categories: ["Vertrieb", "Kundensupport", "Marketing", "Betrieb", "Wissen", "Automatisierung", "Recht"],
+    catalog: "Lösungskatalog",
+    h1a: "KI-Agenten, die für Ihr Unternehmen",
+    h1b: "rund um die Uhr arbeiten",
+    sub: "Modulare, einsatzbereite Lösungen. Klicken Sie auf jeden Agenten, um Schritt für Schritt zu sehen, wie er funktioniert.",
+    problem: "Problem",
+    result: "Ergebnis",
+    seeHow: "So funktioniert es",
+    ctaA: "Welchen Agenten braucht",
+    ctaB: "Ihr Unternehmen?",
+    ctaSub: "Wir helfen Ihnen, die wirkungsvollsten Automatisierungen zu identifizieren. Kostenloses Audit ohne Verpflichtung.",
+    ctaBtn: "Kostenloses Audit anfordern",
+    breadcrumb: "Start",
+  },
+  ru: {
+    categories: ["Продажи", "Поддержка клиентов", "Маркетинг", "Операции", "Знания", "Автоматизация", "Юридическое"],
+    catalog: "Каталог решений",
+    h1a: "ИИ-агенты, работающие на ваш бизнес",
+    h1b: "24/7",
+    sub: "Модульные готовые к внедрению решения. Нажмите на каждого агента, чтобы увидеть пошаговую работу.",
+    problem: "Проблема",
+    result: "Результат",
+    seeHow: "Как это работает",
+    ctaA: "Какой агент нужен",
+    ctaB: "вашему бизнесу?",
+    ctaSub: "Помогаем определить автоматизации с максимальным эффектом. Бесплатный аудит без обязательств.",
+    ctaBtn: "Запросить бесплатный аудит",
+    breadcrumb: "Главная",
+  },
+} as const;
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -21,6 +80,9 @@ const itemVariants = {
 };
 
 export default function AgentesIA() {
+  const { language } = useI18n();
+  const t = COPY[language as keyof typeof COPY] ?? COPY.es;
+  const CATEGORIES = t.categories;
   return (
     <>
       <SEOHead
