@@ -214,10 +214,53 @@ const Servicios = () => {
         },
       ],
     },
+    de: {
+      badge: "Automatisierungslösungen",
+      title: "Automatisierungen, die",
+      titleHighlight: "Ihr Geschäft skalieren",
+      subtitle: "Professionelle Websites, 24/7 Chatbots, Buchungsautomatisierungen und Reputationsmanagement. Komplette KI-Lösungen für lokale Unternehmen.",
+      includes: "Enthält",
+      deliverables: "Lieferumfang",
+      implementTime: "Implementierungszeit:",
+      expectedKpis: "Erwartete KPIs",
+      requestService: "Service anfragen",
+      ctaTitle: "Bereit zu automatisieren?",
+      ctaSubtitle: "Vereinbaren Sie ein kostenloses Audit und wir zeigen Ihnen genau, was wir in Ihrem Unternehmen automatisieren können.",
+      ctaButton: "Technisches Audit anfordern",
+      services: [
+        { id: "webProfesional", icon: Globe, title: "Professionelle Website", subtitle: "Ihre optimierte digitale Präsenz", description: "Conversion-optimierte Landingpage oder Unternehmenswebsite mit lokalem SEO, intelligenten Formularen und Analytics.", features: ["Premium responsives Design", "Lokales SEO optimiert", "Lead-Erfassungsformulare", "Analytics und Tracking", "SSL und Hosting inklusive"], deliverables: ["Veröffentlichungsbereite Website", "Domain konfiguriert", "Google Analytics Setup", "Benutzerhandbuch"], time: "7-14 Tage", price: "497€ + MwSt.", kpis: ["+300% Sichtbarkeit", "2x organische Leads"], accent: "from-primary to-[hsl(200_100%_40%)]" },
+        { id: "chatbotWeb", icon: Bot, title: "Web-Chatbot", subtitle: "Automatischer Web-Support", description: "KI-Konversationsagent auf Ihrer Website, der FAQs 24/7 beantwortet, Leads qualifiziert und Termine automatisch plant.", features: ["KI-Konversationsagent", "Antwortet FAQs 24/7", "Qualifiziert Leads", "Plant Termine automatisch"], deliverables: ["Konfigurierter Chatbot", "Konversationsabläufe", "Metrik-Dashboard", "Initialschulung"], time: "3-5 Tage", price: "295€ + MwSt.", kpis: ["+60% erfasste Leads", "-80% Reaktionszeit"], accent: "from-[hsl(230_70%_55%)] to-primary" },
+        { id: "chatbotWhatsApp", icon: Bot, title: "WhatsApp-Chatbot", subtitle: "KI-Bot in WhatsApp Business", description: "KI-Bot in WhatsApp Business mit Konversationsabläufen, automatischen Erinnerungen und CRM-Integration.", features: ["WhatsApp Business KI-Bot", "Konversationsabläufe", "Automatische Erinnerungen", "CRM-Integration"], deliverables: ["Konfigurierter Bot", "WhatsApp-Abläufe", "Verwaltungspanel", "Automatische Berichte"], time: "3-5 Tage", price: "350€ + MwSt.", kpis: ["+90% Antwortrate", "-70% No-Shows"], accent: "from-[hsl(150_70%_40%)] to-primary" },
+        { id: "reservas", icon: Calendar, title: "Online-Buchungssystem", subtitle: "Anti-No-Show-System", description: "Online-Buchungskalender mit automatischen Bestätigungen, Anti-No-Show-Erinnerungen und Stornoverwaltung.", features: ["Online-Buchungskalender", "Automatische Bestätigungen", "Anti-No-Show-Erinnerungen", "Stornoverwaltung", "Google Calendar Integration"], deliverables: ["Buchungssystem", "WhatsApp-Abläufe", "Verwaltungspanel", "Automatische Berichte"], time: "3-5 Tage", price: "197€ + MwSt.", kpis: ["-80% No-Shows", "+40% Online-Buchungen"], accent: "from-primary to-[hsl(200_90%_55%)]" },
+        { id: "pasarelaPago", icon: Zap, title: "Integriertes Zahlungs-Gateway", subtitle: "Sichere Online-Zahlungen", description: "Stripe/Redsys-Integration mit sicheren Online-Zahlungen, automatischen Rechnungen und Zahlungsverwaltungspanel.", features: ["Stripe/Redsys-Integration", "Sichere Online-Zahlungen", "Automatische Rechnungen", "Zahlungsverwaltungspanel"], deliverables: ["Konfiguriertes Gateway", "Zahlungspanel", "Automatische Rechnungen", "Benutzerhandbuch"], time: "2-3 Tage", price: "197€ + MwSt.", kpis: ["+35% Conversion", "Sofortige Zahlung"], accent: "from-[hsl(38_92%_50%)] to-primary" },
+        { id: "tiendaOnline", icon: Globe, title: "Online-Shop", subtitle: "24/7 online verkaufen", description: "Produktkatalog mit Warenkorb, Checkout, Lagerverwaltung und Zahlungs-Gateway-Integration.", features: ["Produktkatalog", "Warenkorb und Checkout", "Lagerverwaltung", "Zahlungs-Gateway-Integration", "Bestellpanel"], deliverables: ["Konfigurierter Shop", "Bestellpanel", "Lagerverwaltung", "Benutzerhandbuch"], time: "7-14 Tage", price: "497€ + MwSt.", kpis: ["Online-Verkauf 24/7", "+200% Reichweite"], accent: "from-[hsl(280_70%_55%)] to-primary" },
+      ],
+    },
+    ru: {
+      badge: "Решения для автоматизации",
+      title: "Автоматизации, которые",
+      titleHighlight: "масштабируют ваш бизнес",
+      subtitle: "Профессиональные сайты, чат-боты 24/7, автоматизация бронирований и управление репутацией. Полные ИИ-решения для локального бизнеса.",
+      includes: "Включает",
+      deliverables: "Поставка",
+      implementTime: "Время внедрения:",
+      expectedKpis: "Ожидаемые KPI",
+      requestService: "Запросить услугу",
+      ctaTitle: "Готовы к автоматизации?",
+      ctaSubtitle: "Запишитесь на бесплатный аудит — мы покажем, что именно можем автоматизировать в вашем бизнесе.",
+      ctaButton: "Запросить технический аудит",
+      services: [
+        { id: "webProfesional", icon: Globe, title: "Профессиональный сайт", subtitle: "Ваше оптимизированное цифровое присутствие", description: "Лендинг или корпоративный сайт, оптимизированный под конверсию, с локальным SEO, умными формами и аналитикой.", features: ["Премиум адаптивный дизайн", "Локальное SEO", "Формы захвата лидов", "Аналитика и отслеживание", "SSL и хостинг включены"], deliverables: ["Готовый к публикации сайт", "Настроенный домен", "Настройка Google Analytics", "Руководство пользователя"], time: "7-14 дней", price: "497 € + НДС", kpis: ["+300% видимости", "2x органических лидов"], accent: "from-primary to-[hsl(200_100%_40%)]" },
+        { id: "chatbotWeb", icon: Bot, title: "Веб-чат-бот", subtitle: "Автоматическая поддержка на сайте", description: "ИИ-агент на вашем сайте отвечает на FAQ 24/7, квалифицирует лидов и автоматически записывает на приём.", features: ["ИИ-агент диалога", "Отвечает на FAQ 24/7", "Квалифицирует лидов", "Автоматически записывает на встречи"], deliverables: ["Настроенный чат-бот", "Сценарии разговора", "Дашборд метрик", "Первичное обучение"], time: "3-5 дней", price: "295 € + НДС", kpis: ["+60% захваченных лидов", "-80% времени ответа"], accent: "from-[hsl(230_70%_55%)] to-primary" },
+        { id: "chatbotWhatsApp", icon: Bot, title: "Чат-бот WhatsApp", subtitle: "ИИ-бот в WhatsApp Business", description: "ИИ-бот в WhatsApp Business с диалоговыми сценариями, автонапоминаниями и интеграцией с CRM.", features: ["ИИ-бот WhatsApp Business", "Диалоговые сценарии", "Автоматические напоминания", "Интеграция с CRM"], deliverables: ["Настроенный бот", "Сценарии WhatsApp", "Панель управления", "Автоматические отчёты"], time: "3-5 дней", price: "350 € + НДС", kpis: ["+90% ответов", "-70% no-show"], accent: "from-[hsl(150_70%_40%)] to-primary" },
+        { id: "reservas", icon: Calendar, title: "Система онлайн-бронирования", subtitle: "Анти-no-show система", description: "Календарь онлайн-бронирований с автоподтверждениями, напоминаниями и управлением отменами.", features: ["Календарь онлайн-бронирований", "Автоподтверждения", "Анти-no-show напоминания", "Управление отменами", "Интеграция с Google Calendar"], deliverables: ["Система бронирования", "Сценарии WhatsApp", "Панель управления", "Автоматические отчёты"], time: "3-5 дней", price: "197 € + НДС", kpis: ["-80% no-show", "+40% онлайн-броней"], accent: "from-primary to-[hsl(200_90%_55%)]" },
+        { id: "pasarelaPago", icon: Zap, title: "Интегрированный платёжный шлюз", subtitle: "Безопасные онлайн-платежи", description: "Интеграция Stripe/Redsys с безопасными онлайн-платежами, автосчетами и панелью управления платежами.", features: ["Интеграция Stripe/Redsys", "Безопасные онлайн-платежи", "Автоматические счета", "Панель управления платежами"], deliverables: ["Настроенный шлюз", "Панель платежей", "Автосчета", "Руководство"], time: "2-3 дня", price: "197 € + НДС", kpis: ["+35% конверсии", "Мгновенная оплата"], accent: "from-[hsl(38_92%_50%)] to-primary" },
+        { id: "tiendaOnline", icon: Globe, title: "Интернет-магазин", subtitle: "Продавайте онлайн 24/7", description: "Каталог товаров с корзиной, оформлением заказа, управлением остатками и платёжным шлюзом.", features: ["Каталог товаров", "Корзина и оформление", "Управление остатками", "Интеграция платежей", "Панель заказов"], deliverables: ["Настроенный магазин", "Панель заказов", "Управление остатками", "Руководство"], time: "7-14 дней", price: "497 € + НДС", kpis: ["Продажи онлайн 24/7", "+200% охвата"], accent: "from-[hsl(280_70%_55%)] to-primary" },
+      ],
+    },
   };
 
-  // Spanish for 'es', English for all other supported languages (until full translations land)
-  const t = language === 'es' ? content.es : content.en;
+  const t = content[language as keyof typeof content] ?? content.es;
   const seo = usePageSEO('servicios');
 
   return (

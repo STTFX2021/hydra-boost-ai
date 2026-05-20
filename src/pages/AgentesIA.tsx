@@ -5,11 +5,70 @@ import { Link } from "react-router-dom";
 import { PageLayout } from "@/components/layout/PageLayout";
 import { SEOHead, BreadcrumbSchema } from "@/components/seo";
 import { AGENTS_DATA } from "@/data/agents";
+import { useI18n } from "@/lib/i18n";
 
-const CATEGORIES = [
-  "Ventas", "Atención al Cliente", "Marketing", "Operaciones",
-  "Conocimiento", "Automatización", "Legal",
-];
+const COPY = {
+  es: {
+    categories: ["Ventas", "Atención al Cliente", "Marketing", "Operaciones", "Conocimiento", "Automatización", "Legal"],
+    catalog: "Catálogo de Soluciones",
+    h1a: "Agentes IA que trabajan",
+    h1b: "por tu negocio 24/7",
+    sub: "Soluciones modulares y listas para implementar. Haz clic en cada agente para ver cómo funciona paso a paso.",
+    problem: "Problema",
+    result: "Resultado",
+    seeHow: "Ver cómo funciona",
+    ctaA: "¿Qué agente necesita",
+    ctaB: "tu negocio?",
+    ctaSub: "Te ayudamos a identificar las automatizaciones con mayor impacto. Auditoría gratuita y sin compromiso.",
+    ctaBtn: "Solicitar Auditoría Gratis",
+    breadcrumb: "Inicio",
+  },
+  en: {
+    categories: ["Sales", "Customer Support", "Marketing", "Operations", "Knowledge", "Automation", "Legal"],
+    catalog: "Solutions Catalog",
+    h1a: "AI Agents that work",
+    h1b: "for your business 24/7",
+    sub: "Modular, ready-to-deploy solutions. Click each agent to see how it works step by step.",
+    problem: "Problem",
+    result: "Result",
+    seeHow: "See how it works",
+    ctaA: "Which agent does",
+    ctaB: "your business need?",
+    ctaSub: "We help you identify the highest-impact automations. Free, no-commitment audit.",
+    ctaBtn: "Request Free Audit",
+    breadcrumb: "Home",
+  },
+  de: {
+    categories: ["Vertrieb", "Kundensupport", "Marketing", "Betrieb", "Wissen", "Automatisierung", "Recht"],
+    catalog: "Lösungskatalog",
+    h1a: "KI-Agenten, die für Ihr Unternehmen",
+    h1b: "rund um die Uhr arbeiten",
+    sub: "Modulare, einsatzbereite Lösungen. Klicken Sie auf jeden Agenten, um Schritt für Schritt zu sehen, wie er funktioniert.",
+    problem: "Problem",
+    result: "Ergebnis",
+    seeHow: "So funktioniert es",
+    ctaA: "Welchen Agenten braucht",
+    ctaB: "Ihr Unternehmen?",
+    ctaSub: "Wir helfen Ihnen, die wirkungsvollsten Automatisierungen zu identifizieren. Kostenloses Audit ohne Verpflichtung.",
+    ctaBtn: "Kostenloses Audit anfordern",
+    breadcrumb: "Start",
+  },
+  ru: {
+    categories: ["Продажи", "Поддержка клиентов", "Маркетинг", "Операции", "Знания", "Автоматизация", "Юридическое"],
+    catalog: "Каталог решений",
+    h1a: "ИИ-агенты, работающие на ваш бизнес",
+    h1b: "24/7",
+    sub: "Модульные готовые к внедрению решения. Нажмите на каждого агента, чтобы увидеть пошаговую работу.",
+    problem: "Проблема",
+    result: "Результат",
+    seeHow: "Как это работает",
+    ctaA: "Какой агент нужен",
+    ctaB: "вашему бизнесу?",
+    ctaSub: "Помогаем определить автоматизации с максимальным эффектом. Бесплатный аудит без обязательств.",
+    ctaBtn: "Запросить бесплатный аудит",
+    breadcrumb: "Главная",
+  },
+} as const;
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -21,6 +80,9 @@ const itemVariants = {
 };
 
 export default function AgentesIA() {
+  const { language } = useI18n();
+  const t = COPY[language as keyof typeof COPY] ?? COPY.es;
+  const CATEGORIES = t.categories;
   return (
     <>
       <SEOHead
@@ -30,7 +92,7 @@ export default function AgentesIA() {
         keywords="agentes ia, soluciones ia, chatbot ventas, automatización marketing, agente atención cliente"
       />
       <BreadcrumbSchema items={[
-        { name: "Inicio", url: "/" },
+        { name: t.breadcrumb, url: "/" },
         { name: "Agentes IA", url: "/agentes-ia" },
       ]} />
 
@@ -52,14 +114,14 @@ export default function AgentesIA() {
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
               <span className="badge-secondary mb-6 inline-flex items-center gap-2">
                 <Bot className="w-3.5 h-3.5" />
-                Catálogo de Soluciones
+                {t.catalog}
               </span>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
-                Agentes IA que trabajan <br />
-                <span className="text-gradient-hydrai">por tu negocio 24/7</span>
+                {t.h1a} <br />
+                <span className="text-gradient-hydrai">{t.h1b}</span>
               </h1>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
-                Soluciones modulares y listas para implementar. Haz clic en cada agente para ver cómo funciona paso a paso.
+                {t.sub}
               </p>
             </motion.div>
 
@@ -120,17 +182,17 @@ export default function AgentesIA() {
 
                         <div className="grid grid-cols-2 gap-3 text-xs mb-3">
                           <div className="rounded-lg bg-destructive/5 border border-destructive/10 px-3 py-2">
-                            <span className="text-destructive/70 font-medium block mb-0.5">Problema</span>
+                            <span className="text-destructive/70 font-medium block mb-0.5">{t.problem}</span>
                             <span className="text-muted-foreground">{agent.problem.length > 60 ? agent.problem.slice(0, 60) + "…" : agent.problem}</span>
                           </div>
                           <div className="rounded-lg bg-success/5 border border-success/10 px-3 py-2">
-                            <span className="text-success font-medium block mb-0.5">Resultado</span>
+                            <span className="text-success font-medium block mb-0.5">{t.result}</span>
                             <span className="text-muted-foreground">{agent.resultMetric}</span>
                           </div>
                         </div>
 
                         <span className="inline-flex items-center gap-1 text-xs text-primary font-medium group-hover:gap-2 transition-all">
-                          Ver cómo funciona
+                          {t.seeHow}
                           <ArrowRight className="w-3.5 h-3.5" />
                         </span>
                       </div>
@@ -156,14 +218,14 @@ export default function AgentesIA() {
               }}
             >
               <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-                ¿Qué agente necesita <span className="text-gradient-hydrai">tu negocio</span>?
+                {t.ctaA} <span className="text-gradient-hydrai">{t.ctaB}</span>
               </h2>
               <p className="text-lg text-muted-foreground mb-8">
-                Te ayudamos a identificar las automatizaciones con mayor impacto. Auditoría gratuita y sin compromiso.
+                {t.ctaSub}
               </p>
               <Link to="/auditoria-gratis">
                 <Button size="lg" className="btn-neon text-lg px-10">
-                  Solicitar Auditoría Gratis
+                  {t.ctaBtn}
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
