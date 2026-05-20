@@ -1037,28 +1037,36 @@ export function useContactTranslation(): ContactCopy & { language: Language } {
 
 // ===== Page SEO meta (Home / Servicios / Precios) =====
 export interface PageSEO { title: string; description: string; }
-type PageKey = 'home' | 'servicios' | 'precios';
+type PageKey = 'home' | 'servicios' | 'precios' | 'auditoria' | 'contacto';
 
 const pageSEOTranslations: Record<Language, Record<PageKey, PageSEO>> = {
   es: {
-    home: { title: 'HydrAI Labs | Automatización IA para Negocios Locales en Costa del Sol', description: 'Agencia de automatización con IA en Costa del Sol. Chatbots WhatsApp 24/7, automatizaciones n8n y captación de clientes para restaurantes, clínicas, inmobiliarias y gimnasios.' },
-    servicios: { title: 'Servicios de Automatización IA | HydrAI Labs', description: 'Chatbots IA, webs SEO, scraping y campañas automáticas por WhatsApp, Email e Instagram. Desde 197€.' },
-    precios: { title: 'Precios y Planes de Automatización IA | HydrAI Labs', description: 'Planes de automatización IA para negocios locales desde implementación básica hasta arquitectura enterprise. Sin sorpresas, sin permanencia. Costa del Sol.' },
+    home: { title: 'HydrAI Labs | Agencia de IA y Automatización para Negocios en España', description: 'Automatizamos reservas, atención al cliente, WhatsApp, captación y procesos internos para restaurantes, clínicas, inmobiliarias y negocios locales. Solicita una auditoría IA gratuita.' },
+    servicios: { title: 'Servicios de IA y Automatización para Negocios | HydrAI Labs', description: 'Chatbots IA WhatsApp 24/7, webs con SEO local, automatizaciones n8n, sistemas de reservas y captación de leads para negocios en España. Desde 197€. Auditoría gratis.' },
+    precios: { title: 'Precios de Automatización IA para Negocios | HydrAI Labs', description: 'Planes de automatización IA para restaurantes, clínicas e inmobiliarias en España. Desde 497€. Sin permanencia. Solicita una auditoría IA gratuita antes de contratar.' },
+    auditoria: { title: 'Auditoría IA Gratuita para tu Negocio | HydrAI Labs', description: 'Auditoría de automatización IA gratis para negocios en España y Costa del Sol. Te decimos qué automatizar para captar más clientes, ahorrar horas y reducir no-shows.' },
+    contacto: { title: 'Contacto HydrAI Labs | Agencia IA en Costa del Sol', description: 'Habla con HydrAI Labs: agencia de IA y automatización para restaurantes, clínicas e inmobiliarias en España. Auditoría gratuita y respuesta en 24h.' },
   },
   en: {
-    home: { title: 'HydrAI Labs | AI Automation for Local Businesses on Costa del Sol', description: 'AI automation agency on Costa del Sol. 24/7 WhatsApp chatbots, n8n automations and lead generation for restaurants, clinics, real estate and gyms.' },
-    servicios: { title: 'AI Automation Services | HydrAI Labs', description: 'AI chatbots, SEO websites, scraping and automated WhatsApp, Email & Instagram campaigns. From €197.' },
-    precios: { title: 'AI Automation Pricing & Plans | HydrAI Labs', description: 'AI automation plans for local businesses, from basic implementation to enterprise architecture. No surprises, no lock-in. Costa del Sol.' },
+    home: { title: 'HydrAI Labs | AI & Automation Agency for Businesses in Spain', description: 'We automate bookings, customer service, WhatsApp, lead capture and back-office for restaurants, clinics, real estate and local businesses. Request a free AI audit.' },
+    servicios: { title: 'AI & Automation Services for Local Businesses | HydrAI Labs', description: '24/7 WhatsApp AI chatbots, local SEO websites, n8n automations, booking systems and lead capture for businesses in Spain. From €197. Free AI audit.' },
+    precios: { title: 'AI Automation Pricing for Local Businesses | HydrAI Labs', description: 'AI automation plans for restaurants, clinics and real estate in Spain. From €497. No lock-in. Get a free AI audit before you choose a plan.' },
+    auditoria: { title: 'Free AI Audit for Your Business | HydrAI Labs', description: 'Free AI automation audit for businesses in Spain and Costa del Sol. We tell you exactly what to automate to capture more clients and save hours.' },
+    contacto: { title: 'Contact HydrAI Labs | AI Agency on the Costa del Sol', description: 'Talk to HydrAI Labs — AI and automation agency for restaurants, clinics and real estate in Spain. Free audit and reply within 24h.' },
   },
   ru: {
-    home: { title: 'HydrAI Labs | ИИ-автоматизация для бизнеса на Коста-дель-Соль', description: 'Агентство ИИ-автоматизации на Коста-дель-Соль. WhatsApp-чат-боты 24/7, n8n-автоматизации и привлечение клиентов для ресторанов, клиник, агентств недвижимости и фитнес-клубов.' },
-    servicios: { title: 'Услуги ИИ-автоматизации | HydrAI Labs', description: 'ИИ-чат-боты, SEO-сайты, скрапинг и автоматические кампании в WhatsApp, email и Instagram. От 197 €.' },
-    precios: { title: 'Цены и тарифы ИИ-автоматизации | HydrAI Labs', description: 'Тарифы ИИ-автоматизации для локального бизнеса — от базового внедрения до enterprise-архитектуры. Без сюрпризов, без привязки. Коста-дель-Соль.' },
+    home: { title: 'HydrAI Labs | Агентство ИИ и автоматизации для бизнеса в Испании', description: 'Автоматизируем бронирования, поддержку клиентов, WhatsApp, привлечение лидов и внутренние процессы для ресторанов, клиник, недвижимости и локального бизнеса. Бесплатный ИИ-аудит.' },
+    servicios: { title: 'Услуги ИИ и автоматизации для бизнеса | HydrAI Labs', description: 'ИИ-чат-боты WhatsApp 24/7, SEO-сайты, n8n-автоматизации, системы бронирования и привлечения лидов для бизнеса в Испании. От 197 €. Бесплатный аудит.' },
+    precios: { title: 'Цены ИИ-автоматизации для бизнеса | HydrAI Labs', description: 'Тарифы ИИ-автоматизации для ресторанов, клиник и агентств недвижимости в Испании. От 497 €. Без привязки. Бесплатный ИИ-аудит перед выбором тарифа.' },
+    auditoria: { title: 'Бесплатный ИИ-аудит для вашего бизнеса | HydrAI Labs', description: 'Бесплатный аудит ИИ-автоматизации для бизнеса в Испании и на Коста-дель-Соль. Скажем, что именно автоматизировать, чтобы привлечь больше клиентов.' },
+    contacto: { title: 'Контакт HydrAI Labs | ИИ-агентство на Коста-дель-Соль', description: 'Свяжитесь с HydrAI Labs — агентство ИИ и автоматизации для ресторанов, клиник и недвижимости в Испании. Бесплатный аудит и ответ за 24 часа.' },
   },
   de: {
-    home: { title: 'HydrAI Labs | KI-Automatisierung für lokale Unternehmen an der Costa del Sol', description: 'KI-Automatisierungsagentur an der Costa del Sol. 24/7 WhatsApp-Chatbots, n8n-Automatisierungen und Kundengewinnung für Restaurants, Kliniken, Immobilien und Fitnessstudios.' },
-    servicios: { title: 'KI-Automatisierungsdienste | HydrAI Labs', description: 'KI-Chatbots, SEO-Websites, Scraping und automatisierte WhatsApp-, E-Mail- und Instagram-Kampagnen. Ab 197€.' },
-    precios: { title: 'Preise und Pläne für KI-Automatisierung | HydrAI Labs', description: 'KI-Automatisierungspläne für lokale Unternehmen, von der Basisimplementierung bis zur Enterprise-Architektur. Keine Überraschungen, keine Bindung.' },
+    home: { title: 'HydrAI Labs | KI- und Automatisierungsagentur für Unternehmen in Spanien', description: 'Wir automatisieren Buchungen, Kundenservice, WhatsApp, Lead-Erfassung und Back-Office für Restaurants, Kliniken, Immobilien und lokale Unternehmen. Kostenloses KI-Audit anfragen.' },
+    servicios: { title: 'KI- und Automatisierungsdienste für lokale Unternehmen | HydrAI Labs', description: '24/7 WhatsApp-KI-Chatbots, lokale SEO-Websites, n8n-Automatisierungen, Buchungssysteme und Lead-Erfassung in Spanien. Ab 197€. Kostenloses Audit.' },
+    precios: { title: 'Preise KI-Automatisierung für lokale Unternehmen | HydrAI Labs', description: 'KI-Automatisierungspläne für Restaurants, Kliniken und Immobilien in Spanien. Ab 497€. Keine Bindung. Kostenloses KI-Audit vor Auswahl eines Plans.' },
+    auditoria: { title: 'Kostenloses KI-Audit für Ihr Unternehmen | HydrAI Labs', description: 'Kostenloses KI-Automatisierungs-Audit für Unternehmen in Spanien und an der Costa del Sol. Wir sagen Ihnen genau, was Sie automatisieren sollten.' },
+    contacto: { title: 'Kontakt HydrAI Labs | KI-Agentur an der Costa del Sol', description: 'Sprechen Sie mit HydrAI Labs — KI- und Automatisierungsagentur für Restaurants, Kliniken und Immobilien in Spanien. Kostenloses Audit, Antwort in 24h.' },
   },
 };
 
