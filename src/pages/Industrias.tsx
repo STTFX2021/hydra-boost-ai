@@ -86,7 +86,7 @@ const UI = {
     ctaTitle: "Вашей отрасли нет в списке?",
     ctaDesc: "Создаём индивидуальные автоматизации для любого бизнеса. Расскажите о вашей задаче.",
   },
-} as const;
+};
 
 const AUTOMATIONS = (language: Lang) => {
   const items = pick(language, {
