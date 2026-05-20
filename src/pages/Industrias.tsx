@@ -11,7 +11,7 @@ import { useTranslation, type Language } from "@/lib/i18n";
 import { SEOHead, BreadcrumbSchema } from "@/components/seo";
 
 type Lang = Language;
-const pick = <T,>(l: Lang, m: { es: T; en: T; de: T; ru: T }): T => m[l] ?? m.es;
+const pick = <T,>(l: Lang, m: Record<Lang, T>): T => m[l] ?? m.es;
 
 const UI = {
   es: {
