@@ -25,7 +25,7 @@ import { SectorDemos } from "@/components/landing/SectorDemos";
 import { AnimatedCounters } from "@/components/landing/AnimatedCounters";
 import { TestimonialsSection } from "@/components/landing/TestimonialsSection";
 
-import { Shield, Zap } from "lucide-react";
+
 
 // Lazy-loaded below-the-fold sections
 const ROICalculator = lazy(() =>
