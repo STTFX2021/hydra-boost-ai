@@ -39,6 +39,12 @@ const AuditoriaGratis = () => {
         { name: 'Inicio', url: '/' },
         { name: 'Auditoría Gratis', url: '/auditoria-gratis' }
       ]} />
+      <ProfessionalServiceSchema
+        name="Auditoría IA Gratuita para Negocios — HydrAI Labs"
+        description="Auditoría gratuita de automatización con IA para restaurantes, clínicas, inmobiliarias, hoteles y negocios locales en España y Costa del Sol."
+        url="/auditoria-gratis"
+      />
+      <FAQSchema items={AUDIT_FAQ} />
 
       {/* Hero */}
       <section className="relative section-padding overflow-hidden">
