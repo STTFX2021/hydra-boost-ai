@@ -38,6 +38,32 @@ const Casos = () => {
       ctaSubtitle: "Schedule a free audit and we'll show you exactly what we can automate.",
       ctaButton: "Request Technical Audit",
     },
+    de: {
+      badge: "Automatisierungs-Portfolio",
+      title: "Projekte",
+      titleHighlight: "in Produktion",
+      subtitle: "Echte KI-Automatisierungsfälle. Jedes Projekt umfasst Website, Chatbot und/oder Automatisierungen, die rund um die Uhr laufen.",
+      viewDemo: "Projekt ansehen",
+      comingSoon: "Demnächst",
+      testimonialsTitle: "Was unsere Kunden sagen",
+      testimonialsSubtitle: "Echte Ergebnisse von Unternehmen, die uns vertraut haben",
+      ctaTitle: "Bereit für Ihr Projekt?",
+      ctaSubtitle: "Vereinbaren Sie ein kostenloses Audit und wir zeigen Ihnen genau, was wir automatisieren können.",
+      ctaButton: "Technisches Audit anfordern",
+    },
+    ru: {
+      badge: "Портфолио автоматизаций",
+      title: "Проекты",
+      titleHighlight: "в продакшене",
+      subtitle: "Реальные кейсы ИИ-автоматизации. Каждый проект включает сайт, чат-бот и/или автоматизации, работающие 24/7.",
+      viewDemo: "Посмотреть проект",
+      comingSoon: "Скоро",
+      testimonialsTitle: "Что говорят наши клиенты",
+      testimonialsSubtitle: "Реальные результаты бизнесов, доверившихся нам",
+      ctaTitle: "Готовы к вашему проекту?",
+      ctaSubtitle: "Запишитесь на бесплатный аудит — покажем, что именно можно автоматизировать.",
+      ctaButton: "Запросить технический аудит",
+    },
   };
 
   const t = content[language as keyof typeof content] || content.es;
