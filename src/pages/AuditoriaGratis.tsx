@@ -1,31 +1,35 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PageLayout } from "@/components/layout/PageLayout";
-import { WebPageSchema, BreadcrumbSchema } from "@/components/seo";
-import { Helmet } from "react-helmet-async";
+import {
+  SEOHead,
+  WebPageSchema,
+  BreadcrumbSchema,
+  ProfessionalServiceSchema,
+  FAQSchema,
+} from "@/components/seo";
 import { ProfileSelector } from "@/components/diagnostic/ProfileSelector";
 import { LocalBusinessForm } from "@/components/diagnostic/LocalBusinessForm";
 import { WhatWeReview } from "@/components/landing";
+import { usePageSEO } from "@/lib/i18n";
 import { motion } from "framer-motion";
 import { Sparkles, Shield, Zap, TrendingUp } from "lucide-react";
+
+const AUDIT_FAQ = [
+  { question: "¿Cuánto cuesta la auditoría IA?", answer: "La auditoría es 100% gratuita y sin compromiso. Valorada en 150€." },
+  { question: "¿Qué recibo al solicitar la auditoría?", answer: "Análisis de tus procesos actuales, 3-5 automatizaciones IA priorizadas para tu negocio, estimación de ahorro de tiempo y dinero, y propuesta de implantación clara." },
+  { question: "¿Para qué tipo de negocios sirve?", answer: "Restaurantes, clínicas, inmobiliarias, hoteles, gimnasios y pymes en España y Costa del Sol." },
+  { question: "¿Cuánto tarda?", answer: "Recibirás el diagnóstico inicial automatizado en 2 minutos. La sesión humana de auditoría se agenda en menos de 48h." },
+];
 
 const AuditoriaGratis = () => {
   const navigate = useNavigate();
   const [view, setView] = useState<"select" | "local">("select");
+  const seo = usePageSEO("auditoria");
 
   return (
     <PageLayout>
-      <Helmet>
-        <title>Auditoría IA Gratuita para tu Negocio | HydrAI Labs</title>
-        <meta name="description" content="Solicita tu auditoría gratuita de automatización IA. Analizamos tu negocio y te decimos exactamente qué automatizar para ahorrar tiempo y captar más clientes." />
-        <link rel="canonical" href="https://hydrailabs.com/auditoria-gratis" />
-        <meta property="og:title" content="Auditoría IA Gratuita para tu Negocio | HydrAI Labs" />
-        <meta property="og:description" content="Solicita tu auditoría gratuita de automatización IA. Analizamos tu negocio y te decimos exactamente qué automatizar para ahorrar tiempo y captar más clientes." />
-        <meta property="og:url" content="https://hydrailabs.com/auditoria-gratis" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:title" content="Auditoría IA Gratuita para tu Negocio | HydrAI Labs" />
-        <meta name="twitter:description" content="Solicita tu auditoría gratuita de automatización IA. Analizamos tu negocio y te decimos exactamente qué automatizar para ahorrar tiempo y captar más clientes." />
-      </Helmet>
+      <SEOHead title={seo.title} description={seo.description} canonical="/auditoria-gratis" />
       <WebPageSchema
         name="Auditoría Gratis de Automatización IA"
         description="Solicita tu auditoría gratuita de automatización con IA."
