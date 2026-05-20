@@ -1,19 +1,53 @@
+# HydrAI Labs robots.txt
+# Permite indexación legítima. Bloquea crawlers agresivos / scrapers conocidos.
+# IMPORTANTE: el bloqueo real por país o IP debe hacerse en Cloudflare / WAF / DNS.
+# Este archivo solo es una señal voluntaria; los bots maliciosos lo ignoran.
+
+# ---------------------------------------------------------------
+# Reglas por defecto
+# ---------------------------------------------------------------
 User-agent: *
 Allow: /
-Allow: /llms.txt
 Disallow: /admin
 Disallow: /admin/*
 Disallow: /login
 Disallow: /inversores
 Disallow: /api/
 
+# ---------------------------------------------------------------
+# Buscadores legítimos (acceso total explícito)
+# ---------------------------------------------------------------
 User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Googlebot-News
 Allow: /
 
 User-agent: Bingbot
 Allow: /
 
-# OpenAI
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# Brave Search
+User-agent: BraveBot
+Allow: /
+
+# ---------------------------------------------------------------
+# LLM / AI crawlers permitidos (GEO / AEO)
+# ---------------------------------------------------------------
 User-agent: OAI-SearchBot
 Allow: /
 
@@ -23,23 +57,80 @@ Allow: /
 User-agent: ChatGPT-User
 Allow: /
 
-# Anthropic
 User-agent: ClaudeBot
 Allow: /
 
 User-agent: Claude-Web
 Allow: /
 
-# Google AI / Gemini
 User-agent: Google-Extended
 Allow: /
 
-# Perplexity
 User-agent: PerplexityBot
 Allow: /
 
-# Common Crawl (used by many LLMs)
 User-agent: CCBot
 Allow: /
 
+# ---------------------------------------------------------------
+# Scrapers / SEO crawlers agresivos conocidos (bloqueados)
+# Bloquear estos NO afecta a Google / Bing / Brave / LLMs legítimos.
+# ---------------------------------------------------------------
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: SemrushBot-SA
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: SeznamBot
+Disallow: /
+
+User-agent: SerpstatBot
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
+User-agent: ZoominfoBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: ImagesiftBot
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: magpie-crawler
+Disallow: /
+
+User-agent: SiteAuditBot
+Disallow: /
+
+User-agent: BarkrowlerBot
+Disallow: /
+
+User-agent: barkrowler
+Disallow: /
+
+# ---------------------------------------------------------------
+# Sitemap
+# ---------------------------------------------------------------
 Sitemap: https://hydrailabs.com/sitemap.xml
