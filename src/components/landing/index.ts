@@ -18,3 +18,4 @@ export { LocalSEOLinks } from "./LocalSEOLinks";
 export { WhatWeReview } from "./WhatWeReview";
 export { LocalSpecialists } from "./LocalSpecialists";
 export { DifferentiatorBlock } from "./DifferentiatorBlock";
+export { EnterpriseAuditSection } from "./EnterpriseAuditSection";

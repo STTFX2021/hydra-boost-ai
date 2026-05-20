@@ -9,7 +9,7 @@ import {
   UseCaseTabs,
   BaseImplementations,
   EnterpriseElite,
-  LeadFormMultiStep,
+  EnterpriseAuditSection,
   IntegrationsShowcase,
   AgentsTeaser,
   InsightsTeaser,
