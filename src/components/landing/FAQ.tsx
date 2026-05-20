@@ -90,6 +90,28 @@ const FAQS_EN = [
   }
 ];
 
+const FAQS_DE = [
+  { q: "Was ist KI-Automatisierung für lokale Unternehmen?", a: "Eine Reihe von Systemen, die KI nutzen, um Kunden zu beantworten, Leads zu erfassen, Buchungen und wiederkehrende Aufgaben zu verwalten — ohne dass Ihr Team ständig aufpassen muss. Für ein Restaurant, eine Klinik, ein Immobilienbüro oder ein Fitnessstudio bedeutet das automatische WhatsApp-Antworten, Terminerinnerungen, Qualifizierung von Instagram-Leads oder Bestellabwicklung." },
+  { q: "Was kostet die Automatisierung eines Unternehmens mit KI?", a: "Unsere Systeme für lokale Unternehmen starten bei 297 €/Monat (Base) und skalieren je nach Volumen und Kanälen. Das initiale Audit ist kostenlos: Wir sagen Ihnen, was zuerst automatisiert werden sollte, was es kostet und welchen ROI Sie erwarten können — bevor Sie irgendetwas buchen." },
+  { q: "Was kann HydrAI Labs automatisieren?", a: "WhatsApp-Chatbots, Sprachagenten für Anrufe, Buchungen und Kalender, Anti-No-Show-Erinnerungen, Lead-Erfassung aus Social Media, Qualifizierung und Routing von Opportunities, CRM-Integration, Sales-Follow-up und interne Workflows mit n8n." },
+  { q: "Arbeitet HydrAI Labs mit Restaurants?", a: "Ja. Wir haben spezifische Systeme für Restaurants: mehrsprachiger WhatsApp-Chatbot für Reservierungen und Menüfragen, Verwaltung von Take-Away-Bestellungen, Sprachagenten für Telefonreservierungen und Erinnerungen zur Reduzierung von No-Shows." },
+  { q: "Kann man WhatsApp automatisieren?", a: "Ja. Wir verbinden eine WhatsApp Business-Nummer mit einem KI-Assistenten, der 24/7 in mehreren Sprachen antwortet, echte Buchungen gegen Ihr System verwaltet, Meta-Ads-Leads qualifiziert und bei Bedarf an einen Menschen eskaliert." },
+  { q: "Kann man einen Sprachagenten für Anrufe erstellen?", a: "Ja. Wir implementieren KI-Sprachagenten (basierend auf Vapi und fortschrittlichen Modellen), die eingehende Anrufe annehmen, Buchungen verwalten, häufige Fragen beantworten und bei Bedarf an das Team weiterleiten." },
+  { q: "Arbeiten Sie an der Costa del Sol?", a: "Ja. HydrAI Labs hat seinen Sitz in Málaga und arbeitet mit lokalen Unternehmen an der gesamten Costa del Sol: Marbella, Málaga, Estepona, Fuengirola, Benalmádena, Torremolinos und Mijas. Wir arbeiten auch remote im Rest von Spanien und Europa." },
+  { q: "Was unterscheidet HydrAI Labs von einer normalen Webagentur?", a: "Eine Webagentur liefert Ihnen eine Seite und verschwindet. Wir bauen komplette Betriebssysteme: Lead-Gewinnung, Kundensupport, Prozessautomatisierung und Sales-Follow-up — integriert in Ihre Tools und messbar in echten Metriken. Wir verkaufen kein Design, wir verkaufen Betriebsergebnisse." },
+];
+
+const FAQS_RU = [
+  { q: "Что такое ИИ-автоматизация для локального бизнеса?", a: "Это набор систем на основе ИИ, которые отвечают клиентам, захватывают лидов, управляют бронированиями и рутинными задачами — без постоянного участия команды. Для ресторана, клиники, агентства недвижимости или фитнес-клуба это означает автоответы в WhatsApp, напоминания о записях, квалификация лидов из Instagram и автоматическая обработка заказов." },
+  { q: "Сколько стоит автоматизация бизнеса с ИИ?", a: "Наши системы для локального бизнеса начинаются от 297 €/месяц (тариф Base) и масштабируются в зависимости от объёма и каналов. Первичный аудит бесплатен: мы скажем, что автоматизировать в первую очередь, сколько это стоит и какой ROI ожидать — до заключения договора." },
+  { q: "Что может автоматизировать HydrAI Labs?", a: "Чат-боты WhatsApp, голосовые агенты для звонков, бронирования и расписание, напоминания против no-show, захват лидов из соцсетей, квалификацию и маршрутизацию заявок, интеграцию с CRM, sales follow-up и внутренние процессы в n8n." },
+  { q: "HydrAI Labs работает с ресторанами?", a: "Да. У нас есть специализированные системы для ресторанов: многоязычный чат-бот WhatsApp для бронирований и вопросов по меню, управление заказами на вынос, голосовые агенты для телефонных бронирований и напоминания для снижения no-show." },
+  { q: "Можно ли автоматизировать WhatsApp?", a: "Да. Подключаем номер WhatsApp Business к ИИ-ассистенту, который отвечает 24/7 на нескольких языках, управляет реальными бронированиями в вашей системе, квалифицирует лидов из Meta Ads и передаёт диалог человеку при необходимости." },
+  { q: "Можно ли создать голосового агента для звонков?", a: "Да. Внедряем голосовых ИИ-агентов (на базе Vapi и продвинутых моделей), которые принимают входящие звонки, управляют бронированиями, отвечают на частые вопросы и передают разговор команде при необходимости." },
+  { q: "Вы работаете на Коста-дель-Соль?", a: "Да. HydrAI Labs базируется в Малаге и работает с локальным бизнесом по всему побережью: Марбелья, Малага, Эстепона, Фуэнхирола, Бенальмадена, Торремолинос и Михас. Также удалённо работаем по всей Испании и Европе." },
+  { q: "Чем HydrAI Labs отличается от обычного веб-агентства?", a: "Веб-агентство сдаёт сайт и уходит. Мы строим полноценные операционные системы: привлечение, поддержку, автоматизацию процессов и sales follow-up — интегрированные с вашими инструментами и измеримые реальными метриками. Мы продаём не дизайн, а операционный результат." },
+];
+
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -103,15 +125,19 @@ const itemVariants = {
   visible: { opacity: 1, y: 0 },
 };
 
+const TITLES: Record<string, { title: string; subtitle: string }> = {
+  es: { title: 'Preguntas Frecuentes', subtitle: 'Todo lo que necesitas saber antes de empezar' },
+  en: { title: 'Frequently Asked Questions', subtitle: 'Everything you need to know before getting started' },
+  de: { title: 'Häufig gestellte Fragen', subtitle: 'Alles, was Sie vor dem Start wissen müssen' },
+  ru: { title: 'Часто задаваемые вопросы', subtitle: 'Всё, что нужно знать перед началом' },
+};
+
 export const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const { language } = useLandingTranslation();
 
-  const faqs = language === 'es' ? FAQS_ES : FAQS_EN;
-  const title = language === 'es' ? 'Preguntas Frecuentes' : 'Frequently Asked Questions';
-  const subtitle = language === 'es'
-    ? 'Todo lo que necesitas saber antes de empezar'
-    : 'Everything you need to know before getting started';
+  const faqs = language === 'de' ? FAQS_DE : language === 'ru' ? FAQS_RU : language === 'es' ? FAQS_ES : FAQS_EN;
+  const { title, subtitle } = TITLES[language] ?? TITLES.es;
 
   // FAQPage JSON-LD schema (always use Spanish for SEO)
   const faqSchema = {
