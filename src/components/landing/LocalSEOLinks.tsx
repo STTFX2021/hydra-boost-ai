@@ -16,6 +16,12 @@ const verticalLinks = [
   { to: "/agentes-ia-inmobiliarias-costa-del-sol", labels: { es: "Agentes IA para Inmobiliarias", en: "AI Agents for Real Estate", de: "KI-Agenten für Immobilien", ru: "ИИ-агенты для агентств недвижимости" } },
   { to: "/chatbot-ia-hoteles-marbella", labels: { es: "Chatbot IA para Hoteles en Marbella", en: "AI Chatbot for Hotels in Marbella", de: "KI-Chatbot für Hotels in Marbella", ru: "ИИ-чат-бот для отелей Марбельи" } },
   { to: "/automatizacion-ia-pymes-malaga", labels: { es: "Automatización IA para Pymes", en: "AI Automation for SMBs", de: "KI-Automatisierung für KMU", ru: "ИИ-автоматизация для МСБ" } },
+  { to: "/sectores/restaurantes", labels: { es: "Sector Restaurantes", en: "Restaurants Sector", de: "Branche Restaurants", ru: "Сектор: рестораны" } },
+  { to: "/sectores/inmobiliarias", labels: { es: "Sector Inmobiliarias", en: "Real Estate Sector", de: "Branche Immobilien", ru: "Сектор: недвижимость" } },
+  { to: "/sectores/clinicas-estetica", labels: { es: "Sector Clínicas Estéticas", en: "Aesthetic Clinics Sector", de: "Branche ästhetische Kliniken", ru: "Сектор: эстетические клиники" } },
+  { to: "/servicios/chatbots-ia", labels: { es: "Servicio: Chatbots IA", en: "Service: AI Chatbots", de: "Dienst: KI-Chatbots", ru: "Услуга: ИИ-чат-боты" } },
+  { to: "/servicios/automatizaciones", labels: { es: "Servicio: Automatizaciones n8n", en: "Service: n8n Automations", de: "Dienst: n8n-Automatisierungen", ru: "Услуга: n8n-автоматизации" } },
+  { to: "/auditoria-gratis", labels: { es: "Solicitar auditoría IA gratuita", en: "Request free AI audit", de: "Kostenloses KI-Audit anfragen", ru: "Запросить бесплатный ИИ-аудит" } },
 ];
 
 const COPY = {
