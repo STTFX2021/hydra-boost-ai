@@ -127,66 +127,28 @@ const componentDetails = {
     }
   },
   en: {
-    intake: {
-      title: "Lead Intake",
-      description: "Entry point for all leads and system events.",
-      bullets: [
-        "Receives events from WhatsApp, Web, Instagram, APIs",
-        "Normalizes and validates input data",
-        "Assigns timestamps and unique IDs",
-        "Routes to Event Bus for processing"
-      ]
-    },
-    eventbus: {
-      title: "Event Bus",
-      description: "System backbone that distributes events.",
-      bullets: [
-        "Pub/Sub for decoupled communication",
-        "Guarantees message delivery",
-        "Allows historical event replay",
-        "Scales horizontally without limits"
-      ]
-    },
-    orchestrator: {
-      title: "Orchestrator",
-      description: "Brain that decides what to do with each event.",
-      bullets: [
-        "Evaluates business rules in real-time",
-        "Prioritizes events by urgency (P0/P1/P2)",
-        "Distributes work to specialized Workers",
-        "Handles retries and fallbacks"
-      ]
-    },
-    leadsWorker: {
-      title: "Leads Worker",
-      description: "Specialized in lead processing.",
-      bullets: [
-        "Automatic AI qualification",
-        "Lead scoring and prioritization",
-        "Sales rep assignment",
-        "Nurturing sequence trigger"
-      ]
-    },
-    opsWorker: {
-      title: "OPS Worker",
-      description: "Handles business operations.",
-      bullets: [
-        "Processes payments and billing",
-        "Manages bookings and cancellations",
-        "Updates inventory in real-time",
-        "Syncs with external ERPs"
-      ]
-    },
-    notifications: {
-      title: "Notifications",
-      description: "Multi-channel notification system.",
-      bullets: [
-        "Email, SMS, WhatsApp, Push",
-        "Language-specific templates",
-        "Smart scheduling",
-        "Delivery and open tracking"
-      ]
-    }
+    intake: { title: "Lead Intake", description: "Entry point for all leads and system events.", bullets: ["Receives events from WhatsApp, Web, Instagram, APIs", "Normalizes and validates input data", "Assigns timestamps and unique IDs", "Routes to Event Bus for processing"] },
+    eventbus: { title: "Event Bus", description: "System backbone that distributes events.", bullets: ["Pub/Sub for decoupled communication", "Guarantees message delivery", "Allows historical event replay", "Scales horizontally without limits"] },
+    orchestrator: { title: "Orchestrator", description: "Brain that decides what to do with each event.", bullets: ["Evaluates business rules in real-time", "Prioritizes events by urgency (P0/P1/P2)", "Distributes work to specialized Workers", "Handles retries and fallbacks"] },
+    leadsWorker: { title: "Leads Worker", description: "Specialized in lead processing.", bullets: ["Automatic AI qualification", "Lead scoring and prioritization", "Sales rep assignment", "Nurturing sequence trigger"] },
+    opsWorker: { title: "OPS Worker", description: "Handles business operations.", bullets: ["Processes payments and billing", "Manages bookings and cancellations", "Updates inventory in real-time", "Syncs with external ERPs"] },
+    notifications: { title: "Notifications", description: "Multi-channel notification system.", bullets: ["Email, SMS, WhatsApp, Push", "Language-specific templates", "Smart scheduling", "Delivery and open tracking"] }
+  },
+  de: {
+    intake: { title: "Lead Intake", description: "Einstiegspunkt für alle Leads und Systemereignisse.", bullets: ["Empfängt Ereignisse von WhatsApp, Web, Instagram, APIs", "Normalisiert und validiert Eingangsdaten", "Vergibt Zeitstempel und eindeutige IDs", "Leitet an den Event Bus zur Verarbeitung weiter"] },
+    eventbus: { title: "Event Bus", description: "Rückgrat des Systems, das Ereignisse verteilt.", bullets: ["Pub/Sub für entkoppelte Kommunikation", "Garantierte Nachrichtenzustellung", "Erlaubt Wiederholung historischer Ereignisse", "Skaliert horizontal ohne Limits"] },
+    orchestrator: { title: "Orchestrator", description: "Gehirn, das entscheidet, was mit jedem Ereignis geschieht.", bullets: ["Bewertet Geschäftsregeln in Echtzeit", "Priorisiert Ereignisse nach Dringlichkeit (P0/P1/P2)", "Verteilt Arbeit an spezialisierte Worker", "Verarbeitet Retries und Fallbacks"] },
+    leadsWorker: { title: "Leads Worker", description: "Spezialisiert auf Lead-Verarbeitung.", bullets: ["Automatische KI-Qualifizierung", "Lead-Scoring und Priorisierung", "Zuweisung an Vertriebsmitarbeiter", "Auslösen von Nurturing-Sequenzen"] },
+    opsWorker: { title: "OPS Worker", description: "Verwaltet Geschäftsabläufe.", bullets: ["Verarbeitet Zahlungen und Rechnungen", "Verwaltet Buchungen und Stornierungen", "Aktualisiert Bestand in Echtzeit", "Synchronisiert mit externen ERPs"] },
+    notifications: { title: "Notifications", description: "Multikanal-Benachrichtigungssystem.", bullets: ["E-Mail, SMS, WhatsApp, Push", "Sprachspezifische Templates", "Intelligentes Scheduling", "Tracking von Zustellung und Öffnung"] }
+  },
+  ru: {
+    intake: { title: "Lead Intake", description: "Точка входа для всех лидов и системных событий.", bullets: ["Принимает события из WhatsApp, веба, Instagram, API", "Нормализует и валидирует входные данные", "Присваивает временные метки и уникальные ID", "Направляет в Event Bus на обработку"] },
+    eventbus: { title: "Event Bus", description: "Магистраль системы, распределяющая события.", bullets: ["Pub/Sub для разделённой коммуникации", "Гарантия доставки сообщений", "Возможность повторного воспроизведения событий", "Горизонтальное масштабирование без ограничений"] },
+    orchestrator: { title: "Orchestrator", description: "Мозг, решающий, что делать с каждым событием.", bullets: ["Оценивает бизнес-правила в реальном времени", "Приоритизирует события по срочности (P0/P1/P2)", "Распределяет работу между специализированными Workers", "Обрабатывает повторы и резервные сценарии"] },
+    leadsWorker: { title: "Leads Worker", description: "Специализируется на обработке лидов.", bullets: ["Автоматическая квалификация ИИ", "Скоринг и приоритизация лидов", "Назначение менеджеру по продажам", "Запуск цепочек nurturing"] },
+    opsWorker: { title: "OPS Worker", description: "Управляет бизнес-операциями.", bullets: ["Обрабатывает платежи и счета", "Управляет бронированиями и отменами", "Обновляет складские остатки в реальном времени", "Синхронизирует с внешними ERP"] },
+    notifications: { title: "Notifications", description: "Мультиканальная система уведомлений.", bullets: ["Email, SMS, WhatsApp, Push", "Шаблоны под язык клиента", "Умное планирование", "Трекинг доставки и открытий"] }
   }
 };
 
@@ -227,31 +189,57 @@ export default function Arquitectura() {
       waitingEvents: "Esperando eventos...",
     },
     en: {
-      badge: "Live Enterprise Architecture",
-      title: "Event Bus &",
-      titleHighlight: "Orchestrators",
+      badge: "Live Enterprise Architecture", title: "Event Bus &", titleHighlight: "Orchestrators",
       subtitle: "Watch how we process thousands of events without human intervention. This visualization shows the real architecture operating 24/7.",
-      pauseBtn: "Pause Simulation",
-      startBtn: "Start Simulation",
-      processing: "Processing events...",
-      paused: "Simulation paused",
-      eventsProcessed: "Events Processed",
-      uptime: "Uptime",
-      activeWorkers: "Active Workers",
-      flowTitle: "Real-Time Event Flow",
-      liveEventsTitle: "Live Events",
-      componentsTitle: "What does each component do?",
+      pauseBtn: "Pause Simulation", startBtn: "Start Simulation", processing: "Processing events...", paused: "Simulation paused",
+      eventsProcessed: "Events Processed", uptime: "Uptime", activeWorkers: "Active Workers",
+      flowTitle: "Real-Time Event Flow", liveEventsTitle: "Live Events", componentsTitle: "What does each component do?",
       ctaTitle: "Want This Architecture for Your Business?",
       ctaSubtitle: "We design custom architectures that process your events, automate operations and scale without limits.",
       ctaButton: "Request Enterprise Audit",
-      statusIdle: "Idle",
-      statusProcessing: "Processing",
-      statusSuccess: "Completed",
-      statusError: "Error",
-      events: "events",
-      waitingEvents: "Waiting for events...",
-    }
-  };
+      statusIdle: "Idle", statusProcessing: "Processing", statusSuccess: "Completed", statusError: "Error",
+      events: "events", waitingEvents: "Waiting for events...",
+      workflowsBadge: "Real Workflows", workflowsTitle: "Our Workflows in Action",
+      workflowsSubtitle: "This is how we connect Apify + n8n to run campaigns that generate real leads. Click each node to see what it does.",
+      catalogBtn: "View Agent Catalog",
+      seoTitle: "AI Architecture | HydrAI Labs", seoDesc: "How HydrAI Labs' AI automation architecture works. Event Bus, Orchestrators and autonomous Agents.",
+      breadcrumbHome: "Home", breadcrumbArch: "Architecture",
+    },
+    de: {
+      badge: "Live Enterprise-Architektur", title: "Event Bus &", titleHighlight: "Orchestrators",
+      subtitle: "Sehen Sie, wie wir Tausende von Ereignissen ohne menschliches Eingreifen verarbeiten. Diese Visualisierung zeigt die echte Architektur, die 24/7 läuft.",
+      pauseBtn: "Simulation pausieren", startBtn: "Simulation starten", processing: "Ereignisse werden verarbeitet...", paused: "Simulation pausiert",
+      eventsProcessed: "Verarbeitete Ereignisse", uptime: "Verfügbarkeit", activeWorkers: "Aktive Worker",
+      flowTitle: "Echtzeit-Ereignisfluss", liveEventsTitle: "Live-Ereignisse", componentsTitle: "Was macht jede Komponente?",
+      ctaTitle: "Möchten Sie diese Architektur in Ihrem Unternehmen?",
+      ctaSubtitle: "Wir entwerfen maßgeschneiderte Architekturen, die Ihre Ereignisse verarbeiten, Abläufe automatisieren und grenzenlos skalieren.",
+      ctaButton: "Enterprise-Audit anfordern",
+      statusIdle: "Im Leerlauf", statusProcessing: "In Bearbeitung", statusSuccess: "Abgeschlossen", statusError: "Fehler",
+      events: "Ereignisse", waitingEvents: "Warte auf Ereignisse...",
+      workflowsBadge: "Echte Workflows", workflowsTitle: "Unsere Workflows in Aktion",
+      workflowsSubtitle: "So verbinden wir Apify + n8n, um Kampagnen auszuführen, die echte Leads generieren. Klicken Sie auf jeden Knoten, um zu sehen, was er tut.",
+      catalogBtn: "Agentenkatalog ansehen",
+      seoTitle: "KI-Architektur | HydrAI Labs", seoDesc: "Wie die KI-Automatisierungsarchitektur von HydrAI Labs funktioniert. Event Bus, Orchestrators und autonome Agenten.",
+      breadcrumbHome: "Start", breadcrumbArch: "Architektur",
+    },
+    ru: {
+      badge: "Enterprise-архитектура в реальном времени", title: "Event Bus и", titleHighlight: "Orchestrators",
+      subtitle: "Посмотрите, как мы обрабатываем тысячи событий без участия человека. Визуализация показывает реальную архитектуру, работающую 24/7.",
+      pauseBtn: "Пауза симуляции", startBtn: "Запустить симуляцию", processing: "Обработка событий...", paused: "Симуляция на паузе",
+      eventsProcessed: "Обработано событий", uptime: "Доступность", activeWorkers: "Активные Workers",
+      flowTitle: "Поток событий в реальном времени", liveEventsTitle: "События в реальном времени", componentsTitle: "Что делает каждый компонент?",
+      ctaTitle: "Хотите такую архитектуру для вашего бизнеса?",
+      ctaSubtitle: "Мы проектируем индивидуальные архитектуры, которые обрабатывают события, автоматизируют операции и масштабируются без ограничений.",
+      ctaButton: "Запросить Enterprise-аудит",
+      statusIdle: "Ожидание", statusProcessing: "Обработка", statusSuccess: "Завершено", statusError: "Ошибка",
+      events: "событий", waitingEvents: "Ожидание событий...",
+      workflowsBadge: "Реальные Workflows", workflowsTitle: "Наши Workflows в действии",
+      workflowsSubtitle: "Так мы соединяем Apify + n8n для запуска кампаний, которые приносят реальных лидов. Нажмите на любой узел, чтобы увидеть его работу.",
+      catalogBtn: "Смотреть каталог агентов",
+      seoTitle: "ИИ-архитектура | HydrAI Labs", seoDesc: "Как работает архитектура ИИ-автоматизации HydrAI Labs. Event Bus, Orchestrators и автономные агенты.",
+      breadcrumbHome: "Главная", breadcrumbArch: "Архитектура",
+    },
+  } as const;
 
   const t = content[language as keyof typeof content] || content.es;
 
@@ -363,14 +351,14 @@ export default function Arquitectura() {
   return (
     <>
       <SEOHead
-        title="Arquitectura IA | HydrAI Labs"
-        description="Cómo funciona la arquitectura de automatización IA de HydrAI Labs. Event Bus, Orchestrators y Agentes autónomos."
+        title={t.seoTitle}
+        description={t.seoDesc}
         canonical="/arquitectura"
         keywords="event bus, orchestrator, arquitectura enterprise, automatización, workers, microservicios"
       />
       <BreadcrumbSchema items={[
-        { name: "Inicio", url: "/" },
-        { name: "Arquitectura", url: "/arquitectura" },
+        { name: t.breadcrumbHome, url: "/" },
+        { name: t.breadcrumbArch, url: "/arquitectura" },
       ]} />
       
       <PageLayout>
@@ -598,13 +586,13 @@ export default function Arquitectura() {
           <section className="section-container mb-16">
             <div className="text-center mb-10">
               <span className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase border border-primary/30 text-primary bg-primary/10 mb-4">
-                Workflows Reales
+                {(t as any).workflowsBadge ?? "Workflows Reales"}
               </span>
               <h3 className="text-2xl md:text-3xl font-display font-bold mb-3">
-                Nuestros Workflows en Acción
+                {(t as any).workflowsTitle ?? "Nuestros Workflows en Acción"}
               </h3>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Así conectamos Apify + n8n para ejecutar campañas que generan leads reales. Haz clic en cada nodo para ver qué hace.
+                {(t as any).workflowsSubtitle ?? ""}
               </p>
             </div>
             <WorkflowShowcase />
@@ -633,7 +621,7 @@ export default function Arquitectura() {
                 </Link>
                 <Link to="/agentes-ia">
                   <Button size="lg" variant="outline" className="btn-outline-neon gap-2">
-                    {language === "es" ? "Ver Catálogo de Agentes" : "View Agent Catalog"}
+                    {(t as any).catalogBtn ?? "Ver Catálogo de Agentes"}
                     <ArrowRight className="w-4 h-4" />
                   </Button>
                 </Link>
