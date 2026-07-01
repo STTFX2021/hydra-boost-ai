@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 const navItems = [
   { to: "/", label: "Inicio" },
-  { to: "/vozra", label: "Vozra" },
+  { to: "/#vozra", label: "Vozra" },
   { to: "/servicios", label: "Servicios" },
   { to: "/casos", label: "Casos de uso" },
   { to: "/precios", label: "Precios" },
@@ -24,8 +24,11 @@ export const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const isActive = (path: string) =>
-    path === "/" ? location.pathname === "/" : location.pathname.startsWith(path);
+  const isActive = (path: string) => {
+    if (path === "/") return location.pathname === "/" && !location.hash;
+    if (path.startsWith("/#")) return location.pathname === "/" && location.hash === path.slice(1);
+    return location.pathname.startsWith(path);
+  };
 
   return (
     <header
@@ -38,9 +41,7 @@ export const Header = () => {
     >
       <nav className="section-container flex h-20 items-center justify-between" aria-label="Navegación principal">
         <Link to="/" className="group flex items-center gap-3" aria-label="HydrAI Labs - Inicio">
-          <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-cyan-400/35 bg-white/[0.03] text-lg font-bold text-white transition group-hover:border-cyan-300/70">
-            HL
-          </div>
+          <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-cyan-400/35 bg-white/[0.03] text-lg font-bold text-white transition group-hover:border-cyan-300/70">HL</div>
           <div className="leading-none">
             <span className="block font-display text-base font-semibold tracking-[0.18em] text-white">HYDRA</span>
             <span className="mt-1 block text-[10px] font-medium tracking-[0.48em] text-cyan-300">LABS</span>
@@ -64,9 +65,7 @@ export const Header = () => {
 
         <div className="flex items-center gap-3">
           <Link to="/auditoria-gratis" className="hidden sm:block">
-            <Button className="rounded-xl border border-cyan-300/50 bg-cyan-400 px-5 text-black hover:bg-cyan-300">
-              Probar demo
-            </Button>
+            <Button className="rounded-xl border border-cyan-300/50 bg-cyan-400 px-5 text-black hover:bg-cyan-300">Probar demo</Button>
           </Link>
           <Button
             variant="ghost"
