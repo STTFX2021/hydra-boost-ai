@@ -2,7 +2,7 @@
 
 Web corporativa de HydrAI Labs.
 
-## Enfoque actual
+## Enfoque
 
 - Vozra como producto principal.
 - Vozra PID para pedidos inteligentes directos.
