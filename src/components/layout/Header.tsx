@@ -1,83 +1,60 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { useTranslation, useI18n, languageNames, type Language } from "@/lib/i18n";
-import { useAdmin } from "@/hooks/useAdmin";
-import { Menu, X, Globe, ChevronDown } from "lucide-react";
-import { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 
-const availableLanguages: Language[] = ['es', 'en', 'de', 'ru'];
+const navItems = [
+  { to: "/", label: "Inicio" },
+  { to: "/vozra", label: "Vozra" },
+  { to: "/servicios", label: "Servicios" },
+  { to: "/casos", label: "Casos de uso" },
+  { to: "/precios", label: "Precios" },
+  { to: "/contacto", label: "Contacto" },
+];
 
 export const Header = () => {
-  const { t, language } = useTranslation();
-  const { setLanguage } = useI18n();
-  const { isAdmin } = useAdmin();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 16);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const isActive = (path: string) => location.pathname === path;
-
-  const navItems = [
-    { to: "/servicios", label: t("nav.industries") },
-    { to: "/agentes-ia", label: "Agentes IA" },
-    { to: "/arquitectura", label: t("nav.architecture") },
-    { to: "/casos", label: t("nav.cases") },
-    { to: "/contacto", label: t("nav.contact") },
-  ];
+  const isActive = (path: string) =>
+    path === "/" ? location.pathname === "/" : location.pathname.startsWith(path);
 
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        "fixed inset-x-0 top-0 z-50 border-b transition-all duration-300",
         scrolled
-          ? "bg-background/95 backdrop-blur-lg border-b border-border/40 shadow-lg shadow-black/10"
-          : "bg-transparent"
+          ? "border-white/10 bg-black/90 shadow-2xl shadow-cyan-500/5 backdrop-blur-xl"
+          : "border-transparent bg-black/45 backdrop-blur-md",
       )}
     >
-      <nav aria-label="Navegación principal" className="section-container flex items-center justify-between h-18 py-4">
-        <Link
-          to="/"
-          aria-label="HydrAI Labs - Ir a inicio"
-          className="flex items-center gap-3 font-display text-xl font-bold"
-        >
-          <img
-            src="/favicon.png"
-            alt="HydrAI Labs - Agencia de automatización IA"
-            className="w-9 h-9 rounded-lg logo-violet-halo"
-            width={36}
-            height={36}
-            loading="eager"
-            decoding="async"
-          />
-          <span className="text-gradient-hydrai">{t("brand")}</span>
+      <nav className="section-container flex h-20 items-center justify-between" aria-label="Navegación principal">
+        <Link to="/" className="group flex items-center gap-3" aria-label="HydrAI Labs - Inicio">
+          <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-cyan-400/35 bg-white/[0.03] text-lg font-bold text-white transition group-hover:border-cyan-300/70">
+            HL
+          </div>
+          <div className="leading-none">
+            <span className="block font-display text-base font-semibold tracking-[0.18em] text-white">HYDRA</span>
+            <span className="mt-1 block text-[10px] font-medium tracking-[0.48em] text-cyan-300">LABS</span>
+          </div>
         </Link>
 
-        {/* Desktop Nav */}
-        <div className="hidden lg:flex items-center gap-8">
+        <div className="hidden items-center gap-7 lg:flex">
           {navItems.map((item) => (
             <Link
               key={item.to}
               to={item.to}
               className={cn(
                 "text-sm font-medium transition-colors",
-                isActive(item.to)
-                  ? "text-primary"
-                  : "text-muted-foreground hover:text-foreground"
+                isActive(item.to) ? "text-cyan-300" : "text-zinc-400 hover:text-white",
               )}
             >
               {item.label}
@@ -86,99 +63,43 @@ export const Header = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          {/* Language Dropdown */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="text-muted-foreground hover:text-foreground"
-                aria-label={`Cambiar idioma. Idioma actual: ${languageNames[language]}`}
-              >
-                <Globe className="w-4 h-4 mr-1" />
-                {language.toUpperCase()}
-                <ChevronDown className="w-3 h-3 ml-1" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="min-w-[120px]">
-              {availableLanguages.map((lang) => (
-                <DropdownMenuItem
-                  key={lang}
-                  onClick={() => setLanguage(lang)}
-                  className={cn(
-                    "cursor-pointer",
-                    language === lang && "bg-primary/10 text-primary"
-                  )}
-                >
-                  <span className="font-medium">{lang.toUpperCase()}</span>
-                  <span className="ml-2 text-muted-foreground text-xs">
-                    {languageNames[lang]}
-                  </span>
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          {/* Only show Admin link if user is admin */}
-          {isAdmin && (
-            <Link to="/admin" className="hidden sm:block">
-              <Button variant="ghost" size="sm">
-                {t("nav.login")}
-              </Button>
-            </Link>
-          )}
-
           <Link to="/auditoria-gratis" className="hidden sm:block">
-            <Button size="sm" className="btn-neon">
-              {t("nav.audit")}
+            <Button className="rounded-xl border border-cyan-300/50 bg-cyan-400 px-5 text-black hover:bg-cyan-300">
+              Probar demo
             </Button>
           </Link>
-
-          {/* Mobile Menu Button */}
           <Button
             variant="ghost"
-            size="sm"
-            className="lg:hidden"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label={menuOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
+            size="icon"
+            className="text-white lg:hidden"
+            onClick={() => setMenuOpen((open) => !open)}
+            aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
             aria-expanded={menuOpen}
           >
-            {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </Button>
         </div>
       </nav>
 
-      {/* Mobile Menu */}
       {menuOpen && (
-        <div className="lg:hidden bg-background/95 backdrop-blur-xl border-t border-border/30">
-          <nav aria-label="Navegación móvil" className="section-container py-4 space-y-3">
+        <div className="border-t border-white/10 bg-black/95 backdrop-blur-xl lg:hidden">
+          <nav className="section-container space-y-1 py-5" aria-label="Navegación móvil">
             {navItems.map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
                 onClick={() => setMenuOpen(false)}
                 className={cn(
-                  "block py-2 text-sm font-medium",
-                  isActive(item.to) ? "text-primary" : "text-muted-foreground"
+                  "block rounded-lg px-3 py-3 text-sm font-medium",
+                  isActive(item.to) ? "bg-cyan-400/10 text-cyan-300" : "text-zinc-300",
                 )}
               >
                 {item.label}
               </Link>
             ))}
-            <div className="flex gap-3 pt-3 border-t border-border/30">
-              {isAdmin && (
-                <Link to="/admin" onClick={() => setMenuOpen(false)}>
-                  <Button variant="ghost" size="sm">
-                    {t("nav.login")}
-                  </Button>
-                </Link>
-              )}
-              <Link to="/auditoria-gratis" onClick={() => setMenuOpen(false)}>
-                <Button size="sm" className="btn-neon">
-                  {t("nav.audit")}
-                </Button>
-              </Link>
-            </div>
+            <Link to="/auditoria-gratis" onClick={() => setMenuOpen(false)} className="block pt-3">
+              <Button className="w-full rounded-xl bg-cyan-400 text-black hover:bg-cyan-300">Probar demo</Button>
+            </Link>
           </nav>
         </div>
       )}
