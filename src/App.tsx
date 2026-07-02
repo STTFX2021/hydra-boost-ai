@@ -13,6 +13,7 @@ import Contacto from "./pages/Contacto";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import AuditoriaGratis from "./pages/AuditoriaGratis";
+import DemoRedirect from "./pages/DemoRedirect";
 import Privacidad from "./pages/legal/Privacidad";
 import Terminos from "./pages/legal/Terminos";
 import Cookies from "./pages/legal/Cookies";
@@ -34,7 +35,7 @@ const App = () => (
             <Route path="/precios" element={<Precios />} />
             <Route path="/casos" element={<Casos />} />
             <Route path="/contacto" element={<Contacto />} />
-            <Route path="/demo" element={<AuditoriaGratis />} />
+            <Route path="/demo" element={<DemoRedirect />} />
             <Route path="/auditoria-gratis" element={<AuditoriaGratis />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
