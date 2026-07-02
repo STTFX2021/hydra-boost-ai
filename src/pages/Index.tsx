@@ -68,7 +68,7 @@ const Index = () => (
   <>
     <SEOHead
       title="HydrAI Labs | Inteligencia conversacional y desarrollo a medida"
-      description="Herramientas de inteligencia artificial, automatización y desarrollo diseñadas a medida para profesionales, por profesionales."
+      description="Herramientas diseñadas a medida por profesionales para profesionales."
       canonical="/"
     />
     <OrganizationSchema />
@@ -86,7 +86,7 @@ const Index = () => (
                 Inteligencia conversacional para negocios
               </p>
               <h1 className="max-w-4xl text-4xl font-semibold leading-[1.08] tracking-[-0.035em] sm:text-5xl lg:text-[64px]">
-                Herramientas diseñadas a medida para profesionales, por profesionales.
+                Herramientas diseñadas a medida por profesionales para profesionales.
               </h1>
               <p className="mt-6 max-w-2xl text-base leading-8 text-zinc-400 md:text-lg">
                 Creamos soluciones de Inteligencia Artificial, automatización y desarrollo a medida que impulsan negocios reales.
