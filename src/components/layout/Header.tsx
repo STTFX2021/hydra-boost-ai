@@ -46,7 +46,7 @@ export const Header = () => {
           aria-label="HydrAI Labs - Inicio"
         >
           <img
-            src="/hydrai-labs-logo.png"
+            src="/hydrai-labs-logo.svg"
             alt="HydrAI Labs"
             className="h-[78px] w-auto max-w-[185px] object-contain sm:h-[84px]"
           />
