@@ -36,40 +36,16 @@ export const Header = () => {
       className={cn(
         "fixed inset-x-0 top-0 z-50 border-b transition-all duration-300",
         scrolled
-          ? "border-white/10 bg-black/90 shadow-2xl shadow-cyan-500/5 backdrop-blur-xl"
-          : "border-white/5 bg-black/80 backdrop-blur-md",
+          ? "border-white/10 bg-black/92 shadow-2xl shadow-cyan-500/5 backdrop-blur-xl"
+          : "border-white/5 bg-black/78 backdrop-blur-md",
       )}
     >
       <nav className="section-container flex h-[118px] items-center justify-between" aria-label="Navegación principal">
-        <Link
-          to="/"
-          className="relative flex shrink-0 items-center rounded-[40px]"
-          aria-label="HydrAI Labs - Inicio"
-          style={{
-            boxShadow: scrolled
-              ? "0 0 38px 14px rgba(34, 211, 238, 0.30), 0 0 72px 26px rgba(14, 165, 233, 0.16)"
-              : "0 0 24px 8px rgba(34, 211, 238, 0.16)",
-            transition: "box-shadow 500ms ease",
-          }}
-        >
-          <span
-            aria-hidden="true"
-            className="pointer-events-none absolute left-1/2 top-1/2 h-28 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/40 blur-3xl"
-          />
-          <span
-            aria-hidden="true"
-            className="pointer-events-none absolute left-[42%] top-[42%] h-16 w-32 -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky-300/30 blur-2xl"
-          />
+        <Link to="/" className="flex shrink-0 items-center" aria-label="HydrAI Labs - Inicio">
           <img
             src="/hydrai-labs-logo.svg"
             alt="HydrAI Labs"
-            className="relative z-10 h-[104px] w-auto max-w-[245px] object-contain sm:h-[110px] lg:h-[114px]"
-            style={{
-              filter: scrolled
-                ? "drop-shadow(0 0 16px rgba(34, 211, 238, 0.95))"
-                : "drop-shadow(0 0 8px rgba(34, 211, 238, 0.55))",
-              transition: "filter 500ms ease",
-            }}
+            className="h-[104px] w-auto max-w-[245px] object-contain sm:h-[110px] lg:h-[114px]"
           />
         </Link>
 
@@ -108,7 +84,7 @@ export const Header = () => {
       </nav>
 
       {menuOpen && (
-        <div className="border-t border-white/10 bg-black/95 backdrop-blur-xl xl:hidden">
+        <div className="border-t border-white/10 bg-black/96 backdrop-blur-xl xl:hidden">
           <nav className="section-container space-y-1 py-5" aria-label="Navegación móvil">
             {navItems.map((item) => (
               <Link
