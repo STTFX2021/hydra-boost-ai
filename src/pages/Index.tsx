@@ -5,10 +5,8 @@ import {
   BrainCircuit,
   CalendarCheck2,
   CheckCircle2,
-  Clock3,
   Code2,
   Gauge,
-  Globe2,
   Headphones,
   Layers3,
   MessageSquareMore,
@@ -187,8 +185,8 @@ const Index = () => (
             <div className="grid items-center gap-8 lg:grid-cols-[1.15fr_2fr]">
               <div>
                 <img src="/vozra-logo.svg" alt="Vozra" className="h-auto max-h-28 w-auto max-w-full object-contain" />
-                <p className="mt-2 text-xs font-semibold uppercase tracking-[0.24em] text-cyan-300">Tu agente conversacional</p>
-                <div className="mt-4 inline-flex items-center gap-3"><span className="rounded-lg border border-white/30 px-3 py-1 text-sm font-bold">PID</span><span className="text-sm text-zinc-300">Pedidos Inteligentes Directos</span></div>
+                <p className="mt-2 text-xs font-semibold uppercase tracking-[0.24em] text-cyan-300">Vozra · Tu agente conversacional</p>
+                <div className="mt-4 inline-flex items-center gap-3"><span className="rounded-lg border border-white/30 px-3 py-1 text-sm font-bold">PID</span><span className="text-sm text-zinc-300">Tu agente de recepción de pedidos</span></div>
               </div>
 
               <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
