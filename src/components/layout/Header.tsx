@@ -41,11 +41,25 @@ export const Header = () => {
       )}
     >
       <nav className="section-container flex h-[118px] items-center justify-between" aria-label="Navegación principal">
-        <Link to="/" className="flex shrink-0 items-center" aria-label="HydrAI Labs - Inicio">
+        <Link to="/" className="relative flex shrink-0 items-center" aria-label="HydrAI Labs - Inicio">
+          <span
+            aria-hidden="true"
+            className={cn(
+              "pointer-events-none absolute left-1/2 top-1/2 h-24 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/20 blur-3xl transition-all duration-500",
+              scrolled ? "scale-100 opacity-100" : "scale-90 opacity-0",
+            )}
+          />
+          <span
+            aria-hidden="true"
+            className={cn(
+              "pointer-events-none absolute left-[38%] top-[42%] h-14 w-24 -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky-300/20 blur-2xl transition-all duration-500",
+              scrolled ? "opacity-80" : "opacity-0",
+            )}
+          />
           <img
             src="/hydrai-labs-logo.svg"
             alt="HydrAI Labs"
-            className="h-[104px] w-auto max-w-[245px] object-contain sm:h-[110px] lg:h-[114px]"
+            className="relative z-10 h-[104px] w-auto max-w-[245px] object-contain sm:h-[110px] lg:h-[114px]"
           />
         </Link>
 
