@@ -45,21 +45,26 @@ export const Header = () => {
           <span
             aria-hidden="true"
             className={cn(
-              "pointer-events-none absolute left-1/2 top-1/2 h-24 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/20 blur-3xl transition-all duration-500",
-              scrolled ? "scale-100 opacity-100" : "scale-90 opacity-0",
+              "pointer-events-none absolute left-1/2 top-1/2 h-28 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400 blur-3xl transition-all duration-500",
+              scrolled ? "scale-110 opacity-35" : "scale-100 opacity-10",
             )}
           />
           <span
             aria-hidden="true"
             className={cn(
-              "pointer-events-none absolute left-[38%] top-[42%] h-14 w-24 -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky-300/20 blur-2xl transition-all duration-500",
-              scrolled ? "opacity-80" : "opacity-0",
+              "pointer-events-none absolute left-[42%] top-[43%] h-16 w-32 -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky-300 blur-2xl transition-all duration-500",
+              scrolled ? "scale-110 opacity-45" : "scale-100 opacity-15",
             )}
           />
           <img
             src="/hydrai-labs-logo.svg"
             alt="HydrAI Labs"
-            className="relative z-10 h-[104px] w-auto max-w-[245px] object-contain sm:h-[110px] lg:h-[114px]"
+            className={cn(
+              "relative z-10 h-[104px] w-auto max-w-[245px] object-contain transition-all duration-500 sm:h-[110px] lg:h-[114px]",
+              scrolled
+                ? "drop-shadow-[0_0_18px_rgba(34,211,238,0.9)]"
+                : "drop-shadow-[0_0_8px_rgba(34,211,238,0.35)]",
+            )}
           />
         </Link>
 
