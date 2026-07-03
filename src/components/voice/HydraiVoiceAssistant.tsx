@@ -2,7 +2,9 @@ import { useState } from "react";
 import { ConversationProvider, useConversation } from "@elevenlabs/react";
 import { Mic, MicOff, PhoneOff, X } from "lucide-react";
 
-const ELEVENLABS_AGENT_ID = "agent_9201kwkjhahded5tcj42fkj25thn";
+const DEFAULT_ELEVENLABS_AGENT_ID = "agent_9201kwkjhahded5tcj42fkj25thn";
+const ELEVENLABS_AGENT_ID =
+  import.meta.env.VITE_ELEVENLABS_AGENT_ID?.trim() || DEFAULT_ELEVENLABS_AGENT_ID;
 
 function VoiceAssistantPanel() {
   const [open, setOpen] = useState(false);
@@ -10,47 +12,76 @@ function VoiceAssistantPanel() {
 
   const conversation = useConversation({
     serverLocation: "eu-residency",
-    onError: () => setError("No hemos podido conectar con el asistente. Inténtalo de nuevo."),
+    onConnect: () => setError(""),
+    onError: () =>
+      setError("No hemos podido conectar con el asistente. Inténtalo de nuevo."),
   });
+
+  const connected = conversation.status === "connected";
+  const connecting = conversation.status === "connecting";
 
   const startConversation = async () => {
     setError("");
 
+    if (!navigator.mediaDevices?.getUserMedia) {
+      setError("Este navegador no permite usar el micrófono.");
+      return;
+    }
+
     try {
       await navigator.mediaDevices.getUserMedia({ audio: true });
-      await conversation.startSession({ agentId: ELEVENLABS_AGENT_ID });
+      await conversation.startSession({
+        agentId: ELEVENLABS_AGENT_ID,
+        connectionType: "webrtc",
+      });
     } catch {
       setError("No hemos podido acceder al micrófono. Revisa los permisos del navegador.");
     }
   };
 
   const endConversation = async () => {
-    await conversation.endSession();
+    try {
+      await conversation.endSession();
+    } finally {
+      setError("");
+    }
   };
 
-  const connected = conversation.status === "connected";
-  const connecting = conversation.status === "connecting";
+  const closeAssistant = async () => {
+    if (connected) {
+      await endConversation();
+    }
+    setOpen(false);
+  };
 
   return (
     <div className="fixed bottom-4 right-4 z-[80] sm:bottom-6 sm:right-6">
       {open && (
         <section className="mb-4 flex h-[min(620px,calc(100vh-110px))] w-[calc(100vw-32px)] max-w-[390px] flex-col overflow-hidden rounded-[28px] border border-cyan-300/25 bg-zinc-950 shadow-2xl shadow-cyan-500/15">
           <header className="flex items-center justify-between border-b border-white/10 px-5 py-4">
-            <div>
-              <p className="font-semibold text-white">Asistente de voz HydrAI</p>
-              <p className="mt-1 text-xs text-cyan-300">
-                {connected
-                  ? conversation.isSpeaking
-                    ? "Hablando"
-                    : "Escuchando"
-                  : connecting
-                    ? "Conectando"
-                    : "Disponible"}
-              </p>
+            <div className="flex items-center gap-3">
+              <img
+                src="/hydrai-assistant-robot.svg"
+                alt=""
+                className="h-11 w-11 rounded-full border border-white/15 bg-black object-cover"
+                aria-hidden="true"
+              />
+              <div>
+                <p className="font-semibold text-white">Asistente HydrAI</p>
+                <p className="mt-1 text-xs text-cyan-300">
+                  {connected
+                    ? conversation.isSpeaking
+                      ? "Hablando"
+                      : "Escuchando"
+                    : connecting
+                      ? "Conectando"
+                      : "Disponible"}
+                </p>
+              </div>
             </div>
             <button
               type="button"
-              onClick={() => setOpen(false)}
+              onClick={() => void closeAssistant()}
               className="rounded-full p-2 text-zinc-400 transition hover:bg-white/10 hover:text-white"
               aria-label="Cerrar asistente"
             >
@@ -59,9 +90,19 @@ function VoiceAssistantPanel() {
           </header>
 
           <div className="flex flex-1 flex-col items-center justify-center px-6 text-center">
-            <div className="relative flex h-28 w-28 items-center justify-center rounded-full border border-cyan-300/35 bg-cyan-400/10">
-              <div className={connected ? "absolute inset-0 animate-ping rounded-full border border-cyan-300/20" : ""} />
-              <Mic className="h-11 w-11 text-cyan-300" />
+            <div className="relative flex h-32 w-32 items-center justify-center rounded-full border border-cyan-300/35 bg-cyan-400/10 p-2">
+              <div
+                className={
+                  connected
+                    ? "absolute inset-0 animate-ping rounded-full border border-cyan-300/20"
+                    : ""
+                }
+              />
+              <img
+                src="/hydrai-assistant-robot.svg"
+                alt="Robot asistente de HydrAI Labs"
+                className="relative h-full w-full rounded-full object-cover"
+              />
             </div>
 
             <h2 className="mt-7 text-2xl font-semibold text-white">Habla con HydrAI</h2>
@@ -94,12 +135,16 @@ function VoiceAssistantPanel() {
                   onClick={() => conversation.setMuted(!conversation.isMuted)}
                   className="flex items-center justify-center gap-2 rounded-xl border border-white/15 px-4 py-3 font-medium text-white transition hover:bg-white/5"
                 >
-                  {conversation.isMuted ? <Mic className="h-5 w-5" /> : <MicOff className="h-5 w-5" />}
+                  {conversation.isMuted ? (
+                    <Mic className="h-5 w-5" />
+                  ) : (
+                    <MicOff className="h-5 w-5" />
+                  )}
                   {conversation.isMuted ? "Activar" : "Silenciar"}
                 </button>
                 <button
                   type="button"
-                  onClick={endConversation}
+                  onClick={() => void endConversation()}
                   className="flex items-center justify-center gap-2 rounded-xl bg-red-500/15 px-4 py-3 font-medium text-red-200 transition hover:bg-red-500/25"
                 >
                   <PhoneOff className="h-5 w-5" />
@@ -113,14 +158,24 @@ function VoiceAssistantPanel() {
 
       <button
         type="button"
-        onClick={() => setOpen((value) => !value)}
-        className="flex items-center gap-3 rounded-full border border-cyan-300/35 bg-black px-4 py-3 text-sm font-semibold text-white shadow-xl shadow-cyan-500/15 transition hover:-translate-y-0.5 hover:border-cyan-300/70"
-        aria-label="Abrir asistente de voz HydrAI"
+        onClick={() => {
+          if (open) {
+            void closeAssistant();
+          } else {
+            setOpen(true);
+          }
+        }}
+        className="flex items-center gap-3 rounded-full border border-cyan-300/35 bg-black px-3 py-2.5 text-sm font-semibold text-white shadow-xl shadow-cyan-500/15 transition hover:-translate-y-0.5 hover:border-cyan-300/70"
+        aria-label={open ? "Cerrar asistente de HydrAI" : "Abrir asistente de HydrAI"}
+        aria-expanded={open}
       >
-        <span className="flex h-10 w-10 items-center justify-center rounded-full bg-cyan-400 text-black">
-          <Mic className="h-5 w-5" />
-        </span>
-        <span className="hidden sm:inline">Habla con HydrAI</span>
+        <img
+          src="/hydrai-assistant-robot.svg"
+          alt=""
+          className="h-11 w-11 rounded-full border border-white/15 object-cover"
+          aria-hidden="true"
+        />
+        <span className="hidden pr-2 sm:inline">Habla con HydrAI</span>
       </button>
     </div>
   );
