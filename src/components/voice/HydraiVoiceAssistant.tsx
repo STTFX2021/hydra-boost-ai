@@ -2,10 +2,11 @@ import { useState } from "react";
 import { ConversationProvider, useConversation } from "@elevenlabs/react";
 import { Mic, MicOff, PhoneOff, X } from "lucide-react";
 
+const ELEVENLABS_AGENT_ID = "agent_9201kwkjhahded5tcj42fkj25thn";
+
 function VoiceAssistantPanel() {
   const [open, setOpen] = useState(false);
   const [error, setError] = useState("");
-  const agentId = import.meta.env.VITE_ELEVENLABS_AGENT_ID?.trim();
 
   const conversation = useConversation({
     serverLocation: "eu-residency",
@@ -15,14 +16,9 @@ function VoiceAssistantPanel() {
   const startConversation = async () => {
     setError("");
 
-    if (!agentId) {
-      setError("Falta configurar el identificador del agente de ElevenLabs.");
-      return;
-    }
-
     try {
       await navigator.mediaDevices.getUserMedia({ audio: true });
-      await conversation.startSession({ agentId });
+      await conversation.startSession({ agentId: ELEVENLABS_AGENT_ID });
     } catch {
       setError("No hemos podido acceder al micrófono. Revisa los permisos del navegador.");
     }
