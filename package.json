@@ -12,6 +12,7 @@
     "i18n:audit": "tsx scripts/i18n-audit.ts"
   },
   "dependencies": {
+    "@elevenlabs/react": "latest",
     "@hookform/resolvers": "^3.10.0",
     "@radix-ui/react-accordion": "^1.2.11",
     "@radix-ui/react-alert-dialog": "^1.1.14",
@@ -24,7 +25,7 @@
     "@radix-ui/react-dropdown-menu": "^2.1.15",
     "@radix-ui/react-hover-card": "^1.1.14",
     "@radix-ui/react-label": "^2.1.7",
-    "@radix-ui/react-menubar": "^1.1.15",
+    "@radix-ui/react-menubar": "^2.1.15",
     "@radix-ui/react-navigation-menu": "^1.2.13",
     "@radix-ui/react-popover": "^1.1.14",
     "@radix-ui/react-progress": "^1.1.7",
