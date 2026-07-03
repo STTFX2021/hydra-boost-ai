@@ -2,83 +2,22 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
-import { SmartChatbot } from "@/components/smart-chatbot/SmartChatbot";
-import { WhatsAppButton } from "@/components/ux/WhatsAppButton";
-import { ExitIntentPopup } from "@/components/ux/ExitIntentPopup";
-import { ScrollProgressBar } from "@/components/ux/ScrollProgressBar";
-import { MobileStickyCTA } from "@/components/ux/MobileStickyCAT";
-import { ProtectedAdminRoute } from "@/components/ProtectedAdminRoute";
 import Index from "./pages/Index";
+import Vozra from "./pages/Vozra";
 import Servicios from "./pages/Servicios";
-import Industrias from "./pages/Industrias";
 import Precios from "./pages/Precios";
 import Casos from "./pages/Casos";
 import Contacto from "./pages/Contacto";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
-import Auditoria from "./pages/Auditoria";
 import AuditoriaGratis from "./pages/AuditoriaGratis";
-import AuditoriaSelector from "./pages/AuditoriaSelector";
-import AuditoriaLocal from "./pages/AuditoriaLocal";
-import Login from "./pages/Login";
-import AdminDashboard from "./pages/admin/Dashboard";
+import DemoRedirect from "./pages/DemoRedirect";
 import Privacidad from "./pages/legal/Privacidad";
 import Terminos from "./pages/legal/Terminos";
 import Cookies from "./pages/legal/Cookies";
-import Inversores from "./pages/Inversores";
 import NotFound from "./pages/NotFound";
-import Arquitectura from "./pages/Arquitectura";
-import AgentesIA from "./pages/AgentesIA";
-import AgentDetail from "./pages/AgentDetail";
-// Service pages
-import ChatbotsIA from "./pages/servicios/ChatbotsIA";
-import Automatizaciones from "./pages/servicios/Automatizaciones";
-import PedidosRestaurantes from "./pages/servicios/PedidosRestaurantes";
-// Sector pages
-import SectorRestaurantes from "./pages/sectores/Restaurantes";
-import SectorInmobiliarias from "./pages/sectores/Inmobiliarias";
-import SectorClinicasEstetica from "./pages/sectores/ClinicasEstetica";
-import SectorGimnasios from "./pages/sectores/Gimnasios";
-import AIAutomationMarbella from "./pages/AIAutomationMarbella";
-import AIAutomationMalaga from "./pages/AIAutomationMalaga";
-import AIAutomationCostadelSol from "./pages/AIAutomationCostadelSol";
-import AIAutomationEstepona from "./pages/AIAutomationEstepona";
-import AIAutomationFuengirola from "./pages/AIAutomationFuengirola";
-import AIAutomationBenalmadena from "./pages/AIAutomationBenalmadena";
-import AIAutomationTorremolinos from "./pages/AIAutomationTorremolinos";
-// Local SEO (Spanish slugs)
-import AgenciaIAMalaga from "./pages/AgenciaIAMalaga";
-import AgenciaIAMarbella from "./pages/AgenciaIAMarbella";
-import AgenciaIAFuengirola from "./pages/AgenciaIAFuengirola";
-import AgenciaIAEstepona from "./pages/AgenciaIAEstepona";
-import AutomatizacionIACostaDelSol from "./pages/AutomatizacionIACostaDelSol";
-// Vertical landing pages
-import ChatbotWhatsappRestaurantesMalaga from "./pages/ChatbotWhatsappRestaurantesMalaga";
-import AutomatizacionIAClinicasEsteticasMalaga from "./pages/AutomatizacionIAClinicasEsteticasMalaga";
-import AgentesIAInmobiliariasCostaDelSol from "./pages/AgentesIAInmobiliariasCostaDelSol";
-import ChatbotIAHotelesMarbella from "./pages/ChatbotIAHotelesMarbella";
-import AutomatizacionIAPymesMalaga from "./pages/AutomatizacionIAPymesMalaga";
-import { VerticalLandingPage } from "./pages/vertical-landing/VerticalLandingPage";
-import { verticalConfigs } from "./pages/vertical-landing/VerticalLandingData";
-import { CityLandingPage } from "./pages/city-landing/CityLandingPage";
-import { cityConfigs } from "./pages/city-landing/CityLandingData";
-import AIDiscoverability from "./pages/AIDiscoverability";
-import EasternEuropeAICostaDelSol from "./pages/EasternEuropeAICostaDelSol";
-import { RussianLandingPage } from "./pages/ru/RussianLandingPage";
-import { russianConfigs } from "./pages/ru/RussianLandingData";
-import RestaurantesIAReservasWhatsappCostaDelSol from "./pages/RestaurantesIAReservasWhatsappCostaDelSol";
-// Blog article pages
-import ChatbotWhatsappRestaurante from "./pages/blog/ChatbotWhatsappRestaurante";
-import ScrapingLeadsInmobiliaria from "./pages/blog/ScrapingLeadsInmobiliaria";
-import AutomatizacionIANegocioLocal from "./pages/blog/AutomatizacionIANegocioLocal";
-import ChatbotVsPersona from "./pages/blog/ChatbotVsPersona";
-import AutomatizarReservasRestauranteWhatsapp from "./pages/blog/AutomatizarReservasRestauranteWhatsapp";
-import AgenteVozIARestaurantesCostaDelSol from "./pages/blog/AgenteVozIARestaurantesCostaDelSol";
-import ChatbotWhatsappInmobiliariasCostaDelSol from "./pages/blog/ChatbotWhatsappInmobiliariasCostaDelSol";
-import AutomatizacionIAClinicasRecordatoriosCitas from "./pages/blog/AutomatizacionIAClinicasRecordatoriosCitas";
-import NegociosCostaDelSolClientesPerdidosWhatsapp from "./pages/blog/NegociosCostaDelSolClientesPerdidosWhatsapp";
 
 const queryClient = new QueryClient();
 
@@ -91,98 +30,20 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/vozra" element={<Vozra />} />
             <Route path="/servicios" element={<Servicios />} />
-            <Route path="/servicios/chatbots-ia" element={<ChatbotsIA />} />
-            <Route path="/servicios/automatizaciones" element={<Automatizaciones />} />
-            <Route path="/servicios/pedidos-online-restaurantes" element={<PedidosRestaurantes />} />
-            <Route path="/sectores/restaurantes" element={<SectorRestaurantes />} />
-            <Route path="/sectores/inmobiliarias" element={<SectorInmobiliarias />} />
-            <Route path="/sectores/clinicas-estetica" element={<SectorClinicasEstetica />} />
-            <Route path="/sectores/gimnasios" element={<SectorGimnasios />} />
-            <Route path="/ai-automation-marbella" element={<AIAutomationMarbella />} />
-            <Route path="/ai-automation-malaga" element={<AIAutomationMalaga />} />
-            <Route path="/ai-automation-costa-del-sol" element={<AIAutomationCostadelSol />} />
-            <Route path="/ai-automation-estepona" element={<AIAutomationEstepona />} />
-            <Route path="/ai-automation-fuengirola" element={<AIAutomationFuengirola />} />
-            <Route path="/ai-automation-benalmadena" element={<AIAutomationBenalmadena />} />
-            <Route path="/ai-automation-torremolinos" element={<AIAutomationTorremolinos />} />
-            {/* Spanish-slug local SEO */}
-            <Route path="/agencia-ia-malaga" element={<AgenciaIAMalaga />} />
-            <Route path="/agencia-ia-marbella" element={<AgenciaIAMarbella />} />
-            <Route path="/agencia-ia-fuengirola" element={<AgenciaIAFuengirola />} />
-            <Route path="/agencia-ia-estepona" element={<AgenciaIAEstepona />} />
-            <Route path="/automatizacion-ia-costa-del-sol" element={<AutomatizacionIACostaDelSol />} />
-            {/* Vertical landings */}
-            <Route path="/chatbot-whatsapp-restaurantes-malaga" element={<ChatbotWhatsappRestaurantesMalaga />} />
-            <Route path="/automatizacion-ia-clinicas-esteticas-malaga" element={<AutomatizacionIAClinicasEsteticasMalaga />} />
-            <Route path="/agentes-ia-inmobiliarias-costa-del-sol" element={<AgentesIAInmobiliariasCostaDelSol />} />
-            <Route path="/chatbot-ia-hoteles-marbella" element={<ChatbotIAHotelesMarbella />} />
-            <Route path="/automatizacion-ia-pymes-malaga" element={<AutomatizacionIAPymesMalaga />} />
-            {/* New vertical landings (Phase 4) */}
-            <Route path="/automatizacion-ia-restaurantes-costa-del-sol" element={<VerticalLandingPage config={verticalConfigs["automatizacion-ia-restaurantes-costa-del-sol"]} />} />
-            <Route path="/automatizacion-ia-clinicas-costa-del-sol" element={<VerticalLandingPage config={verticalConfigs["automatizacion-ia-clinicas-costa-del-sol"]} />} />
-            <Route path="/automatizacion-ia-inmobiliarias-costa-del-sol" element={<VerticalLandingPage config={verticalConfigs["automatizacion-ia-inmobiliarias-costa-del-sol"]} />} />
-            <Route path="/chatbots-whatsapp-negocios-locales" element={<VerticalLandingPage config={verticalConfigs["chatbots-whatsapp-negocios-locales"]} />} />
-            <Route path="/agentes-ia-voz-restaurantes" element={<VerticalLandingPage config={verticalConfigs["agentes-ia-voz-restaurantes"]} />} />
-            <Route path="/n8n-automatizaciones-empresas" element={<VerticalLandingPage config={verticalConfigs["n8n-automatizaciones-empresas"]} />} />
-            {/* City aliases (automatizacion-ia-*) — canonical points to /ai-automation-* */}
-            <Route path="/automatizacion-ia-estepona" element={<CityLandingPage config={cityConfigs.estepona} />} />
-            <Route path="/automatizacion-ia-marbella" element={<AIAutomationMarbella />} />
-            <Route path="/automatizacion-ia-malaga" element={<CityLandingPage config={cityConfigs.malaga} />} />
-            <Route path="/automatizacion-ia-fuengirola" element={<CityLandingPage config={cityConfigs.fuengirola} />} />
-            {/* AI discoverability */}
-            <Route path="/ai-discoverability" element={<AIDiscoverability />} />
-            {/* International expansion */}
-            <Route path="/eastern-europe-ai-automation-costa-del-sol" element={<EasternEuropeAICostaDelSol />} />
-            {/* Russian landing pages */}
-            <Route path="/ru" element={<RussianLandingPage config={russianConfigs.home} />} />
-            <Route path="/ru/audit" element={<RussianLandingPage config={russianConfigs.audit} />} />
-            <Route path="/ru/ai-automation-costa-del-sol" element={<RussianLandingPage config={russianConfigs["ai-automation-costa-del-sol"]} />} />
-            <Route path="/ru/ai-automation-restaurants" element={<RussianLandingPage config={russianConfigs["ai-automation-restaurants"]} />} />
-            <Route path="/ru/whatsapp-chatbots" element={<RussianLandingPage config={russianConfigs["whatsapp-chatbots"]} />} />
-            <Route path="/ru/voice-ai-agents-restaurants" element={<RussianLandingPage config={russianConfigs["voice-ai-agents-restaurants"]} />} />
-            <Route path="/industrias" element={<Industrias />} />
-            <Route path="/arquitectura" element={<Arquitectura />} />
-            <Route path="/agentes-ia" element={<AgentesIA />} />
-            <Route path="/agentes-ia/:slug" element={<AgentDetail />} />
             <Route path="/precios" element={<Precios />} />
             <Route path="/casos" element={<Casos />} />
             <Route path="/contacto" element={<Contacto />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/chatbot-whatsapp-restaurante" element={<ChatbotWhatsappRestaurante />} />
-            <Route path="/blog/scraping-leads-inmobiliaria" element={<ScrapingLeadsInmobiliaria />} />
-            <Route path="/blog/automatizacion-ia-negocio-local" element={<AutomatizacionIANegocioLocal />} />
-            <Route path="/blog/chatbot-vs-persona-atencion-cliente" element={<ChatbotVsPersona />} />
-            <Route path="/blog/automatizar-reservas-restaurante-whatsapp" element={<AutomatizarReservasRestauranteWhatsapp />} />
-            <Route path="/blog/agente-voz-ia-restaurantes-costa-del-sol" element={<AgenteVozIARestaurantesCostaDelSol />} />
-            <Route path="/blog/chatbot-whatsapp-inmobiliarias-costa-del-sol" element={<ChatbotWhatsappInmobiliariasCostaDelSol />} />
-            <Route path="/blog/automatizacion-ia-clinicas-recordatorios-citas" element={<AutomatizacionIAClinicasRecordatoriosCitas />} />
-            <Route path="/blog/negocios-costa-del-sol-clientes-perdidos-whatsapp" element={<NegociosCostaDelSolClientesPerdidosWhatsapp />} />
-            <Route path="/restaurantes-ia-reservas-whatsapp-costa-del-sol" element={<RestaurantesIAReservasWhatsappCostaDelSol />} />
-            <Route path="/blog/:slug" element={<BlogPost />} />
-            <Route path="/auditoria" element={<Auditoria />} />
+            <Route path="/demo" element={<DemoRedirect />} />
             <Route path="/auditoria-gratis" element={<AuditoriaGratis />} />
-            <Route path="/auditoria-selector" element={<AuditoriaSelector />} />
-            <Route path="/auditoria-local" element={<AuditoriaLocal />} />
-            <Route path="/inversores" element={<Inversores />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/admin/*" element={
-              <ProtectedAdminRoute>
-                <AdminDashboard />
-              </ProtectedAdminRoute>
-            } />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/privacidad" element={<Privacidad />} />
             <Route path="/terminos" element={<Terminos />} />
             <Route path="/cookies" element={<Cookies />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-          {/* Global Smart Chatbot */}
-          <SmartChatbot />
-          {/* UX Improvements */}
-          <WhatsAppButton />
-          <ExitIntentPopup />
-          <ScrollProgressBar />
-          <MobileStickyCTA />
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
