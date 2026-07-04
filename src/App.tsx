@@ -4,7 +4,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
-import { SmartChatbot } from "@/components/smart-chatbot/SmartChatbot";
 import { WhatsAppButton } from "@/components/ux/WhatsAppButton";
 import { ExitIntentPopup } from "@/components/ux/ExitIntentPopup";
 import { ScrollProgressBar } from "@/components/ux/ScrollProgressBar";
@@ -176,8 +175,6 @@ const App = () => (
             <Route path="/cookies" element={<Cookies />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-          {/* Global Smart Chatbot */}
-          <SmartChatbot />
           {/* UX Improvements */}
           <WhatsAppButton />
           <ExitIntentPopup />
