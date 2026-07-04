@@ -6,8 +6,7 @@ import { cn } from "@/lib/utils";
 
 const navItems = [
   { to: "/", label: "Inicio" },
-  { to: "/#sentra", label: "Sentra" },
-  { to: "/vozra", label: "Vozra" },
+  { to: "/#vozra", label: "Vozra" },
   { to: "/servicios", label: "Servicios" },
   { to: "/casos", label: "Casos de uso" },
   { to: "/precios", label: "Precios" },
@@ -20,7 +19,7 @@ export const Header = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 14);
+    const handleScroll = () => setScrolled(window.scrollY > 16);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -36,27 +35,27 @@ export const Header = () => {
       className={cn(
         "fixed inset-x-0 top-0 z-50 border-b transition-all duration-300",
         scrolled
-          ? "border-white/10 bg-black/92 shadow-2xl shadow-cyan-500/5 backdrop-blur-xl"
-          : "border-white/5 bg-black/78 backdrop-blur-md",
+          ? "border-white/10 bg-black/90 shadow-2xl shadow-cyan-500/5 backdrop-blur-xl"
+          : "border-transparent bg-black/45 backdrop-blur-md",
       )}
     >
-      <nav className="section-container flex h-[118px] items-center justify-between" aria-label="Navegación principal">
-        <Link to="/" className="flex shrink-0 items-center" aria-label="HydrAI Labs - Inicio">
-          <img
-            src="/hydrai-labs-logo.svg"
-            alt="HydrAI Labs"
-            className="h-[104px] w-auto max-w-[245px] object-contain sm:h-[110px] lg:h-[114px]"
-          />
+      <nav className="section-container flex h-20 items-center justify-between" aria-label="Navegación principal">
+        <Link to="/" className="group flex items-center gap-3" aria-label="HydrAI Labs - Inicio">
+          <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-cyan-400/35 bg-white/[0.03] text-lg font-bold text-white transition group-hover:border-cyan-300/70">HL</div>
+          <div className="leading-none">
+            <span className="block font-display text-base font-semibold tracking-[0.18em] text-white">HYDRA</span>
+            <span className="mt-1 block text-[10px] font-medium tracking-[0.48em] text-cyan-300">LABS</span>
+          </div>
         </Link>
 
-        <div className="hidden items-center gap-7 xl:flex">
+        <div className="hidden items-center gap-7 lg:flex">
           {navItems.map((item) => (
             <Link
               key={item.to}
               to={item.to}
               className={cn(
-                "text-[13px] font-medium transition-colors",
-                isActive(item.to) ? "text-cyan-300" : "text-zinc-300 hover:text-white",
+                "text-sm font-medium transition-colors",
+                isActive(item.to) ? "text-cyan-300" : "text-zinc-400 hover:text-white",
               )}
             >
               {item.label}
@@ -65,15 +64,13 @@ export const Header = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          <Link to="/demo" className="hidden sm:block">
-            <Button className="h-12 rounded-xl border border-cyan-300/70 bg-transparent px-6 text-white hover:bg-cyan-300 hover:text-black">
-              Probar demo
-            </Button>
+          <Link to="/auditoria-gratis" className="hidden sm:block">
+            <Button className="rounded-xl border border-cyan-300/50 bg-cyan-400 px-5 text-black hover:bg-cyan-300">Probar demo</Button>
           </Link>
           <Button
             variant="ghost"
             size="icon"
-            className="text-white xl:hidden"
+            className="text-white lg:hidden"
             onClick={() => setMenuOpen((open) => !open)}
             aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
             aria-expanded={menuOpen}
@@ -84,7 +81,7 @@ export const Header = () => {
       </nav>
 
       {menuOpen && (
-        <div className="border-t border-white/10 bg-black/96 backdrop-blur-xl xl:hidden">
+        <div className="border-t border-white/10 bg-black/95 backdrop-blur-xl lg:hidden">
           <nav className="section-container space-y-1 py-5" aria-label="Navegación móvil">
             {navItems.map((item) => (
               <Link
@@ -99,7 +96,7 @@ export const Header = () => {
                 {item.label}
               </Link>
             ))}
-            <Link to="/demo" onClick={() => setMenuOpen(false)} className="block pt-3">
+            <Link to="/auditoria-gratis" onClick={() => setMenuOpen(false)} className="block pt-3">
               <Button className="w-full rounded-xl bg-cyan-400 text-black hover:bg-cyan-300">Probar demo</Button>
             </Link>
           </nav>

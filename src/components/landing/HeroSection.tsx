@@ -54,7 +54,7 @@ export const HeroSection = () => {
             variants={itemVariants}
             className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold leading-[1.1] tracking-tight"
           >
-            <span className="text-foreground">Mejora tu negocio</span>
+            <span className="text-foreground">Mejora y Facilita tu negocio</span>
             <br />
             <span className="text-gradient-primary">con IA en 7 días</span>
           </motion.h1>
@@ -69,17 +69,14 @@ export const HeroSection = () => {
           </motion.p>
 
           {/* Dual CTAs */}
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2"
-          >
+          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
             <Link to="/auditoria-gratis">
               <Button size="lg" className="btn-neon text-base px-8 h-12 min-w-[240px]">
                 Agenda diagnóstico gratis
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>
-            <button onClick={() => scrollTo("#casos-uso")}>
+            <button onClick={() => scrollTo('#casos-uso')}>
               <Button size="lg" variant="outline" className="btn-outline-neon text-base px-6 h-12 min-w-[200px]">
                 Ver casos de éxito
               </Button>

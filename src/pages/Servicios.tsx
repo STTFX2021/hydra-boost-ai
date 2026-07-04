@@ -1,166 +1,515 @@
+import { PageLayout } from "@/components/layout/PageLayout";
+import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import {
-  ArrowRight,
-  Bot,
-  CalendarCheck2,
-  Code2,
-  CreditCard,
-  Globe2,
-  MessageSquareMore,
-  Network,
-  ShoppingCart,
-  Workflow,
+import { motion } from "framer-motion";
+import { 
+  Globe, Bot, Calendar, Star, Users, TrendingUp,
+  ArrowRight, CheckCircle2, Clock, Zap, Sparkles
 } from "lucide-react";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-import { SEOHead } from "@/components/seo";
+import { useTranslation, usePageSEO } from "@/lib/i18n";
+import { SEOHead, ServiceSchema, BreadcrumbSchema } from "@/components/seo";
 
-const services = [
-  {
-    icon: Globe2,
-    title: "Creación web",
-    text: "Landing pages, webs corporativas, webs de servicios y experiencias optimizadas para convertir.",
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
   },
-  {
-    icon: Code2,
-    title: "Desarrollo web",
-    text: "Aplicaciones, paneles internos, plataformas, integraciones y herramientas construidas a medida.",
-  },
-  {
-    icon: Bot,
-    title: "Chatbots e IA",
-    text: "Asistentes inteligentes de texto y voz conectados con la operación real del negocio.",
-  },
-  {
-    icon: Workflow,
-    title: "Automatización",
-    text: "Flujos que reducen tareas repetitivas y conectan personas, datos y sistemas.",
-  },
-  {
-    icon: CalendarCheck2,
-    title: "Reservas y citas",
-    text: "Sistemas de reserva, confirmaciones, cambios, recordatorios y gestión de disponibilidad.",
-  },
-  {
-    icon: MessageSquareMore,
-    title: "Atención conversacional",
-    text: "Atención 24/7 para consultas, captación, pedidos, reservas y seguimiento.",
-  },
-  {
-    icon: CreditCard,
-    title: "Pagos y checkout",
-    text: "Integraciones con pasarelas de pago, facturación y procesos de cobro online.",
-  },
-  {
-    icon: ShoppingCart,
-    title: "Comercio digital",
-    text: "Catálogos, tiendas, pedidos, stock y procesos de venta conectados.",
-  },
-];
+};
 
-const steps = [
-  ["01", "Nos cuentas", "Explicas qué necesitas, qué falla y qué resultado buscas."],
-  ["02", "Lo diseñamos", "Definimos una solución clara, útil y ajustada a tu operación."],
-  ["03", "Lo construimos", "Desarrollamos, integramos y probamos cada parte."],
-  ["04", "Lo ponemos en marcha", "Implementamos, medimos y optimizamos."],
-];
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
+};
 
-export default function Servicios() {
+const Servicios = () => {
+  const { language } = useTranslation();
+
+  const content = {
+    es: {
+      badge: "Soluciones de Automatización",
+      title: "Automatizaciones que",
+      titleHighlight: "Escalan tu Negocio",
+      subtitle: "Webs profesionales, chatbots 24/7, automatizaciones de reservas y gestión de reputación. Soluciones IA completas para negocios locales.",
+      includes: "Incluye",
+      deliverables: "Entregables",
+      implementTime: "Tiempo de implementación:",
+      expectedKpis: "KPIs esperados",
+      requestService: "Solicitar servicio",
+      ctaTitle: "¿Listo para automatizar?",
+      ctaSubtitle: "Agenda una auditoría gratuita y te mostramos exactamente qué podemos automatizar en tu negocio.",
+      ctaButton: "Solicitar Auditoría Técnica",
+      services: [
+        {
+          id: "webProfesional",
+          icon: Globe,
+          title: "Web Profesional",
+          subtitle: "Tu presencia digital optimizada",
+          description: "Landing page o web corporativa optimizada para conversión con SEO local, formularios inteligentes y analíticas.",
+          features: ["Diseño responsive premium", "SEO local optimizado", "Formularios de captación", "Analytics y tracking", "SSL y hosting incluido"],
+          deliverables: ["Web lista para publicar", "Dominio configurado", "Google Analytics setup", "Guía de uso"],
+          time: "7-14 días",
+          price: "497€ + IVA",
+          kpis: ["+300% visibilidad", "2x leads orgánicos"],
+          accent: "from-primary to-[hsl(200_100%_40%)]",
+        },
+        {
+          id: "chatbotWeb",
+          icon: Bot,
+          title: "Chatbot Web",
+          subtitle: "Atención automática en tu web",
+          description: "Agente conversacional IA en tu web que responde FAQs 24/7, cualifica leads y agenda citas automáticamente.",
+          features: ["Agente conversacional IA", "Responde FAQs 24/7", "Cualifica leads", "Agenda citas automáticamente"],
+          deliverables: ["Chatbot configurado", "Flujos de conversación", "Dashboard de métricas", "Training inicial"],
+          time: "3-5 días",
+          price: "295€ + IVA",
+          kpis: ["+60% leads capturados", "-80% tiempo respuesta"],
+          accent: "from-[hsl(230_70%_55%)] to-primary",
+        },
+        {
+          id: "chatbotWhatsApp",
+          icon: Bot,
+          title: "Chatbot WhatsApp",
+          subtitle: "Bot IA en WhatsApp Business",
+          description: "Bot IA en WhatsApp Business con flujos conversacionales, recordatorios automáticos e integración CRM.",
+          features: ["Bot IA en WhatsApp Business", "Flujos conversacionales", "Recordatorios automáticos", "Integración CRM"],
+          deliverables: ["Bot configurado", "Flujos de WhatsApp", "Panel de gestión", "Reportes automáticos"],
+          time: "3-5 días",
+          price: "350€ + IVA",
+          kpis: ["+90% tasa respuesta", "-70% no-shows"],
+          accent: "from-[hsl(150_70%_40%)] to-primary",
+        },
+        {
+          id: "reservas",
+          icon: Calendar,
+          title: "Sistema de Reservas Online",
+          subtitle: "Sistema anti no-shows",
+          description: "Calendario de reservas online con confirmaciones automáticas, recordatorios anti no-show y gestión de cancelaciones.",
+          features: ["Calendario de reservas online", "Confirmaciones automáticas", "Recordatorios anti no-show", "Gestión de cancelaciones", "Integración Google Calendar"],
+          deliverables: ["Sistema de reservas", "Flujos de WhatsApp", "Panel de gestión", "Reportes automáticos"],
+          time: "3-5 días",
+          price: "197€ + IVA",
+          kpis: ["-80% no-shows", "+40% reservas online"],
+          accent: "from-primary to-[hsl(200_90%_55%)]",
+        },
+        {
+          id: "pasarelaPago",
+          icon: Zap,
+          title: "Pasarela de Pago Integrada",
+          subtitle: "Cobros online seguros",
+          description: "Integración Stripe/Redsys con pagos online seguros, facturas automáticas y panel de gestión de cobros.",
+          features: ["Integración Stripe/Redsys", "Pagos online seguros", "Facturas automáticas", "Panel de gestión de cobros"],
+          deliverables: ["Pasarela configurada", "Panel de cobros", "Facturas automáticas", "Guía de uso"],
+          time: "2-3 días",
+          price: "197€ + IVA",
+          kpis: ["+35% conversión", "Cobro inmediato"],
+          accent: "from-[hsl(38_92%_50%)] to-primary",
+        },
+        {
+          id: "tiendaOnline",
+          icon: Globe,
+          title: "Tienda Online",
+          subtitle: "Vende online 24/7",
+          description: "Catálogo de productos con carrito, checkout, gestión de stock e integración con pasarela de pago.",
+          features: ["Catálogo de productos", "Carrito y checkout", "Gestión de stock", "Integración pasarela de pago", "Panel de pedidos"],
+          deliverables: ["Tienda configurada", "Panel de pedidos", "Gestión de stock", "Guía de uso"],
+          time: "7-14 días",
+          price: "497€ + IVA",
+          kpis: ["Venta online 24/7", "+200% alcance"],
+          accent: "from-[hsl(280_70%_55%)] to-primary",
+        },
+      ],
+    },
+    en: {
+      badge: "Automation Solutions",
+      title: "Automations that",
+      titleHighlight: "Scale your Business",
+      subtitle: "Professional websites, 24/7 chatbots, booking automations and reputation management. Complete AI solutions for local businesses.",
+      includes: "Includes",
+      deliverables: "Deliverables",
+      implementTime: "Implementation time:",
+      expectedKpis: "Expected KPIs",
+      requestService: "Request service",
+      ctaTitle: "Ready to automate?",
+      ctaSubtitle: "Schedule a free audit and we'll show you exactly what we can automate in your business.",
+      ctaButton: "Request Technical Audit",
+      services: [
+        {
+          id: "webProfesional",
+          icon: Globe,
+          title: "Professional Website",
+          subtitle: "Your optimized digital presence",
+          description: "Conversion-optimized landing page or corporate website with local SEO, smart forms and analytics.",
+          features: ["Premium responsive design", "Local SEO optimized", "Lead capture forms", "Analytics and tracking", "SSL and hosting included"],
+          deliverables: ["Ready-to-publish website", "Domain configured", "Google Analytics setup", "User guide"],
+          time: "7-14 days",
+          price: "€497 + VAT",
+          kpis: ["+300% visibility", "2x organic leads"],
+          accent: "from-primary to-[hsl(200_100%_40%)]",
+        },
+        {
+          id: "chatbotWeb",
+          icon: Bot,
+          title: "Web Chatbot",
+          subtitle: "Automatic web support",
+          description: "AI conversational agent on your website that answers FAQs 24/7, qualifies leads and schedules appointments automatically.",
+          features: ["AI conversational agent", "Answers FAQs 24/7", "Qualifies leads", "Schedules appointments automatically"],
+          deliverables: ["Configured chatbot", "Conversation flows", "Metrics dashboard", "Initial training"],
+          time: "3-5 days",
+          price: "€295 + VAT",
+          kpis: ["+60% leads captured", "-80% response time"],
+          accent: "from-[hsl(230_70%_55%)] to-primary",
+        },
+        {
+          id: "chatbotWhatsApp",
+          icon: Bot,
+          title: "WhatsApp Chatbot",
+          subtitle: "AI bot on WhatsApp Business",
+          description: "AI bot on WhatsApp Business with conversational flows, automatic reminders and CRM integration.",
+          features: ["WhatsApp Business AI bot", "Conversational flows", "Automatic reminders", "CRM integration"],
+          deliverables: ["Configured bot", "WhatsApp flows", "Management panel", "Automatic reports"],
+          time: "3-5 days",
+          price: "€350 + VAT",
+          kpis: ["+90% response rate", "-70% no-shows"],
+          accent: "from-[hsl(150_70%_40%)] to-primary",
+        },
+        {
+          id: "reservas",
+          icon: Calendar,
+          title: "Online Booking System",
+          subtitle: "Anti no-show system",
+          description: "Online booking calendar with automatic confirmations, anti no-show reminders and cancellation management.",
+          features: ["Online booking calendar", "Automatic confirmations", "Anti no-show reminders", "Cancellation management", "Google Calendar integration"],
+          deliverables: ["Booking system", "WhatsApp flows", "Management panel", "Automatic reports"],
+          time: "3-5 days",
+          price: "€197 + VAT",
+          kpis: ["-80% no-shows", "+40% online bookings"],
+          accent: "from-primary to-[hsl(200_90%_55%)]",
+        },
+        {
+          id: "pasarelaPago",
+          icon: Zap,
+          title: "Integrated Payment Gateway",
+          subtitle: "Secure online payments",
+          description: "Stripe/Redsys integration with secure online payments, automatic invoices and payment management panel.",
+          features: ["Stripe/Redsys integration", "Secure online payments", "Automatic invoices", "Payment management panel"],
+          deliverables: ["Configured gateway", "Payment panel", "Automatic invoices", "User guide"],
+          time: "2-3 days",
+          price: "€197 + VAT",
+          kpis: ["+35% conversion", "Immediate payment"],
+          accent: "from-[hsl(38_92%_50%)] to-primary",
+        },
+        {
+          id: "tiendaOnline",
+          icon: Globe,
+          title: "Online Store",
+          subtitle: "Sell online 24/7",
+          description: "Product catalog with cart, checkout, stock management and payment gateway integration.",
+          features: ["Product catalog", "Cart and checkout", "Stock management", "Payment gateway integration", "Order panel"],
+          deliverables: ["Configured store", "Order panel", "Stock management", "User guide"],
+          time: "7-14 days",
+          price: "€497 + VAT",
+          kpis: ["Online sales 24/7", "+200% reach"],
+          accent: "from-[hsl(280_70%_55%)] to-primary",
+        },
+      ],
+    },
+    de: {
+      badge: "Automatisierungslösungen",
+      title: "Automatisierungen, die",
+      titleHighlight: "Ihr Geschäft skalieren",
+      subtitle: "Professionelle Websites, 24/7 Chatbots, Buchungsautomatisierungen und Reputationsmanagement. Komplette KI-Lösungen für lokale Unternehmen.",
+      includes: "Enthält",
+      deliverables: "Lieferumfang",
+      implementTime: "Implementierungszeit:",
+      expectedKpis: "Erwartete KPIs",
+      requestService: "Service anfragen",
+      ctaTitle: "Bereit zu automatisieren?",
+      ctaSubtitle: "Vereinbaren Sie ein kostenloses Audit und wir zeigen Ihnen genau, was wir in Ihrem Unternehmen automatisieren können.",
+      ctaButton: "Technisches Audit anfordern",
+      services: [
+        { id: "webProfesional", icon: Globe, title: "Professionelle Website", subtitle: "Ihre optimierte digitale Präsenz", description: "Conversion-optimierte Landingpage oder Unternehmenswebsite mit lokalem SEO, intelligenten Formularen und Analytics.", features: ["Premium responsives Design", "Lokales SEO optimiert", "Lead-Erfassungsformulare", "Analytics und Tracking", "SSL und Hosting inklusive"], deliverables: ["Veröffentlichungsbereite Website", "Domain konfiguriert", "Google Analytics Setup", "Benutzerhandbuch"], time: "7-14 Tage", price: "497€ + MwSt.", kpis: ["+300% Sichtbarkeit", "2x organische Leads"], accent: "from-primary to-[hsl(200_100%_40%)]" },
+        { id: "chatbotWeb", icon: Bot, title: "Web-Chatbot", subtitle: "Automatischer Web-Support", description: "KI-Konversationsagent auf Ihrer Website, der FAQs 24/7 beantwortet, Leads qualifiziert und Termine automatisch plant.", features: ["KI-Konversationsagent", "Antwortet FAQs 24/7", "Qualifiziert Leads", "Plant Termine automatisch"], deliverables: ["Konfigurierter Chatbot", "Konversationsabläufe", "Metrik-Dashboard", "Initialschulung"], time: "3-5 Tage", price: "295€ + MwSt.", kpis: ["+60% erfasste Leads", "-80% Reaktionszeit"], accent: "from-[hsl(230_70%_55%)] to-primary" },
+        { id: "chatbotWhatsApp", icon: Bot, title: "WhatsApp-Chatbot", subtitle: "KI-Bot in WhatsApp Business", description: "KI-Bot in WhatsApp Business mit Konversationsabläufen, automatischen Erinnerungen und CRM-Integration.", features: ["WhatsApp Business KI-Bot", "Konversationsabläufe", "Automatische Erinnerungen", "CRM-Integration"], deliverables: ["Konfigurierter Bot", "WhatsApp-Abläufe", "Verwaltungspanel", "Automatische Berichte"], time: "3-5 Tage", price: "350€ + MwSt.", kpis: ["+90% Antwortrate", "-70% No-Shows"], accent: "from-[hsl(150_70%_40%)] to-primary" },
+        { id: "reservas", icon: Calendar, title: "Online-Buchungssystem", subtitle: "Anti-No-Show-System", description: "Online-Buchungskalender mit automatischen Bestätigungen, Anti-No-Show-Erinnerungen und Stornoverwaltung.", features: ["Online-Buchungskalender", "Automatische Bestätigungen", "Anti-No-Show-Erinnerungen", "Stornoverwaltung", "Google Calendar Integration"], deliverables: ["Buchungssystem", "WhatsApp-Abläufe", "Verwaltungspanel", "Automatische Berichte"], time: "3-5 Tage", price: "197€ + MwSt.", kpis: ["-80% No-Shows", "+40% Online-Buchungen"], accent: "from-primary to-[hsl(200_90%_55%)]" },
+        { id: "pasarelaPago", icon: Zap, title: "Integriertes Zahlungs-Gateway", subtitle: "Sichere Online-Zahlungen", description: "Stripe/Redsys-Integration mit sicheren Online-Zahlungen, automatischen Rechnungen und Zahlungsverwaltungspanel.", features: ["Stripe/Redsys-Integration", "Sichere Online-Zahlungen", "Automatische Rechnungen", "Zahlungsverwaltungspanel"], deliverables: ["Konfiguriertes Gateway", "Zahlungspanel", "Automatische Rechnungen", "Benutzerhandbuch"], time: "2-3 Tage", price: "197€ + MwSt.", kpis: ["+35% Conversion", "Sofortige Zahlung"], accent: "from-[hsl(38_92%_50%)] to-primary" },
+        { id: "tiendaOnline", icon: Globe, title: "Online-Shop", subtitle: "24/7 online verkaufen", description: "Produktkatalog mit Warenkorb, Checkout, Lagerverwaltung und Zahlungs-Gateway-Integration.", features: ["Produktkatalog", "Warenkorb und Checkout", "Lagerverwaltung", "Zahlungs-Gateway-Integration", "Bestellpanel"], deliverables: ["Konfigurierter Shop", "Bestellpanel", "Lagerverwaltung", "Benutzerhandbuch"], time: "7-14 Tage", price: "497€ + MwSt.", kpis: ["Online-Verkauf 24/7", "+200% Reichweite"], accent: "from-[hsl(280_70%_55%)] to-primary" },
+      ],
+    },
+    ru: {
+      badge: "Решения для автоматизации",
+      title: "Автоматизации, которые",
+      titleHighlight: "масштабируют ваш бизнес",
+      subtitle: "Профессиональные сайты, чат-боты 24/7, автоматизация бронирований и управление репутацией. Полные ИИ-решения для локального бизнеса.",
+      includes: "Включает",
+      deliverables: "Поставка",
+      implementTime: "Время внедрения:",
+      expectedKpis: "Ожидаемые KPI",
+      requestService: "Запросить услугу",
+      ctaTitle: "Готовы к автоматизации?",
+      ctaSubtitle: "Запишитесь на бесплатный аудит — мы покажем, что именно можем автоматизировать в вашем бизнесе.",
+      ctaButton: "Запросить технический аудит",
+      services: [
+        { id: "webProfesional", icon: Globe, title: "Профессиональный сайт", subtitle: "Ваше оптимизированное цифровое присутствие", description: "Лендинг или корпоративный сайт, оптимизированный под конверсию, с локальным SEO, умными формами и аналитикой.", features: ["Премиум адаптивный дизайн", "Локальное SEO", "Формы захвата лидов", "Аналитика и отслеживание", "SSL и хостинг включены"], deliverables: ["Готовый к публикации сайт", "Настроенный домен", "Настройка Google Analytics", "Руководство пользователя"], time: "7-14 дней", price: "497 € + НДС", kpis: ["+300% видимости", "2x органических лидов"], accent: "from-primary to-[hsl(200_100%_40%)]" },
+        { id: "chatbotWeb", icon: Bot, title: "Веб-чат-бот", subtitle: "Автоматическая поддержка на сайте", description: "ИИ-агент на вашем сайте отвечает на FAQ 24/7, квалифицирует лидов и автоматически записывает на приём.", features: ["ИИ-агент диалога", "Отвечает на FAQ 24/7", "Квалифицирует лидов", "Автоматически записывает на встречи"], deliverables: ["Настроенный чат-бот", "Сценарии разговора", "Дашборд метрик", "Первичное обучение"], time: "3-5 дней", price: "295 € + НДС", kpis: ["+60% захваченных лидов", "-80% времени ответа"], accent: "from-[hsl(230_70%_55%)] to-primary" },
+        { id: "chatbotWhatsApp", icon: Bot, title: "Чат-бот WhatsApp", subtitle: "ИИ-бот в WhatsApp Business", description: "ИИ-бот в WhatsApp Business с диалоговыми сценариями, автонапоминаниями и интеграцией с CRM.", features: ["ИИ-бот WhatsApp Business", "Диалоговые сценарии", "Автоматические напоминания", "Интеграция с CRM"], deliverables: ["Настроенный бот", "Сценарии WhatsApp", "Панель управления", "Автоматические отчёты"], time: "3-5 дней", price: "350 € + НДС", kpis: ["+90% ответов", "-70% no-show"], accent: "from-[hsl(150_70%_40%)] to-primary" },
+        { id: "reservas", icon: Calendar, title: "Система онлайн-бронирования", subtitle: "Анти-no-show система", description: "Календарь онлайн-бронирований с автоподтверждениями, напоминаниями и управлением отменами.", features: ["Календарь онлайн-бронирований", "Автоподтверждения", "Анти-no-show напоминания", "Управление отменами", "Интеграция с Google Calendar"], deliverables: ["Система бронирования", "Сценарии WhatsApp", "Панель управления", "Автоматические отчёты"], time: "3-5 дней", price: "197 € + НДС", kpis: ["-80% no-show", "+40% онлайн-броней"], accent: "from-primary to-[hsl(200_90%_55%)]" },
+        { id: "pasarelaPago", icon: Zap, title: "Интегрированный платёжный шлюз", subtitle: "Безопасные онлайн-платежи", description: "Интеграция Stripe/Redsys с безопасными онлайн-платежами, автосчетами и панелью управления платежами.", features: ["Интеграция Stripe/Redsys", "Безопасные онлайн-платежи", "Автоматические счета", "Панель управления платежами"], deliverables: ["Настроенный шлюз", "Панель платежей", "Автосчета", "Руководство"], time: "2-3 дня", price: "197 € + НДС", kpis: ["+35% конверсии", "Мгновенная оплата"], accent: "from-[hsl(38_92%_50%)] to-primary" },
+        { id: "tiendaOnline", icon: Globe, title: "Интернет-магазин", subtitle: "Продавайте онлайн 24/7", description: "Каталог товаров с корзиной, оформлением заказа, управлением остатками и платёжным шлюзом.", features: ["Каталог товаров", "Корзина и оформление", "Управление остатками", "Интеграция платежей", "Панель заказов"], deliverables: ["Настроенный магазин", "Панель заказов", "Управление остатками", "Руководство"], time: "7-14 дней", price: "497 € + НДС", kpis: ["Продажи онлайн 24/7", "+200% охвата"], accent: "from-[hsl(280_70%_55%)] to-primary" },
+      ],
+    },
+  };
+
+  const t = content[language as keyof typeof content] ?? content.es;
+  const seo = usePageSEO('servicios');
+
   return (
     <>
       <SEOHead
-        title="Servicios | HydrAI Labs"
-        description="Soluciones de inteligencia artificial, automatización y desarrollo a medida."
+        title={seo.title}
+        description={seo.description}
         canonical="/servicios"
+        keywords="servicios ia, chatbot negocios, automatizacion reservas, web ia, agencia automatizacion"
       />
-
-      <div className="min-h-screen overflow-hidden bg-black text-white">
-        <Header />
-        <main>
-          <section className="relative border-b border-white/10 pb-20 pt-[170px] md:pb-28">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(34,211,238,0.16),transparent_32%),radial-gradient(circle_at_15%_30%,rgba(37,99,235,0.10),transparent_30%)]" />
-            <div className="section-container relative text-center">
-              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-cyan-300">
-                Soluciones a medida
-              </p>
-              <h1 className="mx-auto mt-5 max-w-5xl text-5xl font-semibold leading-tight tracking-[-0.04em] md:text-7xl">
-                Creamos soluciones que impulsan tu negocio.
+      <ServiceSchema
+        name="Servicios de Automatización con IA"
+        description="Soluciones completas de automatización con inteligencia artificial para negocios locales: webs, chatbots, reservas y más."
+        url="/servicios"
+      />
+      <BreadcrumbSchema items={[
+        { name: "Inicio", url: "/" },
+        { name: "Servicios", url: "/servicios" }
+      ]} />
+      
+      <PageLayout>
+        {/* Hero */}
+        <section className="relative section-padding overflow-hidden bg-mesh-hydrai">
+          <div className="glow-orb-primary w-[500px] h-[500px] -top-60 -right-60 opacity-20" />
+          <div className="glow-orb-accent w-80 h-80 bottom-0 left-10 opacity-15" />
+          
+          <div className="section-container relative z-10">
+            <motion.div 
+              className="max-w-3xl mx-auto text-center"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <motion.div 
+                className="badge-primary mb-6 inline-flex"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.2 }}
+              >
+                <Sparkles className="w-3.5 h-3.5 mr-1.5" /> {t.badge}
+              </motion.div>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
+                {t.title}{" "}
+                <span className="text-gradient-hydrai text-glow-soft">{t.titleHighlight}</span>
               </h1>
-              <p className="mx-auto mt-7 max-w-4xl text-lg leading-8 text-zinc-400 md:text-xl">
-                Creamos soluciones de Inteligencia Artificial, automatización y desarrollo a medida que impulsan tu negocio. Tú nos cuentas y nosotros lo solucionamos.
+              <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+                {t.subtitle}
               </p>
-              <div className="mt-9 flex flex-col justify-center gap-4 sm:flex-row">
-                <Link
-                  to="/contacto"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-cyan-400 px-7 py-4 font-semibold text-black hover:bg-cyan-300"
-                >
-                  Cuéntanos tu proyecto <ArrowRight className="h-4 w-4" />
-                </Link>
-                <Link
-                  to="/precios"
-                  className="inline-flex items-center justify-center rounded-xl border border-white/25 px-7 py-4 font-semibold text-white hover:border-cyan-300/60 hover:bg-white/5"
-                >
-                  Ver catálogo
-                </Link>
-              </div>
-            </div>
-          </section>
 
-          <section className="section-container py-20 md:py-28">
-            <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-              {services.map(({ icon: Icon, title, text }) => (
-                <article
-                  key={title}
-                  className="rounded-2xl border border-white/10 bg-white/[0.025] p-6 transition hover:-translate-y-1 hover:border-cyan-300/35 hover:bg-cyan-400/[0.035]"
-                >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-cyan-300/30 bg-cyan-400/10">
-                    <Icon className="h-6 w-6 text-cyan-300" />
-                  </div>
-                  <h2 className="mt-6 text-xl font-semibold">{title}</h2>
-                  <p className="mt-3 leading-7 text-zinc-500">{text}</p>
-                </article>
-              ))}
-            </div>
-          </section>
+              {/* Decorative divider */}
+              <motion.div
+                className="flex items-center justify-center gap-3 mt-4"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+              >
+                <div className="h-px w-16 bg-gradient-to-r from-transparent to-primary/40" />
+                <div className="w-2 h-2 rounded-full bg-primary/60 animate-pulse-slow" />
+                <div className="h-px w-16 bg-gradient-to-l from-transparent to-primary/40" />
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
 
-          <section className="border-y border-white/10 bg-zinc-950/70 py-20 md:py-24">
-            <div className="section-container">
-              <div className="text-center">
-                <p className="text-sm font-semibold uppercase tracking-[0.24em] text-cyan-300">Cómo trabajamos</p>
-                <h2 className="mt-4 text-4xl font-semibold tracking-tight md:text-5xl">De una necesidad real a una herramienta útil</h2>
-              </div>
-              <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-                {steps.map(([number, title, text]) => (
-                  <article key={number} className="rounded-2xl border border-white/10 bg-black/65 p-6">
-                    <span className="text-sm font-bold tracking-[0.2em] text-cyan-300">{number}</span>
-                    <h3 className="mt-4 text-xl font-semibold">{title}</h3>
-                    <p className="mt-3 leading-7 text-zinc-500">{text}</p>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </section>
+        {/* Services List */}
+        <section className="section-padding relative overflow-hidden">
+          {/* Subtle background pattern */}
+          <div className="absolute inset-0 bg-dots opacity-30 pointer-events-none" />
+          
+          <div className="section-container relative z-10">
+            <div className="space-y-24 lg:space-y-32">
+              {t.services.map((service, index) => {
+                const IconComponent = service.icon;
+                const isReversed = index % 2 === 1;
+                
+                return (
+                  <motion.div
+                    key={service.id}
+                    id={service.id}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-80px" }}
+                    variants={containerVariants}
+                    className={`grid lg:grid-cols-2 gap-10 lg:gap-16 items-center`}
+                  >
+                    {/* Content side */}
+                    <motion.div 
+                      className={isReversed ? "lg:order-2" : ""}
+                      variants={itemVariants}
+                    >
+                      {/* Icon with gradient background */}
+                      <motion.div 
+                        className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.accent} flex items-center justify-center mb-6 shadow-lg`}
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                      >
+                        <IconComponent className="w-8 h-8 text-white" />
+                      </motion.div>
+                      
+                      <h2 className="text-3xl lg:text-4xl font-display font-bold mb-2">{service.title}</h2>
+                      <p className="text-primary font-semibold mb-4 text-lg">{service.subtitle}</p>
+                      <p className="text-muted-foreground mb-6 leading-relaxed">{service.description}</p>
 
-          <section className="section-container py-16 md:py-24">
-            <div className="rounded-[2rem] border border-cyan-300/20 bg-zinc-950 p-8 md:p-12">
-              <div className="grid items-center gap-8 md:grid-cols-[1fr_auto]">
-                <div>
-                  <Network className="h-6 w-6 text-cyan-300" />
-                  <h2 className="mt-5 text-3xl font-semibold md:text-4xl">No adaptamos tu negocio a una herramienta.</h2>
-                  <p className="mt-3 text-lg text-zinc-500">Diseñamos la herramienta alrededor de tu negocio.</p>
-                </div>
-                <Link
-                  to="/contacto"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-cyan-400 px-7 py-4 font-semibold text-black hover:bg-cyan-300"
-                >
-                  Empezar proyecto <ArrowRight className="h-4 w-4" />
+                      <h4 className="font-semibold mb-3 text-sm uppercase tracking-wider text-foreground/80">{t.includes}</h4>
+                      <motion.ul 
+                        className="space-y-2.5 mb-6"
+                        variants={containerVariants}
+                      >
+                        {service.features.map((feature, i) => (
+                          <motion.li 
+                            key={i} 
+                            className="flex items-start gap-2.5 text-sm text-muted-foreground font-medium"
+                            variants={itemVariants}
+                          >
+                            <CheckCircle2 className="w-4 h-4 text-success mt-0.5 shrink-0" />
+                            {feature}
+                          </motion.li>
+                        ))}
+                      </motion.ul>
+
+                      <div className="flex items-center gap-4 mb-6">
+                        <span className={`inline-flex items-center px-4 py-2 rounded-xl text-sm font-bold bg-gradient-to-r ${service.accent} text-white shadow-md`}>
+                          {service.price}
+                        </span>
+                      </div>
+
+                      <Link to="/contacto">
+                        <Button className="btn-neon btn-depth group">
+                          {t.requestService}
+                          <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        </Button>
+                      </Link>
+                    </motion.div>
+
+                    {/* Card side */}
+                    <motion.div 
+                      className={isReversed ? "lg:order-1" : ""}
+                      variants={itemVariants}
+                    >
+                      <div className="card-elevated card-elevated-hover p-8 relative overflow-hidden">
+                        {/* Accent bar */}
+                        <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${service.accent}`} />
+                        
+                        <div className="space-y-6">
+                          <div>
+                            <h4 className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-4 flex items-center gap-2">
+                              <span className="w-5 h-px bg-primary" />
+                              {t.deliverables}
+                            </h4>
+                            <ul className="space-y-3">
+                              {service.deliverables.map((d, i) => (
+                                <motion.li 
+                                  key={i} 
+                                  className="flex items-center gap-3 text-sm font-medium group/item"
+                                  whileHover={{ x: 4 }}
+                                  transition={{ duration: 0.2 }}
+                                >
+                                  <div className="w-6 h-6 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 group-hover/item:bg-primary/20 transition-colors">
+                                    <CheckCircle2 className="w-3.5 h-3.5 text-primary" />
+                                  </div>
+                                  {d}
+                                </motion.li>
+                              ))}
+                            </ul>
+                          </div>
+
+                          {/* Divider */}
+                          <div className="h-px bg-gradient-to-r from-border/50 via-primary/20 to-border/50" />
+
+                          <div className="flex items-center gap-3 text-sm bg-muted/30 rounded-xl p-3">
+                            <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                              <Clock className="w-4 h-4 text-primary" />
+                            </div>
+                            <div>
+                              <span className="text-muted-foreground text-xs">{t.implementTime}</span>
+                              <p className="font-bold text-foreground">{service.time}</p>
+                            </div>
+                          </div>
+
+                          {/* Divider */}
+                          <div className="h-px bg-gradient-to-r from-border/50 via-primary/20 to-border/50" />
+
+                          <div>
+                            <h4 className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-3 flex items-center gap-2">
+                              <span className="w-5 h-px bg-success" />
+                              {t.expectedKpis}
+                            </h4>
+                            <div className="flex flex-wrap gap-2">
+                              {service.kpis.map((kpi, i) => (
+                                <motion.span 
+                                  key={i} 
+                                  className="badge-success text-xs font-bold"
+                                  whileHover={{ scale: 1.05 }}
+                                >
+                                  {kpi}
+                                </motion.span>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="section-padding relative overflow-hidden bg-mesh-hydrai">
+          <div className="glow-orb-primary w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-15" />
+          <div className="section-container relative z-10">
+            <motion.div 
+              className="card-elevated text-center p-10 md:p-16 relative overflow-hidden"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              {/* Top gradient accent */}
+              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary via-[hsl(200_90%_55%)] to-[hsl(230_70%_55%)]" />
+              
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+              >
+                <Sparkles className="w-8 h-8 text-primary mx-auto mb-4 animate-pulse-slow" />
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-gradient-hydrai text-glow-soft">
+                  {t.ctaTitle}
+                </h2>
+                <p className="text-muted-foreground mb-8 max-w-xl mx-auto text-lg">
+                  {t.ctaSubtitle}
+                </p>
+                <Link to="/auditoria-gratis">
+                  <Button size="lg" className="btn-neon btn-depth text-lg px-10 py-6 group">
+                    {t.ctaButton}
+                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </Button>
                 </Link>
-              </div>
-            </div>
-          </section>
-        </main>
-        <Footer />
-      </div>
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
+      </PageLayout>
     </>
   );
-}
+};
+
+export default Servicios;
