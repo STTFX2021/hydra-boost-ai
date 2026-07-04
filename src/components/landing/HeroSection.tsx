@@ -54,7 +54,7 @@ export const HeroSection = () => {
             variants={itemVariants}
             className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold leading-[1.1] tracking-tight"
           >
-            <span className="text-foreground">Automatiza tu negocio</span>
+            <span className="text-foreground">Mejora y Facilita tu negocio</span>
             <br />
             <span className="text-gradient-primary">con IA en 7 días</span>
           </motion.h1>
