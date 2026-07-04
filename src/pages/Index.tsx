@@ -235,7 +235,7 @@ const Index = () => (
               </div>
 
               <h1 className="max-w-3xl text-[40px] font-semibold leading-[1.05] tracking-[-0.035em] sm:text-5xl lg:text-[64px]">
-                Automatiza tu negocio con{" "}
+                Mejora y Agiliza tu negocio con{" "}
                 <span className="bg-gradient-to-r from-cyan-200 via-cyan-300 to-cyan-400 bg-clip-text text-transparent">
                   IA
                 </span>
