@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://unpkg.com" crossorigin />
 
     <!-- Preload critical image (logo in header) -->
     <link rel="preload" as="image" href="/favicon.png" />
@@ -36,6 +37,15 @@
 
   <body>
     <div id="root"></div>
+
+    <!-- ElevenLabs website agent -->
+    <elevenlabs-convai agent-id="agent_9201kwkjhahded5tcj42fkj25thn"></elevenlabs-convai>
+    <script
+      src="https://unpkg.com/@elevenlabs/convai-widget-embed"
+      async
+      type="text/javascript"
+    ></script>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
