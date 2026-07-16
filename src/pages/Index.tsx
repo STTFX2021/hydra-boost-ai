@@ -7,7 +7,6 @@ import { VozraPlatformSection } from "@/components/landing/VozraPlatformSection"
 import { ConversationalDifferentiation } from "@/components/landing/ConversationalDifferentiation";
 import { WebDevelopmentSection } from "@/components/landing/WebDevelopmentSection";
 import { FeaturedProjectsSection } from "@/components/landing/FeaturedProjectsSection";
-import { SarahDemoStrip } from "@/components/landing/SarahDemoStrip";
 import { HomeFinalCTA } from "@/components/landing/HomeFinalCTA";
 
 const Index = () => (
@@ -34,7 +33,6 @@ const Index = () => (
         <ConversationalDifferentiation />
         <WebDevelopmentSection />
         <FeaturedProjectsSection />
-        <SarahDemoStrip />
         <HomeFinalCTA />
       </main>
 
