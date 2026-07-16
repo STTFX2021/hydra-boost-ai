@@ -29,11 +29,11 @@ jobs:
       - name: Preserve routes and contact wiring
         run: npm run test:preservation
 
-      - name: Audit Sarah and Vozra Rapid presence
+      - name: Require Sarah and Vozra Rapid presence
         run: npm run test:preservation:strict
-        continue-on-error: true
 
       - name: Lint audit
+        if: always()
         run: npm run lint
         continue-on-error: true
 
