@@ -18,8 +18,8 @@ const navItems = [
   { href: "/#inteligencia-conversacional", label: "Inteligencia conversacional", anchor: true },
   { href: "/#vozra", label: "Vozra", anchor: true },
   { href: "/#desarrollo-web", label: "Desarrollo web", anchor: true },
-  { href: "/casos", label: "Proyectos" },
-  { href: "/contacto", label: "Contacto" },
+  { href: "/casos", label: "Proyectos", anchor: false },
+  { href: "/contacto", label: "Contacto", anchor: false },
 ] as const;
 
 export const Header = () => {
