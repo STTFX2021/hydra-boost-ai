@@ -1,7 +1,7 @@
 import { ArrowRight, Mic, PhoneCall } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { VOZRA_RAPID_DEMOS } from "@/config/vozraDemos";
+import { SarahIntroDialog } from "@/components/landing/SarahIntroDialog";
 
 export const HomeFinalCTA = () => (
   <section className="section-padding relative overflow-hidden" aria-labelledby="home-final-cta-title">
@@ -15,17 +15,19 @@ export const HomeFinalCTA = () => (
           Cada conversación debería mover tu negocio.
         </h2>
         <p className="mx-auto mt-5 max-w-2xl leading-7 text-muted-foreground">
-          Prueba la experiencia de Vozra Rapid o cuéntanos qué proceso quieres automatizar, conectar o convertir en producto.
+          Prueba a Sarah como cliente de una pizzería o cuéntanos qué proceso quieres automatizar, conectar o convertir en producto.
         </p>
 
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-          <a href={VOZRA_RAPID_DEMOS.sarah.url} target="_blank" rel="noopener noreferrer">
-            <Button size="lg" className="btn-neon btn-depth w-full sm:w-auto">
-              <Mic className="mr-2 h-5 w-5" />
-              Habla con Sarah
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-          </a>
+          <SarahIntroDialog
+            trigger={
+              <Button size="lg" className="btn-neon btn-depth w-full sm:w-auto">
+                <Mic className="mr-2 h-5 w-5" />
+                Habla con Sarah
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            }
+          />
           <Link to="/contacto">
             <Button size="lg" variant="outline" className="w-full sm:w-auto">
               Cuéntanos tu proyecto
