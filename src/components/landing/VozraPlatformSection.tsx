@@ -81,9 +81,21 @@ export const VozraPlatformSection = () => (
 
           const content = (
             <>
-              <div className={`flex h-14 w-14 items-center justify-center rounded-2xl border ${toneClasses}`}>
-                <Icon className="h-7 w-7" />
-              </div>
+              {product.name === "Vozra Rapid" ? (
+                <div className="flex h-24 items-center overflow-hidden rounded-2xl border border-border/60 bg-black/70 px-4">
+                  <img
+                    src="/brand/vozra/vozra-rapid-logo.svg"
+                    alt="Vozra Rapid — Pedidos Inteligentes Directos"
+                    className="h-20 w-full object-contain"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              ) : (
+                <div className={`flex h-14 w-14 items-center justify-center rounded-2xl border ${toneClasses}`}>
+                  <Icon className="h-7 w-7" />
+                </div>
+              )}
               <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">{product.name}</p>
               <h3 className="mt-2 text-2xl font-bold">{product.title}</h3>
               <p className="mt-4 min-h-[84px] leading-7 text-muted-foreground">{product.description}</p>
