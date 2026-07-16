@@ -1,3 +1,4 @@
 HydrAI Labs conversational redesign branch initialized.
 Baseline preservation gate enabled on 2026-07-16.
 Build verification requested after legacy lint audit.
+CI base branch synchronized for full validation.
