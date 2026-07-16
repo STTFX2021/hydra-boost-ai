@@ -5,6 +5,7 @@ import { useAdmin } from "@/hooks/useAdmin";
 import { Menu, X, Globe, ChevronDown } from "lucide-react";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { HydrAILogo } from "@/components/brand/HydrAILogo";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -47,17 +48,9 @@ export const Header = () => {
           : "bg-background/55 backdrop-blur-md",
       )}
     >
-      <nav aria-label="Navegación principal" className="section-container flex min-h-[76px] items-center justify-between gap-4 py-3">
+      <nav aria-label="Navegación principal" className="section-container flex min-h-[82px] items-center justify-between gap-4 py-2">
         <Link to="/" aria-label="HydrAI Labs - Ir a inicio" className="flex shrink-0 items-center">
-          <img
-            src="/brand/hydrai/hydrai-logo.svg"
-            alt="HydrAI Labs"
-            className="h-12 w-auto max-w-[150px] object-contain"
-            width={150}
-            height={48}
-            loading="eager"
-            decoding="async"
-          />
+          <HydrAILogo className="h-[66px] w-auto max-w-[122px]" />
         </Link>
 
         <div className="hidden items-center gap-6 xl:flex">
