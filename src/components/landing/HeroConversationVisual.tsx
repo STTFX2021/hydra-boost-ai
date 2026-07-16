@@ -1,3 +1,4 @@
+import type { ComponentType } from "react";
 import {
   AlertTriangle,
   CalendarCheck,
@@ -13,7 +14,7 @@ const Waveform = () => (
     {[20, 34, 46, 28, 54, 38, 22, 44, 30].map((height, index) => (
       <span
         key={`${height}-${index}`}
-        className="w-1 rounded-full bg-gradient-to-t from-primary to-secondary animate-pulse"
+        className="w-1 animate-pulse rounded-full bg-gradient-to-t from-primary to-secondary"
         style={{
           height,
           animationDelay: `${index * 110}ms`,
@@ -29,7 +30,7 @@ interface FloatingCardProps {
   eyebrow: string;
   title: string;
   detail: string;
-  icon: React.ComponentType<{ className?: string }>;
+  icon: ComponentType<{ className?: string }>;
   tone?: "primary" | "success" | "warning";
 }
 
@@ -42,25 +43,25 @@ const FloatingCard = ({
   tone = "primary",
 }: FloatingCardProps) => {
   const toneClasses = {
-    primary: "bg-primary/10 text-primary border-primary/20",
-    success: "bg-success/10 text-success border-success/20",
-    warning: "bg-warning/10 text-warning border-warning/20",
+    primary: "border-primary/20 bg-primary/10 text-primary",
+    success: "border-success/20 bg-success/10 text-success",
+    warning: "border-warning/20 bg-warning/10 text-warning",
   }[tone];
 
   return (
     <div
-      className={`absolute z-20 w-[210px] rounded-2xl border border-border/60 bg-card/90 p-4 shadow-2xl shadow-black/30 backdrop-blur-xl ${className}`}
+      className={`absolute z-20 w-[180px] rounded-2xl border border-border/60 bg-card/90 p-3 shadow-2xl shadow-black/30 backdrop-blur-xl sm:w-[210px] sm:p-4 ${className}`}
     >
       <div className="flex items-start gap-3">
         <div className={`rounded-xl border p-2 ${toneClasses}`}>
           <Icon className="h-4 w-4" />
         </div>
         <div className="min-w-0">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+          <p className="text-[9px] font-semibold uppercase tracking-[0.16em] text-muted-foreground sm:text-[10px]">
             {eyebrow}
           </p>
-          <p className="mt-1 text-sm font-semibold text-foreground">{title}</p>
-          <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{detail}</p>
+          <p className="mt-1 text-xs font-semibold text-foreground sm:text-sm">{title}</p>
+          <p className="mt-1 hidden text-xs leading-relaxed text-muted-foreground sm:block">{detail}</p>
         </div>
       </div>
     </div>
@@ -68,22 +69,22 @@ const FloatingCard = ({
 };
 
 export const HeroConversationVisual = () => (
-  <div className="relative mx-auto h-[510px] w-full max-w-[620px] overflow-hidden rounded-[2rem] border border-border/50 bg-card/45 shadow-2xl shadow-black/40 backdrop-blur-xl">
+  <div className="relative mx-auto h-[480px] w-full max-w-[620px] overflow-hidden rounded-[2rem] border border-border/50 bg-card/45 shadow-2xl shadow-black/40 backdrop-blur-xl sm:h-[510px]">
     <div className="absolute inset-0 bg-grid opacity-40" />
     <div className="glow-orb-primary left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 opacity-20" />
     <div className="glow-orb-secondary -right-20 top-16 h-56 w-56 opacity-15" />
 
-    <div className="absolute left-1/2 top-1/2 z-10 flex h-52 w-52 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-primary/25 bg-background/75 shadow-[0_0_90px_hsl(var(--primary)/0.20)] backdrop-blur-xl">
-      <div className="absolute inset-4 rounded-full border border-secondary/25 animate-pulse-slow" />
+    <div className="absolute left-1/2 top-1/2 z-10 flex h-44 w-44 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-primary/25 bg-background/75 shadow-[0_0_90px_hsl(var(--primary)/0.20)] backdrop-blur-xl sm:h-52 sm:w-52">
+      <div className="animate-pulse-slow absolute inset-4 rounded-full border border-secondary/25" />
       <div className="text-center">
         <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/20 to-secondary/20 text-primary">
           <Sparkles className="h-6 w-6" />
         </div>
-        <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+        <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-muted-foreground sm:text-[10px] sm:tracking-[0.24em]">
           Sistema conversacional
         </p>
         <Waveform />
-        <p className="text-sm font-semibold text-foreground">Escuchando y actuando</p>
+        <p className="text-xs font-semibold text-foreground sm:text-sm">Escuchando y actuando</p>
       </div>
     </div>
 
@@ -93,7 +94,7 @@ export const HeroConversationVisual = () => (
     <div className="absolute bottom-[25%] right-[18%] h-px w-[24%] rotate-[12deg] bg-gradient-to-l from-transparent via-warning/50 to-warning/10" />
 
     <FloatingCard
-      className="left-5 top-6 animate-float"
+      className="animate-float left-3 top-5 sm:left-5 sm:top-6"
       eyebrow="Llamada entrante"
       title="Cliente identificado"
       detail="Historial, preferencias y contexto disponibles al instante."
@@ -101,7 +102,7 @@ export const HeroConversationVisual = () => (
     />
 
     <FloatingCard
-      className="right-5 top-16 animate-float delay-200"
+      className="animate-float delay-200 right-3 top-20 sm:right-5 sm:top-16"
       eyebrow="Reserva"
       title="Solicitud estructurada"
       detail="Viernes, 21:00 · 4 personas · terraza."
@@ -110,7 +111,7 @@ export const HeroConversationVisual = () => (
     />
 
     <FloatingCard
-      className="bottom-12 left-5 animate-float delay-300"
+      className="animate-float delay-300 bottom-16 left-3 sm:bottom-12 sm:left-5"
       eyebrow="Pedido"
       title="Enviado al negocio"
       detail="Productos, extras y entrega preparados para cocina."
@@ -119,9 +120,9 @@ export const HeroConversationVisual = () => (
     />
 
     <FloatingCard
-      className="bottom-6 right-5 animate-float delay-500"
+      className="animate-float delay-500 bottom-5 right-3 sm:bottom-6 sm:right-5"
       eyebrow="Supervisión"
-      title="Revisión humana solicitada"
+      title="Revisión humana"
       detail="La IA escala cuando detecta riesgo o una decisión reservada."
       icon={AlertTriangle}
       tone="warning"
