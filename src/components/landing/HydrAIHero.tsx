@@ -1,8 +1,8 @@
 import { ArrowRight, BrainCircuit, Headphones, Mic, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { VOZRA_RAPID_DEMOS } from "@/config/vozraDemos";
 import { HeroConversationVisual } from "@/components/landing/HeroConversationVisual";
+import { SarahIntroDialog } from "@/components/landing/SarahIntroDialog";
 
 const proofPoints = [
   { icon: Headphones, label: "Atención continua" },
@@ -35,13 +35,15 @@ export const HydrAIHero = () => (
           </p>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <a href={VOZRA_RAPID_DEMOS.sarah.url} target="_blank" rel="noopener noreferrer">
-              <Button size="lg" className="btn-neon btn-depth w-full sm:w-auto">
-                <Mic className="mr-2 h-5 w-5" />
-                Habla con Sarah
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </a>
+            <SarahIntroDialog
+              trigger={
+                <Button size="lg" className="btn-neon btn-depth w-full sm:w-auto">
+                  <Mic className="mr-2 h-5 w-5" />
+                  Habla con Sarah
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              }
+            />
             <Link to="/contacto">
               <Button size="lg" variant="outline" className="w-full border-border/70 bg-background/40 sm:w-auto">
                 Solicitar una demo
