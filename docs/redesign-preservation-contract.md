@@ -13,10 +13,11 @@ Branch: `work/hydrailabs-conversational-redesign-20260716`
   - Email `hola@hydrailabs.com`.
 - Global navigation helpers and current conversion components unless replaced with an equivalent tested implementation.
 - Vozra Rapid / Sarah demonstrations:
-  - Current Sarah demo: `https://sarah-speaks-direct.lovable.app`.
-  - Stable demo: `https://vozra-direct-demo.lovable.app`.
+  - Public demo: `https://vozra-direct-demo.lovable.app`.
   - Product label: `Vozra Rapid — Pedidos Inteligentes Directos`.
   - Visible CTA: `Habla con Sarah`.
+  - Secondary CTA: `Haz que Sarah te llame` where the callback flow is available.
+  - Before opening Sarah, explain that she is a pizzeria order receptionist and the test must stay focused on placing an order.
 - HydrAI voice assistant integration where present:
   - ElevenLabs agent ID remains environment-driven and must not be hard-coded into new public components.
 
@@ -26,14 +27,15 @@ Branch: `work/hydrailabs-conversational-redesign-20260716`
 - Keep web development as the second commercial pillar.
 - Rework `/casos` as projects and functional demonstrations without deleting the route.
 - Add product-level pages without removing existing pages.
+- Remove redundant standalone Vozra Rapid demo sections from the homepage.
 
 ## Release gate
 
 Before merge to `main`:
 
 1. All previous routes resolve.
-2. Contact form submissions preserve the existing Supabase wiring.
-3. WhatsApp and email fallbacks remain present.
-4. `Habla con Sarah` reaches the current Vozra Rapid demo.
-5. `npm run test:preservation`, lint audit and `npm run build` pass in CI.
+2. Contact form submissions reach the existing Supabase functions.
+3. WhatsApp and email fallbacks work.
+4. `Habla con Sarah` reaches the current Vozra Rapid demo or embedded voice experience.
+5. `npm run lint`, `npm run build`, and the route smoke test pass.
 6. No unverified production claims, testimonials, or metrics are introduced.
