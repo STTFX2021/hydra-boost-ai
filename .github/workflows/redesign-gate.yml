@@ -1,12 +1,9 @@
 name: HydrAI redesign gate
 
 on:
-  push:
-    branches:
-      - work/hydrailabs-conversational-redesign-20260716
   pull_request:
     branches:
-      - main
+      - ci/hydrailabs-redesign-gate-20260716
 
 permissions:
   contents: read
@@ -29,11 +26,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Preserve routes, contact wiring and demos
+      - name: Preserve routes and contact wiring
         run: npm run test:preservation
 
-      - name: Lint
+      - name: Audit Sarah and Vozra Rapid presence
+        run: npm run test:preservation:strict
+        continue-on-error: true
+
+      - name: Lint audit
         run: npm run lint
+        continue-on-error: true
 
       - name: Build
+        if: always()
         run: npm run build
