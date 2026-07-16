@@ -3,6 +3,7 @@ const path = require('node:path');
 
 const root = process.cwd();
 const read = (relativePath) => fs.readFileSync(path.join(root, relativePath), 'utf8');
+const strictSarah = process.argv.includes('--strict-sarah');
 
 const appSource = read('src/App.tsx');
 const contactSource = read('src/pages/Contacto.tsx');
@@ -127,7 +128,7 @@ const combinedSource = sourceFiles.map((file) => fs.readFileSync(file, 'utf8')).
 const hasSarahLabel = /habla con sarah/i.test(combinedSource);
 const hasVozraRapidReference = /vozra\s*rapid|pedidos inteligentes directos/i.test(combinedSource);
 
-if (process.env.STRICT_SARAH === '1') {
+if (strictSarah) {
   check('Sarah demo CTA present', hasSarahLabel, 'Expected visible copy “Habla con Sarah”');
   check('Vozra Rapid reference present', hasVozraRapidReference);
 } else {
