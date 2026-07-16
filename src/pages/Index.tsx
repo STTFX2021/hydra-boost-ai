@@ -24,6 +24,7 @@ import { AutomationQuiz } from "@/components/landing/AutomationQuiz";
 import { SectorDemos } from "@/components/landing/SectorDemos";
 import { AnimatedCounters } from "@/components/landing/AnimatedCounters";
 import { TestimonialsSection } from "@/components/landing/TestimonialsSection";
+import { SarahDemoStrip } from "@/components/landing/SarahDemoStrip";
 
 
 
@@ -59,6 +60,7 @@ const Index = () => {
 
         <main id="main-content">
           <HeroWorld />
+          <SarahDemoStrip />
 
           <WhatWeReview />
           <DifferentiatorBlock />
