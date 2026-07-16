@@ -10,7 +10,8 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { VOZRA_RAPID_DEMOS } from "@/config/vozraDemos";
+import { SarahIntroDialog } from "@/components/landing/SarahIntroDialog";
+import { VozraRapidLogo } from "@/components/brand/VozraRapidLogo";
 
 const products = [
   {
@@ -21,7 +22,6 @@ const products = [
     features: ["Atención telefónica", "Reservas y cambios", "Grupos y preferencias", "Restricciones alimentarias"],
     tone: "primary",
     href: "/restaurantes-ia-reservas-whatsapp-costa-del-sol",
-    external: false,
   },
   {
     name: "Vozra Rapid",
@@ -30,8 +30,7 @@ const products = [
     icon: Pizza,
     features: ["Carta y precios", "Extras y modificadores", "Recogida o entrega", "Confirmación del pedido"],
     tone: "success",
-    href: VOZRA_RAPID_DEMOS.sarah.url,
-    external: true,
+    href: "",
   },
   {
     name: "Vozra Control Center",
@@ -41,7 +40,6 @@ const products = [
     features: ["Configuración multiempresa", "Clientes y memoria", "Operaciones en tiempo real", "Usuarios y permisos"],
     tone: "secondary",
     href: "/arquitectura",
-    external: false,
   },
 ] as const;
 
@@ -63,13 +61,15 @@ export const VozraPlatformSection = () => (
           </p>
         </div>
 
-        <a href={VOZRA_RAPID_DEMOS.sarah.url} target="_blank" rel="noopener noreferrer">
-          <Button className="btn-neon btn-depth w-full lg:w-auto">
-            <Mic className="mr-2 h-4 w-4" />
-            Habla con Sarah
-            <ArrowUpRight className="ml-2 h-4 w-4" />
-          </Button>
-        </a>
+        <SarahIntroDialog
+          trigger={
+            <Button className="btn-neon btn-depth w-full lg:w-auto">
+              <Mic className="mr-2 h-4 w-4" />
+              Habla con Sarah
+              <ArrowUpRight className="ml-2 h-4 w-4" />
+            </Button>
+          }
+        />
       </div>
 
       <div className="grid gap-6 lg:grid-cols-3">
@@ -85,13 +85,7 @@ export const VozraPlatformSection = () => (
             <>
               {product.name === "Vozra Rapid" ? (
                 <div className="flex h-24 items-center overflow-hidden rounded-2xl border border-border/60 bg-black/70 px-4">
-                  <img
-                    src="/brand/vozra/vozra-rapid-logo.svg"
-                    alt="Vozra Rapid — Pedidos Inteligentes Directos"
-                    className="h-20 w-full object-contain"
-                    loading="lazy"
-                    decoding="async"
-                  />
+                  <VozraRapidLogo className="h-20 w-full" />
                 </div>
               ) : (
                 <div className={`flex h-14 w-14 items-center justify-center rounded-2xl border ${toneClasses}`}>
@@ -116,16 +110,15 @@ export const VozraPlatformSection = () => (
             </>
           );
 
-          return product.external ? (
-            <a
+          return product.name === "Vozra Rapid" ? (
+            <SarahIntroDialog
               key={product.name}
-              href={product.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="card-elevated card-elevated-hover block p-7"
-            >
-              {content}
-            </a>
+              trigger={
+                <button type="button" className="card-elevated card-elevated-hover block w-full p-7 text-left">
+                  {content}
+                </button>
+              }
+            />
           ) : (
             <Link key={product.name} to={product.href} className="card-elevated card-elevated-hover block p-7">
               {content}
