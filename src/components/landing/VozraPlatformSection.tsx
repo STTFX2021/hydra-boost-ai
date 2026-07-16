@@ -21,6 +21,7 @@ const products = [
     features: ["Atención telefónica", "Reservas y cambios", "Grupos y preferencias", "Restricciones alimentarias"],
     tone: "primary",
     href: "/restaurantes-ia-reservas-whatsapp-costa-del-sol",
+    external: false,
   },
   {
     name: "Vozra Rapid",
@@ -40,6 +41,7 @@ const products = [
     features: ["Configuración multiempresa", "Clientes y memoria", "Operaciones en tiempo real", "Usuarios y permisos"],
     tone: "secondary",
     href: "/arquitectura",
+    external: false,
   },
 ] as const;
 
