@@ -127,13 +127,19 @@ collectSourceFiles(path.join(root, 'src'));
 const combinedSource = sourceFiles.map((file) => fs.readFileSync(file, 'utf8')).join('\n');
 const hasSarahLabel = /habla con sarah/i.test(combinedSource);
 const hasVozraRapidReference = /vozra\s*rapid|pedidos inteligentes directos/i.test(combinedSource);
+const hasSarahDemoUrl = combinedSource.includes('https://sarah-speaks-direct.lovable.app');
+const hasStableDemoUrl = combinedSource.includes('https://vozra-direct-demo.lovable.app');
 
 if (strictSarah) {
   check('Sarah demo CTA present', hasSarahLabel, 'Expected visible copy “Habla con Sarah”');
   check('Vozra Rapid reference present', hasVozraRapidReference);
+  check('Current Sarah demo URL preserved', hasSarahDemoUrl);
+  check('Stable Vozra Rapid demo URL preserved', hasStableDemoUrl);
 } else {
   console.log(`Sarah CTA audit: ${hasSarahLabel ? 'FOUND' : 'NOT FOUND (release blocker, not baseline failure)'}`);
   console.log(`Vozra Rapid audit: ${hasVozraRapidReference ? 'FOUND' : 'NOT FOUND (release blocker, not baseline failure)'}`);
+  console.log(`Sarah demo URL audit: ${hasSarahDemoUrl ? 'FOUND' : 'NOT FOUND (release blocker, not baseline failure)'}`);
+  console.log(`Stable demo URL audit: ${hasStableDemoUrl ? 'FOUND' : 'NOT FOUND (release blocker, not baseline failure)'}`);
 }
 
 console.log(`Preservation checks passed: ${passes.length}`);
@@ -143,4 +149,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('PASS — existing routes and contact integrations are preserved.');
+console.log('PASS — existing routes, contact integrations and demo connections are preserved.');
