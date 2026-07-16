@@ -1,4 +1,4 @@
 HydrAI Labs conversational redesign branch initialized.
 Baseline preservation gate enabled on 2026-07-16.
 Homepage and project catalogue implemented.
-Sarah introduction, logo reliability and duplicate-section cleanup requested for validation.
+Sarah introduction, logo reliability and duplicate-section cleanup ready for validation.
