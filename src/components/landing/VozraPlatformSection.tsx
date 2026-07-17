@@ -12,64 +12,76 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { SarahIntroDialog } from "@/components/landing/SarahIntroDialog";
 import { VozraRapidLogo } from "@/components/brand/VozraRapidLogo";
+import { productLinks } from "@/config/productLinks";
 
 const products = [
   {
-    name: "Vozra Reserve",
+    name: "Vozra",
     title: "Reservas y atención inteligente",
     description: "Gestiona consultas, solicitudes de reserva, cambios, grupos, preferencias y excepciones operativas.",
     icon: CalendarDays,
     features: ["Atención telefónica", "Reservas y cambios", "Grupos y preferencias", "Restricciones alimentarias"],
     tone: "primary",
     href: "/restaurantes-ia-reservas-whatsapp-costa-del-sol",
+    kind: "internal",
   },
   {
-    name: "Vozra Rapid",
+    name: "Vozra PID",
     title: "Pedidos Inteligentes Directos",
     description: "Recoge pedidos por teléfono, confirma productos y extras y entrega la información estructurada al negocio.",
     icon: Pizza,
     features: ["Carta y precios", "Extras y modificadores", "Recogida o entrega", "Confirmación del pedido"],
     tone: "success",
-    href: "",
+    href: productLinks.sarahDemo,
+    kind: "sarah",
   },
   {
     name: "Vozra Control Center",
-    title: "Configuración y supervisión",
-    description: "Centraliza horarios, reglas, clientes, conversaciones, reservas, pedidos, permisos e integraciones.",
+    title: "Configuración, supervisión y resultados",
+    description: "Centraliza implementaciones, clientes, conversaciones, reservas, pedidos, permisos, integraciones y resultados.",
     icon: Gauge,
-    features: ["Configuración multiempresa", "Clientes y memoria", "Operaciones en tiempo real", "Usuarios y permisos"],
+    features: ["Operación multiempresa", "Clientes y memoria", "Portal de resultados", "Usuarios y permisos"],
     tone: "secondary",
-    href: "/arquitectura",
+    href: productLinks.vozraApp,
+    kind: "external",
   },
 ] as const;
 
 export const VozraPlatformSection = () => (
   <section id="vozra" className="section-padding relative overflow-hidden" aria-labelledby="vozra-platform-title">
-    <div className="glow-orb-primary -left-28 top-20 h-64 w-64 opacity-10" />
+    <div className="absolute inset-0 bg-grid-hydrai opacity-55" aria-hidden />
     <div className="section-container relative z-10">
       <div className="mb-12 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
         <div className="max-w-3xl">
           <div className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
             <Settings2 className="h-4 w-4" />
-            Plataforma Vozra
+            Ecosistema Vozra · Producto HydrAI Labs
           </div>
           <h2 id="vozra-platform-title" className="text-3xl font-bold md:text-5xl">
-            Un único cerebro. Tres soluciones operativas.
+            Un único cerebro. Productos especializados.
           </h2>
           <p className="mt-5 max-w-2xl leading-7 text-muted-foreground">
-            Vozra conecta conversaciones, reglas del negocio, clientes y sistemas para que cada llamada produzca un resultado útil y verificable.
+            Vozra y Vozra PID conectan conversaciones, reglas del negocio, clientes y sistemas. HydrAI Labs configura y supervisa la complejidad desde un único Control Center.
           </p>
         </div>
 
-        <SarahIntroDialog
-          trigger={
-            <Button className="btn-neon btn-depth w-full lg:w-auto">
-              <Mic className="mr-2 h-4 w-4" />
-              Habla con Sarah
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <a href={productLinks.vozraPortal} target="_blank" rel="noreferrer">
+            <Button variant="outline" className="w-full border-white/15 bg-background/55 sm:w-auto">
+              Ver portal cliente
               <ArrowUpRight className="ml-2 h-4 w-4" />
             </Button>
-          }
-        />
+          </a>
+          <SarahIntroDialog
+            trigger={
+              <Button className="btn-neon btn-depth w-full sm:w-auto">
+                <Mic className="mr-2 h-4 w-4" />
+                Habla con Sarah
+                <ArrowUpRight className="ml-2 h-4 w-4" />
+              </Button>
+            }
+          />
+        </div>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-3">
@@ -83,8 +95,8 @@ export const VozraPlatformSection = () => (
 
           const content = (
             <>
-              {product.name === "Vozra Rapid" ? (
-                <div className="flex h-24 items-center overflow-hidden rounded-2xl border border-border/60 bg-black/70 px-4">
+              {product.name === "Vozra PID" ? (
+                <div className="flex h-24 items-center overflow-hidden rounded-2xl border border-white/10 bg-black/75 px-4">
                   <VozraRapidLogo className="h-20 w-full" />
                 </div>
               ) : (
@@ -104,22 +116,40 @@ export const VozraPlatformSection = () => (
                 ))}
               </ul>
               <div className="mt-7 flex items-center gap-2 text-sm font-semibold text-primary">
-                {product.name === "Vozra Rapid" ? "Probar ahora" : "Conocer la solución"}
+                {product.kind === "sarah" ? "Probar ahora" : product.kind === "external" ? "Abrir dashboard" : "Conocer la solución"}
                 <ArrowUpRight className="h-4 w-4" />
               </div>
             </>
           );
 
-          return product.name === "Vozra Rapid" ? (
-            <SarahIntroDialog
-              key={product.name}
-              trigger={
-                <button type="button" className="card-elevated card-elevated-hover block w-full p-7 text-left">
-                  {content}
-                </button>
-              }
-            />
-          ) : (
+          if (product.kind === "sarah") {
+            return (
+              <SarahIntroDialog
+                key={product.name}
+                trigger={
+                  <button type="button" className="card-elevated card-elevated-hover block w-full p-7 text-left">
+                    {content}
+                  </button>
+                }
+              />
+            );
+          }
+
+          if (product.kind === "external") {
+            return (
+              <a
+                key={product.name}
+                href={product.href}
+                target="_blank"
+                rel="noreferrer"
+                className="card-elevated card-elevated-hover block p-7"
+              >
+                {content}
+              </a>
+            );
+          }
+
+          return (
             <Link key={product.name} to={product.href} className="card-elevated card-elevated-hover block p-7">
               {content}
             </Link>
@@ -127,7 +157,7 @@ export const VozraPlatformSection = () => (
         })}
       </div>
 
-      <div className="mt-10 grid gap-4 rounded-3xl border border-border/50 bg-card/45 p-6 backdrop-blur md:grid-cols-3 md:p-8">
+      <div className="mt-10 grid gap-4 rounded-3xl border border-white/10 bg-card/55 p-6 backdrop-blur-xl md:grid-cols-3 md:p-8">
         <div className="flex items-center gap-3">
           <UsersRound className="h-5 w-5 text-primary" />
           <div>
