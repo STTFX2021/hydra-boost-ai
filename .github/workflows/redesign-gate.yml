@@ -3,7 +3,7 @@ name: HydrAI redesign gate
 on:
   pull_request:
     branches:
-      - ci/hydrailabs-redesign-gate-20260716
+      - main
 
 permissions:
   contents: read
@@ -29,7 +29,7 @@ jobs:
       - name: Preserve routes and contact wiring
         run: npm run test:preservation
 
-      - name: Require Sarah and Vozra Rapid presence
+      - name: Require Sarah and Vozra PID presence
         run: npm run test:preservation:strict
 
       - name: Lint audit
