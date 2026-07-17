@@ -20,7 +20,7 @@ const Index = () => (
     <LocalBusinessSchema />
     <WebSiteSchema />
 
-    <div className="min-h-screen bg-background">
+    <div className="hydrai-grid-page min-h-screen bg-background">
       <a href="#main-content" className="skip-link">
         Saltar al contenido principal
       </a>
