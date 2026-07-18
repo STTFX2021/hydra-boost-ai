@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "sdk_version": "0.23.0",
+  "path": "/functions/v1/mcp",
+  "auth": {
+    "type": "oauth",
+    "issuer": "https://tshfnwdqidyhfajzovnq.supabase.co/auth/v1",
+    "accepted_audiences": [
+      "authenticated"
+    ]
+  },
+  "mcp": {
+    "server": {
+      "name": "hydrailabs-mcp",
+      "version": "0.1.0",
+      "title": "HydrAI Labs MCP"
+    },
+    "tools": [
+      {
+        "name": "list_leads",
+        "title": "List leads",
+        "description": "Return the most recent leads captured by the HydrAI Labs website (audit form, contact form, landings). Requires an admin account — non-admin users receive an empty list due to row-level security.",
+        "annotations": {
+          "readOnlyHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "description": "Maximum number of leads to return (default 20)."
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "new",
+                "contacted",
+                "qualified",
+                "proposal",
+                "won",
+                "lost"
+              ],
+              "description": "Optional status filter."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_assessments",
+        "title": "List diagnostic assessments",
+        "description": "Return the latest self-diagnostic assessments submitted through /auditoria and /auditoria-gratis. Admin-only via row-level security.",
+        "annotations": {
+          "readOnlyHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "description": "Maximum number of assessments to return (default 20)."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_blog_posts",
+        "title": "List blog posts",
+        "description": "Return HydrAI Labs blog posts (title, slug, excerpt, published state). Useful for content planning and cross-linking suggestions.",
+        "annotations": {
+          "readOnlyHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50,
+              "description": "Maximum number of posts (default 20)."
+            },
+            "only_published": {
+              "type": "boolean",
+              "description": "If true, return only published posts."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
