@@ -39,8 +39,8 @@ const item = {
 const copy = {
   es: {
     badge: "🚀 Automatización IA para negocios locales · Costa del Sol",
-    title1: "Automatización IA para negocios locales",
-    title2: "que pierden clientes por no responder a tiempo",
+    title1: "Mejora y Facilita tu negocio",
+    title2: "con IA en 7 días, 24/7",
     sub: "Creamos asistentes de WhatsApp, voz y automatizaciones que captan leads, responden clientes y reducen tareas repetitivas para restaurantes, clínicas, inmobiliarias, gimnasios y servicios locales.",
     subBold: "Recibe un diagnóstico gratis en 24h.",
     cta1: "Recibe un diagnóstico gratis en 24h",
