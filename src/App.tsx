@@ -23,6 +23,7 @@ import AuditoriaGratis from "./pages/AuditoriaGratis";
 import AuditoriaSelector from "./pages/AuditoriaSelector";
 import AuditoriaLocal from "./pages/AuditoriaLocal";
 import Login from "./pages/Login";
+import OAuthConsent from "./pages/OAuthConsent";
 import AdminDashboard from "./pages/admin/Dashboard";
 import Privacidad from "./pages/legal/Privacidad";
 import Terminos from "./pages/legal/Terminos";
@@ -166,6 +167,7 @@ const App = () => (
             <Route path="/auditoria-local" element={<AuditoriaLocal />} />
             <Route path="/inversores" element={<Inversores />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/.lovable/oauth/consent" element={<OAuthConsent />} />
             <Route path="/admin/*" element={
               <ProtectedAdminRoute>
                 <AdminDashboard />
