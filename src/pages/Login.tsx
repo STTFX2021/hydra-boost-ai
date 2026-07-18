@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,8 +7,16 @@ import { toast } from "sonner";
 import { LogIn, UserPlus, ArrowLeft, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
 
+function safeNext(raw: string | null): string | null {
+  if (!raw) return null;
+  if (!raw.startsWith("/") || raw.startsWith("//")) return null;
+  return raw;
+}
+
 const Login = () => {
   const navigate = useNavigate();
+  const [params] = useSearchParams();
+  const nextPath = safeNext(params.get("next"));
   const [isLogin, setIsLogin] = useState(true);
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
@@ -18,18 +26,20 @@ const Login = () => {
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (session?.user) {
-        navigate("/admin");
+        if (nextPath) window.location.href = nextPath;
+        else navigate("/admin");
       }
     });
 
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session?.user) {
-        navigate("/admin");
+        if (nextPath) window.location.href = nextPath;
+        else navigate("/admin");
       }
     });
 
     return () => subscription.unsubscribe();
-  }, [navigate]);
+  }, [navigate, nextPath]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,7 +54,7 @@ const Login = () => {
         if (error) throw error;
         toast.success("¡Bienvenido!");
       } else {
-        const redirectUrl = `${window.location.origin}/admin`;
+        const redirectUrl = `${window.location.origin}${nextPath ?? "/admin"}`;
         const { error } = await supabase.auth.signUp({
           email: email.trim(),
           password,
@@ -57,6 +67,7 @@ const Login = () => {
         toast.success("Cuenta creada. Revisa tu email para confirmar.");
       }
     } catch (error: any) {
+
       console.error("Auth error:", error);
       if (error.message?.includes("User already registered")) {
         toast.error("Este email ya está registrado. Inicia sesión.");
