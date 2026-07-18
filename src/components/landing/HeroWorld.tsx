@@ -87,8 +87,8 @@ const copy = {
   },
   de: {
     badge: "🚀 #1 in KI-Automatisierung",
-    title1: "KI-Automatisierungen",
-    title2: "die 24/7 Kunden bringen",
+    title1: "Verbessern und vereinfachen Sie Ihr Geschäft",
+    title2: "mit KI in 7 Tagen, 24/7",
     sub: "Intelligente Chatbots · SEO-Websites · Automatisiertes CRM",
     subBold: "Verwandeln Sie Besucher in Kunden, während Sie schlafen.",
     cta1: "Kostenloses Audit anfordern",
