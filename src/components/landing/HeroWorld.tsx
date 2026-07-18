@@ -55,8 +55,8 @@ const copy = {
   },
   en: {
     badge: "🚀 #1 in AI Automation for Businesses",
-    title1: "AI Automations",
-    title2: "that bring customers 24/7",
+    title1: "Improve and simplify your business",
+    title2: "with AI in 7 days, 24/7",
     sub: "Smart chatbots · SEO websites · Automated CRM",
     subBold: "Convert visitors into customers while you sleep.",
     cta1: "Request Free Audit",
