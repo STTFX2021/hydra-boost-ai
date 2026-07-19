@@ -1,8 +1,31 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "@/lib/i18n";
+
+const COPY = {
+  es: {
+    label: "Contactar por WhatsApp",
+    message: "Hola, me interesa conocer vuestras soluciones de inteligencia conversacional.",
+  },
+  en: {
+    label: "Contact us on WhatsApp",
+    message: "Hello, I would like to learn more about your conversational intelligence solutions.",
+  },
+  de: {
+    label: "Über WhatsApp kontaktieren",
+    message: "Hallo, ich möchte mehr über Ihre Lösungen für Conversational Intelligence erfahren.",
+  },
+  ru: {
+    label: "Связаться через WhatsApp",
+    message: "Здравствуйте, я хочу узнать больше о ваших решениях в области разговорного искусственного интеллекта.",
+  },
+} as const;
 
 export const WhatsAppButton = () => {
   const [visible, setVisible] = useState(false);
+  const { language } = useTranslation();
+  const copy = COPY[language as keyof typeof COPY] ?? COPY.es;
+  const whatsappUrl = `https://wa.me/34634425921?text=${encodeURIComponent(copy.message)}`;
 
   useEffect(() => {
     const timer = setTimeout(() => setVisible(true), 10000);
@@ -14,10 +37,10 @@ export const WhatsAppButton = () => {
   return (
     <AnimatePresence>
       <motion.a
-        href="https://wa.me/34634425921?text=Hola%2C%20me%20interesa%20saber%20m%C3%A1s%20sobre%20vuestros%20servicios%20de%20automatizaci%C3%B3n%20IA"
+        href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Contactar por WhatsApp"
+        aria-label={copy.label}
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         className="fixed bottom-6 left-6 w-14 h-14 bg-[#25D366] rounded-full shadow-lg z-40 flex items-center justify-center hover:scale-110 transition-transform"
