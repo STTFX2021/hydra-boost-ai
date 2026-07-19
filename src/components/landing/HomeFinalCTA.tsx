@@ -15,10 +15,10 @@ export const HomeFinalCTA = () => { const {language}=useTranslation(); const cop
           <PhoneCall className="h-7 w-7" />
         </div>
         <h2 id="home-final-cta-title" className="mx-auto mt-7 max-w-3xl text-3xl font-bold md:text-5xl">
-          Cada conversación debería mover tu negocio.
+          {copy.title}
         </h2>
         <p className="mx-auto mt-5 max-w-2xl leading-7 text-muted-foreground">
-          Prueba a Sarah como cliente de una pizzería o cuéntanos qué proceso quieres automatizar, conectar o convertir en producto.
+          {copy.description}
         </p>
 
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
@@ -26,14 +26,14 @@ export const HomeFinalCTA = () => { const {language}=useTranslation(); const cop
             trigger={
               <Button size="lg" className="btn-neon btn-depth w-full sm:w-auto">
                 <Mic className="mr-2 h-5 w-5" />
-                Habla con Sarah
+                {copy.talk}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             }
           />
           <Link to="/contacto">
             <Button size="lg" variant="outline" className="w-full sm:w-auto">
-              Cuéntanos tu proyecto
+              {copy.project}
             </Button>
           </Link>
         </div>
