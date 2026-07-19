@@ -24,7 +24,7 @@ export function MobileStickyAgentCTA({ agentName }: Props) {
             <ArrowRight className="w-3.5 h-3.5 ml-1" />
           </Button>
         </Link>
-        <a href="https://wa.me/34666666666" target="_blank" rel="noopener noreferrer" className="flex-shrink-0">
+        <a href="https://wa.me/34634425921" target="_blank" rel="noopener noreferrer" className="flex-shrink-0">
           <Button size="sm" variant="outline" className="border-border/50 text-xs">{c.wa}</Button>
         </a>
       </div>
