@@ -11,7 +11,7 @@ export const OrganizationSchema = () => {
     url: BASE_URL,
     logo: `${BASE_URL}/favicon.png`,
     description:
-      "Agencia de Inteligencia Artificial para negocios locales: webs, chatbots 24/7 y automatizaciones que captan clientes mientras duermes.",
+      "Empresa de inteligencia conversacional para empresas. Diseña agentes de voz y mensajería, sistemas de reservas y pedidos, automatización operativa y desarrollo web conectado.",
     email: "hola@hydrailabs.com",
     sameAs: ["https://discord.gg/uBd28UuhvP"],
     address: {
@@ -38,7 +38,7 @@ export const LocalBusinessSchema = () => {
     "@type": "LocalBusiness",
     "@id": `${BASE_URL}/#localbusiness`,
     name: "HydrAI Labs",
-    description: "Agencia de automatización con IA para negocios locales en Costa del Sol",
+    description: "Empresa de inteligencia conversacional, agentes de voz y mensajería y desarrollo web para empresas en España",
     image: `${BASE_URL}/og-image.png`,
     url: BASE_URL,
     telephone: "",
@@ -59,10 +59,11 @@ export const LocalBusinessSchema = () => {
       "Costa del Sol",
     ],
     serviceType: [
-      "Chatbots IA",
-      "Automatización n8n",
-      "WhatsApp Business",
-      "Marketing Automation",
+      "Inteligencia conversacional",
+      "Agentes de voz con IA",
+      "Agentes de WhatsApp",
+      "Automatización de reservas y pedidos",
+      "Desarrollo web conectado",
     ],
     openingHoursSpecification: {
       "@type": "OpeningHoursSpecification",
