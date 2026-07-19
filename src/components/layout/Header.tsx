@@ -16,18 +16,25 @@ import {
 
 const availableLanguages: Language[] = ["es", "en", "de", "ru"];
 
-const navItems = [
-  { href: "/#inteligencia-conversacional", label: "Inteligencia conversacional", anchor: true },
-  { href: "/#vozra", label: "Vozra", anchor: true },
-  { href: "/#desarrollo-web", label: "Desarrollo web", anchor: true },
-  { href: "/casos", label: "Proyectos", anchor: false },
-  { href: "/contacto", label: "Contacto", anchor: false },
-] as const;
+const NAV_COPY = {
+  es: { conversational: "Inteligencia conversacional", web: "Desarrollo web", projects: "Proyectos", contact: "Contacto", panel: "Panel Vozra", demo: "Solicitar demo", nav: "Navegación principal", mobile: "Navegación móvil", change: "Cambiar idioma" },
+  en: { conversational: "Conversational intelligence", web: "Web development", projects: "Projects", contact: "Contact", panel: "Vozra dashboard", demo: "Request demo", nav: "Main navigation", mobile: "Mobile navigation", change: "Change language" },
+  de: { conversational: "Conversational Intelligence", web: "Webentwicklung", projects: "Projekte", contact: "Kontakt", panel: "Vozra-Dashboard", demo: "Demo anfordern", nav: "Hauptnavigation", mobile: "Mobile Navigation", change: "Sprache ändern" },
+  ru: { conversational: "Разговорный ИИ", web: "Веб-разработка", projects: "Проекты", contact: "Контакты", panel: "Панель Vozra", demo: "Запросить демо", nav: "Основная навигация", mobile: "Мобильная навигация", change: "Изменить язык" },
+} as const;
 
 export const Header = () => {
   const { t, language } = useTranslation();
   const { setLanguage } = useI18n();
   const { isAdmin } = useAdmin();
+  const copy = NAV_COPY[language as keyof typeof NAV_COPY] ?? NAV_COPY.es;
+  const navItems = [
+    { href: "/#inteligencia-conversacional", label: copy.conversational, anchor: true },
+    { href: "/#vozra", label: "Vozra", anchor: true },
+    { href: "/#desarrollo-web", label: copy.web, anchor: true },
+    { href: "/casos", label: copy.projects, anchor: false },
+    { href: "/contacto", label: copy.contact, anchor: false },
+  ] as const;
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
@@ -49,7 +56,7 @@ export const Header = () => {
           : "border-b border-white/[0.04] bg-background/65 backdrop-blur-lg",
       )}
     >
-      <nav aria-label="Navegación principal" className="section-container flex min-h-[88px] items-center justify-between gap-4 py-2">
+      <nav aria-label={copy.nav} className="section-container flex min-h-[88px] items-center justify-between gap-4 py-2">
         <Link to="/" aria-label="HydrAI Labs - Ir a inicio" className="flex shrink-0 items-center">
           <HydrAILogo className="h-[72px] w-auto max-w-[142px]" />
         </Link>
@@ -83,7 +90,7 @@ export const Header = () => {
             rel="noreferrer"
             className="inline-flex items-center gap-1.5 text-sm font-semibold text-foreground transition hover:text-primary"
           >
-            Panel Vozra
+            {copy.panel}
             <ExternalLink className="h-3.5 w-3.5" />
           </a>
         </div>
@@ -95,7 +102,7 @@ export const Header = () => {
                 variant="ghost"
                 size="sm"
                 className="hidden text-muted-foreground hover:text-foreground sm:flex"
-                aria-label={`Cambiar idioma. Idioma actual: ${languageNames[language]}`}
+                aria-label={`${copy.change}: ${languageNames[language]}`}
               >
                 <Globe className="mr-1 h-4 w-4" />
                 {language.toUpperCase()}
@@ -145,7 +152,7 @@ export const Header = () => {
 
       {menuOpen && (
         <div className="border-t border-white/10 bg-background/96 backdrop-blur-xl xl:hidden">
-          <nav aria-label="Navegación móvil" className="section-container space-y-2 py-4">
+          <nav aria-label={copy.mobile} className="section-container space-y-2 py-4">
             {navItems.map((item) =>
               item.anchor ? (
                 <a
@@ -177,13 +184,13 @@ export const Header = () => {
               onClick={() => setMenuOpen(false)}
               className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold text-foreground hover:bg-muted/40"
             >
-              Panel Vozra
+              {copy.panel}
               <ExternalLink className="h-4 w-4" />
             </a>
             <div className="flex flex-wrap gap-3 border-t border-white/10 pt-4">
               <Link to="/contacto" onClick={() => setMenuOpen(false)}>
                 <Button size="sm" className="btn-neon">
-                  Solicitar demo
+                  {copy.demo}
                 </Button>
               </Link>
               {isAdmin && (
