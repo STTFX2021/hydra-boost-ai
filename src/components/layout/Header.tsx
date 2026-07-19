@@ -17,7 +17,7 @@ import {
 const availableLanguages: Language[] = ["es", "en", "de", "ru"];
 
 const NAV_COPY = {
-  es: { conversational: "Inteligencia conversacional", web: "Desarrollo web", projects: "Proyectos", contact: "Contacto", panel: "Panel Vozra", demo: "{copy.demo}", nav: "Navegación principal", mobile: "Navegación móvil", change: "Cambiar idioma" },
+  es: { conversational: "Inteligencia conversacional", web: "Desarrollo web", projects: "Proyectos", contact: "Contacto", panel: "Panel Vozra", demo: "Solicitar demo", nav: "Navegación principal", mobile: "Navegación móvil", change: "Cambiar idioma" },
   en: { conversational: "Conversational intelligence", web: "Web development", projects: "Projects", contact: "Contact", panel: "Vozra dashboard", demo: "Request demo", nav: "Main navigation", mobile: "Mobile navigation", change: "Change language" },
   de: { conversational: "Conversational Intelligence", web: "Webentwicklung", projects: "Projekte", contact: "Kontakt", panel: "Vozra-Dashboard", demo: "Demo anfordern", nav: "Hauptnavigation", mobile: "Mobile Navigation", change: "Sprache ändern" },
   ru: { conversational: "Разговорный ИИ", web: "Веб-разработка", projects: "Проекты", contact: "Контакты", panel: "Панель Vozra", demo: "Запросить демо", nav: "Основная навигация", mobile: "Мобильная навигация", change: "Изменить язык" },
