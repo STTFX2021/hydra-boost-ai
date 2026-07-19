@@ -146,7 +146,7 @@ export const VozraPlatformSection = () => {
             </>
           );
 
-          if (product.kind === "sarah") {
+          if ((product.kind as string) === "sarah") {
             return (
               <SarahIntroDialog
                 key={product.name}
