@@ -13,6 +13,13 @@ export const OrganizationSchema = () => {
     description:
       "Empresa de inteligencia conversacional para empresas. Diseña agentes de voz y mensajería, sistemas de reservas y pedidos, automatización operativa y desarrollo web conectado.",
     email: "hola@hydrailabs.com",
+    telephone: "+34634425921",
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: "+34634425921",
+      contactType: "sales",
+      availableLanguage: ["Spanish", "English", "German", "Russian"],
+    },
     sameAs: ["https://discord.gg/uBd28UuhvP"],
     address: {
       "@type": "PostalAddress",
@@ -41,7 +48,7 @@ export const LocalBusinessSchema = () => {
     description: "Empresa de inteligencia conversacional, agentes de voz y mensajería y desarrollo web para empresas en España",
     image: `${BASE_URL}/og-image.png`,
     url: BASE_URL,
-    telephone: "",
+    telephone: "+34634425921",
     email: "hola@hydrailabs.com",
     priceRange: "€€",
     address: {
