@@ -10,6 +10,12 @@ import {
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { VOZRA_RAPID_DEMOS } from "@/config/vozraDemos";
+import { useTranslation } from "@/lib/i18n";
+
+const COPY={es:{eyebrow:"Proyectos destacados",title:"{copy.title}",description:"Diferenciamos con claridad producto propio, implementación y demostración funcional.",all:"{copy.all}",view:"{copy.view}",items:[["Inteligencia conversacional","Plataforma propia para atención, reservas, pedidos, memoria y lógica operacional.","Producto propio"],["Pedidos telefónicos","Demostración conversacional de Sarah para pedidos inteligentes directos.","Producto propio"],["Hostelería","Carta digital, personalización de productos y sistema de pedidos para restauración.","Implementación web"],["Hostelería","Experiencia digital para reservas, carta, maridajes y pedidos desde mesa.","Demo funcional"],["Inmobiliaria","Portal inmobiliario con búsqueda avanzada, captación y herramientas de cualificación.","Demo funcional"],["Belleza y salud","Web de captación, servicios, reservas y chatbot especializado.","Demo funcional"]]},
+en:{eyebrow:"Featured projects",title:"Products, implementations and demos you can explore now.",description:"We clearly distinguish our own products, client implementations and functional demos.",all:"View all projects",view:"View project",items:[["Conversational intelligence","Our platform for customer service, bookings, orders, memory and operational logic.","Own product"],["Phone orders","Sarah conversational demo for direct intelligent orders.","Own product"],["Hospitality","Digital menu, product customization and restaurant ordering system.","Web implementation"],["Hospitality","Digital experience for bookings, menu, pairings and table ordering.","Functional demo"],["Real estate","Property portal with advanced search, acquisition and qualification tools.","Functional demo"],["Beauty and health","Lead-generation website, services, bookings and specialized chatbot.","Functional demo"]]},
+de:{eyebrow:"Ausgewählte Projekte",title:"Produkte, Implementierungen und Demos, die Sie jetzt erkunden können.",description:"Wir unterscheiden klar zwischen eigenen Produkten, Kundenimplementierungen und funktionalen Demos.",all:"Alle Projekte ansehen",view:"Projekt ansehen",items:[["Conversational Intelligence","Eigene Plattform für Betreuung, Reservierungen, Bestellungen, Gedächtnis und operative Logik.","Eigenes Produkt"],["Telefonbestellungen","Sarah-Demo für direkte intelligente Bestellungen.","Eigenes Produkt"],["Gastronomie","Digitale Karte, Produktanpassung und Bestellsystem für Restaurants.","Webimplementierung"],["Gastronomie","Digitale Erfahrung für Reservierungen, Karte, Pairings und Tischbestellungen.","Funktionale Demo"],["Immobilien","Immobilienportal mit erweiterter Suche, Akquise und Qualifizierung.","Funktionale Demo"],["Beauty und Gesundheit","Website für Akquise, Leistungen, Reservierungen und spezialisierten Chatbot.","Funktionale Demo"]]},
+ru:{eyebrow:"Избранные проекты",title:"Продукты, внедрения и демо, которые уже можно посмотреть.",description:"Мы чётко разделяем собственные продукты, клиентские внедрения и функциональные демонстрации.",all:"Все проекты",view:"Посмотреть проект",items:[["Разговорный ИИ","Собственная платформа для обслуживания, бронирований, заказов, памяти и операционной логики.","Собственный продукт"],["Телефонные заказы","Демонстрация Сары для прямых интеллектуальных заказов.","Собственный продукт"],["Гостеприимство","Цифровое меню, настройка блюд и система заказов для ресторана.","Веб-внедрение"],["Гостеприимство","Цифровой опыт для бронирований, меню, сочетаний и заказов за столом.","Функциональное демо"],["Недвижимость","Портал недвижимости с расширенным поиском, привлечением и квалификацией.","Функциональное демо"],["Красота и здоровье","Сайт для привлечения, услуг, бронирований и специализированный чатбот.","Функциональное демо"]]}} as const;
 
 const featuredProjects = [
   {
@@ -68,17 +74,17 @@ const featuredProjects = [
   },
 ] as const;
 
-export const FeaturedProjectsSection = () => (
+export const FeaturedProjectsSection = () => { const {language}=useTranslation(); const copy=COPY[language as keyof typeof COPY]??COPY.es; const localized=featuredProjects.map((p,i)=>({...p,sector:copy.items[i][0],description:copy.items[i][1],status:copy.items[i][2]})); return (
   <section id="proyectos" className="section-padding section-alt-subtle" aria-labelledby="featured-projects-title">
     <div className="section-container">
       <div className="mb-12 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
         <div className="max-w-3xl">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary">Proyectos destacados</p>
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary">{copy.eyebrow}</p>
           <h2 id="featured-projects-title" className="text-3xl font-bold md:text-5xl">
             Productos, implementaciones y demostraciones que ya puedes explorar.
           </h2>
           <p className="mt-5 max-w-2xl leading-7 text-muted-foreground">
-            Mostramos claramente qué es producto propio, qué es una implementación y qué es una demostración funcional.
+            {copy.description}
           </p>
         </div>
 
@@ -91,7 +97,7 @@ export const FeaturedProjectsSection = () => (
       </div>
 
       <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-        {featuredProjects.map((project) => {
+        {localized.map((project) => {
           const Icon = project.icon;
           const card = (
             <article className="card-elevated card-elevated-hover group h-full overflow-hidden p-6">
@@ -128,4 +134,4 @@ export const FeaturedProjectsSection = () => (
       </div>
     </div>
   </section>
-);
+); };
