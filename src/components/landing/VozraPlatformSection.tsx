@@ -52,8 +52,8 @@ const products = [
     icon: Pizza,
     features: ["Carta y precios", "Extras y modificadores", "Recogida o entrega", "Confirmación del pedido"],
     tone: "success",
-    href: productLinks.sarahDemo,
-    kind: "sarah",
+    href: "/vozra-pid",
+    kind: "internal",
   },
   {
     name: "Vozra Control Center",
