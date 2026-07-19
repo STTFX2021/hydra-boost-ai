@@ -12,8 +12,9 @@ import { HomeFinalCTA } from "@/components/landing/HomeFinalCTA";
 const Index = () => (
   <>
     <SEOHead
-      title="Inteligencia Conversacional y Desarrollo Web | HydrAI Labs"
-      description="HydrAI Labs crea sistemas conversacionales especializados, agentes de voz, reservas, pedidos, aplicaciones y soluciones web conectadas con la operación real de cada negocio."
+      title="Inteligencia Conversacional para Empresas | HydrAI Labs"
+      description="Diseñamos sistemas de inteligencia conversacional: agentes de voz y WhatsApp, reservas, pedidos y atención al cliente conectados con la operación real. Desarrollo web como capa de captación e integración."
+      keywords="inteligencia conversacional, agentes de voz IA, IA conversacional para empresas, automatización de llamadas, agentes WhatsApp, Vozra, Vozra Rapid, desarrollo web con IA"
       canonical="/"
     />
     <OrganizationSchema />
