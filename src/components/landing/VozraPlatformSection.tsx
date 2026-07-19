@@ -140,7 +140,7 @@ export const VozraPlatformSection = () => {
                 ))}
               </ul>
               <div className="mt-7 flex items-center gap-2 text-sm font-semibold text-primary">
-                {product.kind === "sarah" ? copy.try : product.kind === "external" ? copy.dashboard : copy.learn}
+                {(product.kind as string) === "sarah" ? copy.try : product.kind === "external" ? copy.dashboard : copy.learn}
                 <ArrowUpRight className="h-4 w-4" />
               </div>
             </>
