@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "@/lib/i18n";
 
 const COPY = {
-es:{eyebrow:"Dos capacidades, un solo sistema",title:"{copy.title}",description:"{copy.description}",explore:"{copy.explore}",flow1:"{copy.flow1}",flow2:"{copy.flow2}",pillars:[
+es:{eyebrow:"Dos capacidades, un solo sistema",title:"Construimos la conversación y todo lo que ocurre después.",description:"La inteligencia conversacional es el centro. El desarrollo web conecta esa inteligencia con clientes, equipos y operaciones.",explore:"Explorar soluciones",flow1:"Conversación → decisión → acción",flow2:"Web → datos → operación",pillars:[
 {eyebrow:"Pilar principal",title:"Inteligencia conversacional",description:"Agentes de voz y sistemas que entienden el contexto, aplican las reglas de tu negocio y ejecutan acciones verificables.",features:["Agentes telefónicos","Reservas y pedidos","Memoria y personalización","Escalado humano"]},
 {eyebrow:"Infraestructura digital",title:"Desarrollo web",description:"Construimos las webs, aplicaciones y paneles que convierten cada conversación en una operación útil para el negocio.",features:["Webs corporativas","E-commerce","Aplicaciones web","Paneles e integraciones"]}]},
 en:{eyebrow:"Two capabilities, one system",title:"We build the conversation and everything that happens next.",description:"Conversational intelligence is the core. Web development connects that intelligence to customers, teams and operations.",explore:"Explore solutions",flow1:"Conversation → decision → action",flow2:"Web → data → operation",pillars:[
