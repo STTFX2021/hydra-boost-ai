@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useState, type FormEvent } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Send, Mail, MapPin, Clock, ArrowRight, Zap } from "lucide-react";
+import { Send, Mail, Phone, MapPin, Clock, ArrowRight, Zap } from "lucide-react";
 import { z } from "zod";
 import { DISCORD_INVITE_URL } from "@/lib/constants";
 import { SEOHead, BreadcrumbSchema } from "@/components/seo";
@@ -250,6 +250,17 @@ const Contacto = () => {
                   <div>
                     <h4 className="font-semibold">{c.emailTitle}</h4>
                     <p className="text-sm text-muted-foreground">hola@hydrailabs.com</p>
+                  </div>
+                  <ArrowRight className="w-4 h-4 ml-auto text-muted-foreground group-hover:text-foreground transition" />
+                </a>
+
+                <a href="https://wa.me/34634425921" target="_blank" rel="noopener noreferrer" className="card-elevated card-elevated-hover p-4 flex items-center gap-4 group">
+                  <div className="w-12 h-12 rounded-xl bg-[#25D366]/10 flex items-center justify-center group-hover:bg-[#25D366]/20 transition">
+                    <Phone className="w-6 h-6 text-[#25D366]" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold">WhatsApp</h4>
+                    <p className="text-sm text-muted-foreground">+34 634 425 921</p>
                   </div>
                   <ArrowRight className="w-4 h-4 ml-auto text-muted-foreground group-hover:text-foreground transition" />
                 </a>
