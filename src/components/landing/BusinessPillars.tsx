@@ -1,5 +1,21 @@
 import { ArrowUpRight, Bot, Braces, CheckCircle2, Globe2, LayoutDashboard, PhoneCall, Workflow } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "@/lib/i18n";
+
+const COPY = {
+es:{eyebrow:"Dos capacidades, un solo sistema",title:"{copy.title}",description:"{copy.description}",explore:"{copy.explore}",flow1:"{copy.flow1}",flow2:"{copy.flow2}",pillars:[
+{eyebrow:"Pilar principal",title:"Inteligencia conversacional",description:"Agentes de voz y sistemas que entienden el contexto, aplican las reglas de tu negocio y ejecutan acciones verificables.",features:["Agentes telefónicos","Reservas y pedidos","Memoria y personalización","Escalado humano"]},
+{eyebrow:"Infraestructura digital",title:"Desarrollo web",description:"Construimos las webs, aplicaciones y paneles que convierten cada conversación en una operación útil para el negocio.",features:["Webs corporativas","E-commerce","Aplicaciones web","Paneles e integraciones"]}]},
+en:{eyebrow:"Two capabilities, one system",title:"We build the conversation and everything that happens next.",description:"Conversational intelligence is the core. Web development connects that intelligence to customers, teams and operations.",explore:"Explore solutions",flow1:"Conversation → decision → action",flow2:"Web → data → operation",pillars:[
+{eyebrow:"Core capability",title:"Conversational intelligence",description:"Voice agents and systems that understand context, apply your business rules and execute verifiable actions.",features:["Phone agents","Bookings and orders","Memory and personalization","Human escalation"]},
+{eyebrow:"Digital infrastructure",title:"Web development",description:"We build websites, applications and dashboards that turn every conversation into a useful business operation.",features:["Corporate websites","E-commerce","Web applications","Dashboards and integrations"]}]},
+de:{eyebrow:"Zwei Fähigkeiten, ein System",title:"Wir entwickeln das Gespräch und alles, was danach geschieht.",description:"Conversational Intelligence ist der Kern. Webentwicklung verbindet sie mit Kunden, Teams und Abläufen.",explore:"Lösungen entdecken",flow1:"Gespräch → Entscheidung → Aktion",flow2:"Web → Daten → Betrieb",pillars:[
+{eyebrow:"Kernbereich",title:"Conversational Intelligence",description:"Sprachagenten und Systeme, die Kontext verstehen, Geschäftsregeln anwenden und überprüfbare Aktionen ausführen.",features:["Telefonagenten","Reservierungen und Bestellungen","Gedächtnis und Personalisierung","Übergabe an Menschen"]},
+{eyebrow:"Digitale Infrastruktur",title:"Webentwicklung",description:"Wir bauen Websites, Anwendungen und Dashboards, die jedes Gespräch in einen nützlichen Geschäftsprozess verwandeln.",features:["Unternehmenswebsites","E-Commerce","Webanwendungen","Dashboards und Integrationen"]}]},
+ru:{eyebrow:"Две возможности, единая система",title:"Мы создаём разговор и всё, что происходит после него.",description:"Разговорный ИИ — это центр. Веб-разработка связывает его с клиентами, командами и операциями.",explore:"Посмотреть решения",flow1:"Разговор → решение → действие",flow2:"Веб → данные → операция",pillars:[
+{eyebrow:"Основное направление",title:"Разговорный ИИ",description:"Голосовые агенты и системы, которые понимают контекст, применяют правила бизнеса и выполняют проверяемые действия.",features:["Телефонные агенты","Бронирования и заказы","Память и персонализация","Передача человеку"]},
+{eyebrow:"Цифровая инфраструктура",title:"Веб-разработка",description:"Мы создаём сайты, приложения и панели, превращающие каждый разговор в полезную бизнес-операцию.",features:["Корпоративные сайты","Электронная коммерция","Веб-приложения","Панели и интеграции"]}]}
+} as const;
 
 const pillars = [
   {
@@ -26,11 +42,11 @@ const pillars = [
   },
 ] as const;
 
-export const BusinessPillars = () => (
+export const BusinessPillars = () => { const { language } = useTranslation(); const copy = COPY[language as keyof typeof COPY] ?? COPY.es; const localizedPillars = pillars.map((p,i)=>({...p,...copy.pillars[i]})); return (
   <section id="inteligencia-conversacional" className="section-padding section-alt-subtle" aria-labelledby="business-pillars-title">
     <div className="section-container">
       <div className="mx-auto mb-12 max-w-3xl text-center">
-        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary">Dos capacidades, un solo sistema</p>
+        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary">{copy.eyebrow}</p>
         <h2 id="business-pillars-title" className="text-3xl font-bold md:text-5xl">
           Construimos la conversación y todo lo que ocurre después.
         </h2>
@@ -40,7 +56,7 @@ export const BusinessPillars = () => (
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">
-        {pillars.map((pillar) => {
+        {localizedPillars.map((pillar) => {
           const Icon = pillar.icon;
           const primary = pillar.accent === "primary";
           return (
@@ -93,4 +109,4 @@ export const BusinessPillars = () => (
       </div>
     </div>
   </section>
-);
+); };
