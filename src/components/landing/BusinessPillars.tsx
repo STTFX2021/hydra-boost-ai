@@ -48,7 +48,7 @@ export const BusinessPillars = () => { const { language } = useTranslation(); co
       <div className="mx-auto mb-12 max-w-3xl text-center">
         <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary">{copy.eyebrow}</p>
         <h2 id="business-pillars-title" className="text-3xl font-bold md:text-5xl">
-          Construimos la conversación y todo lo que ocurre después.
+          {copy.title}
         </h2>
         <p className="mt-5 text-base leading-7 text-muted-foreground">
           La inteligencia conversacional es el centro. El desarrollo web conecta esa inteligencia con clientes, equipos y operaciones.
@@ -93,13 +93,13 @@ export const BusinessPillars = () => { const { language } = useTranslation(); co
                   <>
                     <PhoneCall className="h-4 w-4 text-primary" />
                     <Workflow className="h-4 w-4 text-primary" />
-                    Conversación → decisión → acción
+                    {copy.flow1}
                   </>
                 ) : (
                   <>
                     <Globe2 className="h-4 w-4 text-secondary" />
                     <LayoutDashboard className="h-4 w-4 text-secondary" />
-                    Web → datos → operación
+                    {copy.flow2}
                   </>
                 )}
               </div>
