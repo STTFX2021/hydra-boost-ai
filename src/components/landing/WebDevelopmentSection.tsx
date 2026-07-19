@@ -41,7 +41,7 @@ export const WebDevelopmentSection = () => { const { language }=useTranslation()
           </p>
 
           <ul className="mt-7 space-y-3">
-            {copy.bullets].map((item) => (
+            {copy.bullets.map((item) => (
               <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
                 <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-secondary" />
                 {item}
