@@ -20,6 +20,15 @@ import {
   type ProjectCategory,
   type ProjectShowcaseItem,
 } from "@/data/projectShowcase";
+import { useTranslation } from "@/lib/i18n";
+
+const COPY={
+es:{view:"Ver proyecto",all:"Todos",categories:["Inteligencia conversacional","Hostelería","Inmobiliaria y reformas","Belleza y salud","Deporte","Comercio y proyectos personales"],statuses:["Producto propio","Implementación web","Demo funcional","Concepto demostrativo"],seo:"Proyectos y Demostraciones | HydrAI Labs",seoDescription:"Productos propios, implementaciones web y demostraciones funcionales.",home:"Inicio",projects:"Proyectos",eyebrow:"Portfolio HydrAI Labs",title:"Proyectos y demostraciones",description:"Productos propios, implementaciones y conceptos funcionales que conectan inteligencia conversacional, desarrollo web y operación.",catalog:"Catálogo de proyectos",singular:"proyecto",plural:"proyectos",cta:"{copy.cta}",ctaDescription:"{copy.ctaDescription}",contact:"{copy.contact}"},
+en:{view:"View project",all:"All",categories:["Conversational intelligence","Hospitality","Real estate and renovation","Beauty and health","Sports","Commerce and personal projects"],statuses:["Own product","Web implementation","Functional demo","Demonstration concept"],seo:"Projects and Demos | HydrAI Labs",seoDescription:"Our products, web implementations and functional demonstrations.",home:"Home",projects:"Projects",eyebrow:"HydrAI Labs portfolio",title:"Projects and demonstrations",description:"Products, implementations and functional concepts connecting conversational intelligence, web development and business operations.",catalog:"Project catalog",singular:"project",plural:"projects",cta:"What system does your business need?",ctaDescription:"We can build the conversational agent, website, dashboard and integrations as one solution.",contact:"Tell us about your project"},
+de:{view:"Projekt ansehen",all:"Alle",categories:["Conversational Intelligence","Gastronomie","Immobilien und Renovierung","Beauty und Gesundheit","Sport","Handel und persönliche Projekte"],statuses:["Eigenes Produkt","Webimplementierung","Funktionale Demo","Demonstrationskonzept"],seo:"Projekte und Demos | HydrAI Labs",seoDescription:"Eigene Produkte, Webimplementierungen und funktionale Demonstrationen.",home:"Start",projects:"Projekte",eyebrow:"HydrAI Labs Portfolio",title:"Projekte und Demonstrationen",description:"Produkte, Implementierungen und funktionale Konzepte, die Conversational Intelligence, Webentwicklung und Betrieb verbinden.",catalog:"Projektkatalog",singular:"Projekt",plural:"Projekte",cta:"Welches System braucht Ihr Unternehmen?",ctaDescription:"Wir können Gesprächsagent, Website, Dashboard und Integrationen als eine Lösung entwickeln.",contact:"Erzählen Sie uns von Ihrem Projekt"},
+ru:{view:"Посмотреть проект",all:"Все",categories:["Разговорный ИИ","Гостеприимство","Недвижимость и ремонт","Красота и здоровье","Спорт","Торговля и личные проекты"],statuses:["Собственный продукт","Веб-внедрение","Функциональное демо","Демонстрационная концепция"],seo:"Проекты и демо | HydrAI Labs",seoDescription:"Собственные продукты, веб-внедрения и функциональные демонстрации.",home:"Главная",projects:"Проекты",eyebrow:"Портфолио HydrAI Labs",title:"Проекты и демонстрации",description:"Продукты, внедрения и рабочие концепции, объединяющие разговорный ИИ, веб-разработку и бизнес-операции.",catalog:"Каталог проектов",singular:"проект",plural:"проектов",cta:"Какая система нужна вашему бизнесу?",ctaDescription:"Мы можем создать разговорного агента, сайт, панель и интеграции как единое решение.",contact:"Рассказать о проекте"}} as const;
+const categoryKeys=["Inteligencia conversacional","Hostelería","Inmobiliaria y reformas","Belleza y salud","Deporte","Comercio y proyectos personales"] as const;
+const statusKeys=["Producto propio","Implementación web","Demo funcional","Concepto demostrativo"] as const;
 
 const categoryIcons: Record<ProjectCategory, ComponentType<{ className?: string }>> = {
   "Inteligencia conversacional": Bot,
@@ -37,7 +46,7 @@ const statusClasses = {
   "Concepto demostrativo": "border-warning/25 bg-warning/10 text-warning",
 } as const;
 
-const ProjectCard = ({ project }: { project: ProjectShowcaseItem }) => {
+const ProjectCard = ({ project, copy }: { project: ProjectShowcaseItem; copy: (typeof COPY)[keyof typeof COPY] }) => {
   const Icon = categoryIcons[project.category];
 
   const content = (
@@ -47,11 +56,11 @@ const ProjectCard = ({ project }: { project: ProjectShowcaseItem }) => {
           <Icon className="h-6 w-6" />
         </div>
         <span className={`rounded-full border px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] ${statusClasses[project.status]}`}>
-          {project.status}
+          {copy.statuses[statusKeys.indexOf(project.status)]}
         </span>
       </div>
 
-      <p className="mt-6 text-xs font-semibold uppercase tracking-[0.16em] text-primary">{project.category}</p>
+      <p className="mt-6 text-xs font-semibold uppercase tracking-[0.16em] text-primary">{copy.categories[categoryKeys.indexOf(project.category)]}</p>
       <h2 className="mt-2 text-2xl font-bold">{project.title}</h2>
       <p className="mt-4 flex-1 text-sm leading-6 text-muted-foreground">{project.description}</p>
 
@@ -65,7 +74,7 @@ const ProjectCard = ({ project }: { project: ProjectShowcaseItem }) => {
       </ul>
 
       <div className="mt-6 flex items-center gap-2 border-t border-border/40 pt-5 text-sm font-semibold text-primary">
-        Ver proyecto
+        {copy.view}
         <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
       </div>
     </article>
@@ -83,6 +92,8 @@ const ProjectCard = ({ project }: { project: ProjectShowcaseItem }) => {
 };
 
 const Casos = () => {
+  const { language }=useTranslation();
+  const copy=COPY[language as keyof typeof COPY]??COPY.es;
   const [activeCategory, setActiveCategory] = useState<(typeof PROJECT_CATEGORIES)[number]>("Todos");
 
   const visibleProjects = useMemo(
@@ -96,14 +107,14 @@ const Casos = () => {
   return (
     <>
       <SEOHead
-        title="Proyectos y Demostraciones | HydrAI Labs"
-        description="Explora productos propios, implementaciones web y demostraciones funcionales de inteligencia conversacional, hostelería, inmobiliaria, salud, deporte y comercio."
+        title={copy.seo}
+        description={copy.seoDescription}
         canonical="/casos"
       />
       <BreadcrumbSchema
         items={[
-          { name: "Inicio", url: "/" },
-          { name: "Proyectos", url: "/casos" },
+          { name: copy.home, url: "/" },
+          { name: copy.projects, url: "/casos" },
         ]}
       />
 
@@ -113,18 +124,18 @@ const Casos = () => {
           <div className="glow-orb-primary -left-24 top-12 h-72 w-72 opacity-10" />
           <div className="section-container relative z-10">
             <div className="mx-auto max-w-4xl text-center">
-              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-primary">Portfolio HydrAI Labs</p>
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-primary">{copy.eyebrow}</p>
               <h1 id="projects-title" className="text-4xl font-bold md:text-6xl">
-                Proyectos y <span className="text-gradient-hydrai">demostraciones</span>
+                {copy.title}
               </h1>
               <p className="mx-auto mt-6 max-w-3xl text-base leading-8 text-muted-foreground md:text-lg">
-                Productos propios, implementaciones y conceptos funcionales que muestran cómo conectamos inteligencia conversacional, desarrollo web y operación de negocio.
+                {copy.description}
               </p>
             </div>
           </div>
         </section>
 
-        <section className="pb-20 md:pb-28" aria-label="Catálogo de proyectos">
+        <section className="pb-20 md:pb-28" aria-label={copy.catalog}>
           <div className="section-container">
             <div className="mb-10 flex flex-wrap justify-center gap-2">
               {PROJECT_CATEGORIES.map((category) => (
@@ -139,18 +150,18 @@ const Casos = () => {
                   }`}
                   aria-pressed={activeCategory === category}
                 >
-                  {category}
+                  {category === "Todos" ? copy.all : copy.categories[categoryKeys.indexOf(category as typeof categoryKeys[number])]}
                 </button>
               ))}
             </div>
 
             <div className="mb-6 text-sm text-muted-foreground">
-              {visibleProjects.length} {visibleProjects.length === 1 ? "proyecto" : "proyectos"}
+              {visibleProjects.length} {visibleProjects.length === 1 ? copy.singular : copy.plural}
             </div>
 
             <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
               {visibleProjects.map((project) => (
-                <ProjectCard key={project.id} project={project} />
+                <ProjectCard key={project.id} project={project} copy={copy} />
               ))}
             </div>
           </div>
