@@ -2,8 +2,11 @@ import { ArrowRight, Mic, PhoneCall } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { SarahIntroDialog } from "@/components/landing/SarahIntroDialog";
+import { useTranslation } from "@/lib/i18n";
 
-export const HomeFinalCTA = () => (
+const COPY={es:{title:"{copy.title}",description:"{copy.description}",talk:"{copy.talk}",project:"{copy.project}"},en:{title:"Every conversation should move your business forward.",description:"Try Sarah as a pizzeria customer or tell us which process you want to automate, connect or turn into a product.",talk:"Talk to Sarah",project:"Tell us about your project"},de:{title:"Jedes Gespräch sollte Ihr Unternehmen voranbringen.",description:"Testen Sie Sarah als Pizzeria-Kunde oder erzählen Sie uns, welchen Prozess Sie automatisieren, verbinden oder in ein Produkt verwandeln möchten.",talk:"Mit Sarah sprechen",project:"Erzählen Sie uns von Ihrem Projekt"},ru:{title:"Каждый разговор должен двигать ваш бизнес вперёд.",description:"Попробуйте Сару как клиент пиццерии или расскажите, какой процесс вы хотите автоматизировать, связать или превратить в продукт.",talk:"Поговорить с Сарой",project:"Рассказать о проекте"}} as const;
+
+export const HomeFinalCTA = () => { const {language}=useTranslation(); const copy=COPY[language as keyof typeof COPY]??COPY.es; return (
   <section className="section-padding relative overflow-hidden" aria-labelledby="home-final-cta-title">
     <div className="glow-orb-primary left-1/3 top-1/2 h-80 w-80 -translate-y-1/2 opacity-10" />
     <div className="section-container relative z-10">
@@ -37,4 +40,4 @@ export const HomeFinalCTA = () => (
       </div>
     </div>
   </section>
-);
+); };
