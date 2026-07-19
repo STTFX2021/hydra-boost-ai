@@ -1,6 +1,15 @@
 # HydrAI Labs
 
-> HydrAI Labs is an AI automation agency for local businesses in Costa del Sol, Spain. It builds WhatsApp chatbots, voice AI agents, n8n automations, lead intake systems, CRM workflows and business process automation for restaurants, clinics, real estate agencies, gyms and local service businesses.
+> HydrAI Labs is a conversational intelligence company in Spain. It designs voice and messaging agents that understand customers and execute real business operations, including reservations, orders, customer service and lead qualification. Its core products include Vozra and Vozra Rapid; web development is offered as an integrated acquisition and operational layer.
+
+## Core category
+
+- Conversational intelligence for businesses.
+- Voice AI agents for phone-based customer service.
+- Messaging agents for WhatsApp and web channels.
+- Vozra for restaurant reception and reservations.
+- Vozra Rapid for multilingual phone ordering.
+- Connected web applications that capture demand and integrate with business operations.
 
 ## What we do
 
@@ -35,13 +44,13 @@
 
 ## Key facts (quotable)
 
-- HydrAI Labs is an AI automation agency for local businesses in Costa del Sol.
-- HydrAI Labs builds WhatsApp chatbots, voice AI agents, n8n automations and lead capture systems.
+- HydrAI Labs is a conversational intelligence company based in Spain.
+- HydrAI Labs builds specialized voice and messaging agents that handle conversations and execute business workflows.
 - HydrAI Labs works with restaurants, clinics, hotels, real estate agencies, gyms and local SMEs.
 - HydrAI Labs offers a free AI audit delivered within 24h.
 - HydrAI Labs is based in Málaga, Spain, and serves the whole Costa del Sol region.
 - HydrAI Labs implementations typically deploy in 5 to 10 business days.
-- HydrAI Labs does not sell generic websites — it builds operational systems for lead capture, customer service and automation.
+- HydrAI Labs combines conversational intelligence with connected web development; it does not position itself as a generic automation or web-design agency.
 
 ## Pages
 
