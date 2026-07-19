@@ -11,7 +11,7 @@ import {
 import { useTranslation } from "@/lib/i18n";
 
 const COPY={
-es:{system:"Sistema conversacional",listening:"{copy.listening}",cards:[["Llamada entrante","Cliente identificado","Historial, preferencias y contexto disponibles al instante."],["Reserva","Solicitud estructurada","Viernes, 21:00 · 4 personas · terraza."],["Pedido","Enviado al negocio","Productos, extras y entrega preparados para cocina."],["Supervisión","Revisión humana","La IA escala cuando detecta riesgo o una decisión reservada."]],rules:"Reglas aplicadas",result:"Resultado verificable"},
+es:{system:"Sistema conversacional",listening:"Escuchando y actuando",cards:[["Llamada entrante","Cliente identificado","Historial, preferencias y contexto disponibles al instante."],["Reserva","Solicitud estructurada","Viernes, 21:00 · 4 personas · terraza."],["Pedido","Enviado al negocio","Productos, extras y entrega preparados para cocina."],["Supervisión","Revisión humana","La IA escala cuando detecta riesgo o una decisión reservada."]],rules:"Reglas aplicadas",result:"Resultado verificable"},
 en:{system:"Conversational system",listening:"Listening and acting",cards:[["Incoming call","Customer identified","History, preferences and context available instantly."],["Booking","Structured request","Friday, 9:00 PM · 4 guests · terrace."],["Order","Sent to the business","Products, extras and delivery details ready for the kitchen."],["Supervision","Human review","AI escalates when it detects risk or a reserved decision."]],rules:"Rules applied",result:"Verifiable result"},
 de:{system:"Gesprächssystem",listening:"Hört zu und handelt",cards:[["Eingehender Anruf","Kunde erkannt","Verlauf, Präferenzen und Kontext sofort verfügbar."],["Reservierung","Strukturierte Anfrage","Freitag, 21:00 · 4 Personen · Terrasse."],["Bestellung","An Betrieb gesendet","Produkte, Extras und Lieferdaten für die Küche vorbereitet."],["Aufsicht","Menschliche Prüfung","Die KI übergibt bei Risiko oder vorbehaltenen Entscheidungen."]],rules:"Regeln angewendet",result:"Überprüfbares Ergebnis"},
 ru:{system:"Разговорная система",listening:"Слушает и действует",cards:[["Входящий звонок","Клиент определён","История, предпочтения и контекст доступны мгновенно."],["Бронирование","Структурированный запрос","Пятница, 21:00 · 4 гостя · терраса."],["Заказ","Отправлен бизнесу","Позиции, дополнения и доставка подготовлены для кухни."],["Контроль","Проверка человеком","ИИ передаёт случай человеку при риске или зарезервированном решении."]],rules:"Правила применены",result:"Проверяемый результат"}} as const;
@@ -91,7 +91,7 @@ export const HeroConversationVisual = () => { const {language}=useTranslation();
           {copy.system}
         </p>
         <Waveform />
-        <p className="text-xs font-semibold text-foreground sm:text-sm">Escuchando y actuando</p>
+        <p className="text-xs font-semibold text-foreground sm:text-sm">{copy.listening}</p>
       </div>
     </div>
 
