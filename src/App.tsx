@@ -11,6 +11,7 @@ import { ScrollProgressBar } from "@/components/ux/ScrollProgressBar";
 import { MobileStickyCTA } from "@/components/ux/MobileStickyCAT";
 import { ProtectedAdminRoute } from "@/components/ProtectedAdminRoute";
 import Index from "./pages/Index";
+import VozraPID from "./pages/VozraPID";
 import Servicios from "./pages/Servicios";
 import Industrias from "./pages/Industrias";
 import Precios from "./pages/Precios";
@@ -92,6 +93,7 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/vozra-pid" element={<VozraPID />} />
             <Route path="/servicios" element={<Servicios />} />
             <Route path="/servicios/chatbots-ia" element={<ChatbotsIA />} />
             <Route path="/servicios/automatizaciones" element={<Automatizaciones />} />
