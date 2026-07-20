@@ -8,12 +8,15 @@ import { ConversationalDifferentiation } from "@/components/landing/Conversation
 import { WebDevelopmentSection } from "@/components/landing/WebDevelopmentSection";
 import { FeaturedProjectsSection } from "@/components/landing/FeaturedProjectsSection";
 import { HomeFinalCTA } from "@/components/landing/HomeFinalCTA";
+import { usePageSEO } from "@/lib/i18n";
 
-const Index = () => (
+const Index = () => {
+  const seo = usePageSEO("home");
+  return (
   <>
     <SEOHead
-      title="Inteligencia Conversacional para Empresas | HydrAI Labs"
-      description="Diseñamos sistemas de inteligencia conversacional: agentes de voz y WhatsApp, reservas, pedidos y atención al cliente conectados con la operación real. Desarrollo web como capa de captación e integración."
+      title={seo.title}
+      description={seo.description}
       keywords="inteligencia conversacional, agentes de voz IA, IA conversacional para empresas, automatización de llamadas, agentes WhatsApp, Vozra, Vozra Rapid, desarrollo web con IA"
       canonical="/"
     />
@@ -40,6 +43,7 @@ const Index = () => (
       <Footer />
     </div>
   </>
-);
+  );
+};
 
 export default Index;
