@@ -64,7 +64,7 @@ const Contacto = () => {
         });
       } catch { /* best-effort */ }
 
-      await Promise.allSettled([
+      const deliveryResults = await Promise.allSettled([
         supabase.functions.invoke("contact-submit", {
           body: {
             ...validation.data,
@@ -85,6 +85,13 @@ const Contacto = () => {
           },
         }),
       ]);
+
+      const delivered = deliveryResults.some(
+        (result) => result.status === "fulfilled" && !result.value.error
+      );
+      if (!delivered) {
+        throw new Error("No se pudo entregar el formulario de contacto");
+      }
 
       try {
         const { trackContact } = await import("@/lib/analytics");
