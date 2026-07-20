@@ -9,4 +9,5 @@ export {
   WebPageSchema,
   WebSiteSchema,
   ProfessionalServiceSchema,
+  BlogPostingSchema,
 } from './SchemaOrg';

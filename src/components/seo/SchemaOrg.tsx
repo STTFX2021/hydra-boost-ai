@@ -301,3 +301,60 @@ export const ProfessionalServiceSchema = ({
   );
 };
 
+// BlogPosting Schema — for individual blog articles
+interface BlogPostingSchemaProps {
+  title: string;
+  description: string;
+  url: string;
+  datePublished: string;
+  dateModified?: string;
+  image?: string;
+  authorName?: string;
+}
+
+export const BlogPostingSchema = ({
+  title,
+  description,
+  url,
+  datePublished,
+  dateModified,
+  image,
+  authorName = "HydrAI Labs",
+}: BlogPostingSchemaProps) => {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: title,
+    description,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${BASE_URL}${url}`,
+    },
+    url: `${BASE_URL}${url}`,
+    image: image || `${BASE_URL}/og-image.png`,
+    datePublished,
+    dateModified: dateModified || datePublished,
+    author: {
+      "@type": "Organization",
+      name: authorName,
+      url: BASE_URL,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "HydrAI Labs",
+      url: BASE_URL,
+      logo: {
+        "@type": "ImageObject",
+        url: `${BASE_URL}/favicon.png`,
+      },
+    },
+    inLanguage: "es-ES",
+  };
+
+  return (
+    <Helmet>
+      <script type="application/ld+json">{JSON.stringify(schema)}</script>
+    </Helmet>
+  );
+};
+
