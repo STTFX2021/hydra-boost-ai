@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { SmartChatbot } from "@/components/smart-chatbot/SmartChatbot";
 import { WhatsAppButton } from "@/components/ux/WhatsAppButton";
+import { AnalyticsConsent } from "@/components/ux/AnalyticsConsent";
 import { ExitIntentPopup } from "@/components/ux/ExitIntentPopup";
 import { ScrollProgressBar } from "@/components/ux/ScrollProgressBar";
 import { MobileStickyCTA } from "@/components/ux/MobileStickyCAT";
@@ -187,6 +188,7 @@ const App = () => (
           <ExitIntentPopup />
           <ScrollProgressBar />
           <MobileStickyCTA />
+          <AnalyticsConsent />
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
