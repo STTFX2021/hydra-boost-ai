@@ -18,10 +18,11 @@ declare global {
 const push = (event: string, params: EventParams = {}) => {
   if (typeof window === "undefined") return;
   try {
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event, ...params });
     if (typeof window.gtag === "function") {
       window.gtag("event", event, params);
+    } else {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event, ...params });
     }
   } catch {
     /* tracking never breaks UX */
@@ -40,7 +41,7 @@ export const trackContact = (params: EventParams = {}) => {
 
 /** Reserva / booking (restaurantes, clínicas, inmobiliaria). */
 export const trackReservation = (params: EventParams = {}) => {
-  push("reservation", { currency: "EUR", value: 1, ...params });
+  push("booking_completed", { currency: "EUR", value: 1, ...params });
 };
 
 /** Evento genérico. */
