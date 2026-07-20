@@ -129,11 +129,9 @@ export function LocalBusinessForm() {
         console.warn("[auditoria-gratis] partial success:", data.warning);
       }
 
-      // Tracking: lead_auditoria_gratis_submit
+      // Tracking: lead_auditoria_gratis_submit + GA4 generate_lead
       try {
-        // @ts-expect-error - dataLayer may not be typed
         window.dataLayer = window.dataLayer || [];
-        // @ts-expect-error
         window.dataLayer.push({
           event: "lead_auditoria_gratis_submit",
           sector: formData.sector,
@@ -141,13 +139,20 @@ export function LocalBusinessForm() {
           volume: formData.volume,
           request_id: requestId,
         });
-        // Custom event fallback for any listener
+        const { trackLead } = await import("@/lib/analytics");
+        trackLead({
+          form: "auditoria_gratis",
+          sector: formData.sector,
+          city: cleanCity,
+          volume: formData.volume,
+          request_id: requestId,
+        });
         window.dispatchEvent(
           new CustomEvent("lead_auditoria_gratis_submit", {
             detail: { sector: formData.sector, city: cleanCity, request_id: requestId },
           })
         );
-      } catch (e) {
+      } catch {
         // tracking should never break submission
       }
 

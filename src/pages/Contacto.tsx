@@ -86,6 +86,11 @@ const Contacto = () => {
         }),
       ]);
 
+      try {
+        const { trackContact } = await import("@/lib/analytics");
+        trackContact({ form: "contacto", page: window.location.pathname });
+      } catch { /* noop */ }
+
       toast.success(`${c.successPrefix} ${validation.data.name.split(" ")[0]}${c.successSuffix}`);
       setFormData({ name: "", email: "", phone: "", message: "" });
       setHoneypot("");
