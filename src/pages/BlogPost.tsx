@@ -63,6 +63,7 @@ const BlogPost = () => {
         ogType="article"
         publishedTime={post.published_at || undefined}
         modifiedTime={post.updated_at || post.published_at || undefined}
+        ogImage={post.cover_image_url || undefined}
       />
       <BreadcrumbSchema
         items={[
@@ -77,6 +78,7 @@ const BlogPost = () => {
         url={`/blog/${post.slug}`}
         datePublished={post.published_at || new Date().toISOString()}
         dateModified={post.updated_at || post.published_at || undefined}
+        image={post.cover_image_url || undefined}
       />
 
       <PageLayout>
