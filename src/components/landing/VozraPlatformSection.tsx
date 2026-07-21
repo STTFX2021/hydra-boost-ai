@@ -135,7 +135,7 @@ export const VozraPlatformSection = () => {
             <>
               {product.name === "Vozra" ? (
                 <div className="flex h-24 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-black/75 px-4">
-                  <img src="/brand/vozra/vozra-app-icon.svg" alt="Vozra" className="h-20 w-20 object-contain" />
+                  <img src="/brand/vozra/vozra-logo-official.svg" alt="Vozra — inteligencia conversacional para reservas" className="h-24 w-full object-contain" />
                 </div>
               ) : product.name === "Vozra PID" ? (
                 <div className="flex h-24 items-center overflow-hidden rounded-2xl border border-white/10 bg-black/75 px-4">
