@@ -1,7 +1,6 @@
 import { ArrowRight, CheckCircle2, Mic, PhoneCall, ShoppingBag, Languages, Send } from "lucide-react";
 import { PageLayout } from "@/components/layout/PageLayout";
 import { SEOHead, ServiceSchema, BreadcrumbSchema } from "@/components/seo";
-import { VozraRapidLogo } from "@/components/brand/VozraRapidLogo";
 import { SarahIntroDialog } from "@/components/landing/SarahIntroDialog";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "@/lib/i18n";
@@ -37,7 +36,7 @@ const VozraPID = () => {
               </div>
             </div>
             <div className="rounded-[2rem] border border-white/10 bg-black p-8 shadow-2xl shadow-black/60">
-              <VozraRapidLogo className="w-full" />
+              <img src="/brand/vozra-pid/vozra-pid-logo.png" alt="Vozra PID — Pedidos Inteligentes Directos" className="mx-auto w-full max-w-xl" />
             </div>
           </div>
         </div>

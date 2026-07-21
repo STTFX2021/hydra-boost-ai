@@ -4,6 +4,7 @@ import {
   CheckCircle2,
   Gauge,
   Mic,
+  Hotel,
   Pizza,
   Settings2,
   UsersRound,
@@ -11,30 +12,43 @@ import {
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { SarahIntroDialog } from "@/components/landing/SarahIntroDialog";
-import { VozraRapidLogo } from "@/components/brand/VozraRapidLogo";
 import { productLinks } from "@/config/productLinks";
 import { useTranslation } from "@/lib/i18n";
 
 const COPY = {
-  es: { eyebrow:"Ecosistema Vozra · Producto HydrAI Labs", title:"Un único cerebro. Productos especializados.", description:"Vozra y Vozra PID conectan conversaciones, reglas del negocio, clientes y sistemas desde un único Control Center.", portal:"Ver portal cliente", talk:"Habla con Sarah", try:"Probar ahora", dashboard:"Abrir dashboard", learn:"Conocer la solución", memory:"Memoria del cliente", memoryDetail:"Contexto, preferencias e historial.", rules:"Reglas configurables", rulesDetail:"Cada negocio define su operación.", trace:"Trazabilidad", traceDetail:"Decisiones y acciones supervisables.", products:[
+  es: { eyebrow:"Ecosistema Vozra · Producto HydrAI Labs", title:"Un único cerebro. Productos especializados.", description:"Vozra, Vozra PID y Roomy conectan conversaciones, reglas del negocio, clientes y sistemas desde un único Control Center.", portal:"Ver portal cliente", talk:"Habla con Sarah", try:"Probar ahora", dashboard:"Abrir dashboard", learn:"Conocer la solución", memory:"Memoria del cliente", memoryDetail:"Contexto, preferencias e historial.", rules:"Reglas configurables", rulesDetail:"Cada negocio define su operación.", trace:"Trazabilidad", traceDetail:"Decisiones y acciones supervisables.", products:[
     {title:"Reservas y atención inteligente",description:"Gestiona consultas, reservas, cambios, grupos, preferencias y excepciones operativas.",features:["Atención telefónica","Reservas y cambios","Grupos y preferencias","Restricciones alimentarias"]},
     {title:"Pedidos Inteligentes Directos",description:"Recoge pedidos por teléfono, confirma productos y extras y entrega la información estructurada al negocio.",features:["Carta y precios","Extras y modificadores","Recogida o entrega","Confirmación del pedido"]},
+    {title:"Room service inteligente",description:"Atiende al huésped, consulta el menú, gestiona pedidos y coordina la entrega a la habitación.",features:["Atención multilingüe","Menú y disponibilidad","Pedidos a habitación","Seguimiento operativo"]},
     {title:"Configuración, supervisión y resultados",description:"Centraliza clientes, conversaciones, reservas, pedidos, permisos, integraciones y resultados.",features:["Operación multiempresa","Clientes y memoria","Portal de resultados","Usuarios y permisos"]}]},
   en: { eyebrow:"Vozra ecosystem · A HydrAI Labs product", title:"One intelligence core. Specialized products.", description:"Vozra and Vozra PID connect conversations, business rules, customers and systems from one Control Center.", portal:"Open client portal", talk:"Talk to Sarah", try:"Try now", dashboard:"Open dashboard", learn:"Explore the solution", memory:"Customer memory", memoryDetail:"Context, preferences and history.", rules:"Configurable rules", rulesDetail:"Each business defines its operations.", trace:"Traceability", traceDetail:"Decisions and actions you can supervise.", products:[
     {title:"Smart bookings and customer service",description:"Handles enquiries, bookings, changes, groups, preferences and operational exceptions.",features:["Phone support","Bookings and changes","Groups and preferences","Dietary restrictions"]},
     {title:"Direct Intelligent Orders",description:"Takes phone orders, confirms products and extras, and delivers structured information to the business.",features:["Menu and prices","Extras and modifiers","Pickup or delivery","Order confirmation"]},
+    {title:"Intelligent room service",description:"Assists guests, checks the menu, manages orders and coordinates delivery to the room.",features:["Multilingual service","Menu and availability","In-room orders","Operational tracking"]},
     {title:"Configuration, supervision and results",description:"Centralizes customers, conversations, bookings, orders, permissions, integrations and results.",features:["Multi-business operations","Customers and memory","Results portal","Users and permissions"]}]},
   de: { eyebrow:"Vozra-Ökosystem · Ein HydrAI-Labs-Produkt", title:"Ein intelligenter Kern. Spezialisierte Produkte.", description:"Vozra und Vozra PID verbinden Gespräche, Geschäftsregeln, Kunden und Systeme in einem Control Center.", portal:"Kundenportal öffnen", talk:"Mit Sarah sprechen", try:"Jetzt testen", dashboard:"Dashboard öffnen", learn:"Lösung entdecken", memory:"Kundengedächtnis", memoryDetail:"Kontext, Präferenzen und Verlauf.", rules:"Konfigurierbare Regeln", rulesDetail:"Jedes Unternehmen definiert seine Abläufe.", trace:"Nachvollziehbarkeit", traceDetail:"Überprüfbare Entscheidungen und Aktionen.", products:[
     {title:"Intelligente Reservierungen und Betreuung",description:"Bearbeitet Anfragen, Reservierungen, Änderungen, Gruppen, Präferenzen und operative Ausnahmen.",features:["Telefonservice","Reservierungen und Änderungen","Gruppen und Präferenzen","Ernährungseinschränkungen"]},
     {title:"Direkte intelligente Bestellungen",description:"Nimmt telefonische Bestellungen auf und übermittelt strukturierte Daten an den Betrieb.",features:["Speisekarte und Preise","Extras und Optionen","Abholung oder Lieferung","Bestellbestätigung"]},
+    {title:"Intelligenter Roomservice",description:"Betreut Gäste, prüft das Menü, verwaltet Bestellungen und koordiniert die Lieferung aufs Zimmer.",features:["Mehrsprachiger Service","Menü und Verfügbarkeit","Zimmerbestellungen","Operative Verfolgung"]},
     {title:"Konfiguration, Kontrolle und Ergebnisse",description:"Zentralisiert Kunden, Gespräche, Reservierungen, Bestellungen, Rechte, Integrationen und Ergebnisse.",features:["Mehrbetriebsfähig","Kunden und Gedächtnis","Ergebnisportal","Benutzer und Rechte"]}]},
   ru: { eyebrow:"Экосистема Vozra · Продукт HydrAI Labs", title:"Единый интеллект. Специализированные продукты.", description:"Vozra и Vozra PID объединяют разговоры, бизнес-правила, клиентов и системы в едином Control Center.", portal:"Открыть портал клиента", talk:"Поговорить с Сарой", try:"Попробовать", dashboard:"Открыть панель", learn:"Подробнее о решении", memory:"Память о клиенте", memoryDetail:"Контекст, предпочтения и история.", rules:"Настраиваемые правила", rulesDetail:"Каждый бизнес определяет свои процессы.", trace:"Прослеживаемость", traceDetail:"Контролируемые решения и действия.", products:[
     {title:"Умные бронирования и обслуживание",description:"Обрабатывает вопросы, бронирования, изменения, группы, предпочтения и исключения.",features:["Телефонное обслуживание","Бронирования и изменения","Группы и предпочтения","Пищевые ограничения"]},
     {title:"Прямые интеллектуальные заказы",description:"Принимает заказы по телефону и передаёт бизнесу структурированные данные.",features:["Меню и цены","Дополнения и модификаторы","Самовывоз или доставка","Подтверждение заказа"]},
+    {title:"Интеллектуальный room service",description:"Обслуживает гостей, проверяет меню, принимает заказы и координирует доставку в номер.",features:["Многоязычное обслуживание","Меню и наличие","Заказы в номер","Контроль операций"]},
     {title:"Настройка, контроль и результаты",description:"Объединяет клиентов, разговоры, бронирования, заказы, права, интеграции и результаты.",features:["Несколько компаний","Клиенты и память","Портал результатов","Пользователи и права"]}]},
 } as const;
 
 const products = [
+  {
+    name: "Roomy",
+    title: "Room service inteligente",
+    description: "Atiende al huésped, consulta el menú, gestiona pedidos y coordina la entrega a la habitación.",
+    icon: Hotel,
+    features: ["Atención multilingüe", "Menú y disponibilidad", "Pedidos a habitación", "Seguimiento operativo"],
+    tone: "primary",
+    href: "/roomy",
+    kind: "internal",
+  },
   {
     name: "Vozra",
     title: "Reservas y atención inteligente",
@@ -108,7 +122,7 @@ export const VozraPlatformSection = () => {
         </div>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
         {localizedProducts.map((product) => {
           const Icon = product.icon;
           const toneClasses = {
@@ -121,7 +135,11 @@ export const VozraPlatformSection = () => {
             <>
               {product.name === "Vozra PID" ? (
                 <div className="flex h-24 items-center overflow-hidden rounded-2xl border border-white/10 bg-black/75 px-4">
-                  <VozraRapidLogo className="h-20 w-full" />
+                  <img src="/brand/vozra-pid/vozra-pid-logo.png" alt="Vozra PID" className="h-20 w-full object-contain" />
+                </div>
+              ) : product.name === "Roomy" ? (
+                <div className="flex h-24 items-center overflow-hidden rounded-2xl border border-white/10 bg-black/75 px-4">
+                  <img src="/brand/roomy/roomy-logo.jpeg" alt="Roomy — Room Service Inteligente" className="h-24 w-full object-contain" />
                 </div>
               ) : (
                 <div className={`flex h-14 w-14 items-center justify-center rounded-2xl border ${toneClasses}`}>
