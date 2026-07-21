@@ -139,11 +139,11 @@ export const VozraPlatformSection = () => {
                 </div>
               ) : product.name === "Vozra PID" ? (
                 <div className="flex h-24 items-center overflow-hidden rounded-2xl border border-white/10 bg-black/75 px-4">
-                  <img src="/brand/vozra-pid/vozra-pid-logo.png" alt="Vozra PID" className="h-20 w-full object-contain" />
+                  <img src="/brand/vozra-pid/vozra-pid-logo.webp" alt="Vozra PID" width={256} height={256} loading="lazy" decoding="async" className="h-20 w-full object-contain" />
                 </div>
               ) : product.name === "Roomy" ? (
                 <div className="flex h-24 items-center overflow-hidden rounded-2xl border border-white/10 bg-black/75 px-4">
-                  <img src="/brand/roomy/roomy-logo.jpeg" alt="Roomy — Room Service Inteligente" className="h-24 w-full object-contain" />
+                  <img src="/brand/roomy/roomy-logo.webp" alt="Roomy — Room Service Inteligente" width={256} height={256} loading="lazy" decoding="async" className="h-24 w-full object-contain" />
                 </div>
               ) : (
                 <div className={`flex h-14 w-14 items-center justify-center rounded-2xl border ${toneClasses}`}>
