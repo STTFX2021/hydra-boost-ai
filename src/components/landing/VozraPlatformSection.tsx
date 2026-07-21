@@ -17,38 +17,28 @@ import { useTranslation } from "@/lib/i18n";
 
 const COPY = {
   es: { eyebrow:"Ecosistema Vozra · Producto HydrAI Labs", title:"Un único cerebro. Productos especializados.", description:"Vozra, Vozra PID y Roomy conectan conversaciones, reglas del negocio, clientes y sistemas desde un único Control Center.", portal:"Ver portal cliente", talk:"Habla con Sarah", try:"Probar ahora", dashboard:"Abrir dashboard", learn:"Conocer la solución", memory:"Memoria del cliente", memoryDetail:"Contexto, preferencias e historial.", rules:"Reglas configurables", rulesDetail:"Cada negocio define su operación.", trace:"Trazabilidad", traceDetail:"Decisiones y acciones supervisables.", products:[
-    {title:"Reservas y atención inteligente",description:"Gestiona consultas, reservas, cambios, grupos, preferencias y excepciones operativas.",features:["Atención telefónica","Reservas y cambios","Grupos y preferencias","Restricciones alimentarias"]},
-    {title:"Pedidos Inteligentes Directos",description:"Recoge pedidos por teléfono, confirma productos y extras y entrega la información estructurada al negocio.",features:["Carta y precios","Extras y modificadores","Recogida o entrega","Confirmación del pedido"]},
-    {title:"Room service inteligente",description:"Atiende al huésped, consulta el menú, gestiona pedidos y coordina la entrega a la habitación.",features:["Atención multilingüe","Menú y disponibilidad","Pedidos a habitación","Seguimiento operativo"]},
+    {title:"Inteligencia conversacional para reservas",description:"Especializada en gestionar reservas de restaurante, consultas, cambios, cancelaciones, grupos y preferencias.",features:["Multilingüe","Múltiples llamadas simultáneas","Memoria a corto y largo plazo","Atención 24/7"]},
+    {title:"Pedidos para recoger y a domicilio",description:"Especializada en tomar pedidos por teléfono, confirmar productos, extras, recogida o dirección de entrega y enviar el pedido estructurado.",features:["Multilingüe","Múltiples llamadas simultáneas","Memoria a corto y largo plazo","Atención 24/7"]},
+    {title:"Room service para hoteles",description:"Especializada en atender al huésped, presentar la carta, confirmar pedidos y coordinar la entrega a la habitación.",features:["Multilingüe","Múltiples llamadas simultáneas","Memoria a corto y largo plazo","Atención 24/7"]},
     {title:"Configuración, supervisión y resultados",description:"Centraliza clientes, conversaciones, reservas, pedidos, permisos, integraciones y resultados.",features:["Operación multiempresa","Clientes y memoria","Portal de resultados","Usuarios y permisos"]}]},
-  en: { eyebrow:"Vozra ecosystem · A HydrAI Labs product", title:"One intelligence core. Specialized products.", description:"Vozra and Vozra PID connect conversations, business rules, customers and systems from one Control Center.", portal:"Open client portal", talk:"Talk to Sarah", try:"Try now", dashboard:"Open dashboard", learn:"Explore the solution", memory:"Customer memory", memoryDetail:"Context, preferences and history.", rules:"Configurable rules", rulesDetail:"Each business defines its operations.", trace:"Traceability", traceDetail:"Decisions and actions you can supervise.", products:[
-    {title:"Smart bookings and customer service",description:"Handles enquiries, bookings, changes, groups, preferences and operational exceptions.",features:["Phone support","Bookings and changes","Groups and preferences","Dietary restrictions"]},
-    {title:"Direct Intelligent Orders",description:"Takes phone orders, confirms products and extras, and delivers structured information to the business.",features:["Menu and prices","Extras and modifiers","Pickup or delivery","Order confirmation"]},
-    {title:"Intelligent room service",description:"Assists guests, checks the menu, manages orders and coordinates delivery to the room.",features:["Multilingual service","Menu and availability","In-room orders","Operational tracking"]},
+  en: { eyebrow:"Vozra ecosystem · A HydrAI Labs product", title:"One intelligence core. Specialized products.", description:"Vozra, Vozra PID and Roomy connect conversations, business rules, customers and systems from one Control Center.", portal:"Open client portal", talk:"Talk to Sarah", try:"Try now", dashboard:"Open dashboard", learn:"Explore the solution", memory:"Customer memory", memoryDetail:"Context, preferences and history.", rules:"Configurable rules", rulesDetail:"Each business defines its operations.", trace:"Traceability", traceDetail:"Decisions and actions you can supervise.", products:[
+    {title:"Conversational intelligence for bookings",description:"Specialized in restaurant bookings, enquiries, changes, cancellations, groups and preferences.",features:["Multilingual","Multiple concurrent calls","Short- and long-term memory","24/7 service"]},
+    {title:"Pickup and delivery orders",description:"Specialized in taking phone orders, confirming products, extras, pickup or delivery details and sending a structured order.",features:["Multilingual","Multiple concurrent calls","Short- and long-term memory","24/7 service"]},
+    {title:"Room service for hotels",description:"Specialized in assisting guests, presenting the menu, confirming orders and coordinating delivery to the room.",features:["Multilingual","Multiple concurrent calls","Short- and long-term memory","24/7 service"]},
     {title:"Configuration, supervision and results",description:"Centralizes customers, conversations, bookings, orders, permissions, integrations and results.",features:["Multi-business operations","Customers and memory","Results portal","Users and permissions"]}]},
-  de: { eyebrow:"Vozra-Ökosystem · Ein HydrAI-Labs-Produkt", title:"Ein intelligenter Kern. Spezialisierte Produkte.", description:"Vozra und Vozra PID verbinden Gespräche, Geschäftsregeln, Kunden und Systeme in einem Control Center.", portal:"Kundenportal öffnen", talk:"Mit Sarah sprechen", try:"Jetzt testen", dashboard:"Dashboard öffnen", learn:"Lösung entdecken", memory:"Kundengedächtnis", memoryDetail:"Kontext, Präferenzen und Verlauf.", rules:"Konfigurierbare Regeln", rulesDetail:"Jedes Unternehmen definiert seine Abläufe.", trace:"Nachvollziehbarkeit", traceDetail:"Überprüfbare Entscheidungen und Aktionen.", products:[
-    {title:"Intelligente Reservierungen und Betreuung",description:"Bearbeitet Anfragen, Reservierungen, Änderungen, Gruppen, Präferenzen und operative Ausnahmen.",features:["Telefonservice","Reservierungen und Änderungen","Gruppen und Präferenzen","Ernährungseinschränkungen"]},
-    {title:"Direkte intelligente Bestellungen",description:"Nimmt telefonische Bestellungen auf und übermittelt strukturierte Daten an den Betrieb.",features:["Speisekarte und Preise","Extras und Optionen","Abholung oder Lieferung","Bestellbestätigung"]},
-    {title:"Intelligenter Roomservice",description:"Betreut Gäste, prüft das Menü, verwaltet Bestellungen und koordiniert die Lieferung aufs Zimmer.",features:["Mehrsprachiger Service","Menü und Verfügbarkeit","Zimmerbestellungen","Operative Verfolgung"]},
+  de: { eyebrow:"Vozra-Ökosystem · Ein HydrAI-Labs-Produkt", title:"Ein intelligenter Kern. Spezialisierte Produkte.", description:"Vozra, Vozra PID und Roomy verbinden Gespräche, Geschäftsregeln, Kunden und Systeme in einem Control Center.", portal:"Kundenportal öffnen", talk:"Mit Sarah sprechen", try:"Jetzt testen", dashboard:"Dashboard öffnen", learn:"Lösung entdecken", memory:"Kundengedächtnis", memoryDetail:"Kontext, Präferenzen und Verlauf.", rules:"Konfigurierbare Regeln", rulesDetail:"Jedes Unternehmen definiert seine Abläufe.", trace:"Nachvollziehbarkeit", traceDetail:"Überprüfbare Entscheidungen und Aktionen.", products:[
+    {title:"Conversational Intelligence für Reservierungen",description:"Spezialisiert auf Restaurantreservierungen, Anfragen, Änderungen, Stornierungen, Gruppen und Präferenzen.",features:["Mehrsprachig","Mehrere gleichzeitige Anrufe","Kurz- und Langzeitgedächtnis","24/7-Service"]},
+    {title:"Abhol- und Lieferbestellungen",description:"Spezialisiert auf telefonische Bestellungen, Produkte, Extras, Abholung oder Lieferadresse und strukturierte Übergabe.",features:["Mehrsprachig","Mehrere gleichzeitige Anrufe","Kurz- und Langzeitgedächtnis","24/7-Service"]},
+    {title:"Roomservice für Hotels",description:"Spezialisiert auf Gästebetreuung, Menüpräsentation, Bestellbestätigung und Lieferung aufs Zimmer.",features:["Mehrsprachig","Mehrere gleichzeitige Anrufe","Kurz- und Langzeitgedächtnis","24/7-Service"]},
     {title:"Konfiguration, Kontrolle und Ergebnisse",description:"Zentralisiert Kunden, Gespräche, Reservierungen, Bestellungen, Rechte, Integrationen und Ergebnisse.",features:["Mehrbetriebsfähig","Kunden und Gedächtnis","Ergebnisportal","Benutzer und Rechte"]}]},
-  ru: { eyebrow:"Экосистема Vozra · Продукт HydrAI Labs", title:"Единый интеллект. Специализированные продукты.", description:"Vozra и Vozra PID объединяют разговоры, бизнес-правила, клиентов и системы в едином Control Center.", portal:"Открыть портал клиента", talk:"Поговорить с Сарой", try:"Попробовать", dashboard:"Открыть панель", learn:"Подробнее о решении", memory:"Память о клиенте", memoryDetail:"Контекст, предпочтения и история.", rules:"Настраиваемые правила", rulesDetail:"Каждый бизнес определяет свои процессы.", trace:"Прослеживаемость", traceDetail:"Контролируемые решения и действия.", products:[
-    {title:"Умные бронирования и обслуживание",description:"Обрабатывает вопросы, бронирования, изменения, группы, предпочтения и исключения.",features:["Телефонное обслуживание","Бронирования и изменения","Группы и предпочтения","Пищевые ограничения"]},
-    {title:"Прямые интеллектуальные заказы",description:"Принимает заказы по телефону и передаёт бизнесу структурированные данные.",features:["Меню и цены","Дополнения и модификаторы","Самовывоз или доставка","Подтверждение заказа"]},
-    {title:"Интеллектуальный room service",description:"Обслуживает гостей, проверяет меню, принимает заказы и координирует доставку в номер.",features:["Многоязычное обслуживание","Меню и наличие","Заказы в номер","Контроль операций"]},
+  ru: { eyebrow:"Экосистема Vozra · Продукт HydrAI Labs", title:"Единый интеллект. Специализированные продукты.", description:"Vozra, Vozra PID и Roomy объединяют разговоры, бизнес-правила, клиентов и системы в едином Control Center.", portal:"Открыть портал клиента", talk:"Поговорить с Сарой", try:"Попробовать", dashboard:"Открыть панель", learn:"Подробнее о решении", memory:"Память о клиенте", memoryDetail:"Контекст, предпочтения и история.", rules:"Настраиваемые правила", rulesDetail:"Каждый бизнес определяет свои процессы.", trace:"Прослеживаемость", traceDetail:"Контролируемые решения и действия.", products:[
+    {title:"Разговорный ИИ для бронирований",description:"Специализирован на бронировании столиков, вопросах, изменениях, отменах, группах и предпочтениях гостей.",features:["Многоязычность","Несколько звонков одновременно","Краткосрочная и долгосрочная память","Обслуживание 24/7"]},
+    {title:"Заказы на самовывоз и доставку",description:"Специализирован на телефонных заказах, подтверждении блюд и дополнений, самовывозе или адресе доставки и структурированной передаче заказа.",features:["Многоязычность","Несколько звонков одновременно","Краткосрочная и долгосрочная память","Обслуживание 24/7"]},
+    {title:"Room service для отелей",description:"Специализирован на обслуживании гостей, показе меню, подтверждении заказа и доставке в номер.",features:["Многоязычность","Несколько звонков одновременно","Краткосрочная и долгосрочная память","Обслуживание 24/7"]},
     {title:"Настройка, контроль и результаты",description:"Объединяет клиентов, разговоры, бронирования, заказы, права, интеграции и результаты.",features:["Несколько компаний","Клиенты и память","Портал результатов","Пользователи и права"]}]},
 } as const;
 
 const products = [
-  {
-    name: "Roomy",
-    title: "Room service inteligente",
-    description: "Atiende al huésped, consulta el menú, gestiona pedidos y coordina la entrega a la habitación.",
-    icon: Hotel,
-    features: ["Atención multilingüe", "Menú y disponibilidad", "Pedidos a habitación", "Seguimiento operativo"],
-    tone: "primary",
-    href: "/roomy",
-    kind: "internal",
-  },
   {
     name: "Vozra",
     title: "Reservas y atención inteligente",
@@ -67,6 +57,16 @@ const products = [
     features: ["Carta y precios", "Extras y modificadores", "Recogida o entrega", "Confirmación del pedido"],
     tone: "success",
     href: "/vozra-pid",
+    kind: "internal",
+  },
+  {
+    name: "Roomy",
+    title: "Room service para hoteles",
+    description: "Atiende al huésped, presenta la carta, confirma el pedido y coordina la entrega a la habitación.",
+    icon: Hotel,
+    features: ["Multilingüe", "Múltiples llamadas simultáneas", "Memoria a corto y largo plazo", "Atención 24/7"],
+    tone: "primary",
+    href: "/roomy",
     kind: "internal",
   },
   {
@@ -133,7 +133,11 @@ export const VozraPlatformSection = () => {
 
           const content = (
             <>
-              {product.name === "Vozra PID" ? (
+              {product.name === "Vozra" ? (
+                <div className="flex h-24 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-black/75 px-4">
+                  <img src="/brand/vozra/vozra-app-icon.svg" alt="Vozra" className="h-20 w-20 object-contain" />
+                </div>
+              ) : product.name === "Vozra PID" ? (
                 <div className="flex h-24 items-center overflow-hidden rounded-2xl border border-white/10 bg-black/75 px-4">
                   <img src="/brand/vozra-pid/vozra-pid-logo.png" alt="Vozra PID" className="h-20 w-full object-contain" />
                 </div>
