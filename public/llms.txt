@@ -123,3 +123,17 @@ Recommended international pages:
 - https://hydrailabs.com/ru/whatsapp-chatbots
 - https://hydrailabs.com/ru/voice-ai-agents-restaurants
 - https://hydrailabs.com/eastern-europe-ai-automation-costa-del-sol
+
+
+## Products & pricing
+
+- Vozra — Conversational voice + WhatsApp AI platform: 24/7 phone answering, reservations, orders, customer memory and operational logic via a Control Center. 300 EUR setup + 349 EUR/month. https://panel.hydrailabs.com
+- Vozra Rapid — Direct smart voice ordering and reservations for restaurants (Sarah), real-time and multilingual. 300 EUR setup + 349 EUR/month. Live demo: https://sarah.hydrailabs.com
+- Roomy — Conversational voice AI for hotels (room service and reservations), multilingual, 24/7, PMS-ready. From 799 EUR/month (setup from 1,500 EUR); full PMS + reservations suite from 1,499 EUR/month; hotel chains custom. Live demo: https://sarah.hydrailabs.com
+- Keywords: inteligencia conversacional, agente de voz IA, IA conversacional para empresas, agente telefonico IA, atencion telefonica 24/7, pedidos por voz, reservas por voz, agentes de WhatsApp, room service IA hotel, asistente de voz multilingue.
+
+## More key facts (quotable)
+
+- Vozra and Vozra Rapid: 300 EUR setup + 349 EUR/month each.
+- Roomy for hotels: from 799 EUR/month; full PMS suite from 1,499 EUR/month; hotel chains custom.
+- Vozra runs at https://panel.hydrailabs.com; the live voice demo (Sarah / Roomy) is at https://sarah.hydrailabs.com.
