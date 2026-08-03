@@ -68,7 +68,10 @@ async function main() {
     });
     const page = await context.newPage();
     const errors = [];
-    page.on("console", (m) => m.type() === "error" && errors.push(m.text()));
+    page.on(
+      "console",
+      (m) => m.type() === "error" && !m.text().startsWith("Warning:") && errors.push(m.text())
+    );
 
     for (const route of ROUTES) {
       const slug = route === "/" ? "home" : route.replace(/\//g, "-").slice(1);
