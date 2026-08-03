@@ -2,9 +2,11 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useTranslation, useI18n, languageNames, type Language } from "@/lib/i18n";
 import { useAdmin } from "@/hooks/useAdmin";
-import { Menu, X, Globe, ChevronDown } from "lucide-react";
+import { Menu, X, Globe, ChevronDown, ExternalLink } from "lucide-react";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { HydrAILogo } from "@/components/brand/HydrAILogo";
+import { productLinks } from "@/config/productLinks";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,172 +14,192 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-const availableLanguages: Language[] = ['es', 'en', 'de', 'ru'];
+const availableLanguages: Language[] = ["es", "en", "de", "ru"];
+
+const NAV_COPY = {
+  es: { conversational: "Inteligencia conversacional", web: "Desarrollo web", projects: "Proyectos", contact: "Contacto", panel: "Panel Vozra", demo: "Solicitar demo", nav: "Navegación principal", mobile: "Navegación móvil", change: "Cambiar idioma" },
+  en: { conversational: "Conversational intelligence", web: "Web development", projects: "Projects", contact: "Contact", panel: "Vozra dashboard", demo: "Request demo", nav: "Main navigation", mobile: "Mobile navigation", change: "Change language" },
+  de: { conversational: "Conversational Intelligence", web: "Webentwicklung", projects: "Projekte", contact: "Kontakt", panel: "Vozra-Dashboard", demo: "Demo anfordern", nav: "Hauptnavigation", mobile: "Mobile Navigation", change: "Sprache ändern" },
+  ru: { conversational: "Разговорный ИИ", web: "Веб-разработка", projects: "Проекты", contact: "Контакты", panel: "Панель Vozra", demo: "Запросить демо", nav: "Основная навигация", mobile: "Мобильная навигация", change: "Изменить язык" },
+} as const;
 
 export const Header = () => {
   const { t, language } = useTranslation();
   const { setLanguage } = useI18n();
   const { isAdmin } = useAdmin();
+  const copy = NAV_COPY[language as keyof typeof NAV_COPY] ?? NAV_COPY.es;
+  const navItems = [
+    { href: "/#inteligencia-conversacional", label: copy.conversational, anchor: true },
+    { href: "/#vozra", label: "Vozra", anchor: true },
+    { href: "/#desarrollo-web", label: copy.web, anchor: true },
+    { href: "/casos", label: copy.projects, anchor: false },
+    { href: "/contacto", label: copy.contact, anchor: false },
+  ] as const;
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const isActive = (path: string) => location.pathname === path;
-
-  const navItems = [
-    { to: "/servicios", label: t("nav.industries") },
-    { to: "/agentes-ia", label: "Agentes IA" },
-    { to: "/arquitectura", label: t("nav.architecture") },
-    { to: "/casos", label: t("nav.cases") },
-    { to: "/contacto", label: t("nav.contact") },
-  ];
+  const isActive = (path: string) => !path.includes("#") && location.pathname === path;
 
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
         scrolled
-          ? "bg-background/95 backdrop-blur-lg border-b border-border/40 shadow-lg shadow-black/10"
-          : "bg-transparent"
+          ? "border-b border-white/10 bg-background/92 shadow-lg shadow-black/20 backdrop-blur-xl"
+          : "border-b border-white/[0.04] bg-background/65 backdrop-blur-lg",
       )}
     >
-      <nav aria-label="Navegación principal" className="section-container flex items-center justify-between h-18 py-4">
-        <Link
-          to="/"
-          aria-label="HydrAI Labs - Ir a inicio"
-          className="flex items-center gap-3 font-display text-xl font-bold"
-        >
-          <img
-            src="/favicon.png"
-            alt="HydrAI Labs - Agencia de automatización IA"
-            className="w-9 h-9 rounded-lg logo-violet-halo"
-            width={36}
-            height={36}
-            loading="eager"
-            decoding="async"
-          />
-          <span className="text-gradient-hydrai">{t("brand")}</span>
+      <nav aria-label={copy.nav} className="section-container flex min-h-[88px] items-center justify-between gap-4 py-2">
+        <Link to="/" aria-label="HydrAI Labs - Ir a inicio" className="flex shrink-0 items-center">
+          <HydrAILogo className="h-[72px] w-auto max-w-[142px]" />
         </Link>
 
-        {/* Desktop Nav */}
-        <div className="hidden lg:flex items-center gap-8">
-          {navItems.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className={cn(
-                "text-sm font-medium transition-colors",
-                isActive(item.to)
-                  ? "text-primary"
-                  : "text-muted-foreground hover:text-foreground"
-              )}
-            >
-              {item.label}
-            </Link>
-          ))}
+        <div className="hidden items-center gap-5 xl:flex">
+          {navItems.map((item) =>
+            item.anchor ? (
+              <a
+                key={item.href}
+                href={item.href}
+                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              >
+                {item.label}
+              </a>
+            ) : (
+              <Link
+                key={item.href}
+                to={item.href}
+                className={cn(
+                  "text-sm font-medium transition-colors",
+                  isActive(item.href) ? "text-primary" : "text-muted-foreground hover:text-foreground",
+                )}
+              >
+                {item.label}
+              </Link>
+            ),
+          )}
+          <a
+            href={productLinks.vozraApp}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-foreground transition hover:text-primary"
+          >
+            {copy.panel}
+            <ExternalLink className="h-3.5 w-3.5" />
+          </a>
         </div>
 
-        <div className="flex items-center gap-3">
-          {/* Language Dropdown */}
+        <div className="flex items-center gap-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-muted-foreground hover:text-foreground"
-                aria-label={`Cambiar idioma. Idioma actual: ${languageNames[language]}`}
+                className="hidden text-muted-foreground hover:text-foreground sm:flex"
+                aria-label={`${copy.change}: ${languageNames[language]}`}
               >
-                <Globe className="w-4 h-4 mr-1" />
+                <Globe className="mr-1 h-4 w-4" />
                 {language.toUpperCase()}
-                <ChevronDown className="w-3 h-3 ml-1" />
+                <ChevronDown className="ml-1 h-3 w-3" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="min-w-[120px]">
+            <DropdownMenuContent align="end" className="min-w-[140px]">
               {availableLanguages.map((lang) => (
                 <DropdownMenuItem
                   key={lang}
                   onClick={() => setLanguage(lang)}
-                  className={cn(
-                    "cursor-pointer",
-                    language === lang && "bg-primary/10 text-primary"
-                  )}
+                  className={cn("cursor-pointer", language === lang && "bg-primary/10 text-primary")}
                 >
                   <span className="font-medium">{lang.toUpperCase()}</span>
-                  <span className="ml-2 text-muted-foreground text-xs">
-                    {languageNames[lang]}
-                  </span>
+                  <span className="ml-2 text-xs text-muted-foreground">{languageNames[lang]}</span>
                 </DropdownMenuItem>
               ))}
             </DropdownMenuContent>
           </DropdownMenu>
 
-          {/* Only show Admin link if user is admin */}
           {isAdmin && (
-            <Link to="/admin" className="hidden sm:block">
+            <Link to="/admin" className="hidden lg:block">
               <Button variant="ghost" size="sm">
                 {t("nav.login")}
               </Button>
             </Link>
           )}
 
-          <Link to="/auditoria-gratis" className="hidden sm:block">
+          <Link to="/contacto" className="hidden sm:block">
             <Button size="sm" className="btn-neon">
-              {t("nav.audit")}
+              {copy.demo}
             </Button>
           </Link>
 
-          {/* Mobile Menu Button */}
           <Button
             variant="ghost"
             size="sm"
-            className="lg:hidden"
-            onClick={() => setMenuOpen(!menuOpen)}
+            className="xl:hidden"
+            onClick={() => setMenuOpen((open) => !open)}
             aria-label={menuOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
             aria-expanded={menuOpen}
           >
-            {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </Button>
         </div>
       </nav>
 
-      {/* Mobile Menu */}
       {menuOpen && (
-        <div className="lg:hidden bg-background/95 backdrop-blur-xl border-t border-border/30">
-          <nav aria-label="Navegación móvil" className="section-container py-4 space-y-3">
-            {navItems.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                onClick={() => setMenuOpen(false)}
-                className={cn(
-                  "block py-2 text-sm font-medium",
-                  isActive(item.to) ? "text-primary" : "text-muted-foreground"
-                )}
-              >
-                {item.label}
+        <div className="border-t border-white/10 bg-background/96 backdrop-blur-xl xl:hidden">
+          <nav aria-label={copy.mobile} className="section-container space-y-2 py-4">
+            {navItems.map((item) =>
+              item.anchor ? (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="block rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-muted/40 hover:text-foreground"
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <Link
+                  key={item.href}
+                  to={item.href}
+                  onClick={() => setMenuOpen(false)}
+                  className={cn(
+                    "block rounded-lg px-3 py-2 text-sm font-medium",
+                    isActive(item.href) ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-muted/40",
+                  )}
+                >
+                  {item.label}
+                </Link>
+              ),
+            )}
+            <a
+              href={productLinks.vozraApp}
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => setMenuOpen(false)}
+              className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold text-foreground hover:bg-muted/40"
+            >
+              {copy.panel}
+              <ExternalLink className="h-4 w-4" />
+            </a>
+            <div className="flex flex-wrap gap-3 border-t border-white/10 pt-4">
+              <Link to="/contacto" onClick={() => setMenuOpen(false)}>
+                <Button size="sm" className="btn-neon">
+                  {copy.demo}
+                </Button>
               </Link>
-            ))}
-            <div className="flex gap-3 pt-3 border-t border-border/30">
               {isAdmin && (
                 <Link to="/admin" onClick={() => setMenuOpen(false)}>
-                  <Button variant="ghost" size="sm">
+                  <Button variant="outline" size="sm">
                     {t("nav.login")}
                   </Button>
                 </Link>
               )}
-              <Link to="/auditoria-gratis" onClick={() => setMenuOpen(false)}>
-                <Button size="sm" className="btn-neon">
-                  {t("nav.audit")}
-                </Button>
-              </Link>
             </div>
           </nav>
         </div>

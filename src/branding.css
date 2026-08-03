@@ -1,0 +1,131 @@
+/*
+ * HydrAI Labs unified brand layer
+ * Shared visual language with Vozra Control Center:
+ * graphite surfaces, white/steel typography, blue-violet ambient light and a 28px technical grid.
+ */
+
+:root,
+.dark {
+  --background: 225 18% 7%;
+  --foreground: 210 20% 96%;
+  --card: 224 16% 10%;
+  --card-foreground: 210 20% 96%;
+  --popover: 224 16% 10%;
+  --popover-foreground: 210 20% 96%;
+  --primary: 214 24% 94%;
+  --primary-foreground: 225 20% 8%;
+  --secondary: 229 68% 62%;
+  --secondary-foreground: 210 20% 98%;
+  --muted: 224 14% 14%;
+  --muted-foreground: 216 12% 65%;
+  --accent: 267 54% 54%;
+  --accent-foreground: 210 20% 98%;
+  --border: 215 20% 92% / 0.11;
+  --input: 215 20% 92% / 0.13;
+  --ring: 220 65% 72%;
+  --glow-primary: 210 70% 66%;
+  --glow-secondary: 270 62% 62%;
+  --gradient-primary: linear-gradient(135deg, hsl(214 24% 96%), hsl(224 72% 76%));
+  --gradient-secondary: linear-gradient(135deg, hsl(229 68% 62%), hsl(270 58% 60%));
+  --gradient-accent: linear-gradient(135deg, hsl(207 74% 66%), hsl(270 62% 62%));
+  --gradient-card: linear-gradient(145deg, hsl(224 16% 11% / 0.94), hsl(225 18% 8% / 0.94));
+  --shadow-neon-sm: 0 4px 18px hsl(222 70% 68% / 0.12);
+  --shadow-neon-md: 0 8px 30px hsl(222 70% 68% / 0.17);
+  --shadow-neon-lg: 0 14px 56px hsl(222 70% 68% / 0.2);
+  --shadow-purple: 0 8px 30px hsl(270 62% 62% / 0.14);
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  background-color: hsl(var(--background));
+}
+
+body {
+  position: relative;
+  isolation: isolate;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 15% 10%, hsl(207 74% 66% / 0.12), transparent 42%),
+    radial-gradient(circle at 85% 90%, hsl(270 62% 62% / 0.11), transparent 46%),
+    radial-gradient(circle, hsl(210 20% 96% / 0.19) 1.1px, transparent 1.5px),
+    linear-gradient(hsl(210 20% 96% / 0.085) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(210 20% 96% / 0.085) 1px, transparent 1px);
+  background-size: auto, auto, 28px 28px, 28px 28px, 28px 28px;
+  background-position: center, center, 0 0, 0 0, 0 0;
+}
+
+.hydrai-grid-page {
+  position: relative;
+  background-color: transparent;
+}
+
+/* Exact dashboard-style grid for hero and selected product areas. */
+.bg-mesh-hydrai,
+.bg-grid-hydrai {
+  background-image:
+    radial-gradient(circle at 15% 10%, hsl(207 74% 66% / 0.17), transparent 42%),
+    radial-gradient(circle at 85% 90%, hsl(270 62% 62% / 0.15), transparent 46%),
+    radial-gradient(circle, hsl(210 20% 96% / 0.25) 1.15px, transparent 1.55px),
+    linear-gradient(hsl(210 20% 96% / 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(210 20% 96% / 0.12) 1px, transparent 1px) !important;
+  background-size: auto, auto, 28px 28px, 28px 28px, 28px 28px !important;
+  background-position: center, center, 0 0, 0 0, 0 0 !important;
+}
+
+.text-gradient-hydrai {
+  background-image: linear-gradient(135deg, hsl(210 20% 98%), hsl(220 42% 78%), hsl(268 48% 70%)) !important;
+}
+
+.text-glow-violet {
+  text-shadow:
+    0 0 28px hsl(228 68% 62% / 0.19),
+    0 0 64px hsl(270 62% 62% / 0.1) !important;
+}
+
+.btn-neon {
+  color: hsl(var(--primary-foreground));
+  box-shadow: 0 8px 30px hsl(225 68% 68% / 0.12);
+}
+
+.btn-neon::before {
+  background: linear-gradient(135deg, hsl(210 20% 100%), hsl(229 68% 76%)) !important;
+}
+
+.card-premium,
+.card-elevated,
+.glass {
+  border-color: hsl(210 20% 96% / 0.1);
+  background: hsl(224 16% 10% / 0.78);
+  backdrop-filter: blur(18px);
+}
+
+.card-premium:hover,
+.card-elevated-hover:hover,
+.glass-hover:hover {
+  border-color: hsl(224 72% 76% / 0.28);
+  box-shadow:
+    0 16px 44px hsl(0 0% 0% / 0.32),
+    0 0 42px hsl(229 68% 62% / 0.08);
+}
+
+.section-alt,
+.section-alt-subtle,
+.section-tint {
+  background: hsl(224 16% 9% / 0.76) !important;
+  backdrop-filter: blur(8px);
+}
+
+.bg-background,
+.bg-card,
+.bg-muted {
+  background-color: hsl(var(--background) / 0.88);
+}

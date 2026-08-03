@@ -3,221 +3,80 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { FAQSchema, BreadcrumbSchema, ServiceSchema } from "@/components/seo";
-import { ArrowRight, CheckCircle2, Phone, MessageSquare, AlertTriangle, Sparkles } from "lucide-react";
+import { useTranslation } from "@/lib/i18n";
+import { ArrowRight, CheckCircle2, Phone, AlertTriangle, Sparkles } from "lucide-react";
 
-const URL = "https://hydrailabs.com/restaurantes-ia-reservas-whatsapp-costa-del-sol";
+const PATH = "/restaurantes-ia-reservas-whatsapp-costa-del-sol";
+const BASE_URL = "https://hydrailabs.com";
 
-const PAIN = [
-  "Llamadas perdidas en horas punta",
-  "WhatsApps sin responder",
-  "Reservas apuntadas a mano",
-  "Clientes que preguntan disponibilidad y se van",
-  "Cambios, alergias y grupos gestionados sin control",
-  "Falta de seguimiento después del primer contacto",
-];
+const COPY = {
+  es: {
+    seo: { title: "IA para reservas de restaurantes en Costa del Sol | HydrAI Labs", description: "Automatiza reservas, WhatsApp y llamadas en restaurantes con asistentes IA. HydrAI Labs ayuda a restaurantes de Costa del Sol a captar más reservas y responder más rápido.", service: "IA para reservas de restaurantes en Costa del Sol", serviceDescription: "Asistentes IA para restaurantes: WhatsApp, llamadas, captura de reservas, avisos al equipo y registro de alergias." },
+    breadcrumb: ["Inicio", "IA para reservas de restaurantes"], badge: "Restaurantes · Costa del Sol",
+    hero: ["¿Tu restaurante pierde reservas por ", "no responder a tiempo", "?"],
+    intro: "HydrAI Labs crea asistentes IA para restaurantes que responden WhatsApp, llamadas y solicitudes de reserva, capturan datos del cliente y avisan al equipo antes de que el cliente se vaya a otro sitio.",
+    primary: "Quiero revisar mis reservas gratis", secondary: "Ver qué puede automatizar", trust: "Diagnóstico gratuito · Sin compromiso · Respuesta en menos de 24 h",
+    painTitle: "Dónde se escapan tus reservas", pain: ["Llamadas perdidas en horas punta", "WhatsApps sin responder", "Reservas apuntadas a mano", "Clientes que preguntan disponibilidad y se van", "Cambios, alergias y grupos gestionados sin control", "Falta de seguimiento después del primer contacto"],
+    solutionTitle: "Qué automatizamos para tu restaurante", solution: ["Chatbot de WhatsApp para reservas", "Agente de voz IA para llamadas", "Captura de nombre, teléfono, fecha, hora y número de personas", "Avisos automáticos al equipo", "Escalado a una persona en casos delicados", "Registro de preferencias, alergias y notas importantes"],
+    conversationTitle: "Ejemplo de conversación", customer: "Cliente", ai: "IA", messages: ["Hola, quiero reservar para 4 esta noche.", "Perfecto. ¿A qué hora os gustaría venir?", "A las 21:00.", "Genial. ¿A nombre de quién la anoto?", "Tengo anotada la solicitud. El equipo revisará la disponibilidad antes de confirmarla."],
+    differenceTitle: "No es un chatbot genérico", difference: "HydrAI Labs no vende bots genéricos. Creamos sistemas de atención y reservas diseñados para restaurantes reales: llamadas, WhatsApp, horarios, grupos, alergias, cocina, sala y responsables.",
+    vozraTitle: "Vozra: agente IA para reservas de restaurantes", vozra: "Vozra es el sistema de voz y reservas de HydrAI Labs para restaurantes. Recoge solicitudes, entiende preferencias, detecta casos delicados y avisa al equipo cuando hace falta intervención humana.",
+    ctaTitle: "¿Quieres saber cuántas reservas puedes estar perdiendo?", ctaText: "Te hacemos una revisión gratuita y te decimos qué parte de tu atención al cliente deberías automatizar primero.", cta: "Solicitar revisión gratuita",
+    faqTitle: "Preguntas frecuentes", faq: [["¿La IA confirma reservas automáticamente?", "No necesariamente. Puede recoger la solicitud, validar datos y avisar al equipo. La confirmación final depende de la configuración y de la disponibilidad real del restaurante."], ["¿Puede responder WhatsApp?", "Sí. Podemos crear flujos para responder consultas, recoger solicitudes de reserva, clasificar clientes y avisar al equipo."], ["¿Puede atender llamadas?", "Sí. Los agentes de voz IA recogen datos y reducen las llamadas perdidas."], ["¿Qué pasa con alergias o grupos grandes?", "Los casos delicados se pueden escalar a una persona. La IA no debe prometer seguridad alimentaria ni disponibilidad sin validación."], ["¿Sirve para restaurantes pequeños?", "Sí. El primer MVP puede capturar solicitudes, responder preguntas frecuentes y avisar al equipo."], ["¿Cuánto tarda en implementarse?", "Depende del sistema. Empezamos con un MVP para validar rápido antes de escalar."], ["¿Trabajáis en Costa del Sol?", "Sí. HydrAI Labs trabaja con negocios locales e internacionales en Costa del Sol."], ["¿La auditoría es gratuita?", "Sí. La auditoría inicial detecta qué proceso conviene automatizar primero."]],
+    explore: "Sigue explorando", links: ["Auditoría gratis", "Chatbots de WhatsApp", "Agentes de voz IA", "Automatización IA para restaurantes"]
+  },
+  en: {
+    seo: { title: "AI restaurant reservations on the Costa del Sol | HydrAI Labs", description: "Automate restaurant reservations, WhatsApp and calls with AI assistants. Capture more bookings and respond faster on the Costa del Sol.", service: "AI restaurant reservations on the Costa del Sol", serviceDescription: "AI assistants for restaurants: WhatsApp, calls, booking requests, team alerts and allergy notes." },
+    breadcrumb: ["Home", "AI restaurant reservations"], badge: "Restaurants · Costa del Sol",
+    hero: ["Is your restaurant losing bookings because you ", "cannot respond in time", "?"], intro: "HydrAI Labs builds AI assistants for restaurants that answer WhatsApp, calls and booking requests, capture customer details and alert the team before the customer goes elsewhere.", primary: "Review my bookings for free", secondary: "See what can be automated", trust: "Free assessment · No commitment · Reply within 24 hours",
+    painTitle: "Where your bookings are being lost", pain: ["Missed calls during peak hours", "Unanswered WhatsApp messages", "Bookings written down by hand", "Customers ask about availability and leave", "Changes, allergies and groups handled without control", "No follow-up after the first contact"],
+    solutionTitle: "What we automate for your restaurant", solution: ["WhatsApp booking chatbot", "AI voice agent for calls", "Capture name, phone, date, time and party size", "Automatic team alerts", "Human escalation for sensitive cases", "Record preferences, allergies and important notes"],
+    conversationTitle: "Conversation example", customer: "Customer", ai: "AI", messages: ["Hi, I would like a table for four tonight.", "Great. What time would you like to come?", "At 9:00 pm.", "Perfect. What name should I use?", "I have recorded your request. The team will check availability before confirming it."],
+    differenceTitle: "Not a generic chatbot", difference: "HydrAI Labs does not sell generic bots. We build service and booking systems for real restaurants: calls, WhatsApp, opening hours, groups, allergies, kitchen, front of house and human oversight.",
+    vozraTitle: "Vozra: AI agent for restaurant reservations", vozra: "Vozra is HydrAI Labs' voice and booking system for restaurants. It captures requests, understands preferences, detects sensitive cases and alerts the team when human intervention is needed.",
+    ctaTitle: "Want to know how many bookings you may be losing?", ctaText: "We will review your process for free and show you which part of customer service to automate first.", cta: "Request a free review",
+    faqTitle: "Frequently asked questions", faq: [["Does the AI confirm bookings automatically?", "Not necessarily. It can capture the request, validate details and alert the team. Final confirmation depends on configuration and real availability."], ["Can it answer WhatsApp?", "Yes. We can answer questions, capture booking requests, classify customers and alert the team."], ["Can it answer calls?", "Yes. AI voice agents capture details and reduce missed calls."], ["What about allergies or large groups?", "Sensitive cases can be escalated to a person. The AI must not promise food safety or availability without validation."], ["Is it suitable for small restaurants?", "Yes. A first MVP can capture requests, answer common questions and alert the team."], ["How long does implementation take?", "It depends on the system. We start with an MVP to validate quickly before scaling."], ["Do you work on the Costa del Sol?", "Yes. HydrAI Labs works with local and international businesses on the Costa del Sol."], ["Is the assessment free?", "Yes. The initial assessment identifies which process should be automated first."]], explore: "Keep exploring", links: ["Free assessment", "WhatsApp chatbots", "AI voice agents", "AI restaurant automation"]
+  },
+  de: {
+    seo: { title: "KI für Restaurantreservierungen an der Costa del Sol | HydrAI Labs", description: "Automatisieren Sie Reservierungen, WhatsApp und Anrufe mit KI-Assistenten und gewinnen Sie mehr Gäste.", service: "KI für Restaurantreservierungen an der Costa del Sol", serviceDescription: "KI-Assistenten für Restaurants: WhatsApp, Anrufe, Reservierungsanfragen, Team-Benachrichtigungen und Allergiehinweise." },
+    breadcrumb: ["Startseite", "KI-Restaurantreservierungen"], badge: "Restaurants · Costa del Sol", hero: ["Verliert Ihr Restaurant Reservierungen, weil Sie ", "nicht rechtzeitig antworten", "?"], intro: "HydrAI Labs entwickelt KI-Assistenten für Restaurants, die WhatsApp, Anrufe und Reservierungsanfragen beantworten, Kundendaten erfassen und das Team informieren, bevor der Gast woanders bucht.", primary: "Reservierungen kostenlos prüfen", secondary: "Automatisierung ansehen", trust: "Kostenlose Analyse · Unverbindlich · Antwort innerhalb von 24 Stunden",
+    painTitle: "Wo Reservierungen verloren gehen", pain: ["Verpasste Anrufe zu Stoßzeiten", "Unbeantwortete WhatsApp-Nachrichten", "Handschriftlich notierte Reservierungen", "Gäste fragen nach Verfügbarkeit und gehen", "Änderungen, Allergien und Gruppen ohne Kontrolle", "Keine Nachverfolgung nach dem Erstkontakt"], solutionTitle: "Was wir für Ihr Restaurant automatisieren", solution: ["WhatsApp-Chatbot für Reservierungen", "KI-Sprachassistent für Anrufe", "Erfassung von Name, Telefon, Datum, Uhrzeit und Personenzahl", "Automatische Team-Benachrichtigungen", "Übergabe an Menschen bei sensiblen Fällen", "Speicherung von Präferenzen, Allergien und wichtigen Notizen"],
+    conversationTitle: "Gesprächsbeispiel", customer: "Gast", ai: "KI", messages: ["Hallo, ich möchte heute Abend für vier Personen reservieren.", "Gerne. Um wie viel Uhr möchten Sie kommen?", "Um 21:00 Uhr.", "Perfekt. Auf welchen Namen darf ich die Anfrage aufnehmen?", "Ihre Anfrage ist erfasst. Das Team prüft die Verfügbarkeit vor der Bestätigung."], differenceTitle: "Kein generischer Chatbot", difference: "HydrAI Labs verkauft keine Standard-Bots. Wir entwickeln Service- und Reservierungssysteme für echte Restaurants: Anrufe, WhatsApp, Öffnungszeiten, Gruppen, Allergien, Küche, Service und menschliche Kontrolle.", vozraTitle: "Vozra: KI-Agent für Restaurantreservierungen", vozra: "Vozra ist das Sprach- und Reservierungssystem von HydrAI Labs. Es erfasst Anfragen, versteht Präferenzen, erkennt sensible Fälle und informiert das Team, wenn menschliches Eingreifen nötig ist.", ctaTitle: "Möchten Sie wissen, wie viele Reservierungen Ihnen entgehen?", ctaText: "Wir prüfen Ihren Prozess kostenlos und zeigen, welchen Teil des Kundenservice Sie zuerst automatisieren sollten.", cta: "Kostenlose Prüfung anfordern",
+    faqTitle: "Häufige Fragen", faq: [["Bestätigt die KI Reservierungen automatisch?", "Nicht zwingend. Sie erfasst Anfragen, prüft Angaben und informiert das Team. Die endgültige Bestätigung hängt von Konfiguration und realer Verfügbarkeit ab."], ["Kann sie WhatsApp beantworten?", "Ja. Sie kann Fragen beantworten, Reservierungsanfragen erfassen und das Team informieren."], ["Kann sie Anrufe annehmen?", "Ja. KI-Sprachagenten erfassen Daten und reduzieren verpasste Anrufe."], ["Was passiert bei Allergien oder großen Gruppen?", "Sensible Fälle werden an einen Menschen übergeben. Ohne Prüfung darf die KI weder Lebensmittelsicherheit noch Verfügbarkeit zusagen."], ["Eignet es sich für kleine Restaurants?", "Ja. Ein MVP kann Anfragen erfassen, häufige Fragen beantworten und das Team informieren."], ["Wie lange dauert die Umsetzung?", "Das hängt vom System ab. Wir starten mit einem MVP und skalieren nach erfolgreicher Validierung."], ["Arbeiten Sie an der Costa del Sol?", "Ja. HydrAI Labs arbeitet mit lokalen und internationalen Unternehmen an der Costa del Sol."], ["Ist die Analyse kostenlos?", "Ja. Die erste Analyse zeigt, welcher Prozess zuerst automatisiert werden sollte."]], explore: "Mehr entdecken", links: ["Kostenlose Analyse", "WhatsApp-Chatbots", "KI-Sprachagenten", "KI-Automatisierung für Restaurants"]
+  },
+  ru: {
+    seo: { title: "ИИ для бронирования ресторанов на Коста-дель-Соль | HydrAI Labs", description: "Автоматизируйте бронирования, WhatsApp и звонки с помощью ИИ-ассистентов и получайте больше заявок.", service: "ИИ для бронирования ресторанов на Коста-дель-Соль", serviceDescription: "ИИ-ассистенты для ресторанов: WhatsApp, звонки, заявки на бронирование, уведомления команды и сведения об аллергиях." },
+    breadcrumb: ["Главная", "ИИ для бронирования ресторанов"], badge: "Рестораны · Коста-дель-Соль", hero: ["Ваш ресторан теряет бронирования, потому что вы ", "не успеваете ответить", "?"], intro: "HydrAI Labs создаёт ИИ-ассистентов для ресторанов: они отвечают в WhatsApp и на звонки, принимают заявки на бронирование, собирают данные клиента и уведомляют команду, прежде чем гость уйдёт к конкурентам.", primary: "Бесплатно проверить мои бронирования", secondary: "Посмотреть возможности автоматизации", trust: "Бесплатная диагностика · Без обязательств · Ответ в течение 24 часов",
+    painTitle: "Где теряются ваши бронирования", pain: ["Пропущенные звонки в часы пик", "Сообщения WhatsApp без ответа", "Бронирования записываются вручную", "Гости спрашивают о наличии мест и уходят", "Изменения, аллергии и группы обрабатываются без контроля", "Нет повторного контакта после первого обращения"], solutionTitle: "Что мы автоматизируем для ресторана", solution: ["WhatsApp-чатбот для бронирований", "Голосовой ИИ-агент для звонков", "Сбор имени, телефона, даты, времени и числа гостей", "Автоматические уведомления команды", "Передача человеку в сложных случаях", "Сохранение предпочтений, аллергий и важных заметок"],
+    conversationTitle: "Пример разговора", customer: "Клиент", ai: "ИИ", messages: ["Здравствуйте, я хочу забронировать столик на четверых сегодня вечером.", "Отлично. Во сколько вы хотели бы прийти?", "В 21:00.", "Хорошо. На чьё имя оформить заявку?", "Заявка записана. Команда проверит наличие мест перед подтверждением."], differenceTitle: "Это не обычный чатбот", difference: "HydrAI Labs не продаёт типовых ботов. Мы создаём системы обслуживания и бронирования для реальных ресторанов: звонки, WhatsApp, расписание, группы, аллергии, кухня, зал и контроль сотрудников.", vozraTitle: "Vozra: ИИ-агент для бронирования ресторанов", vozra: "Vozra — голосовая система бронирования HydrAI Labs для ресторанов. Она принимает заявки, понимает предпочтения, выявляет сложные случаи и уведомляет команду, когда требуется участие человека.", ctaTitle: "Хотите узнать, сколько бронирований вы теряете?", ctaText: "Мы бесплатно проверим процесс и подскажем, какую часть обслуживания клиентов стоит автоматизировать первой.", cta: "Запросить бесплатную проверку",
+    faqTitle: "Частые вопросы", faq: [["ИИ автоматически подтверждает бронирование?", "Не обязательно. Он принимает заявку, проверяет данные и уведомляет команду. Окончательное подтверждение зависит от настроек и фактического наличия мест."], ["Он может отвечать в WhatsApp?", "Да. Он отвечает на вопросы, принимает заявки и уведомляет команду."], ["Он может принимать звонки?", "Да. Голосовые ИИ-агенты собирают данные и сокращают число пропущенных звонков."], ["Что происходит при аллергиях или больших группах?", "Сложные случаи передаются человеку. ИИ не должен обещать пищевую безопасность или наличие мест без проверки."], ["Это подходит небольшим ресторанам?", "Да. Первый MVP может принимать заявки, отвечать на частые вопросы и уведомлять команду."], ["Сколько занимает внедрение?", "Это зависит от системы. Мы начинаем с MVP для быстрой проверки, а затем масштабируем."], ["Вы работаете на Коста-дель-Соль?", "Да. HydrAI Labs работает с местными и международными компаниями на Коста-дель-Соль."], ["Диагностика бесплатна?", "Да. Первая диагностика показывает, какой процесс следует автоматизировать первым."]], explore: "Продолжить знакомство", links: ["Бесплатная диагностика", "WhatsApp-чатботы", "Голосовые ИИ-агенты", "ИИ-автоматизация ресторанов"]
+  }
+} as const;
 
-const SOLUTION = [
-  "Chatbot WhatsApp para reservas",
-  "Agente de voz IA para llamadas",
-  "Captura de nombre, teléfono, fecha, hora y número de personas",
-  "Avisos automáticos al equipo",
-  "Escalado a responsable en casos delicados",
-  "Registro de preferencias, alergias y notas importantes",
-];
+const LINK_PATHS = ["/auditoria-gratis", "/chatbots-whatsapp-negocios-locales", "/agentes-ia-voz-restaurantes", "/automatizacion-ia-restaurantes-costa-del-sol"];
 
-const FAQ = [
-  { question: "¿La IA confirma reservas automáticamente?", answer: "No necesariamente. Puede recoger la solicitud, validar datos y avisar al equipo. La confirmación final depende de la configuración y disponibilidad real del restaurante." },
-  { question: "¿Puede responder WhatsApp?", answer: "Sí. Podemos crear flujos para responder consultas, recoger solicitudes de reserva, clasificar clientes y avisar al equipo." },
-  { question: "¿Puede atender llamadas?", answer: "Sí. HydrAI Labs trabaja con agentes de voz IA para llamadas de restaurantes, especialmente para recoger datos y reducir llamadas perdidas." },
-  { question: "¿Qué pasa con alergias o grupos grandes?", answer: "Los casos delicados pueden escalarse a un responsable. La IA no debe prometer seguridad alimentaria ni disponibilidad sin validación humana." },
-  { question: "¿Sirve para restaurantes pequeños?", answer: "Sí. La primera automatización puede ser sencilla: capturar solicitudes, responder preguntas frecuentes y avisar al equipo." },
-  { question: "¿Cuánto tarda en implementarse?", answer: "Depende del sistema, pero una primera versión puede plantearse como MVP para validar rápido antes de escalar." },
-  { question: "¿Trabajáis en Costa del Sol?", answer: "Sí. HydrAI Labs trabaja con negocios locales e internacionales en Costa del Sol." },
-  { question: "¿La auditoría es gratuita?", answer: "Sí. La auditoría inicial es gratuita y sirve para detectar qué proceso conviene automatizar primero." },
-];
+const RestaurantesIAReservasWhatsappCostaDelSol = () => {
+  const { language } = useTranslation();
+  const c = COPY[language as keyof typeof COPY] ?? COPY.es;
+  const canonical = `${BASE_URL}${PATH}${language === "es" ? "" : `?lang=${language}`}`;
+  const messages = c.messages.map((text, index) => ({ text, who: index === 0 || index === 2 ? c.customer : c.ai, primary: index !== 0 && index !== 2 }));
 
-const RestaurantesIAReservasWhatsappCostaDelSol = () => (
-  <PageLayout>
-    <Helmet>
-      <title>IA para reservas de restaurantes en Costa del Sol | HydrAI Labs</title>
-      <meta name="description" content="Automatiza reservas, WhatsApp y llamadas en restaurantes con asistentes IA. HydrAI Labs ayuda a restaurantes de Costa del Sol a captar más reservas y responder más rápido." />
-      <link rel="canonical" href={URL} />
-      <meta property="og:title" content="IA para reservas de restaurantes en Costa del Sol | HydrAI Labs" />
-      <meta property="og:description" content="Automatiza reservas, WhatsApp y llamadas en restaurantes con asistentes IA en Costa del Sol." />
-      <meta property="og:url" content={URL} />
-      <meta property="og:type" content="website" />
-    </Helmet>
+  return <PageLayout>
+    <Helmet><html lang={language} /><title>{c.seo.title}</title><meta name="description" content={c.seo.description} /><link rel="canonical" href={canonical} /><meta property="og:title" content={c.seo.title} /><meta property="og:description" content={c.seo.description} /><meta property="og:url" content={canonical} /><meta property="og:type" content="website" />{(["es", "en", "de", "ru"] as const).map(lang => <link key={lang} rel="alternate" hrefLang={lang} href={`${BASE_URL}${PATH}${lang === "es" ? "" : `?lang=${lang}`}`} />)}<link rel="alternate" hrefLang="x-default" href={`${BASE_URL}${PATH}`} /></Helmet>
+    <BreadcrumbSchema items={[{ name: c.breadcrumb[0], url: "/" }, { name: c.breadcrumb[1], url: PATH }]} />
+    <FAQSchema items={c.faq.map(([question, answer]) => ({ question, answer }))} />
+    <ServiceSchema name={c.seo.service} description={c.seo.serviceDescription} url={PATH} />
 
-    <BreadcrumbSchema items={[
-      { name: "Inicio", url: "/" },
-      { name: "Restaurantes IA Reservas WhatsApp Costa del Sol", url: "/restaurantes-ia-reservas-whatsapp-costa-del-sol" },
-    ]} />
-    <FAQSchema items={FAQ} />
-    <ServiceSchema
-      name="IA para reservas de restaurantes en Costa del Sol"
-      description="Asistentes IA para restaurantes: WhatsApp, llamadas, captura de reservas, avisos al equipo y registro de alergias."
-      url="/restaurantes-ia-reservas-whatsapp-costa-del-sol"
-    />
+    <section className="relative pt-32 pb-20 overflow-hidden bg-gradient-to-b from-background to-muted/30"><div className="absolute inset-0 bg-grid opacity-20" /><div className="section-container relative z-10 max-w-3xl mx-auto text-center space-y-6"><span className="badge-primary inline-flex items-center gap-2 text-sm"><Sparkles className="w-4 h-4" /> {c.badge}</span><h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight">{c.hero[0]}<span className="text-gradient-primary">{c.hero[1]}</span>{c.hero[2]}</h1><p className="text-lg md:text-xl text-muted-foreground leading-relaxed">{c.intro}</p><div className="flex flex-col sm:flex-row gap-4 justify-center pt-2"><Link to="/auditoria-gratis"><Button size="lg" className="btn-neon text-base px-8 h-12 min-w-[260px]">{c.primary}<ArrowRight className="ml-2 w-4 h-4" /></Button></Link><a href="#solucion"><Button size="lg" variant="outline" className="btn-outline-neon text-base px-6 h-12">{c.secondary}</Button></a></div><p className="text-xs text-muted-foreground">{c.trust}</p></div></section>
 
-    {/* Hero */}
-    <section className="relative pt-32 pb-20 overflow-hidden bg-gradient-to-b from-background to-muted/30">
-      <div className="absolute inset-0 bg-grid opacity-20" />
-      <div className="section-container relative z-10 max-w-3xl mx-auto text-center space-y-6">
-        <span className="badge-primary inline-flex items-center gap-2 text-sm">
-          <Sparkles className="w-4 h-4" /> Restaurantes · Costa del Sol
-        </span>
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight">
-          ¿Tu restaurante pierde reservas por <span className="text-gradient-primary">no responder a tiempo</span>?
-        </h1>
-        <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-          HydrAI Labs crea asistentes IA para restaurantes que responden WhatsApp, llamadas y solicitudes
-          de reserva, capturan datos del cliente y avisan al equipo antes de que el cliente se vaya a otro sitio.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center pt-2">
-          <Link to="/auditoria-gratis">
-            <Button size="lg" className="btn-neon text-base px-8 h-12 min-w-[260px]">
-              Quiero revisar mis reservas gratis <ArrowRight className="ml-2 w-4 h-4" />
-            </Button>
-          </Link>
-          <a href="#solucion">
-            <Button size="lg" variant="outline" className="btn-outline-neon text-base px-6 h-12">
-              Ver qué puede automatizar
-            </Button>
-          </a>
-        </div>
-        <p className="text-xs text-muted-foreground">Diagnóstico gratuito · Sin compromiso · Respuesta en menos de 24h</p>
-      </div>
-    </section>
-
-    {/* Dolor */}
-    <section className="py-20 bg-muted/30">
-      <div className="section-container max-w-5xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-display font-bold text-center mb-12">Dónde se escapan tus reservas</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {PAIN.map((p) => (
-            <div key={p} className="rounded-2xl border border-destructive/30 bg-card p-6 flex gap-3">
-              <AlertTriangle className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
-              <p className="text-muted-foreground">{p}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    {/* Solución */}
-    <section id="solucion" className="py-20">
-      <div className="section-container max-w-5xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-display font-bold text-center mb-12">Qué automatizamos para tu restaurante</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {SOLUTION.map((s) => (
-            <div key={s} className="rounded-2xl border border-border/60 bg-card p-6 flex gap-3 hover:border-primary/40 transition-all">
-              <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-              <p className="text-foreground">{s}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    {/* Ejemplo conversación */}
-    <section className="py-20 bg-muted/30">
-      <div className="section-container max-w-2xl mx-auto">
-        <h2 className="text-3xl font-display font-bold text-center mb-10">Ejemplo de conversación</h2>
-        <div className="space-y-3">
-          {[
-            { who: "Cliente", text: "Hola, quiero reservar para 4 esta noche.", primary: false },
-            { who: "IA", text: "Perfecto. ¿A qué hora os gustaría venir?", primary: true },
-            { who: "Cliente", text: "A las 21:00.", primary: false },
-            { who: "IA", text: "Genial. ¿A nombre de quién la anoto?", primary: true },
-            { who: "IA", text: "Tengo anotada la solicitud. El equipo revisará disponibilidad antes de confirmarla.", primary: true },
-          ].map((m, i) => (
-            <div key={i} className={`flex ${m.primary ? "justify-start" : "justify-end"}`}>
-              <div className={`max-w-[80%] rounded-2xl p-4 ${m.primary ? "bg-primary/10 border border-primary/30" : "bg-card border border-border/60"}`}>
-                <p className="text-xs font-semibold mb-1 text-muted-foreground">{m.who}</p>
-                <p className="text-foreground text-sm">{m.text}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    {/* Diferenciador */}
-    <section className="py-20">
-      <div className="section-container max-w-3xl mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">No es un chatbot genérico</h2>
-        <p className="text-lg text-muted-foreground leading-relaxed">
-          HydrAI Labs no vende bots genéricos. Creamos sistemas de atención y reservas diseñados para
-          restaurantes reales: llamadas, WhatsApp, horarios, grupos, alergias, cocina, sala y responsables.
-        </p>
-      </div>
-    </section>
-
-    {/* Vozra */}
-    <section className="py-20 bg-muted/30">
-      <div className="section-container max-w-3xl mx-auto">
-        <div className="rounded-2xl border border-primary/40 bg-card p-8 md:p-12 space-y-4">
-          <span className="badge-primary inline-flex items-center gap-2 text-sm">
-            <Phone className="w-4 h-4" /> Vozra
-          </span>
-          <h2 className="text-3xl font-display font-bold">Vozra: agente IA para restaurantes</h2>
-          <p className="text-muted-foreground leading-relaxed">
-            Vozra es el sistema de voz y reservas de HydrAI Labs para restaurantes. Está diseñado para
-            recoger solicitudes, entender preferencias, detectar casos delicados y avisar al equipo
-            cuando hace falta intervención humana.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    {/* CTA Final */}
-    <section className="py-20 bg-secondary text-secondary-foreground">
-      <div className="section-container max-w-2xl mx-auto text-center space-y-6">
-        <h2 className="text-3xl md:text-4xl font-display font-bold">
-          ¿Quieres saber cuántas reservas puedes estar perdiendo?
-        </h2>
-        <p className="text-secondary-foreground/80 text-lg">
-          Te hacemos una revisión gratuita y te decimos qué parte de tu atención al cliente deberías automatizar primero.
-        </p>
-        <Link to="/auditoria-gratis">
-          <Button size="lg" className="btn-neon text-base px-8 h-12">
-            Solicitar revisión gratuita <ArrowRight className="ml-2 w-4 h-4" />
-          </Button>
-        </Link>
-      </div>
-    </section>
-
-    {/* FAQ */}
-    <section className="py-20">
-      <div className="section-container max-w-2xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-display font-bold text-center mb-12">Preguntas frecuentes</h2>
-        <div className="space-y-4">
-          {FAQ.map((f, i) => (
-            <details key={i} className="group rounded-xl border border-border/60 bg-card overflow-hidden">
-              <summary className="flex items-center justify-between cursor-pointer p-5 text-foreground font-medium hover:text-primary transition-colors list-none">
-                {f.question}
-                <ArrowRight className="w-4 h-4 text-muted-foreground group-open:rotate-90 transition-transform flex-shrink-0 ml-4" />
-              </summary>
-              <div className="px-5 pb-5 text-muted-foreground text-sm leading-relaxed">{f.answer}</div>
-            </details>
-          ))}
-        </div>
-
-        <div className="mt-16 pt-8 border-t border-border/40 text-center space-y-3">
-          <p className="text-sm text-muted-foreground">Sigue explorando</p>
-          <div className="flex flex-wrap justify-center gap-3 text-sm">
-            <Link to="/auditoria-gratis" className="text-primary hover:underline">Auditoría gratis</Link>
-            <span className="text-border">·</span>
-            <Link to="/chatbots-whatsapp-negocios-locales" className="text-primary hover:underline">Chatbots WhatsApp</Link>
-            <span className="text-border">·</span>
-            <Link to="/agentes-ia-voz-restaurantes" className="text-primary hover:underline">Agentes de voz IA</Link>
-            <span className="text-border">·</span>
-            <Link to="/automatizacion-ia-restaurantes-costa-del-sol" className="text-primary hover:underline">Automatización IA Restaurantes</Link>
-          </div>
-        </div>
-      </div>
-    </section>
-  </PageLayout>
-);
+    <section className="py-20 bg-muted/30"><div className="section-container max-w-5xl mx-auto"><h2 className="text-3xl md:text-4xl font-display font-bold text-center mb-12">{c.painTitle}</h2><div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">{c.pain.map(p => <div key={p} className="rounded-2xl border border-destructive/30 bg-card p-6 flex gap-3"><AlertTriangle className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" /><p className="text-muted-foreground">{p}</p></div>)}</div></div></section>
+    <section id="solucion" className="py-20"><div className="section-container max-w-5xl mx-auto"><h2 className="text-3xl md:text-4xl font-display font-bold text-center mb-12">{c.solutionTitle}</h2><div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">{c.solution.map(s => <div key={s} className="rounded-2xl border border-border/60 bg-card p-6 flex gap-3 hover:border-primary/40 transition-all"><CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" /><p className="text-foreground">{s}</p></div>)}</div></div></section>
+    <section className="py-20 bg-muted/30"><div className="section-container max-w-2xl mx-auto"><h2 className="text-3xl font-display font-bold text-center mb-10">{c.conversationTitle}</h2><div className="space-y-3">{messages.map((m, i) => <div key={i} className={`flex ${m.primary ? "justify-start" : "justify-end"}`}><div className={`max-w-[80%] rounded-2xl p-4 ${m.primary ? "bg-primary/10 border border-primary/30" : "bg-card border border-border/60"}`}><p className="text-xs font-semibold mb-1 text-muted-foreground">{m.who}</p><p className="text-foreground text-sm">{m.text}</p></div></div>)}</div></div></section>
+    <section className="py-20"><div className="section-container max-w-3xl mx-auto text-center"><h2 className="text-3xl md:text-4xl font-display font-bold mb-6">{c.differenceTitle}</h2><p className="text-lg text-muted-foreground leading-relaxed">{c.difference}</p></div></section>
+    <section className="py-20 bg-muted/30"><div className="section-container max-w-3xl mx-auto"><div className="rounded-2xl border border-primary/40 bg-card p-8 md:p-12 space-y-4"><span className="badge-primary inline-flex items-center gap-2 text-sm"><Phone className="w-4 h-4" /> Vozra</span><h2 className="text-3xl font-display font-bold">{c.vozraTitle}</h2><p className="text-muted-foreground leading-relaxed">{c.vozra}</p></div></div></section>
+    <section className="py-20 bg-secondary text-secondary-foreground"><div className="section-container max-w-2xl mx-auto text-center space-y-6"><h2 className="text-3xl md:text-4xl font-display font-bold">{c.ctaTitle}</h2><p className="text-secondary-foreground/80 text-lg">{c.ctaText}</p><Link to="/auditoria-gratis"><Button size="lg" className="btn-neon text-base px-8 h-12">{c.cta}<ArrowRight className="ml-2 w-4 h-4" /></Button></Link></div></section>
+    <section className="py-20"><div className="section-container max-w-2xl mx-auto"><h2 className="text-3xl md:text-4xl font-display font-bold text-center mb-12">{c.faqTitle}</h2><div className="space-y-4">{c.faq.map(([question, answer]) => <details key={question} className="group rounded-xl border border-border/60 bg-card overflow-hidden"><summary className="flex items-center justify-between cursor-pointer p-5 text-foreground font-medium hover:text-primary transition-colors list-none">{question}<ArrowRight className="w-4 h-4 text-muted-foreground group-open:rotate-90 transition-transform flex-shrink-0 ml-4" /></summary><div className="px-5 pb-5 text-muted-foreground text-sm leading-relaxed">{answer}</div></details>)}</div><div className="mt-16 pt-8 border-t border-border/40 text-center space-y-3"><p className="text-sm text-muted-foreground">{c.explore}</p><div className="flex flex-wrap justify-center gap-3 text-sm">{c.links.map((label, index) => <span key={label} className="contents"><Link to={LINK_PATHS[index]} className="text-primary hover:underline">{label}</Link>{index < c.links.length - 1 && <span className="text-border">·</span>}</span>)}</div></div></div></section>
+  </PageLayout>;
+};
 
 export default RestaurantesIAReservasWhatsappCostaDelSol;

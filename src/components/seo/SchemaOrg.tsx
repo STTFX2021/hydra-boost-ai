@@ -11,9 +11,57 @@ export const OrganizationSchema = () => {
     url: BASE_URL,
     logo: `${BASE_URL}/favicon.png`,
     description:
-      "Agencia de Inteligencia Artificial para negocios locales: webs, chatbots 24/7 y automatizaciones que captan clientes mientras duermes.",
+      "Empresa de inteligencia conversacional para empresas. Diseña agentes de voz y mensajería, sistemas de reservas y pedidos, automatización operativa y desarrollo web conectado.",
     email: "hola@hydrailabs.com",
-    sameAs: ["https://discord.gg/uBd28UuhvP"],
+    telephone: "+34634425921",
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: "+34634425921",
+      contactType: "sales",
+      availableLanguage: ["Spanish", "English", "German", "Russian"],
+    },
+    sameAs: [
+      "https://discord.gg/uBd28UuhvP",
+      "https://sarah.hydrailabs.com",
+      "https://panel.hydrailabs.com",
+    ],
+    knowsAbout: [
+      "Inteligencia conversacional",
+      "Agentes de voz con IA",
+      "Agentes de WhatsApp",
+      "Atencion telefonica 24/7 con IA",
+      "Reservas y pedidos por voz",
+      "Desarrollo web",
+    ],
+    owns: [
+      {
+        "@type": "SoftwareApplication",
+        name: "Vozra",
+        applicationCategory: "BusinessApplication",
+        operatingSystem: "Web",
+        url: "https://panel.hydrailabs.com",
+        description: "Plataforma de inteligencia conversacional: agentes de voz y WhatsApp para atencion telefonica 24/7, reservas, pedidos, memoria y logica operacional, con Control Center.",
+        offers: { "@type": "Offer", price: "349", priceCurrency: "EUR", priceSpecification: { "@type": "UnitPriceSpecification", price: "349", priceCurrency: "EUR", unitText: "MES" } },
+      },
+      {
+        "@type": "Service",
+        name: "Vozra Rapid",
+        serviceType: "Agente de voz para pedidos y reservas de restaurante",
+        url: "https://sarah.hydrailabs.com",
+        description: "Toma de pedidos y reservas por voz para restauracion (Sarah), en tiempo real y multilingue.",
+        provider: { "@type": "Organization", name: "HydrAI Labs", url: BASE_URL },
+        offers: { "@type": "Offer", price: "349", priceCurrency: "EUR", priceSpecification: { "@type": "UnitPriceSpecification", price: "349", priceCurrency: "EUR", unitText: "MES" } },
+      },
+      {
+        "@type": "Service",
+        name: "Roomy",
+        serviceType: "Agente de voz para hoteles (room service y reservas)",
+        url: "https://sarah.hydrailabs.com",
+        description: "IA conversacional para hoteles: room service y reservas por voz, multilingue, 24/7, integrable con PMS.",
+        provider: { "@type": "Organization", name: "HydrAI Labs", url: BASE_URL },
+        offers: { "@type": "Offer", price: "799", priceCurrency: "EUR", priceSpecification: { "@type": "UnitPriceSpecification", price: "799", priceCurrency: "EUR", unitText: "MES", minPrice: "799" } },
+      },
+    ],
     address: {
       "@type": "PostalAddress",
       addressCountry: "ES",
@@ -38,10 +86,10 @@ export const LocalBusinessSchema = () => {
     "@type": "LocalBusiness",
     "@id": `${BASE_URL}/#localbusiness`,
     name: "HydrAI Labs",
-    description: "Agencia de automatización con IA para negocios locales en Costa del Sol",
+    description: "Empresa de inteligencia conversacional, agentes de voz y mensajería y desarrollo web para empresas en España",
     image: `${BASE_URL}/og-image.png`,
     url: BASE_URL,
-    telephone: "",
+    telephone: "+34634425921",
     email: "hola@hydrailabs.com",
     priceRange: "€€",
     address: {
@@ -59,10 +107,11 @@ export const LocalBusinessSchema = () => {
       "Costa del Sol",
     ],
     serviceType: [
-      "Chatbots IA",
-      "Automatización n8n",
-      "WhatsApp Business",
-      "Marketing Automation",
+      "Inteligencia conversacional",
+      "Agentes de voz con IA",
+      "Agentes de WhatsApp",
+      "Automatización de reservas y pedidos",
+      "Desarrollo web conectado",
     ],
     openingHoursSpecification: {
       "@type": "OpeningHoursSpecification",
@@ -284,6 +333,63 @@ export const ProfessionalServiceSchema = ({
       name: "HydrAI Labs",
       url: BASE_URL,
     },
+  };
+
+  return (
+    <Helmet>
+      <script type="application/ld+json">{JSON.stringify(schema)}</script>
+    </Helmet>
+  );
+};
+
+// BlogPosting Schema — for individual blog articles
+interface BlogPostingSchemaProps {
+  title: string;
+  description: string;
+  url: string;
+  datePublished: string;
+  dateModified?: string;
+  image?: string;
+  authorName?: string;
+}
+
+export const BlogPostingSchema = ({
+  title,
+  description,
+  url,
+  datePublished,
+  dateModified,
+  image,
+  authorName = "HydrAI Labs",
+}: BlogPostingSchemaProps) => {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: title,
+    description,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${BASE_URL}${url}`,
+    },
+    url: `${BASE_URL}${url}`,
+    image: image || `${BASE_URL}/og-image.png`,
+    datePublished,
+    dateModified: dateModified || datePublished,
+    author: {
+      "@type": "Organization",
+      name: authorName,
+      url: BASE_URL,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "HydrAI Labs",
+      url: BASE_URL,
+      logo: {
+        "@type": "ImageObject",
+        url: `${BASE_URL}/favicon.png`,
+      },
+    },
+    inLanguage: "es-ES",
   };
 
   return (

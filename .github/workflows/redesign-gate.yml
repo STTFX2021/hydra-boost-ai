@@ -1,0 +1,42 @@
+name: HydrAI redesign gate
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Preserve routes and contact wiring
+        run: npm run test:preservation
+
+      - name: Require Sarah and Vozra PID presence
+        run: npm run test:preservation:strict
+
+      - name: Lint audit
+        if: always()
+        run: npm run lint
+        continue-on-error: true
+
+      - name: Build
+        if: always()
+        run: npm run build

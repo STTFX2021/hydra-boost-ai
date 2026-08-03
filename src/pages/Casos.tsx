@@ -1,248 +1,189 @@
+import { useMemo, useState, type ComponentType } from "react";
+import { Link } from "react-router-dom";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Bot,
+  Building2,
+  CheckCircle2,
+  Dumbbell,
+  HeartPulse,
+  ShoppingBag,
+  UtensilsCrossed,
+} from "lucide-react";
 import { PageLayout } from "@/components/layout/PageLayout";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-import { ArrowRight, Zap, ExternalLink, Star, CheckCircle2 } from "lucide-react";
-import { cases } from "@/data/cases";
-import { testimonials } from "@/data/testimonials";
+import { BreadcrumbSchema, SEOHead } from "@/components/seo";
+import {
+  PROJECT_CATEGORIES,
+  PROJECT_SHOWCASE,
+  type ProjectCategory,
+  type ProjectShowcaseItem,
+} from "@/data/projectShowcase";
 import { useTranslation } from "@/lib/i18n";
-import { BreadcrumbSchema } from "@/components/seo";
-import { Helmet } from "react-helmet-async";
+
+const COPY={
+es:{view:"Ver proyecto",all:"Todos",categories:["Inteligencia conversacional","Hostelería","Inmobiliaria y reformas","Belleza y salud","Deporte","Comercio y proyectos personales"],statuses:["Producto propio","Implementación web","Demo funcional","Concepto demostrativo"],seo:"Proyectos y Demostraciones | HydrAI Labs",seoDescription:"Productos propios, implementaciones web y demostraciones funcionales.",home:"Inicio",projects:"Proyectos",eyebrow:"Portfolio HydrAI Labs",title:"Proyectos y demostraciones",description:"Productos propios, implementaciones y conceptos funcionales que conectan inteligencia conversacional, desarrollo web y operación.",catalog:"Catálogo de proyectos",singular:"proyecto",plural:"proyectos",cta:"{copy.cta}",ctaDescription:"{copy.ctaDescription}",contact:"{copy.contact}"},
+en:{generic:true,details:[["Conversational system connected to real business operations.",["Voice agents","Business rules","Operational integration"]],["Digital hospitality experience for bookings, menus and orders.",["Bookings","Digital menu","Online orders"]],["Digital platform for property search, acquisition and qualification.",["Property search","Lead capture","Qualification"]],["Digital experience for services, bookings and customer acquisition.",["Services","Bookings","Lead capture"]],["Digital platform for sports services, customers and operations.",["Customer management","Bookings","Digital experience"]],["Digital commerce or personal project with a functional experience.",["Catalog","Conversion","Connected operation"]]],view:"View project",all:"All",categories:["Conversational intelligence","Hospitality","Real estate and renovation","Beauty and health","Sports","Commerce and personal projects"],statuses:["Own product","Web implementation","Functional demo","Demonstration concept"],seo:"Projects and Demos | HydrAI Labs",seoDescription:"Our products, web implementations and functional demonstrations.",home:"Home",projects:"Projects",eyebrow:"HydrAI Labs portfolio",title:"Projects and demonstrations",description:"Products, implementations and functional concepts connecting conversational intelligence, web development and business operations.",catalog:"Project catalog",singular:"project",plural:"projects",cta:"What system does your business need?",ctaDescription:"We can build the conversational agent, website, dashboard and integrations as one solution.",contact:"Tell us about your project"},
+de:{generic:true,details:[["Gesprächssystem, verbunden mit realen Geschäftsabläufen.",["Sprachagenten","Geschäftsregeln","Operative Integration"]],["Digitale Gastronomie-Erfahrung für Reservierungen, Karten und Bestellungen.",["Reservierungen","Digitale Karte","Online-Bestellungen"]],["Digitale Plattform für Immobiliensuche, Akquise und Qualifizierung.",["Immobiliensuche","Lead-Erfassung","Qualifizierung"]],["Digitale Erfahrung für Leistungen, Reservierungen und Akquise.",["Leistungen","Reservierungen","Lead-Erfassung"]],["Digitale Plattform für Sportangebote, Kunden und Betrieb.",["Kundenverwaltung","Reservierungen","Digitale Erfahrung"]],["Digitaler Handel oder persönliches Projekt mit funktionaler Erfahrung.",["Katalog","Conversion","Vernetzter Betrieb"]]],view:"Projekt ansehen",all:"Alle",categories:["Conversational Intelligence","Gastronomie","Immobilien und Renovierung","Beauty und Gesundheit","Sport","Handel und persönliche Projekte"],statuses:["Eigenes Produkt","Webimplementierung","Funktionale Demo","Demonstrationskonzept"],seo:"Projekte und Demos | HydrAI Labs",seoDescription:"Eigene Produkte, Webimplementierungen und funktionale Demonstrationen.",home:"Start",projects:"Projekte",eyebrow:"HydrAI Labs Portfolio",title:"Projekte und Demonstrationen",description:"Produkte, Implementierungen und funktionale Konzepte, die Conversational Intelligence, Webentwicklung und Betrieb verbinden.",catalog:"Projektkatalog",singular:"Projekt",plural:"Projekte",cta:"Welches System braucht Ihr Unternehmen?",ctaDescription:"Wir können Gesprächsagent, Website, Dashboard und Integrationen als eine Lösung entwickeln.",contact:"Erzählen Sie uns von Ihrem Projekt"},
+ru:{generic:true,details:[["Разговорная система, связанная с реальными операциями бизнеса.",["Голосовые агенты","Бизнес-правила","Операционная интеграция"]],["Цифровой сервис для бронирований, меню и заказов.",["Бронирования","Цифровое меню","Онлайн-заказы"]],["Цифровая платформа для поиска недвижимости, привлечения и квалификации.",["Поиск недвижимости","Привлечение лидов","Квалификация"]],["Цифровой сервис для услуг, бронирований и привлечения клиентов.",["Услуги","Бронирования","Привлечение клиентов"]],["Цифровая платформа для спортивных услуг, клиентов и операций.",["Управление клиентами","Бронирования","Цифровой сервис"]],["Цифровая торговля или личный проект с функциональным интерфейсом.",["Каталог","Конверсия","Связанные операции"]]],view:"Посмотреть проект",all:"Все",categories:["Разговорный ИИ","Гостеприимство","Недвижимость и ремонт","Красота и здоровье","Спорт","Торговля и личные проекты"],statuses:["Собственный продукт","Веб-внедрение","Функциональное демо","Демонстрационная концепция"],seo:"Проекты и демо | HydrAI Labs",seoDescription:"Собственные продукты, веб-внедрения и функциональные демонстрации.",home:"Главная",projects:"Проекты",eyebrow:"Портфолио HydrAI Labs",title:"Проекты и демонстрации",description:"Продукты, внедрения и рабочие концепции, объединяющие разговорный ИИ, веб-разработку и бизнес-операции.",catalog:"Каталог проектов",singular:"проект",plural:"проектов",cta:"Какая система нужна вашему бизнесу?",ctaDescription:"Мы можем создать разговорного агента, сайт, панель и интеграции как единое решение.",contact:"Рассказать о проекте"}} as const;
+const categoryKeys=["Inteligencia conversacional","Hostelería","Inmobiliaria y reformas","Belleza y salud","Deporte","Comercio y proyectos personales"] as const;
+const statusKeys=["Producto propio","Implementación web","Demo funcional","Concepto demostrativo"] as const;
+
+const categoryIcons: Record<ProjectCategory, ComponentType<{ className?: string }>> = {
+  "Inteligencia conversacional": Bot,
+  Hostelería: UtensilsCrossed,
+  "Inmobiliaria y reformas": Building2,
+  "Belleza y salud": HeartPulse,
+  Deporte: Dumbbell,
+  "Comercio y proyectos personales": ShoppingBag,
+};
+
+const statusClasses = {
+  "Producto propio": "border-primary/25 bg-primary/10 text-primary",
+  "Implementación web": "border-secondary/25 bg-secondary/10 text-secondary",
+  "Demo funcional": "border-success/25 bg-success/10 text-success",
+  "Concepto demostrativo": "border-warning/25 bg-warning/10 text-warning",
+} as const;
+
+const ProjectCard = ({ project, copy }: { project: ProjectShowcaseItem; copy: (typeof COPY)[keyof typeof COPY] }) => {
+  const Icon = categoryIcons[project.category];
+  const categoryIndex=categoryKeys.indexOf(project.category);
+  const generic = "generic" in copy ? copy.details[categoryIndex] : null;
+  const projectDescription = generic ? generic[0] : project.description;
+  const projectCapabilities = generic ? generic[1] : project.capabilities;
+
+  const content = (
+    <article className="card-elevated card-elevated-hover group flex h-full flex-col p-6 md:p-7">
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-primary/20 bg-primary/10 text-primary">
+          <Icon className="h-6 w-6" />
+        </div>
+        <span className={`rounded-full border px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] ${statusClasses[project.status]}`}>
+          {copy.statuses[statusKeys.indexOf(project.status)]}
+        </span>
+      </div>
+
+      <p className="mt-6 text-xs font-semibold uppercase tracking-[0.16em] text-primary">{copy.categories[categoryKeys.indexOf(project.category)]}</p>
+      <h2 className="mt-2 text-2xl font-bold">{project.title}</h2>
+      <p className="mt-4 flex-1 text-sm leading-6 text-muted-foreground">{projectDescription}</p>
+
+      <ul className="mt-6 space-y-2">
+        {projectCapabilities.map((capability) => (
+          <li key={capability} className="flex items-center gap-2 text-xs text-muted-foreground">
+            <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-success" />
+            {capability}
+          </li>
+        ))}
+      </ul>
+
+      <div className="mt-6 flex items-center gap-2 border-t border-border/40 pt-5 text-sm font-semibold text-primary">
+        {copy.view}
+        <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+      </div>
+    </article>
+  );
+
+  return project.external ? (
+    <a href={project.href} target="_blank" rel="noopener noreferrer" aria-label={`Ver ${project.title}`}>
+      {content}
+    </a>
+  ) : (
+    <Link to={project.href} aria-label={`Ver ${project.title}`}>
+      {content}
+    </Link>
+  );
+};
 
 const Casos = () => {
-  const { language } = useTranslation();
+  const { language }=useTranslation();
+  const copy=COPY[language as keyof typeof COPY]??COPY.es;
+  const [activeCategory, setActiveCategory] = useState<(typeof PROJECT_CATEGORIES)[number]>("Todos");
 
-  const content = {
-    es: {
-      badge: "Portfolio de Automatizaciones",
-      title: "Proyectos",
-      titleHighlight: "en Producción",
-      subtitle: "Casos reales de automatización con IA. Cada proyecto incluye web, chatbot y/o automatizaciones funcionando 24/7.",
-      viewDemo: "Ver proyecto",
-      comingSoon: "Próximamente",
-      testimonialsTitle: "Lo que dicen nuestros clientes",
-      testimonialsSubtitle: "Resultados reales de negocios que confiaron en nosotros",
-      ctaTitle: "¿Listo para tu proyecto?",
-      ctaSubtitle: "Agenda una auditoría gratuita y te mostramos exactamente qué podemos automatizar.",
-      ctaButton: "Solicitar Auditoría Técnica",
-    },
-    en: {
-      badge: "Automation Portfolio",
-      title: "Projects",
-      titleHighlight: "in Production",
-      subtitle: "Real AI automation cases. Each project includes website, chatbot and/or automations running 24/7.",
-      viewDemo: "View project",
-      comingSoon: "Coming soon",
-      testimonialsTitle: "What our clients say",
-      testimonialsSubtitle: "Real results from businesses that trusted us",
-      ctaTitle: "Ready for your project?",
-      ctaSubtitle: "Schedule a free audit and we'll show you exactly what we can automate.",
-      ctaButton: "Request Technical Audit",
-    },
-    de: {
-      badge: "Automatisierungs-Portfolio",
-      title: "Projekte",
-      titleHighlight: "in Produktion",
-      subtitle: "Echte KI-Automatisierungsfälle. Jedes Projekt umfasst Website, Chatbot und/oder Automatisierungen, die rund um die Uhr laufen.",
-      viewDemo: "Projekt ansehen",
-      comingSoon: "Demnächst",
-      testimonialsTitle: "Was unsere Kunden sagen",
-      testimonialsSubtitle: "Echte Ergebnisse von Unternehmen, die uns vertraut haben",
-      ctaTitle: "Bereit für Ihr Projekt?",
-      ctaSubtitle: "Vereinbaren Sie ein kostenloses Audit und wir zeigen Ihnen genau, was wir automatisieren können.",
-      ctaButton: "Technisches Audit anfordern",
-    },
-    ru: {
-      badge: "Портфолио автоматизаций",
-      title: "Проекты",
-      titleHighlight: "в продакшене",
-      subtitle: "Реальные кейсы ИИ-автоматизации. Каждый проект включает сайт, чат-бот и/или автоматизации, работающие 24/7.",
-      viewDemo: "Посмотреть проект",
-      comingSoon: "Скоро",
-      testimonialsTitle: "Что говорят наши клиенты",
-      testimonialsSubtitle: "Реальные результаты бизнесов, доверившихся нам",
-      ctaTitle: "Готовы к вашему проекту?",
-      ctaSubtitle: "Запишитесь на бесплатный аудит — покажем, что именно можно автоматизировать.",
-      ctaButton: "Запросить технический аудит",
-    },
-  };
-
-  const t = content[language as keyof typeof content] || content.es;
+  const visibleProjects = useMemo(
+    () =>
+      activeCategory === "Todos"
+        ? PROJECT_SHOWCASE
+        : PROJECT_SHOWCASE.filter((project) => project.category === activeCategory),
+    [activeCategory],
+  );
 
   return (
     <>
-      <Helmet>
-        <title>Casos de Éxito en Automatización IA | HydrAI Labs</title>
-        <meta name="description" content="Casos reales de negocios locales que han automatizado con HydrAI Labs: más reservas, menos trabajo manual y clientes 24/7 en Costa del Sol." />
-        <link rel="canonical" href="https://hydrailabs.com/casos" />
-        <meta property="og:title" content="Casos de Éxito en Automatización IA | HydrAI Labs" />
-        <meta property="og:description" content="Casos reales de negocios locales que han automatizado con HydrAI Labs: más reservas, menos trabajo manual y clientes 24/7 en Costa del Sol." />
-        <meta property="og:url" content="https://hydrailabs.com/casos" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:title" content="Casos de Éxito en Automatización IA | HydrAI Labs" />
-        <meta name="twitter:description" content="Casos reales de negocios locales que han automatizado con HydrAI Labs: más reservas, menos trabajo manual y clientes 24/7 en Costa del Sol." />
-      </Helmet>
-      <BreadcrumbSchema items={[
-        { name: "Inicio", url: "/" },
-        { name: "Casos de Éxito", url: "/casos" }
-      ]} />
-      
+      <SEOHead
+        title={copy.seo}
+        description={copy.seoDescription}
+        canonical="/casos"
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: copy.home, url: "/" },
+          { name: copy.projects, url: "/casos" },
+        ]}
+      />
+
       <PageLayout>
-        {/* Hero */}
-        <section aria-label="Casos de éxito" className="relative section-padding overflow-hidden">
-          <div className="glow-orb-accent w-96 h-96 -top-48 -right-48" />
-          <div className="glow-orb-primary w-64 h-64 bottom-0 left-0" />
-          
+        <section className="relative overflow-hidden pb-14 pt-20 md:pb-20 md:pt-28" aria-labelledby="projects-title">
+          <div className="absolute inset-0 bg-mesh-hydrai" />
+          <div className="glow-orb-primary -left-24 top-12 h-72 w-72 opacity-10" />
           <div className="section-container relative z-10">
-            <div className="max-w-3xl mx-auto text-center">
-              <div className="badge-accent mb-6 inline-flex">
-                <Zap className="w-3 h-3 mr-1" /> {t.badge}
-              </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
-                {t.title} <span className="text-gradient-accent">{t.titleHighlight}</span>
+            <div className="mx-auto max-w-4xl text-center">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-primary">{copy.eyebrow}</p>
+              <h1 id="projects-title" className="text-4xl font-bold md:text-6xl">
+                {copy.title}
               </h1>
-              <p className="text-lg text-muted-foreground mb-8">
-                {t.subtitle}
+              <p className="mx-auto mt-6 max-w-3xl text-base leading-8 text-muted-foreground md:text-lg">
+                {copy.description}
               </p>
             </div>
           </div>
         </section>
 
-        {/* Projects Grid */}
-        <section aria-label="Proyectos" className="section-padding">
+        <section className="pb-20 md:pb-28" aria-label={copy.catalog}>
           <div className="section-container">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {cases.map((project) => {
-                const IconComponent = project.icon;
-                const isComingSoon = project.demoUrl === '#';
-                const features = project.features?.[language as 'es' | 'en'] || project.features?.es;
-                
-                return (
-                  <div key={project.id} className="card-elevated card-elevated-hover group flex flex-col overflow-hidden p-6">
-                    {/* Image */}
-                    <div className="relative h-48 -mx-6 -mt-6 mb-4 overflow-hidden">
-                      <img 
-                        src={project.imageUrl} 
-                        alt={project.imageAlt[language as 'es' | 'en']}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        width={400}
-                        height={192}
-                        loading="lazy"
-                        decoding="async"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent" />
-                    </div>
-                    
-                    <div className={`w-12 h-12 rounded-xl bg-${project.color}/10 flex items-center justify-center mb-4 group-hover:bg-${project.color}/20 transition`}>
-                      <IconComponent className={`w-6 h-6 text-${project.color}`} />
-                    </div>
-                    
-                    <div className="mb-2">
-                      <span className="text-xs text-muted-foreground">{project.type[language as 'es' | 'en']}</span>
-                    </div>
-                    
-                    <h3 className="text-xl font-display font-bold mb-3">{project.title}</h3>
-                    
-                    <p className="text-sm text-muted-foreground mb-4">
-                      {project.description[language as 'es' | 'en']}
-                    </p>
-
-                    {/* Features bullets */}
-                    {features && features.length > 0 && (
-                      <ul className="space-y-2 mb-4 flex-1">
-                        {features.map((feature, i) => (
-                          <li key={i} className="flex items-start gap-2 text-xs text-muted-foreground">
-                            <CheckCircle2 className="w-3 h-3 text-success mt-0.5 shrink-0" />
-                            {feature}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                    
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.tags.map((tag, i) => (
-                        <span key={i} className="badge-primary text-xs">{tag}</span>
-                      ))}
-                    </div>
-                    
-                    {isComingSoon ? (
-                      <Button size="sm" variant="ghost" disabled className="w-full opacity-60 cursor-not-allowed">
-                        {t.comingSoon}
-                        <ExternalLink className="ml-2 w-3 h-3" />
-                      </Button>
-                    ) : (
-                      <a 
-                        href={project.demoUrl} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        aria-label={`${t.viewDemo}: ${project.title}`}
-                        className="w-full"
-                      >
-                        <Button size="sm" variant="ghost" className="w-full group/btn hover:bg-primary/10">
-                          {t.viewDemo}
-                          <ExternalLink className="ml-2 w-3 h-3 group-hover/btn:translate-x-1 transition-transform" />
-                        </Button>
-                      </a>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* Testimonials */}
-        <section aria-label="Testimonios" className="section-padding bg-muted/10">
-          <div className="section-container">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-                {t.testimonialsTitle}
-              </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                {t.testimonialsSubtitle}
-              </p>
+            <div className="mb-10 flex flex-wrap justify-center gap-2">
+              {PROJECT_CATEGORIES.map((category) => (
+                <button
+                  key={category}
+                  type="button"
+                  onClick={() => setActiveCategory(category)}
+                  className={`rounded-full border px-4 py-2 text-xs font-semibold transition-all ${
+                    activeCategory === category
+                      ? "border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/15"
+                      : "border-border/60 bg-card/50 text-muted-foreground hover:border-primary/35 hover:text-foreground"
+                  }`}
+                  aria-pressed={activeCategory === category}
+                >
+                  {category === "Todos" ? copy.all : copy.categories[categoryKeys.indexOf(category as typeof categoryKeys[number])]}
+                </button>
+              ))}
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {testimonials.map((testimonial) => (
-                <div key={testimonial.id} className="card-elevated card-elevated-hover p-6">
-                  {/* Stars */}
-                  <div className="flex gap-1 mb-4">
-                    {Array.from({ length: testimonial.rating }).map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-primary text-primary" />
-                    ))}
-                  </div>
-                  
-                  {/* Quote */}
-                  <p className="text-sm italic text-muted-foreground mb-4">
-                    "{testimonial.quote[language as 'es' | 'en']}"
-                  </p>
-                  
-                  {/* Author */}
-                  <div className="border-t border-border/30 pt-4">
-                    <p className="font-semibold text-sm">{testimonial.name}</p>
-                    <p className="text-xs text-muted-foreground">{testimonial.business[language as 'es' | 'en']}</p>
-                    <p className="text-xs text-primary">{testimonial.location}</p>
-                  </div>
-                </div>
+            <div className="mb-6 text-sm text-muted-foreground">
+              {visibleProjects.length} {visibleProjects.length === 1 ? copy.singular : copy.plural}
+            </div>
+
+            <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+              {visibleProjects.map((project) => (
+                <ProjectCard key={project.id} project={project} copy={copy} />
               ))}
             </div>
           </div>
         </section>
 
-        {/* CTA */}
-        <section aria-label="Solicitar auditoría" className="section-padding">
+        <section className="section-padding section-alt-subtle" aria-labelledby="projects-cta-title">
           <div className="section-container">
-            <div className="card-elevated text-center p-12 max-w-2xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-                {t.ctaTitle}
+            <div className="gradient-border mx-auto max-w-3xl rounded-[2rem] bg-card/70 p-8 text-center md:p-12">
+              <h2 id="projects-cta-title" className="text-3xl font-bold md:text-4xl">
+                ¿Qué sistema necesita tu negocio?
               </h2>
-              <p className="text-muted-foreground mb-8">
-                {t.ctaSubtitle}
+              <p className="mx-auto mt-4 max-w-xl leading-7 text-muted-foreground">
+                Podemos construir el agente conversacional, la web, el panel y las integraciones como una sola solución.
               </p>
-              <Link to="/contacto">
-                <Button size="lg" className="btn-neon text-lg px-8 btn-depth">
-                  {t.ctaButton}
-                  <ArrowRight className="ml-2 w-5 h-5" />
+              <Link to="/contacto" className="mt-8 inline-block">
+                <Button size="lg" className="btn-neon btn-depth">
+                  Cuéntanos tu proyecto
+                  <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
             </div>

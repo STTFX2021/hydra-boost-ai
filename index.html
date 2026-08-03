@@ -5,8 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="google-site-verification" content="ds1fNCjm2lF-e3oGLXT9Wl7147NFiK2we98WuFCsfcM" />
 
+    <!-- Fallback SEO visible before React renders -->
+    <title>Inteligencia Conversacional para Empresas | HydrAI Labs</title>
+    <meta name="title" content="Inteligencia Conversacional para Empresas | HydrAI Labs" />
+    <meta name="description" content="HydrAI Labs diseña sistemas de inteligencia conversacional: agentes de voz y WhatsApp, reservas, pedidos y atención al cliente conectados con la operación real. Desarrollo web como capa de captación e integración." />
+    <meta name="keywords" content="inteligencia conversacional, agentes de voz IA, IA conversacional para empresas, automatización de llamadas, agentes WhatsApp, Vozra, Vozra Rapid, desarrollo web con IA" />
+
     <!-- Robots -->
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+    <!-- Open Graph fallback -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://hydrailabs.com/" />
+    <meta property="og:title" content="Inteligencia Conversacional para Empresas | HydrAI Labs" />
+    <meta property="og:description" content="Agentes conversacionales de voz y mensajería que atienden, entienden y ejecutan tareas reales para empresas." />
+    <meta property="og:image" content="https://hydrailabs.com/og-image.png" />
+    <meta property="og:site_name" content="HydrAI Labs" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Inteligencia Conversacional para Empresas | HydrAI Labs" />
+    <meta name="twitter:description" content="Agentes conversacionales de voz y mensajería conectados con la operación real de cada empresa." />
+    <meta name="twitter:image" content="https://hydrailabs.com/og-image.png" />
+
+    <link rel="canonical" href="https://hydrailabs.com/" />
 
     <!-- Preconnect / DNS Prefetch -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -14,21 +35,33 @@
     <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
 
     <!-- Preload critical image (logo in header) -->
-    <link rel="preload" as="image" href="/favicon.png" />
+    <link rel="preload" as="image" href="/brand/hydrai/hydrai-logo.webp" type="image/webp" />
 
     <!-- Favicons -->
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="mask-icon" href="/brand/hydrai/hydrai-logo.svg" color="#00B4D8" />
     <link rel="manifest" href="/site.webmanifest" />
-    <meta name="theme-color" content="#0B0F14" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#0B0F14" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0B0F14" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="HydrAI" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
     <!-- Google Analytics (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DKBJT284EP"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        analytics_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        wait_for_update: 500
+      });
       gtag('js', new Date());
       gtag('config', 'G-DKBJT284EP');
     </script>

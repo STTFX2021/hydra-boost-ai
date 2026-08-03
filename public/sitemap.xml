@@ -8,6 +8,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Home y conversión -->
   <url><loc>https://hydrailabs.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://hydrailabs.com/vozra-pid</loc><changefreq>weekly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://hydrailabs.com/roomy</loc><changefreq>weekly</changefreq><priority>0.95</priority></url>
   <url><loc>https://hydrailabs.com/auditoria-gratis</loc><changefreq>weekly</changefreq><priority>0.95</priority></url>
   <url><loc>https://hydrailabs.com/auditoria</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://hydrailabs.com/auditoria-local</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>

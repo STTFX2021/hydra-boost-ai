@@ -1043,28 +1043,28 @@ const pageSEOTranslations: Record<Language, Record<PageKey, PageSEO>> = {
   es: {
     home: { title: 'HydrAI Labs | Agencia de IA y Automatización para Negocios en España', description: 'Automatizamos reservas, atención al cliente, WhatsApp, captación y procesos internos para restaurantes, clínicas, inmobiliarias y negocios locales. Solicita una auditoría IA gratuita.' },
     servicios: { title: 'Servicios de IA y Automatización para Negocios | HydrAI Labs', description: 'Chatbots IA WhatsApp 24/7, webs con SEO local, automatizaciones n8n, sistemas de reservas y captación de leads para negocios en España. Desde 197€. Auditoría gratis.' },
-    precios: { title: 'Precios de Automatización IA para Negocios | HydrAI Labs', description: 'Planes de automatización IA para restaurantes, clínicas e inmobiliarias en España. Desde 497€. Sin permanencia. Solicita una auditoría IA gratuita antes de contratar.' },
+    precios: { title: 'Precios Vozra — inteligencia conversacional para empresas | HydrAI Labs', description: 'Vozra y Vozra Rapid desde 349€/mes (alta 300€). Roomy para hoteles desde 799€/mes. Agentes de voz y WhatsApp 24/7, reservas y pedidos. Sin permanencia. Auditoría IA gratis.' },
     auditoria: { title: 'Auditoría IA Gratuita para tu Negocio | HydrAI Labs', description: 'Auditoría de automatización IA gratis para negocios en España y Costa del Sol. Te decimos qué automatizar para captar más clientes, ahorrar horas y reducir no-shows.' },
     contacto: { title: 'Contacto HydrAI Labs | Agencia IA en Costa del Sol', description: 'Habla con HydrAI Labs: agencia de IA y automatización para restaurantes, clínicas e inmobiliarias en España. Auditoría gratuita y respuesta en 24h.' },
   },
   en: {
     home: { title: 'HydrAI Labs | AI & Automation Agency for Businesses in Spain', description: 'We automate bookings, customer service, WhatsApp, lead capture and back-office for restaurants, clinics, real estate and local businesses. Request a free AI audit.' },
     servicios: { title: 'AI & Automation Services for Local Businesses | HydrAI Labs', description: '24/7 WhatsApp AI chatbots, local SEO websites, n8n automations, booking systems and lead capture for businesses in Spain. From €197. Free AI audit.' },
-    precios: { title: 'AI Automation Pricing for Local Businesses | HydrAI Labs', description: 'AI automation plans for restaurants, clinics and real estate in Spain. From €497. No lock-in. Get a free AI audit before you choose a plan.' },
+    precios: { title: 'Vozra Pricing — Conversational AI for businesses | HydrAI Labs', description: 'Vozra and Vozra Rapid from 349€/month (300€ setup). Roomy for hotels from 799€/month. Voice and WhatsApp AI agents, 24/7 reservations and orders. No lock-in. Free AI audit.' },
     auditoria: { title: 'Free AI Audit for Your Business | HydrAI Labs', description: 'Free AI automation audit for businesses in Spain and Costa del Sol. We tell you exactly what to automate to capture more clients and save hours.' },
     contacto: { title: 'Contact HydrAI Labs | AI Agency on the Costa del Sol', description: 'Talk to HydrAI Labs — AI and automation agency for restaurants, clinics and real estate in Spain. Free audit and reply within 24h.' },
   },
   ru: {
     home: { title: 'HydrAI Labs | Агентство ИИ и автоматизации для бизнеса в Испании', description: 'Автоматизируем бронирования, поддержку клиентов, WhatsApp, привлечение лидов и внутренние процессы для ресторанов, клиник, недвижимости и локального бизнеса. Бесплатный ИИ-аудит.' },
     servicios: { title: 'Услуги ИИ и автоматизации для бизнеса | HydrAI Labs', description: 'ИИ-чат-боты WhatsApp 24/7, SEO-сайты, n8n-автоматизации, системы бронирования и привлечения лидов для бизнеса в Испании. От 197 €. Бесплатный аудит.' },
-    precios: { title: 'Цены ИИ-автоматизации для бизнеса | HydrAI Labs', description: 'Тарифы ИИ-автоматизации для ресторанов, клиник и агентств недвижимости в Испании. От 497 €. Без привязки. Бесплатный ИИ-аудит перед выбором тарифа.' },
+    precios: { title: 'Цены Vozra — разговорный ИИ для бизнеса | HydrAI Labs', description: 'Vozra и Vozra Rapid от 349€/мес (настройка 300€). Roomy для отелей от 799€/мес. Голосовые и WhatsApp ИИ-агенты, брони и заказы 24/7. Без обязательств. Бесплатный ИИ-аудит.' },
     auditoria: { title: 'Бесплатный ИИ-аудит для вашего бизнеса | HydrAI Labs', description: 'Бесплатный аудит ИИ-автоматизации для бизнеса в Испании и на Коста-дель-Соль. Скажем, что именно автоматизировать, чтобы привлечь больше клиентов.' },
     contacto: { title: 'Контакт HydrAI Labs | ИИ-агентство на Коста-дель-Соль', description: 'Свяжитесь с HydrAI Labs — агентство ИИ и автоматизации для ресторанов, клиник и недвижимости в Испании. Бесплатный аудит и ответ за 24 часа.' },
   },
   de: {
     home: { title: 'HydrAI Labs | KI- und Automatisierungsagentur für Unternehmen in Spanien', description: 'Wir automatisieren Buchungen, Kundenservice, WhatsApp, Lead-Erfassung und Back-Office für Restaurants, Kliniken, Immobilien und lokale Unternehmen. Kostenloses KI-Audit anfragen.' },
     servicios: { title: 'KI- und Automatisierungsdienste für lokale Unternehmen | HydrAI Labs', description: '24/7 WhatsApp-KI-Chatbots, lokale SEO-Websites, n8n-Automatisierungen, Buchungssysteme und Lead-Erfassung in Spanien. Ab 197€. Kostenloses Audit.' },
-    precios: { title: 'Preise KI-Automatisierung für lokale Unternehmen | HydrAI Labs', description: 'KI-Automatisierungspläne für Restaurants, Kliniken und Immobilien in Spanien. Ab 497€. Keine Bindung. Kostenloses KI-Audit vor Auswahl eines Plans.' },
+    precios: { title: 'Vozra Preise — Conversational AI für Unternehmen | HydrAI Labs', description: 'Vozra und Vozra Rapid ab 349€/Monat (Einrichtung 300€). Roomy für Hotels ab 799€/Monat. Sprach- und WhatsApp-KI-Agenten, Reservierungen und Bestellungen 24/7. Keine Bindung. Kostenloses KI-Audit.' },
     auditoria: { title: 'Kostenloses KI-Audit für Ihr Unternehmen | HydrAI Labs', description: 'Kostenloses KI-Automatisierungs-Audit für Unternehmen in Spanien und an der Costa del Sol. Wir sagen Ihnen genau, was Sie automatisieren sollten.' },
     contacto: { title: 'Kontakt HydrAI Labs | KI-Agentur an der Costa del Sol', description: 'Sprechen Sie mit HydrAI Labs — KI- und Automatisierungsagentur für Restaurants, Kliniken und Immobilien in Spanien. Kostenloses Audit, Antwort in 24h.' },
   },
@@ -1091,9 +1091,9 @@ const pricingTranslations: Record<Language, PricingCopy> = {
     ctaTitle: '¿Necesitas algo personalizado?', ctaSubtitle: 'Haz nuestra auditoría gratuita y te recomendamos el mejor plan.',
     ctaAudit: 'Auditoría Gratis', ctaHuman: 'Hablar con humano',
     plans: [
-      { id: 'base', name: 'Base', price: '497', badge: null, cta: 'Empezar con Base', features: ['Chatbot IA en tu web (atención 24/7)', '3 workflows automatizados', 'Integración WhatsApp Business', 'Dashboard de métricas básico', 'Soporte por email 48h', 'Setup completo en 7 días'] },
-      { id: 'growth', name: 'Growth', price: '997', badge: 'Más popular', cta: 'Empezar con Growth', features: ['Todo lo del plan Base', '10 workflows automatizados', 'Agente IA especializado en tu nicho', 'Integración CRM + email marketing', 'Soporte prioritario 24h', 'Reporting semanal con recomendaciones', 'Optimización continua del sistema'] },
-      { id: 'enterprise', name: 'Enterprise', price: 'A medida', badge: 'Premium', cta: 'Solicitar Propuesta', features: ['Arquitectura Event Bus completa', 'Workflows y agentes ilimitados', 'Agentes CEO/CFO/CTO especializados', 'Integraciones a medida (ERP, POS, etc.)', 'SLA garantizado + soporte dedicado', 'Onboarding presencial en España'] },
+      { id: 'base', name: 'Vozra Rapid', price: '349', badge: null, cta: 'Probar Sarah', features: ['Agente de voz para pedidos y reservas de restaurante', 'Atención telefónica 24/7 multilingüe', 'Modificaciones, cancelaciones y transferencia al local', 'Alta única: 300€', 'Sin permanencia', 'Puesta en marcha en pocos días'] },
+      { id: 'growth', name: 'Vozra', price: '349', badge: 'Más popular', cta: 'Solicitar demo', features: ['Agente de voz + WhatsApp 24/7', 'Reservas, pedidos y atención al cliente', 'Memoria y personalización por cliente', 'Control Center y trazabilidad', 'Alta única: 300€', 'Multilingüe · sin permanencia'] },
+      { id: 'enterprise', name: 'Roomy · Hoteles', price: 'A medida', badge: 'Premium', cta: 'Hablar con ventas', features: ['IA de voz para hoteles: room service y reservas', 'Desde 799€/mes (alta desde 1.500€)', 'Suite completa con PMS desde 1.499€/mes', 'Multilingüe 24/7 · integrable con PMS', 'Cadenas: integración central a medida', 'SLA y onboarding dedicado'] },
     ],
   },
   en: {
@@ -1103,9 +1103,9 @@ const pricingTranslations: Record<Language, PricingCopy> = {
     ctaTitle: 'Need something custom?', ctaSubtitle: 'Take our free audit and we will recommend the best plan.',
     ctaAudit: 'Free Audit', ctaHuman: 'Talk to a human',
     plans: [
-      { id: 'base', name: 'Base', price: '497', badge: null, cta: 'Start with Base', features: ['AI chatbot on your website (24/7)', '3 automated workflows', 'WhatsApp Business integration', 'Basic metrics dashboard', '48h email support', 'Full setup in 7 days'] },
-      { id: 'growth', name: 'Growth', price: '997', badge: 'Most popular', cta: 'Start with Growth', features: ['Everything in Base', '10 automated workflows', 'Niche-specialized AI agent', 'CRM + email marketing integration', '24h priority support', 'Weekly reporting with recommendations', 'Continuous system optimization'] },
-      { id: 'enterprise', name: 'Enterprise', price: 'Custom', badge: 'Premium', cta: 'Request a Proposal', features: ['Full Event Bus architecture', 'Unlimited workflows and agents', 'Specialized CEO/CFO/CTO agents', 'Custom integrations (ERP, POS, etc.)', 'Guaranteed SLA + dedicated support', 'On-site onboarding in Spain'] },
+      { id: 'base', name: 'Vozra Rapid', price: '349', badge: null, cta: 'Try Sarah', features: ['Voice agent for restaurant orders and reservations', '24/7 multilingual phone answering', 'Changes, cancellations and transfer to the venue', 'One-time setup: 300€', 'No lock-in', 'Live in a few days'] },
+      { id: 'growth', name: 'Vozra', price: '349', badge: 'Most popular', cta: 'Request a demo', features: ['Voice + WhatsApp agent 24/7', 'Reservations, orders and customer service', 'Per-customer memory and personalization', 'Control Center and traceability', 'One-time setup: 300€', 'Multilingual · no lock-in'] },
+      { id: 'enterprise', name: 'Roomy · Hotels', price: 'Custom', badge: 'Premium', cta: 'Talk to sales', features: ['Voice AI for hotels: room service and reservations', 'From 799€/month (setup from 1.500€)', 'Full PMS suite from 1.499€/month', 'Multilingual 24/7 · PMS-ready', 'Chains: custom central integration', 'SLA and dedicated onboarding'] },
     ],
   },
   ru: {
@@ -1115,9 +1115,9 @@ const pricingTranslations: Record<Language, PricingCopy> = {
     ctaTitle: 'Нужно индивидуальное решение?', ctaSubtitle: 'Пройдите бесплатный аудит — мы предложим оптимальный тариф.',
     ctaAudit: 'Бесплатный аудит', ctaHuman: 'Поговорить с человеком',
     plans: [
-      { id: 'base', name: 'Base', price: '497', badge: null, cta: 'Начать с Base', features: ['ИИ-чат-бот на вашем сайте (24/7)', '3 автоматизированных воркфлоу', 'Интеграция WhatsApp Business', 'Базовый дашборд метрик', 'Поддержка по email 48ч', 'Полная настройка за 7 дней'] },
-      { id: 'growth', name: 'Growth', price: '997', badge: 'Самый популярный', cta: 'Начать с Growth', features: ['Всё из тарифа Base', '10 автоматизированных воркфлоу', 'ИИ-агент, специализированный под вашу нишу', 'Интеграция CRM + email-маркетинг', 'Приоритетная поддержка 24ч', 'Еженедельные отчёты с рекомендациями', 'Постоянная оптимизация системы'] },
-      { id: 'enterprise', name: 'Enterprise', price: 'По запросу', badge: 'Premium', cta: 'Запросить предложение', features: ['Полная архитектура Event Bus', 'Безлимит воркфлоу и агентов', 'Специализированные агенты CEO/CFO/CTO', 'Индивидуальные интеграции (ERP, POS и др.)', 'Гарантированный SLA + выделенная поддержка', 'Очный онбординг в Испании'] },
+      { id: 'base', name: 'Vozra Rapid', price: '349', badge: null, cta: 'Попробовать Sarah', features: ['Голосовой агент для заказов и броней ресторана', 'Приём звонков 24/7 на разных языках', 'Изменения, отмены и перевод в заведение', 'Разовая настройка: 300€', 'Без обязательств', 'Запуск за несколько дней'] },
+      { id: 'growth', name: 'Vozra', price: '349', badge: 'Самый популярный', cta: 'Запросить демо', features: ['Голосовой агент + WhatsApp 24/7', 'Брони, заказы и поддержка клиентов', 'Память и персонализация по клиенту', 'Control Center и прозрачность', 'Разовая настройка: 300€', 'Многоязычный · без обязательств'] },
+      { id: 'enterprise', name: 'Roomy · Отели', price: 'По запросу', badge: 'Premium', cta: 'Связаться с продажами', features: ['Голосовой ИИ для отелей: room service и брони', 'От 799€/мес (настройка от 1.500€)', 'Полный пакет с PMS от 1.499€/мес', 'Многоязычный 24/7 · интеграция с PMS', 'Сети: индивидуальная центральная интеграция', 'SLA и выделенный онбординг'] },
     ],
   },
   de: {
@@ -1127,9 +1127,9 @@ const pricingTranslations: Record<Language, PricingCopy> = {
     ctaTitle: 'Brauchen Sie etwas Individuelles?', ctaSubtitle: 'Machen Sie unser kostenloses Audit und wir empfehlen den besten Plan.',
     ctaAudit: 'Kostenloses Audit', ctaHuman: 'Mit Mensch sprechen',
     plans: [
-      { id: 'base', name: 'Base', price: '497', badge: null, cta: 'Mit Base starten', features: ['KI-Chatbot auf Ihrer Website (24/7)', '3 automatisierte Workflows', 'WhatsApp Business Integration', 'Basis-Metrik-Dashboard', 'E-Mail-Support 48h', 'Komplettes Setup in 7 Tagen'] },
-      { id: 'growth', name: 'Growth', price: '997', badge: 'Am beliebtesten', cta: 'Mit Growth starten', features: ['Alles aus Base', '10 automatisierte Workflows', 'Auf Ihre Nische spezialisierter KI-Agent', 'CRM + E-Mail-Marketing Integration', 'Prioritäts-Support 24h', 'Wöchentliches Reporting mit Empfehlungen', 'Kontinuierliche Systemoptimierung'] },
-      { id: 'enterprise', name: 'Enterprise', price: 'Individuell', badge: 'Premium', cta: 'Angebot anfordern', features: ['Vollständige Event Bus Architektur', 'Unbegrenzte Workflows und Agenten', 'Spezialisierte CEO/CFO/CTO-Agenten', 'Individuelle Integrationen (ERP, POS, etc.)', 'Garantierte SLA + dedizierter Support', 'Vor-Ort-Onboarding in Spanien'] },
+      { id: 'base', name: 'Vozra Rapid', price: '349', badge: null, cta: 'Sarah testen', features: ['Sprachagent für Restaurant-Bestellungen und Reservierungen', 'Mehrsprachige Telefonannahme 24/7', 'Änderungen, Stornierungen und Weiterleitung ans Lokal', 'Einmalige Einrichtung: 300€', 'Keine Bindung', 'In wenigen Tagen startklar'] },
+      { id: 'growth', name: 'Vozra', price: '349', badge: 'Am beliebtesten', cta: 'Demo anfordern', features: ['Sprach- + WhatsApp-Agent 24/7', 'Reservierungen, Bestellungen und Kundenservice', 'Gedächtnis und Personalisierung pro Kunde', 'Control Center und Nachvollziehbarkeit', 'Einmalige Einrichtung: 300€', 'Mehrsprachig · keine Bindung'] },
+      { id: 'enterprise', name: 'Roomy · Hotels', price: 'Individuell', badge: 'Premium', cta: 'Mit Vertrieb sprechen', features: ['Sprach-KI für Hotels: Room Service und Reservierungen', 'Ab 799€/Monat (Einrichtung ab 1.500€)', 'Komplette PMS-Suite ab 1.499€/Monat', 'Mehrsprachig 24/7 · PMS-fähig', 'Ketten: individuelle zentrale Integration', 'SLA und dediziertes Onboarding'] },
     ],
   },
 };

@@ -6,11 +6,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { SmartChatbot } from "@/components/smart-chatbot/SmartChatbot";
 import { WhatsAppButton } from "@/components/ux/WhatsAppButton";
+import { AnalyticsConsent } from "@/components/ux/AnalyticsConsent";
 import { ExitIntentPopup } from "@/components/ux/ExitIntentPopup";
 import { ScrollProgressBar } from "@/components/ux/ScrollProgressBar";
 import { MobileStickyCTA } from "@/components/ux/MobileStickyCAT";
 import { ProtectedAdminRoute } from "@/components/ProtectedAdminRoute";
 import Index from "./pages/Index";
+import VozraPID from "./pages/VozraPID";
+import Roomy from "./pages/Roomy";
 import Servicios from "./pages/Servicios";
 import Industrias from "./pages/Industrias";
 import Precios from "./pages/Precios";
@@ -23,6 +26,7 @@ import AuditoriaGratis from "./pages/AuditoriaGratis";
 import AuditoriaSelector from "./pages/AuditoriaSelector";
 import AuditoriaLocal from "./pages/AuditoriaLocal";
 import Login from "./pages/Login";
+import OAuthConsent from "./pages/OAuthConsent";
 import AdminDashboard from "./pages/admin/Dashboard";
 import Privacidad from "./pages/legal/Privacidad";
 import Terminos from "./pages/legal/Terminos";
@@ -91,6 +95,8 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/vozra-pid" element={<VozraPID />} />
+            <Route path="/roomy" element={<Roomy />} />
             <Route path="/servicios" element={<Servicios />} />
             <Route path="/servicios/chatbots-ia" element={<ChatbotsIA />} />
             <Route path="/servicios/automatizaciones" element={<Automatizaciones />} />
@@ -166,6 +172,7 @@ const App = () => (
             <Route path="/auditoria-local" element={<AuditoriaLocal />} />
             <Route path="/inversores" element={<Inversores />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/.lovable/oauth/consent" element={<OAuthConsent />} />
             <Route path="/admin/*" element={
               <ProtectedAdminRoute>
                 <AdminDashboard />
@@ -183,6 +190,7 @@ const App = () => (
           <ExitIntentPopup />
           <ScrollProgressBar />
           <MobileStickyCTA />
+          <AnalyticsConsent />
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>

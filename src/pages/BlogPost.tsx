@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Calendar, Clock, User, Share2 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { SEOHead, BreadcrumbSchema } from "@/components/seo";
+import { SEOHead, BreadcrumbSchema, BlogPostingSchema } from "@/components/seo";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -60,6 +60,10 @@ const BlogPost = () => {
         title={`${post.title} | Blog HydrAI Labs`}
         description={post.excerpt || `Lee ${post.title} en el blog de HydrAI Labs`}
         canonical={`/blog/${post.slug}`}
+        ogType="article"
+        publishedTime={post.published_at || undefined}
+        modifiedTime={post.updated_at || post.published_at || undefined}
+        ogImage={post.cover_image_url || undefined}
       />
       <BreadcrumbSchema
         items={[
@@ -67,6 +71,14 @@ const BlogPost = () => {
           { name: "Blog", url: "/blog" },
           { name: post.title, url: `/blog/${post.slug}` },
         ]}
+      />
+      <BlogPostingSchema
+        title={post.title}
+        description={post.excerpt || post.title}
+        url={`/blog/${post.slug}`}
+        datePublished={post.published_at || new Date().toISOString()}
+        dateModified={post.updated_at || post.published_at || undefined}
+        image={post.cover_image_url || undefined}
       />
 
       <PageLayout>

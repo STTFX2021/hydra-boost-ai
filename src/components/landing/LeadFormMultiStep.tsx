@@ -540,6 +540,16 @@ ${formData.additional_requirements || 'None provided'}
 
       if (error) throw error;
 
+      try {
+        const { trackLead } = await import("@/lib/analytics");
+        trackLead({
+          form: "enterprise_audit_v2",
+          vertical: formData.vertical,
+          company_size: formData.company_size,
+          budget: formData.budget_range,
+        });
+      } catch { /* noop */ }
+
       setIsSuccess(true);
       onSuccess?.();
     } catch (err) {

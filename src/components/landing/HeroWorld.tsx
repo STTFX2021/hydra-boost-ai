@@ -39,8 +39,8 @@ const item = {
 const copy = {
   es: {
     badge: "🚀 Automatización IA para negocios locales · Costa del Sol",
-    title1: "Automatización IA para negocios locales",
-    title2: "que pierden clientes por no responder a tiempo",
+    title1: "Mejora y Facilita tu negocio",
+    title2: "con IA en 7 días, 24/7",
     sub: "Creamos asistentes de WhatsApp, voz y automatizaciones que captan leads, responden clientes y reducen tareas repetitivas para restaurantes, clínicas, inmobiliarias, gimnasios y servicios locales.",
     subBold: "Recibe un diagnóstico gratis en 24h.",
     cta1: "Recibe un diagnóstico gratis en 24h",
@@ -55,8 +55,8 @@ const copy = {
   },
   en: {
     badge: "🚀 #1 in AI Automation for Businesses",
-    title1: "AI Automations",
-    title2: "that bring customers 24/7",
+    title1: "Improve and simplify your business",
+    title2: "with AI in 7 days, 24/7",
     sub: "Smart chatbots · SEO websites · Automated CRM",
     subBold: "Convert visitors into customers while you sleep.",
     cta1: "Request Free Audit",
@@ -71,8 +71,8 @@ const copy = {
   },
   ru: {
     badge: "🚀 #1 в ИИ-автоматизации для бизнеса",
-    title1: "ИИ-автоматизации",
-    title2: "которые приводят клиентов 24/7",
+    title1: "Улучшите и упростите ваш бизнес",
+    title2: "с ИИ за 7 дней, 24/7",
     sub: "Умные чат-боты · SEO-сайты · автоматизированный CRM",
     subBold: "Превращайте посетителей в клиентов, пока вы спите.",
     cta1: "Заказать бесплатный аудит",
@@ -87,8 +87,8 @@ const copy = {
   },
   de: {
     badge: "🚀 #1 in KI-Automatisierung",
-    title1: "KI-Automatisierungen",
-    title2: "die 24/7 Kunden bringen",
+    title1: "Verbessern und vereinfachen Sie Ihr Geschäft",
+    title2: "mit KI in 7 Tagen, 24/7",
     sub: "Intelligente Chatbots · SEO-Websites · Automatisiertes CRM",
     subBold: "Verwandeln Sie Besucher in Kunden, während Sie schlafen.",
     cta1: "Kostenloses Audit anfordern",

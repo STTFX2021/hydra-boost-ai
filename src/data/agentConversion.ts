@@ -119,7 +119,7 @@ export const AGENT_CONVERSION_DATA: Record<string, AgentConversionData> = {
     ],
     nextSteps: [
       { label: "Solicitar auditoría gratuita", href: "/auditoria-gratis", type: "primary" },
-      { label: "Hablar por WhatsApp", href: "https://wa.me/34666666666", type: "secondary" },
+      { label: "Hablar por WhatsApp", href: "https://wa.me/34634425921", type: "secondary" },
       { label: "Ver Agente de Cualificación", href: "/agentes-ia/cualificacion-comercial", type: "link" },
     ],
     relatedLinks: [
@@ -176,7 +176,7 @@ export const AGENT_CONVERSION_DATA: Record<string, AgentConversionData> = {
     ],
     nextSteps: [
       { label: "Solicitar auditoría gratuita", href: "/auditoria-gratis", type: "primary" },
-      { label: "Hablar por WhatsApp", href: "https://wa.me/34666666666", type: "secondary" },
+      { label: "Hablar por WhatsApp", href: "https://wa.me/34634425921", type: "secondary" },
       { label: "Ver Agente de Captación", href: "/agentes-ia/captacion-leads", type: "link" },
     ],
     relatedLinks: [
@@ -231,7 +231,7 @@ export const AGENT_CONVERSION_DATA: Record<string, AgentConversionData> = {
     ],
     nextSteps: [
       { label: "Solicitar auditoría gratuita", href: "/auditoria-gratis", type: "primary" },
-      { label: "Hablar por WhatsApp", href: "https://wa.me/34666666666", type: "secondary" },
+      { label: "Hablar por WhatsApp", href: "https://wa.me/34634425921", type: "secondary" },
       { label: "Ver Agente de Atención 24/7", href: "/agentes-ia/atencion-24-7", type: "link" },
     ],
     relatedLinks: [
@@ -286,7 +286,7 @@ export const AGENT_CONVERSION_DATA: Record<string, AgentConversionData> = {
     ],
     nextSteps: [
       { label: "Solicitar auditoría gratuita", href: "/auditoria-gratis", type: "primary" },
-      { label: "Hablar por WhatsApp", href: "https://wa.me/34666666666", type: "secondary" },
+      { label: "Hablar por WhatsApp", href: "https://wa.me/34634425921", type: "secondary" },
       { label: "Ver Agente de Soporte Interno", href: "/agentes-ia/soporte-interno", type: "link" },
     ],
     relatedLinks: [
@@ -341,7 +341,7 @@ export const AGENT_CONVERSION_DATA: Record<string, AgentConversionData> = {
     ],
     nextSteps: [
       { label: "Solicitar auditoría gratuita", href: "/auditoria-gratis", type: "primary" },
-      { label: "Hablar por WhatsApp", href: "https://wa.me/34666666666", type: "secondary" },
+      { label: "Hablar por WhatsApp", href: "https://wa.me/34634425921", type: "secondary" },
       { label: "Ver Agente de Seguimiento", href: "/agentes-ia/seguimiento-whatsapp", type: "link" },
     ],
     relatedLinks: [
@@ -397,7 +397,7 @@ export const AGENT_CONVERSION_DATA: Record<string, AgentConversionData> = {
     ],
     nextSteps: [
       { label: "Solicitar auditoría gratuita", href: "/auditoria-gratis", type: "primary" },
-      { label: "Hablar por WhatsApp", href: "https://wa.me/34666666666", type: "secondary" },
+      { label: "Hablar por WhatsApp", href: "https://wa.me/34634425921", type: "secondary" },
       { label: "Ver Agente de Cualificación", href: "/agentes-ia/cualificacion-comercial", type: "link" },
     ],
     relatedLinks: [
@@ -452,7 +452,7 @@ export const AGENT_CONVERSION_DATA: Record<string, AgentConversionData> = {
     ],
     nextSteps: [
       { label: "Solicitar auditoría gratuita", href: "/auditoria-gratis", type: "primary" },
-      { label: "Hablar por WhatsApp", href: "https://wa.me/34666666666", type: "secondary" },
+      { label: "Hablar por WhatsApp", href: "https://wa.me/34634425921", type: "secondary" },
       { label: "Ver Agente de Seguimiento WhatsApp", href: "/agentes-ia/seguimiento-whatsapp", type: "link" },
     ],
     relatedLinks: [
@@ -507,7 +507,7 @@ export const AGENT_CONVERSION_DATA: Record<string, AgentConversionData> = {
     ],
     nextSteps: [
       { label: "Solicitar auditoría gratuita", href: "/auditoria-gratis", type: "primary" },
-      { label: "Hablar por WhatsApp", href: "https://wa.me/34666666666", type: "secondary" },
+      { label: "Hablar por WhatsApp", href: "https://wa.me/34634425921", type: "secondary" },
       { label: "Ver Agente de Compliance", href: "/agentes-ia/compliance-documental", type: "link" },
     ],
     relatedLinks: [
@@ -562,7 +562,7 @@ export const AGENT_CONVERSION_DATA: Record<string, AgentConversionData> = {
     ],
     nextSteps: [
       { label: "Solicitar auditoría gratuita", href: "/auditoria-gratis", type: "primary" },
-      { label: "Hablar por WhatsApp", href: "https://wa.me/34666666666", type: "secondary" },
+      { label: "Hablar por WhatsApp", href: "https://wa.me/34634425921", type: "secondary" },
       { label: "Ver Agente de Documentación", href: "/agentes-ia/documentacion-resumenes", type: "link" },
     ],
     relatedLinks: [
@@ -618,7 +618,7 @@ export const AGENT_CONVERSION_DATA: Record<string, AgentConversionData> = {
     ],
     nextSteps: [
       { label: "Solicitar auditoría gratuita", href: "/auditoria-gratis", type: "primary" },
-      { label: "Hablar por WhatsApp", href: "https://wa.me/34666666666", type: "secondary" },
+      { label: "Hablar por WhatsApp", href: "https://wa.me/34634425921", type: "secondary" },
       { label: "Ver Agente de Documentación", href: "/agentes-ia/documentacion-resumenes", type: "link" },
     ],
     relatedLinks: [
