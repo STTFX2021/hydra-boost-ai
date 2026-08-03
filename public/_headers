@@ -19,10 +19,16 @@
 /favicon.ico
   Cache-Control: public, max-age=31536000, immutable
 
+/favicon-*.png
+  Cache-Control: public, max-age=31536000, immutable
+
 /apple-touch-icon.png
   Cache-Control: public, max-age=31536000, immutable
 
 /android-chrome-*.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/maskable-icon-*.png
   Cache-Control: public, max-age=31536000, immutable
 
 /brand/*
@@ -36,6 +42,10 @@
 
 /*.svg
   Cache-Control: public, max-age=31536000, immutable
+
+/site.webmanifest
+  Content-Type: application/manifest+json
+  Cache-Control: public, max-age=86400
 
 /index.html
   Cache-Control: no-cache, no-store, must-revalidate
